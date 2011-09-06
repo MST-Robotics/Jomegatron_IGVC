@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source
+END
+MIDG II Message Specification.pdf
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/MIDG%20II%20Message%20Specification.pdf
+END
+mMIDG2.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/mMIDG2.c
+END
+mQueue.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/mQueue.c
+END
+mMIDG2.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/mMIDG2.h
+END
+main.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/main.c
+END
+mBin.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/mBin.c
+END
+mQueue.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/mQueue.h
+END
+mBin.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/mBin.h
+END
+readme.txt
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/readme.txt
+END
+MIDG II Specifications.pdf
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/MIDG%20II%20Specifications.pdf
+END

@@ -1,0 +1,12 @@
+<stack>
+  <description brief="Joemegatron_IGVC">
+  Stack of code run on Joemegatron during the IGVC competition.
+  Inteligent Ground Vehical Competition
+  </description>
+  <author>Maintained by Robot</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Joemegatron_IGVC</url>
+  <depend stack="ros" />
+
+</stack>

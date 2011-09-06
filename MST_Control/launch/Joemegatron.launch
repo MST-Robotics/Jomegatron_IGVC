@@ -1,0 +1,102 @@
+<launch>
+
+    
+    <arg name="usb" default="0" />
+    <arg name="playback" default="0" />
+    <arg name="display" default="1" />
+	<arg name="robot" default="1" />
+    
+    <node pkg="MST_Potential_Navigation" type="Pot_Nav" name="Pot_Nav" >
+    	
+    	<rosparam file="$(find MST_Control)/yaml/Pot_Nav.yaml" command="load" />
+
+    </node>
+    
+    
+    <node pkg="MST_Control" type="Control" name="Control"  required="true" >
+        	
+    	<rosparam file="$(find MST_Control)/yaml/Control.yaml" command="load" />
+    	
+    	<param name = "minus_sound" value = "$(find MST_Control)/sounds/Ahooga_Car_Horn.wav" />
+    	
+    	<param name = "navigation_waypoints" value = "$(find MST_Control)/yaml/Navigation_Waypoints.yaml" />
+    	
+    	<param name = "autonomous_waypoints" value = "$(find MST_Control)/yaml/Autonomous_Waypoints.yaml" />
+
+    </node>
+    
+    <node pkg="MST_Position" type="Position" name="Position" >
+        	
+    	<rosparam file="$(find MST_Control)/yaml/Carrot.yaml" command="load" />
+
+    </node>
+    
+    
+    
+    <node pkg="wiimote" type="wiimote_node.py" name="wiimote" respawn="true" />
+    
+    <node pkg="sound_play" type="soundplay_node.py" name="sound_play" />
+    
+    <group if="$(arg usb)">
+    
+    	<include file="$(find MST_Edge_Detection)/launch/usb.launch" />  	
+
+    	<node pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=usb_cam/image_raw"  >
+    	    	
+    		<rosparam file="$(find MST_Control)/yaml/Edge_Detection.yaml" command="load" />
+
+    	</node>
+    	
+    	<node pkg="MST_ColorStat" type="ColorStat" name="ColorStat" args= "image:=usb_cam/image_raw" >
+        	
+    		<rosparam file="$(find MST_Control)/yaml/ColorStat.yaml" command="load"  />
+
+    	</node>
+    	
+    </group>
+    
+    <group unless="$(arg usb)">
+    
+    	<include file="$(find MST_Edge_Detection)/launch/ptgrey.launch" unless="$(arg playback)" />
+
+		<node pkg="image_proc" type="image_proc" name="image_proc" ns="ptgrey" unless="$(arg playback)" />  
+    
+    	<node pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=ptgrey/image_rect_color" >
+    	    	
+    		<rosparam file="$(find MST_Control)/yaml/Edge_Detection.yaml" command="load" />
+
+    	</node>
+    	
+    	<node pkg="MST_ColorStat" type="ColorStat" name="ColorStat" args= "image:=ptgrey/image_rect_color" >
+        	
+    		<rosparam file="$(find MST_Control)/yaml/ColorStat.yaml" command="load"  />
+
+    	</node>
+    	
+    </group>
+
+    <group if="$(arg robot)">
+    	
+    	<node pkg="Midg" type="Midg_node" name="Midge" />
+		<node pkg="MST_Motors" type="Motors" name="Motors" />
+		<node pkg="MST_Estop" type="Estop" name="Estop" />
+    	
+    </group>
+    
+    <group if="$(arg display)">
+    
+		<node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=usb_cam/image_raw" if="$(arg usb)"/>
+		
+		<node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=ptgrey/image_rect_color" unless="$(arg usb)"/>
+	
+		<node pkg="image_view" type="image_view" name="edges_display" args="image:=image_edges" />
+		
+		<node pkg="image_view" type="image_view" name="stat_display" args="image:=image_stat" />
+	
+		<node pkg="image_view" type="image_view" name="map_display" args="image:=map" />
+	
+		<node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui" />
+		
+	</group>
+
+</launch>

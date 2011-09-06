@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/misc
+END
+rotate.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/misc/rotate.c
+END
+ecef.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/misc/ecef.c
+END
+COMPORT.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/misc/COMPORT.cpp
+END
+rotate.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/misc/rotate.h
+END
+eph_parse.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/misc/eph_parse.c
+END
+ecef.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/misc/ecef.h
+END
+COMPORT.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/misc/COMPORT.h
+END
+NMEAOut.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/misc/NMEAOut.c
+END
+readme.txt
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/MIDG_source/misc/readme.txt
+END

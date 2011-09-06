@@ -1,0 +1,16 @@
+<package>
+  <description brief="MST_Estop">
+
+     MST_Estop
+
+  </description>
+  <author>Robot</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/MST_Estop</url>
+
+  <depend package="roscpp"/>
+
+</package>
+
+

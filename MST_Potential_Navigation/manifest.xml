@@ -1,0 +1,32 @@
+<package>
+  <description brief="MST_Potential_Navigation">
+
+     MST_Potential_Navigation: will take in an image from the edge
+     detection and from the collor filters and flag filters and otput 
+     forward and agular velocity for the robot to controll 
+
+  </description>
+  <author>James Anderson (jra798)</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/MST_Potential_Navigation</url>
+  
+  <!-- depends for using cv_bridge -->
+  <depend package = "sensor_msgs"/>
+  <depend package = "opencv2"/>
+  <depend package = "cv_bridge"/>
+  <depend package = "roscpp"/>
+  <depend package = "std_msgs"/>
+  <depend package = "image_transport"/>
+
+  
+  <depend package = "geometry_msgs"/>
+  <depend package = "MST_Position"/>
+  
+  <!-- depends for using dynamic reconfigur gui -->
+  <depend package="dynamic_reconfigure" />
+  <depend package="driver_base" />
+
+</package>
+
+

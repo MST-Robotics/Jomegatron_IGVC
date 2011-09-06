@@ -1,0 +1,4 @@
+{canny: false, canny_per_add: 33.0, canny_second_order: true, canny_third_order: false,
+  canny_thresh_1: 2500.0, canny_thresh_2: 2900.0, canny_val: 34.0, laplace: false,
+  laplace_per_add: 8.0, scaler_percent: 54.0, second_order: true, sobel: true, sobel_per_add: 195.0,
+  square_root: false, third_order: false}

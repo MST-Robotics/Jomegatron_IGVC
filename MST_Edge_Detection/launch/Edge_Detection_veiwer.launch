@@ -1,0 +1,10 @@
+<launch>
+
+    <include file="$(find MST_Edge_Detection)/launch/ptgrey.launch" />
+    <include file="$(find MST_Edge_Detection)/launch/Edge_Detection.launch" />
+    
+	<node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=ptgrey/image_raw" />
+	
+	<node pkg="image_view" type="image_view" name="edges_display" args="image:=image_edges" />
+
+</launch>

@@ -1,0 +1,12 @@
+float64     latitude
+float64     longitude
+float64     altitude
+float64     heading
+float64     speed
+float64     angular_rate
+float64     gps_time
+bool        position_valid
+bool        heading_valid
+bool        speed_valid
+bool        angular_rate_valid
+float64     position_accuracy

@@ -1,0 +1,10 @@
+{dummy_heading: 0.0, dummy_latitude: 0.0, dummy_longitude: 0.0, go_to_waypoints: false,
+  pause: false, reset_waypoints: false, skip_waypoint: false, use_dummy: false, use_gpsd: false,
+  way_10_latitude: 1.0, way_10_longitude: 1.0, way_10_priority: 0, way_1_latitude: 0.0,
+  way_1_longitude: 0.0, way_1_priority: 1, way_2_latitude: 1.0, way_2_longitude: 1.0,
+  way_2_priority: 1, way_3_latitude: 1.0, way_3_longitude: 1.0, way_3_priority: 0,
+  way_4_latitude: 1.0, way_4_longitude: 1.0, way_4_priority: 0, way_5_latitude: 1.0,
+  way_5_longitude: 1.0, way_5_priority: 0, way_6_latitude: 1.0, way_6_longitude: 1.0,
+  way_6_priority: 0, way_7_latitude: 1.0, way_7_longitude: 1.0, way_7_priority: 0,
+  way_8_latitude: 1.0, way_8_longitude: 1.0, way_8_priority: 0, way_9_latitude: 1.0,
+  way_9_longitude: 1.0, way_9_priority: 0, waypoint_radius: 1.0}

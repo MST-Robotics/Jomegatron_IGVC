@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="MST_Motors" type="Motors" name="Motors" />
+    <node pkg="Midg" type="Midg_node" name="Midg_node" />
+    <node pkg="MST_Easy_Waypoints" type="qual_waypoints" name="qual_waypoints" />
+</launch>

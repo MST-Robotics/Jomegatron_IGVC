@@ -1,0 +1,24 @@
+<package>
+  <description brief="MST_ColorStat">
+
+     MST_Edge_Detection takes and image and runs a sobel filter on it to
+     find edges then outputs a greyscale image
+
+  </description>
+  <author>James Anderson (jra798) </author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/MST_Edge_Detection</url>
+  
+  <depend package = "sensor_msgs"/>
+  <depend package = "opencv2"/>
+  <depend package = "cv_bridge"/>
+  <depend package = "roscpp"/>
+  <depend package = "std_msgs"/>
+  <depend package = "image_transport"/>
+  
+  <!-- depends for using dynamic reconfigur gui -->
+  <depend package="dynamic_reconfigure" />
+  <depend package="driver_base" />
+
+</package>

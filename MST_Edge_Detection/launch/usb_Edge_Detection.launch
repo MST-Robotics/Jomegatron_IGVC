@@ -1,0 +1,5 @@
+<launch>
+	<group >
+		<node pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=usb_cam/image_raw" />
+	</group>
+</launch>

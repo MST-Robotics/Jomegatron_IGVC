@@ -1,0 +1,14 @@
+<package>
+  <description brief="MST_Particles">
+
+     MST_Particles
+
+  </description>
+  <author>Robot</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/MST_Particles</url>
+
+</package>
+
+

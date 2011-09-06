@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers
+END
+midgPacketNAVSENSE.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/midgPacketNAVSENSE.h
+END
+fletcher.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/fletcher.h
+END
+midgPacketSTATUS.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/midgPacketSTATUS.h
+END
+midgPacketAIDVEL.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/midgPacketAIDVEL.h
+END
+midgPacketGPSCLOCK.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/midgPacketGPSCLOCK.h
+END
+midgPacketNAVHDG.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/midgPacketNAVHDG.h
+END
+midgPacket.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/midgPacket.cpp
+END
+midgPacketNAVPV.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/midgPacketNAVPV.h
+END
+midgPacketUTCTIME.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/midgPacketUTCTIME.h
+END
+midgPacket.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/midgPacket.h
+END
+midgPacketGPSPV.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/1027/Code/ROS_test/Midg/src/drivers/midgPacketGPSPV.h
+END

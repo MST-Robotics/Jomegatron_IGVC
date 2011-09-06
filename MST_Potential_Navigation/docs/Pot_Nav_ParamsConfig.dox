@@ -1,0 +1,27 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~robot_x" : \b [int] The height of the robot mask. min: 0, default: 200, max: 400
+- \b "~robot_y" : \b [int] The width of the robot mask. min: 0, default: 100, max: 400
+- \b "~robot_filled" : \b [bool] Option to disply the robot mask as a filed box min: False, default: False, max: True
+- \b "~search_radius" : \b [int] The search radius of potential navigation. min: 0, default: 100, max: 1000
+- \b "~search_res" : \b [int] The search  degrees of potential navigation. min: 1, default: 180, max: 360
+- \b "~display_rays" : \b [bool] Option to disply rays on debug image min: False, default: False, max: True
+- \b "~compas_length" : \b [double] The length of the target and movement. min: 0.0, default: 200.0, max: 1000.0
+- \b "~carrot_on_a_stick" : \b [double] The forward forcing velocity on robot. min: 0.0, default: 1.0, max: 10.0
+- \b "~target_weight_y" : \b [double] The scalar aplied to the y target component. min: 0.0, default: 1.0, max: 100.0
+- \b "~target_weight_z" : \b [double] The scalar aplied to the z target component. min: 0.0, default: 1.0, max: 100.0
+- \b "~target_dist_scale" : \b [double] Percentage of pixel distace aplied min: 0.0, default: 200.0, max: 1000.0
+- \b "~dist_scale_x" : \b [double] Percentage of pixel distace aplied min: 0.0, default: 200.0, max: 1000.0
+- \b "~dist_scale_y" : \b [double] Percentage of pixel distace aplied min: 0.0, default: 200.0, max: 1000.0
+- \b "~twist_scalar_y" : \b [double] The scalar aplied to the y twist values. min: 0.0, default: 1.0, max: 100.0
+- \b "~twist_scalar_z" : \b [double] The scalar aplied to the z twist values. min: 0.0, default: 1.0, max: 100.0
+- \b "~edges_per" : \b [double] The percentage that edges are added at. min: 0.0, default: 100.0, max: 100.0
+- \b "~stat_per" : \b [double] The percentage that grass is subtracted at. min: 0.0, default: 40.0, max: 100.0
+- \b "~previous_per" : \b [double] The percentage that grass is subtracted at. min: 0.0, default: 40.0, max: 100.0
+- \b "~lines_per" : \b [double] The percentage that edges are added at. min: 0.0, default: 40.0, max: 100.0
+- \b "~flags_per" : \b [double] The percentage that edges are added at. min: 0.0, default: 40.0, max: 100.0
+- \b "~obst_per" : \b [double] The percentage that edges are added at. min: 0.0, default: 40.0, max: 100.0
+- \b "~grass_per" : \b [double] The percentage that grass is subtracted at. min: 0.0, default: 40.0, max: 100.0
+

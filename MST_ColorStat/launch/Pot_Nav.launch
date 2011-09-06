@@ -1,0 +1,6 @@
+<launch>
+	<group >
+		<node pkg="MST_Potential_Navigation" type="Pot_Nav" name="Pot_Nav" />
+	</group>
+</launch>
+

@@ -1,0 +1,5 @@
+<launch>
+	<group>
+		<node pkg="usb_cam" type="usb_cam_node" name="usb_cam" />
+	</group>
+</launch>

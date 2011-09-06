@@ -1,0 +1,14 @@
+<package>
+  <description brief="MST_Color">
+
+     MST_Color
+
+  </description>
+  <author>James Anderson</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/MST_Color</url>
+
+</package>
+
+

@@ -1,0 +1,13 @@
+<launch>
+
+   	<node pkg="usb_cam" type="usb_cam_node" name="usb_cam" args="_video_device:=/dev/video1" /> 
+   	
+    <node pkg="MST_ColorStat" type="ColorStat" name="color_stat" args="image:=usb_cam/image_raw" />
+        
+	<node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=usb_cam/image_raw" />
+	
+	<node pkg="image_view" type="image_view" name="edges_display" args="image:=image_stat" />
+	
+	<node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui" />
+
+</launch>

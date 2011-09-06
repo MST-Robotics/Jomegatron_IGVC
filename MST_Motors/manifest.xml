@@ -1,0 +1,17 @@
+<package>
+  <description brief="MST_Motors">
+
+     MST_Motors
+
+  </description>
+  <author>Robot</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/MST_Motors</url>
+  
+  <depend package = "roscpp" />
+  <depend package = "geometry_msgs" />
+
+</package>
+
+

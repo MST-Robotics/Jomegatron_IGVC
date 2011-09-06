@@ -1,0 +1,24 @@
+<launch>
+
+    <include file="$(find MST_Edge_Detection)/launch/usb.launch" if="$(arg u)" />
+    <include file="$(find MST_Edge_Detection)/launch/ptgrey.launch" unless="$(arg u)" />
+    <node pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=usb_cam/image_raw" if="$(arg u)" />
+    <node pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=ptgrey/image_raw" unless="$(arg u)" />
+    <include file="$(find MST_Potential_Navigation)/launch/Pot_Nav.launch" />
+    <node pkg="MST_Control" type="Control" name="Control" args= "image:=ptgrey/image_raw" unless="$(arg u)" />
+    
+    <group if="$(arg d)">
+    
+		<node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=usb_cam/image_raw" if="$(arg u)"/>
+		
+		<node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=ptgrey/image_raw" unless="$(arg u)"/>
+	
+		<node pkg="image_view" type="image_view" name="edges_display" args="image:=image_edges" />
+	
+		<node pkg="image_view" type="image_view" name="map_display" args="image:=map" />
+	
+		<node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui" />
+		
+	</group>
+
+</launch>

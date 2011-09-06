@@ -1,0 +1,39 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~use_gpsd" : \b [bool] bool to use the garmin gps min: False, default: False, max: True
+- \b "~go_to_waypoints" : \b [bool] option to go forward or follow waypoints min: False, default: False, max: True
+- \b "~skip_waypoint" : \b [bool] option to skip a waypoint min: False, default: False, max: True
+- \b "~waypoint_radius" : \b [double] radius considerd to reach waypoints min: 0.0, default: 1.0, max: 10.0
+- \b "~way_1_latitude" : \b [double] latitude for waypoint min: -90.0, default: 1.0, max: 90.0
+- \b "~way_1_longitude" : \b [double] longitude for waypoint min: -90.0, default: 1.0, max: 10.0
+- \b "~way_1_priority" : \b [int] priority of waypoint(0 is ignored) min: 0, default: 1, max: 10
+- \b "~way_2_latitude" : \b [double] latitude for waypoint min: -90.0, default: 1.0, max: 90.0
+- \b "~way_2_longitude" : \b [double] longitude for waypoint min: -90.0, default: 1.0, max: 10.0
+- \b "~way_2_priority" : \b [int] priority of waypoint(0 is ignored) min: 0, default: 1, max: 10
+- \b "~way_3_latitude" : \b [double] latitude for waypoint min: -90.0, default: 1.0, max: 90.0
+- \b "~way_3_longitude" : \b [double] longitude for waypoint min: -90.0, default: 1.0, max: 10.0
+- \b "~way_3_priority" : \b [int] priority of waypoint(0 is ignored) min: 0, default: 1, max: 10
+- \b "~way_4_latitude" : \b [double] latitude for waypoint min: -90.0, default: 1.0, max: 90.0
+- \b "~way_4_longitude" : \b [double] longitude for waypoint min: -90.0, default: 1.0, max: 10.0
+- \b "~way_4_priority" : \b [int] priority of waypoint(0 is ignored) min: 0, default: 1, max: 10
+- \b "~way_5_latitude" : \b [double] latitude for waypoint min: -90.0, default: 1.0, max: 90.0
+- \b "~way_5_longitude" : \b [double] longitude for waypoint min: -90.0, default: 1.0, max: 10.0
+- \b "~way_5_priority" : \b [int] priority of waypoint(0 is ignored) min: 0, default: 1, max: 10
+- \b "~way_6_latitude" : \b [double] latitude for waypoint min: -90.0, default: 1.0, max: 90.0
+- \b "~way_6_longitude" : \b [double] longitude for waypoint min: -90.0, default: 1.0, max: 10.0
+- \b "~way_6_priority" : \b [int] priority of waypoint(0 is ignored) min: 0, default: 1, max: 10
+- \b "~way_7_latitude" : \b [double] latitude for waypoint min: -90.0, default: 1.0, max: 90.0
+- \b "~way_7_longitude" : \b [double] longitude for waypoint min: -90.0, default: 1.0, max: 10.0
+- \b "~way_7_priority" : \b [int] priority of waypoint(0 is ignored) min: 0, default: 1, max: 10
+- \b "~way_8_latitude" : \b [double] latitude for waypoint min: -90.0, default: 1.0, max: 90.0
+- \b "~way_8_longitude" : \b [double] longitude for waypoint min: -90.0, default: 1.0, max: 10.0
+- \b "~way_8_priority" : \b [int] priority of waypoint(0 is ignored) min: 0, default: 1, max: 10
+- \b "~way_9_latitude" : \b [double] latitude for waypoint min: -90.0, default: 1.0, max: 90.0
+- \b "~way_9_longitude" : \b [double] longitude for waypoint min: -90.0, default: 1.0, max: 10.0
+- \b "~way_9_priority" : \b [int] priority of waypoint(0 is ignored) min: 0, default: 1, max: 10
+- \b "~way_10_latitude" : \b [double] latitude for waypoint min: -90.0, default: 1.0, max: 90.0
+- \b "~way_10_longitude" : \b [double] longitude for waypoint min: -90.0, default: 1.0, max: 10.0
+- \b "~way_10_priority" : \b [int] priority of waypoint(0 is ignored) min: 0, default: 1, max: 10
+

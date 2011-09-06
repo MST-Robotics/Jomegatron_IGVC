@@ -1,0 +1,15 @@
+<launch>
+
+    <include file="$(find MST_Edge_Detection)/launch/ptgrey.launch" />
+    <include file="$(find MST_Edge_Detection)/launch/Edge_Detection.launch" />
+    <include file="$(find MST_Potential_Navigation)/launch/Pot_Nav.launch" />
+    
+	<node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=ptgrey/image_raw" />
+	
+	<node pkg="image_view" type="image_view" name="edges_display" args="image:=image_edges" />
+	
+	<node pkg="image_view" type="image_view" name="map_display" args="image:=map" />
+	
+	<node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui" />
+
+</launch>

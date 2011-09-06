@@ -1,0 +1,34 @@
+<package>
+  <description brief="MST_Control">
+
+     MST_Control contains the controll node wich decides what comands to sent form the motors
+     and deals with the various user iputs and displays. 
+
+  </description>
+  <author>James Anderson</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/MST_Control</url>
+  
+  
+  <depend package = "sound_play" />
+  <depend package = "wiimote" />
+  <depend package = "MST_Estop" />
+  <depend package = "MST_Position" />
+  
+  
+  <!-- depends for using cv_bridge -->  
+  <depend package = "sensor_msgs"/>
+  <depend package = "opencv2"/>
+  <depend package = "cv_bridge"/>
+  <depend package = "roscpp"/>
+  <depend package = "std_msgs"/>
+  <depend package = "image_transport"/>
+  
+  <!-- depends for using dynamic reconfigur gui -->
+  <depend package="dynamic_reconfigure" />
+  <depend package="driver_base" />
+
+</package>
+
+

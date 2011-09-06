@@ -1,0 +1,210 @@
+/*******************************************************************************
+ * File: Midg_II.cpp
+ * Auth: Chris Bessent <cmbq76>
+ *
+ * Desc: Midg controller.  Parses data from Midg and posts to "Midg" topic.
+ ******************************************************************************/
+
+/***********************************************************
+* ROS specific includes
+***********************************************************/
+#include "ros/ros.h"
+
+/***********************************************************
+* Message includes
+***********************************************************/
+#include "mst_common/IMU.h"
+
+/***********************************************************
+* Other includes
+***********************************************************/
+#include "Midg_II.h"
+#include <list>
+#include "Math.h"
+#include "drivers/midgPacket.h"
+
+/***********************************************************
+* Global variables
+***********************************************************/
+
+
+/***********************************************************
+* Function prototypes
+***********************************************************/
+int  Open_MIDG_Connection();
+void Process_MIDG_Packets( int );
+
+/***********************************************************
+* Message Callbacks
+***********************************************************/
+mst_common::IMU      imu_msg;
+
+int main(int argc, char **argv)
+{
+    ros::init(argc, argv, "Midg");
+    ros::NodeHandle n;
+
+    ros::Publisher imu_pub = n.advertise<mst_common::IMU>( MIDG_TOPIC, 1000 );
+
+    /***********************************************************
+    * Midg initialization
+    ***********************************************************/
+    int fd = Open_MIDG_Connection();
+
+    while( ros::ok() )
+    {
+        Process_MIDG_Packets( fd );
+
+        imu_pub.publish( imu_msg );
+    }
+
+}
+
+int Open_MIDG_Connection()
+{
+    //------------------------------------------------------------------
+    // Create serial socket port
+    //------------------------------------------------------------------
+    int fd;
+    struct termios newtio;
+
+    fd = open(MIDG_MODEMDEVICE, O_RDWR | O_NOCTTY | O_NONBLOCK );
+    if (fd <0) {perror(MIDG_MODEMDEVICE); exit(-1); }
+
+    memset( &newtio, 0x00, sizeof(newtio) );
+
+    newtio.c_cflag = MIDG_BAUDRATE | CS8 | CLOCAL | CREAD;
+    newtio.c_iflag = IGNPAR | IGNBRK;
+    newtio.c_oflag = 0;
+    newtio.c_lflag = 0 & !ECHO;
+
+    /* set input mode (non-canonical, no echo,...) */
+    newtio.c_lflag = 0;
+
+    newtio.c_cc[VTIME]    = 0;   /* inter-character timer unused */
+    newtio.c_cc[VMIN]     = 250; /* blocking read until 1 chars received */
+
+    tcsetattr(fd,TCSANOW,&newtio);
+
+    return fd;
+} /* Start_MIDG_Connection() */
+
+void Process_MIDG_Packets( int fd )
+{
+    static list<double>  GPSPV_LONG_DATA;
+    static list<double>  GPSPV_LAT_DATA;
+
+    msg_NAVPV       msg_navpv;
+    msg_GPSPV       msg_gpspv;
+    msg_NAVSENSE    msg_navsense;
+    msg_UTCTIME     msg_utctime;
+    msg_NAVHDG      msg_navhdg;
+
+    const unsigned int sample_size = 50;
+
+    midgPacket msg_temp = getonepacket( fd );
+    switch( msg_temp.messageID )
+    {
+        case MIDG_MESSAGE_NAVPVDATA:
+            msg_navpv = msg_temp.handle_msg_NAVPV();
+
+            if( !msg_navpv.positionvalid )
+            {
+                imu_msg.longitude = GPS_NO_FIX;
+                imu_msg.latitude  = GPS_NO_FIX;
+                imu_msg.altitude  = GPS_NO_FIX;
+            }
+            else
+            {
+                imu_msg.longitude = msg_navpv.xPos;
+                imu_msg.latitude  = msg_navpv.yPos;
+                imu_msg.altitude  = msg_navpv.zPos;
+            }
+            break;
+
+        case MIDG_MESSAGE_GPSPVDATA:
+            msg_gpspv = msg_temp.handle_msg_GPSPV();
+
+            if( !msg_gpspv.gpsfixvalid )
+            {
+                imu_msg.longitude  = GPS_NO_FIX;
+                imu_msg.latitude   = GPS_NO_FIX;
+                imu_msg.altitude   = GPS_NO_FIX;
+                imu_msg.position_valid = false;
+                imu_msg.position_accuracy = msg_gpspv.positionaccuracy;
+            }
+            else
+            {
+                //----------------------------------------------------
+                // Average GPS position over N samples
+                //----------------------------------------------------
+                if( GPSPV_LONG_DATA.size() >= sample_size )
+                {
+                    GPSPV_LONG_DATA.pop_front();
+                }
+                GPSPV_LONG_DATA.push_back( msg_gpspv.GPS_PosX );
+                imu_msg.longitude = average( GPSPV_LONG_DATA );
+
+                if( GPSPV_LAT_DATA.size() >= sample_size )
+                {
+                    GPSPV_LAT_DATA.pop_front();
+                }
+                GPSPV_LAT_DATA.push_back( msg_gpspv.GPS_PosY );
+                imu_msg.latitude = average( GPSPV_LAT_DATA );
+
+                //~ imu_msg.longitude = msg_gpspv.GPS_PosX;
+                //~ imu_msg.latitude  = msg_gpspv.GPS_PosY;
+                imu_msg.altitude  = msg_gpspv.GPS_PosZ;
+                imu_msg.position_valid = true;
+                imu_msg.position_accuracy = msg_gpspv.positionaccuracy;
+            }
+            break;
+
+        case MIDG_MESSAGE_NAVSENSEDATA:
+            msg_navsense = msg_temp.handle_msg_NAVSENSE();
+
+            //------------------------------------------------------
+            // Modify yaw for robot system
+            //
+            // IN: North = 0, East = +M_PI_2, West = -M_PI_2,
+            //     South = +-M_PI
+            //
+            // OUT: East = 0, North = +M_PI_2, West = +M_PI,
+            //      South = +3*M_PI_2
+            //------------------------------------------------------
+            msg_navsense.yaw *= -1;
+            msg_navsense.yaw += M_PI_2;
+            while( msg_navsense.yaw < 0 )
+            {
+                msg_navsense.yaw += 2*M_PI;
+            }
+            while( msg_navsense.yaw > 2*M_PI )
+            {
+                msg_navsense.yaw -= 2*M_PI;
+            }
+
+            //------------------------------------------------------
+            // Modify angular rate for robot system
+            //------------------------------------------------------
+            msg_navsense.zAngRate *= M_PI/180.;
+
+            imu_msg.heading        = msg_navsense.yaw;
+            imu_msg.angular_rate       = msg_navsense.zAngRate;
+            break;
+
+        case MIDG_MESSAGE_UTCTIME:
+            msg_utctime = msg_temp.handle_msg_UTCTIME();
+
+            imu_msg.gps_time = ( msg_utctime.timestamp - 15 );
+            break;
+
+        case MIDG_MESSAGE_NAVHDGDATA:
+            msg_navhdg = msg_temp.handle_msg_NAVHDG();
+
+            imu_msg.speed = msg_navhdg.sog;
+            break;
+
+        default:
+            break;
+    } /* switch( msg_temp.messageID ) */
+} /* Process_MIDG_Packets() */

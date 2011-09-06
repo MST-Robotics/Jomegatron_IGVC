@@ -1,0 +1,18 @@
+<package>
+  <description brief="MST_Easy_Waypoints">
+
+     MST_Easy_Waypoints
+
+  </description>
+  <author>Robot</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/MST_Easy_Waypoints</url>
+  <depend package="roscpp"/>
+  <depend package="MST_Motors"/>
+  <depend package="Midg"/>
+  <depend package="geometry_msgs"/>
+
+</package>
+
+
