@@ -1,0 +1,28 @@
+\subsubsection usage Usage
+\verbatim
+<node name="dynamic_reconfigure_node" pkg="MST_Potential_Navigation" type="dynamic_reconfigure_node">
+  <param name="robot_x" type="int" value="200" />
+  <param name="robot_y" type="int" value="100" />
+  <param name="robot_filled" type="bool" value="False" />
+  <param name="search_radius" type="int" value="100" />
+  <param name="search_res" type="int" value="180" />
+  <param name="display_rays" type="bool" value="False" />
+  <param name="compas_length" type="double" value="200.0" />
+  <param name="carrot_on_a_stick" type="double" value="1.0" />
+  <param name="target_weight_y" type="double" value="1.0" />
+  <param name="target_weight_z" type="double" value="1.0" />
+  <param name="target_dist_scale" type="double" value="200.0" />
+  <param name="dist_scale_x" type="double" value="200.0" />
+  <param name="dist_scale_y" type="double" value="200.0" />
+  <param name="twist_scalar_y" type="double" value="1.0" />
+  <param name="twist_scalar_z" type="double" value="1.0" />
+  <param name="edges_per" type="double" value="100.0" />
+  <param name="stat_per" type="double" value="40.0" />
+  <param name="previous_per" type="double" value="40.0" />
+  <param name="lines_per" type="double" value="40.0" />
+  <param name="flags_per" type="double" value="40.0" />
+  <param name="obst_per" type="double" value="40.0" />
+  <param name="grass_per" type="double" value="40.0" />
+</node>
+\endverbatim
+

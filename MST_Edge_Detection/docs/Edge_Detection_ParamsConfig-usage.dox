@@ -1,0 +1,21 @@
+\subsubsection usage Usage
+\verbatim
+<node name="dynamic_reconfigure_node" pkg="MST_Edge_Detection" type="dynamic_reconfigure_node">
+  <param name="sobel" type="bool" value="True" />
+  <param name="second_order" type="bool" value="False" />
+  <param name="third_order" type="bool" value="False" />
+  <param name="sobel_per_add" type="double" value="100.0" />
+  <param name="laplace" type="bool" value="False" />
+  <param name="laplace_per_add" type="double" value="100.0" />
+  <param name="canny" type="bool" value="False" />
+  <param name="canny_thresh_1" type="double" value="100.0" />
+  <param name="canny_thresh_2" type="double" value="100.0" />
+  <param name="canny_val" type="double" value="100.0" />
+  <param name="canny_second_order" type="bool" value="False" />
+  <param name="canny_third_order" type="bool" value="False" />
+  <param name="canny_per_add" type="double" value="100.0" />
+  <param name="square_root" type="bool" value="False" />
+  <param name="scaler_percent" type="double" value="100.0" />
+</node>
+\endverbatim
+
