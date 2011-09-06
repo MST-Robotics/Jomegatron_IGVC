@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors
+CMAKE_SOURCE_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Motors
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/build
+CMAKE_BINARY_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Motors/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Motors.dir/depend.make
@@ -49,48 +49,49 @@ include CMakeFiles/Motors.dir/flags.make
 CMakeFiles/Motors.dir/src/Motors.o: CMakeFiles/Motors.dir/flags.make
 CMakeFiles/Motors.dir/src/Motors.o: ../src/Motors.cpp
 CMakeFiles/Motors.dir/src/Motors.o: ../manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/ros/core/rosbuild/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/ros/core/roslang/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/utilities/cpp_common/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/utilities/rostime/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/ros/tools/rospack/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/ros/core/roslib/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosconsole/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/clients/rospy/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/ros/tools/rosclean/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosgraph/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosmaster/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosout/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/tools/roslaunch/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/ros/tools/rosunit/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/tools/rostest/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbag/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbagmigration/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/manifest.xml
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/msg_gen/generated
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/srv_gen/generated
-CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/msg_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/build/CMakeFiles $(CMAKE_PROGRESS_1)
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/ros/core/roslang/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/ros/tools/rospack/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/ros/core/roslib/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/ros/tools/rosclean/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/tools/rosmaster/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/tools/rosout/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/tools/roslaunch/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/ros/tools/rosunit/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/tools/rostest/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/tools/rosbag/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/tools/rosbagmigration/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/manifest.xml
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
+CMakeFiles/Motors.dir/src/Motors.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/robot/Documents/Jomegatron_IGVC/MST_Motors/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Motors.dir/src/Motors.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/Motors.dir/src/Motors.o -c /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/src/Motors.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/Motors.dir/src/Motors.o -c /home/robot/Documents/Jomegatron_IGVC/MST_Motors/src/Motors.cpp
 
 CMakeFiles/Motors.dir/src/Motors.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Motors.dir/src/Motors.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/src/Motors.cpp > CMakeFiles/Motors.dir/src/Motors.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/robot/Documents/Jomegatron_IGVC/MST_Motors/src/Motors.cpp > CMakeFiles/Motors.dir/src/Motors.i
 
 CMakeFiles/Motors.dir/src/Motors.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Motors.dir/src/Motors.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/src/Motors.cpp -o CMakeFiles/Motors.dir/src/Motors.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/robot/Documents/Jomegatron_IGVC/MST_Motors/src/Motors.cpp -o CMakeFiles/Motors.dir/src/Motors.s
 
 CMakeFiles/Motors.dir/src/Motors.o.requires:
 .PHONY : CMakeFiles/Motors.dir/src/Motors.o.requires
@@ -105,48 +106,49 @@ CMakeFiles/Motors.dir/src/Motors.o.provides.build: CMakeFiles/Motors.dir/src/Mot
 CMakeFiles/Motors.dir/src/motorController.o: CMakeFiles/Motors.dir/flags.make
 CMakeFiles/Motors.dir/src/motorController.o: ../src/motorController.cpp
 CMakeFiles/Motors.dir/src/motorController.o: ../manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/ros/core/rosbuild/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/ros/core/roslang/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/utilities/cpp_common/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/utilities/rostime/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/ros/tools/rospack/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/ros/core/roslib/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosconsole/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/clients/rospy/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/ros/tools/rosclean/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosgraph/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosmaster/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosout/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/tools/roslaunch/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/ros/tools/rosunit/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/tools/rostest/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbag/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbagmigration/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/manifest.xml
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/msg_gen/generated
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/srv_gen/generated
-CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/msg_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/build/CMakeFiles $(CMAKE_PROGRESS_2)
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/ros/core/roslang/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/ros/tools/rospack/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/ros/core/roslib/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/ros/tools/rosclean/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/tools/rosmaster/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/tools/rosout/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/tools/roslaunch/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/ros/tools/rosunit/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/tools/rostest/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/tools/rosbag/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/tools/rosbagmigration/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/manifest.xml
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
+CMakeFiles/Motors.dir/src/motorController.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/robot/Documents/Jomegatron_IGVC/MST_Motors/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Motors.dir/src/motorController.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/Motors.dir/src/motorController.o -c /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/src/motorController.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/Motors.dir/src/motorController.o -c /home/robot/Documents/Jomegatron_IGVC/MST_Motors/src/motorController.cpp
 
 CMakeFiles/Motors.dir/src/motorController.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Motors.dir/src/motorController.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/src/motorController.cpp > CMakeFiles/Motors.dir/src/motorController.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/robot/Documents/Jomegatron_IGVC/MST_Motors/src/motorController.cpp > CMakeFiles/Motors.dir/src/motorController.i
 
 CMakeFiles/Motors.dir/src/motorController.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Motors.dir/src/motorController.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/src/motorController.cpp -o CMakeFiles/Motors.dir/src/motorController.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/robot/Documents/Jomegatron_IGVC/MST_Motors/src/motorController.cpp -o CMakeFiles/Motors.dir/src/motorController.s
 
 CMakeFiles/Motors.dir/src/motorController.o.requires:
 .PHONY : CMakeFiles/Motors.dir/src/motorController.o.requires
@@ -186,6 +188,6 @@ CMakeFiles/Motors.dir/clean:
 .PHONY : CMakeFiles/Motors.dir/clean
 
 CMakeFiles/Motors.dir/depend:
-	cd /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/build/CMakeFiles/Motors.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/robot/Documents/Jomegatron_IGVC/MST_Motors/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/Documents/Jomegatron_IGVC/MST_Motors /home/robot/Documents/Jomegatron_IGVC/MST_Motors /home/robot/Documents/Jomegatron_IGVC/MST_Motors/build /home/robot/Documents/Jomegatron_IGVC/MST_Motors/build /home/robot/Documents/Jomegatron_IGVC/MST_Motors/build/CMakeFiles/Motors.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Motors.dir/depend
 

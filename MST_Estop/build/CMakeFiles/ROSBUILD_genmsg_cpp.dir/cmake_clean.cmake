@@ -3,8 +3,8 @@ FILE(REMOVE_RECURSE
   "../msg_gen"
   "../msg_gen"
   "CMakeFiles/ROSBUILD_genmsg_cpp"
-  "../msg_gen/cpp/include/MST_Estop/Estop_State.h"
   "../msg_gen/cpp/include/MST_Estop/Control_State.h"
+  "../msg_gen/cpp/include/MST_Estop/Estop_State.h"
 )
 
 # Per-language clean rules from dependency scanning.

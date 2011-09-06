@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection
+CMAKE_SOURCE_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build
+CMAKE_BINARY_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Edge_Detection.dir/depend.make
@@ -49,70 +49,70 @@ include CMakeFiles/Edge_Detection.dir/flags.make
 CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: CMakeFiles/Edge_Detection.dir/flags.make
 CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: ../src/Edge_Detection.cpp
 CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: ../manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/ros/tools/rospack/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/ros/core/roslib/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/ros/core/rosbuild/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/ros/core/roslang/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/utilities/cpp_common/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/utilities/rostime/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosconsole/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/clients/rospy/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/ros/tools/rosclean/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosgraph/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosmaster/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosout/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/tools/roslaunch/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/ros/tools/rosunit/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/tools/rostest/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbag/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbagmigration/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/vision_opencv/opencv2/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/vision_opencv/cv_bridge/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/common/tinyxml/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/common/pluginlib/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/utilities/message_filters/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/image_common/image_transport/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosmsg/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/tools/rostopic/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosservice/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/diagnostics/diagnostic_updater/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/diagnostics/self_test/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/driver_common/driver_base/manifest.xml
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/msg_gen/generated
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/srv_gen/generated
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/msg_gen/generated
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/msg_gen/generated
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/srv_gen/generated
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/msg_gen/generated
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/srv_gen/generated
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/msg_gen/generated
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/srv_gen/generated
-CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/diamondback/stacks/driver_common/driver_base/msg_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build/CMakeFiles $(CMAKE_PROGRESS_1)
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/ros/core/roslang/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/ros/tools/rospack/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/ros/core/roslib/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/ros/tools/rosclean/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/tools/rosmaster/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/tools/rosout/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/tools/roslaunch/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/ros/tools/rosunit/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/tools/rostest/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/tools/rosbag/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/tools/rosbagmigration/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/vision_opencv/opencv2/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/vision_opencv/cv_bridge/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/pluginlib/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/utilities/message_filters/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/image_common/image_transport/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/tools/rosmsg/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/tools/rostopic/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/tools/rosservice/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/diagnostics/diagnostic_updater/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/diagnostics/self_test/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/driver_common/driver_base/manifest.xml
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/msg_gen/generated
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/srv_gen/generated
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/msg_gen/generated
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/srv_gen/generated
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/msg_gen/generated
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/srv_gen/generated
+CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o: /opt/ros/electric/stacks/driver_common/driver_base/msg_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o -c /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/src/Edge_Detection.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o -c /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/src/Edge_Detection.cpp
 
 CMakeFiles/Edge_Detection.dir/src/Edge_Detection.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Edge_Detection.dir/src/Edge_Detection.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/src/Edge_Detection.cpp > CMakeFiles/Edge_Detection.dir/src/Edge_Detection.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/src/Edge_Detection.cpp > CMakeFiles/Edge_Detection.dir/src/Edge_Detection.i
 
 CMakeFiles/Edge_Detection.dir/src/Edge_Detection.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Edge_Detection.dir/src/Edge_Detection.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/src/Edge_Detection.cpp -o CMakeFiles/Edge_Detection.dir/src/Edge_Detection.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/src/Edge_Detection.cpp -o CMakeFiles/Edge_Detection.dir/src/Edge_Detection.s
 
 CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o.requires:
 .PHONY : CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o.requires
@@ -149,6 +149,6 @@ CMakeFiles/Edge_Detection.dir/clean:
 .PHONY : CMakeFiles/Edge_Detection.dir/clean
 
 CMakeFiles/Edge_Detection.dir/depend:
-	cd /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build/CMakeFiles/Edge_Detection.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build/CMakeFiles/Edge_Detection.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Edge_Detection.dir/depend
 

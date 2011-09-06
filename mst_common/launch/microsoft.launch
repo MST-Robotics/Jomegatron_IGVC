@@ -1,0 +1,5 @@
+<launch>	
+	<group ns="microsoft">
+		<node name="uvc_camera" pkg="uvc_camera" type="camera_node"/>
+	</group>
+</launch>

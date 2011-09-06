@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop
+CMAKE_SOURCE_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Estop
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build
+CMAKE_BINARY_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Estop.dir/depend.make
@@ -49,34 +49,34 @@ include CMakeFiles/Estop.dir/flags.make
 CMakeFiles/Estop.dir/src/estop.o: CMakeFiles/Estop.dir/flags.make
 CMakeFiles/Estop.dir/src/estop.o: ../src/estop.cpp
 CMakeFiles/Estop.dir/src/estop.o: ../manifest.xml
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/ros/core/rosbuild/manifest.xml
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/ros/core/roslang/manifest.xml
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/stacks/ros_comm/utilities/cpp_common/manifest.xml
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/stacks/ros_comm/utilities/rostime/manifest.xml
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/ros/tools/rospack/manifest.xml
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/ros/core/roslib/manifest.xml
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosconsole/manifest.xml
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/manifest.xml
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/msg_gen/generated
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
-CMakeFiles/Estop.dir/src/estop.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build/CMakeFiles $(CMAKE_PROGRESS_1)
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/ros/core/roslang/manifest.xml
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/ros/tools/rospack/manifest.xml
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/ros/core/roslib/manifest.xml
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+CMakeFiles/Estop.dir/src/estop.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Estop.dir/src/estop.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/Estop.dir/src/estop.o -c /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/src/estop.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/Estop.dir/src/estop.o -c /home/robot/Documents/Jomegatron_IGVC/MST_Estop/src/estop.cpp
 
 CMakeFiles/Estop.dir/src/estop.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Estop.dir/src/estop.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/src/estop.cpp > CMakeFiles/Estop.dir/src/estop.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/robot/Documents/Jomegatron_IGVC/MST_Estop/src/estop.cpp > CMakeFiles/Estop.dir/src/estop.i
 
 CMakeFiles/Estop.dir/src/estop.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Estop.dir/src/estop.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/src/estop.cpp -o CMakeFiles/Estop.dir/src/estop.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/robot/Documents/Jomegatron_IGVC/MST_Estop/src/estop.cpp -o CMakeFiles/Estop.dir/src/estop.s
 
 CMakeFiles/Estop.dir/src/estop.o.requires:
 .PHONY : CMakeFiles/Estop.dir/src/estop.o.requires
@@ -113,6 +113,6 @@ CMakeFiles/Estop.dir/clean:
 .PHONY : CMakeFiles/Estop.dir/clean
 
 CMakeFiles/Estop.dir/depend:
-	cd /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build/CMakeFiles/Estop.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/Documents/Jomegatron_IGVC/MST_Estop /home/robot/Documents/Jomegatron_IGVC/MST_Estop /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build/CMakeFiles/Estop.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Estop.dir/depend
 

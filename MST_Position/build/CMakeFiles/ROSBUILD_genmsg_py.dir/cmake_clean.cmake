@@ -4,9 +4,9 @@ FILE(REMOVE_RECURSE
   "../msg_gen"
   "CMakeFiles/ROSBUILD_genmsg_py"
   "../src/MST_Position/msg/__init__.py"
+  "../src/MST_Position/msg/_inital_gps.py"
   "../src/MST_Position/msg/_Target_Heading.py"
   "../src/MST_Position/msg/_target.py"
-  "../src/MST_Position/msg/_inital_gps.py"
 )
 
 # Per-language clean rules from dependency scanning.

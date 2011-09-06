@@ -1,0 +1,16 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~base_linear_speed" : \b [double] max robot speed in lineardirection min: 0.0, default: 1.0, max: 10.0
+- \b "~base_rot_speed" : \b [double] max robot speed in angular direction min: 0.0, default: 1.0, max: 4.0
+- \b "~turbo_x" : \b [double] multiplyer of turbo button x min: 0.0, default: 1.5, max: 5.0
+- \b "~turbo_y" : \b [double] multiplyer of turbo button y min: 0.0, default: 2.0, max: 5.0
+- \b "~d_pad_percent" : \b [double] the percent that the dpad is scaled down min: 0.0, default: 50.0, max: 100.0
+- \b "~plus_mesage" : \b [str] phrase to say when plus button is pressed min: , default: Pardon me. coming through., max: 
+- \b "~minus_sound" : \b [str] sound to play when minus button is pressed min: , default: /home/robot/Documents/Joemegatron_IGVC_2011/sounds/Ahooga_Car_Horn.wav, max: 
+- \b "~autonomous_waypoints" : \b [str] .yaml file with autonomous waypoints min: , default: /home/robot/Documents/Joemegatron_IGVC_2011/yaml/Autonomous_Waypoints.yaml, max: 
+- \b "~navigation_waypoints" : \b [str] .yaml file with autonomous waypoints min: , default: /home/robot/Documents/Joemegatron_IGVC_2011/yaml/Navigation_Waypoints.yaml, max: 
+- \b "~waypoint_sound" : \b [str] sound to play when minus button is pressed min: , default: /home/robot/Documents/Joemegatron_IGVC_2011/sounds/Ahooga_Car_Horn.wav, max: 
+- \b "~done_sound" : \b [str] sound to play when minus button is pressed min: , default: /home/robot/Documents/Joemegatron_IGVC_2011/sounds/Ahooga_Car_Horn.wav, max: 
+

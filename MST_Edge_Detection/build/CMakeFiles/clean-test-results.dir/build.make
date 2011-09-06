@@ -32,15 +32,15 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection
+CMAKE_SOURCE_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build
+CMAKE_BINARY_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build
 
 # Utility rule file for clean-test-results.
 
 CMakeFiles/clean-test-results:
-	if ! rm -rf /home/james/.ros/test_results/MST_Edge_Detection; then echo WARNING:\ failed\ to\ remove\ test-results\ directory ; fi
+	if ! rm -rf /home/robot/.ros/test_results/MST_Edge_Detection; then echo WARNING:\ failed\ to\ remove\ test-results\ directory ; fi
 
 clean-test-results: CMakeFiles/clean-test-results
 clean-test-results: CMakeFiles/clean-test-results.dir/build.make
@@ -55,6 +55,6 @@ CMakeFiles/clean-test-results.dir/clean:
 .PHONY : CMakeFiles/clean-test-results.dir/clean
 
 CMakeFiles/clean-test-results.dir/depend:
-	cd /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build/CMakeFiles/clean-test-results.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build/CMakeFiles/clean-test-results.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/clean-test-results.dir/depend
 

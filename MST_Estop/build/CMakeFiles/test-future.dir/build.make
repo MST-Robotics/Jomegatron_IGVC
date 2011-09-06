@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop
+CMAKE_SOURCE_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Estop
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build
+CMAKE_BINARY_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build
 
 # Utility rule file for test-future.
 
@@ -54,6 +54,6 @@ CMakeFiles/test-future.dir/clean:
 .PHONY : CMakeFiles/test-future.dir/clean
 
 CMakeFiles/test-future.dir/depend:
-	cd /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build/CMakeFiles/test-future.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/Documents/Jomegatron_IGVC/MST_Estop /home/robot/Documents/Jomegatron_IGVC/MST_Estop /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build/CMakeFiles/test-future.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/test-future.dir/depend
 

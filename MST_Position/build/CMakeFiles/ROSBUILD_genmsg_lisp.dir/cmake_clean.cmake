@@ -3,15 +3,15 @@ FILE(REMOVE_RECURSE
   "../msg_gen"
   "../msg_gen"
   "CMakeFiles/ROSBUILD_genmsg_lisp"
+  "../msg_gen/lisp/inital_gps.lisp"
+  "../msg_gen/lisp/_package.lisp"
+  "../msg_gen/lisp/_package_inital_gps.lisp"
   "../msg_gen/lisp/Target_Heading.lisp"
   "../msg_gen/lisp/_package.lisp"
   "../msg_gen/lisp/_package_Target_Heading.lisp"
   "../msg_gen/lisp/target.lisp"
   "../msg_gen/lisp/_package.lisp"
   "../msg_gen/lisp/_package_target.lisp"
-  "../msg_gen/lisp/inital_gps.lisp"
-  "../msg_gen/lisp/_package.lisp"
-  "../msg_gen/lisp/_package_inital_gps.lisp"
 )
 
 # Per-language clean rules from dependency scanning.

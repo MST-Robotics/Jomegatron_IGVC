@@ -32,15 +32,15 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints
+CMAKE_SOURCE_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints/build
+CMAKE_BINARY_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints/build
 
 # Utility rule file for test-results.
 
 CMakeFiles/test-results:
-	/opt/ros/diamondback/ros/tools/rosunit/scripts/summarize_results.py --nodeps MST_Easy_Waypoints
+	/opt/ros/electric/ros/tools/rosunit/scripts/summarize_results.py --nodeps MST_Easy_Waypoints
 
 test-results: CMakeFiles/test-results
 test-results: CMakeFiles/test-results.dir/build.make
@@ -55,6 +55,6 @@ CMakeFiles/test-results.dir/clean:
 .PHONY : CMakeFiles/test-results.dir/clean
 
 CMakeFiles/test-results.dir/depend:
-	cd /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints/build/CMakeFiles/test-results.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints/build /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints/build /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints/build/CMakeFiles/test-results.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/test-results.dir/depend
 

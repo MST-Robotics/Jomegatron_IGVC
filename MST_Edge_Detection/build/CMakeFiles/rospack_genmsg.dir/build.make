@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection
+CMAKE_SOURCE_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build
+CMAKE_BINARY_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build
 
 # Utility rule file for rospack_genmsg.
 
@@ -54,6 +54,6 @@ CMakeFiles/rospack_genmsg.dir/clean:
 .PHONY : CMakeFiles/rospack_genmsg.dir/clean
 
 CMakeFiles/rospack_genmsg.dir/depend:
-	cd /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build/CMakeFiles/rospack_genmsg.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build /home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build/CMakeFiles/rospack_genmsg.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/rospack_genmsg.dir/depend
 

@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/src/Edge_Detection.cpp" "/home/james/Documents/Joemegatron_IGVC_2012/MST_Edge_Detection/build/CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o"
+  "/home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/src/Edge_Detection.cpp" "/home/robot/Documents/Jomegatron_IGVC/MST_Edge_Detection/build/CMakeFiles/Edge_Detection.dir/src/Edge_Detection.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

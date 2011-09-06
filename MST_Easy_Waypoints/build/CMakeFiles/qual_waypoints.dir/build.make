@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints
+CMAKE_SOURCE_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints/build
+CMAKE_BINARY_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/qual_waypoints.dir/depend.make
@@ -49,53 +49,54 @@ include CMakeFiles/qual_waypoints.dir/flags.make
 CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: CMakeFiles/qual_waypoints.dir/flags.make
 CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: ../src/straight_waypoint.cpp
 CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: ../manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/ros/core/rosbuild/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/ros/core/roslang/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/utilities/cpp_common/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/utilities/rostime/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/ros/tools/rospack/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/ros/core/roslib/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosconsole/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/clients/rospy/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/ros/tools/rosclean/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosgraph/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosmaster/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosout/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/tools/roslaunch/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/ros/tools/rosunit/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/tools/rostest/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbag/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbagmigration/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /home/james/Documents/Old_Ros_Code/mst_common/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /home/james/Documents/Joemegatron_IGVC_2012/Midg/manifest.xml
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/msg_gen/generated
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/srv_gen/generated
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/msg_gen/generated
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /home/james/Documents/Old_Ros_Code/mst_common/msg_gen/generated
-CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /home/james/Documents/Joemegatron_IGVC_2012/Midg/msg_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints/build/CMakeFiles $(CMAKE_PROGRESS_1)
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/ros/core/roslang/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/ros/tools/rospack/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/ros/core/roslib/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/ros/tools/rosclean/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/tools/rosmaster/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/tools/rosout/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/tools/roslaunch/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/ros/tools/rosunit/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/tools/rostest/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/tools/rosbag/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/tools/rosbagmigration/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /home/robot/Documents/Jomegatron_IGVC/MST_Motors/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /home/robot/Documents/MST_Broken/mst_common/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /home/robot/Documents/Jomegatron_IGVC/Midg/manifest.xml
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /home/robot/Documents/MST_Broken/mst_common/msg_gen/generated
+CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o: /home/robot/Documents/Jomegatron_IGVC/Midg/msg_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o -c /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints/src/straight_waypoint.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o -c /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints/src/straight_waypoint.cpp
 
 CMakeFiles/qual_waypoints.dir/src/straight_waypoint.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/qual_waypoints.dir/src/straight_waypoint.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints/src/straight_waypoint.cpp > CMakeFiles/qual_waypoints.dir/src/straight_waypoint.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints/src/straight_waypoint.cpp > CMakeFiles/qual_waypoints.dir/src/straight_waypoint.i
 
 CMakeFiles/qual_waypoints.dir/src/straight_waypoint.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/qual_waypoints.dir/src/straight_waypoint.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints/src/straight_waypoint.cpp -o CMakeFiles/qual_waypoints.dir/src/straight_waypoint.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints/src/straight_waypoint.cpp -o CMakeFiles/qual_waypoints.dir/src/straight_waypoint.s
 
 CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o.requires:
 .PHONY : CMakeFiles/qual_waypoints.dir/src/straight_waypoint.o.requires
@@ -132,6 +133,6 @@ CMakeFiles/qual_waypoints.dir/clean:
 .PHONY : CMakeFiles/qual_waypoints.dir/clean
 
 CMakeFiles/qual_waypoints.dir/depend:
-	cd /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Easy_Waypoints/build/CMakeFiles/qual_waypoints.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints/build /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints/build /home/robot/Documents/Jomegatron_IGVC/MST_Easy_Waypoints/build/CMakeFiles/qual_waypoints.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/qual_waypoints.dir/depend
 

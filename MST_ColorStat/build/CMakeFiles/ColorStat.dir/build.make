@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat
+CMAKE_SOURCE_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/build
+CMAKE_BINARY_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/ColorStat.dir/depend.make
@@ -49,70 +49,70 @@ include CMakeFiles/ColorStat.dir/flags.make
 CMakeFiles/ColorStat.dir/src/ColorStat.o: CMakeFiles/ColorStat.dir/flags.make
 CMakeFiles/ColorStat.dir/src/ColorStat.o: ../src/ColorStat.cpp
 CMakeFiles/ColorStat.dir/src/ColorStat.o: ../manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/ros/tools/rospack/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/ros/core/roslib/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/ros/core/rosbuild/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/ros/core/roslang/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/utilities/cpp_common/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/utilities/rostime/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosconsole/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/clients/rospy/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/ros/tools/rosclean/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosgraph/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosmaster/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosout/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/tools/roslaunch/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/ros/tools/rosunit/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rostest/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbag/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbagmigration/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/vision_opencv/opencv2/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/vision_opencv/cv_bridge/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/common/tinyxml/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/common/pluginlib/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/utilities/message_filters/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/image_common/image_transport/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosmsg/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rostopic/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosservice/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/diagnostics/diagnostic_updater/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/diagnostics/self_test/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/driver_common/driver_base/manifest.xml
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/diamondback/stacks/driver_common/driver_base/msg_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/build/CMakeFiles $(CMAKE_PROGRESS_1)
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/ros/core/roslang/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/ros/tools/rospack/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/ros/core/roslib/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/ros/tools/rosclean/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/tools/rosmaster/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/tools/rosout/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/tools/roslaunch/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/ros/tools/rosunit/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/tools/rostest/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/tools/rosbag/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/tools/rosbagmigration/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/vision_opencv/opencv2/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/vision_opencv/cv_bridge/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/pluginlib/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/utilities/message_filters/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/image_common/image_transport/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/tools/rosmsg/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/tools/rostopic/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/tools/rosservice/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/diagnostics/diagnostic_updater/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/diagnostics/self_test/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/driver_common/driver_base/manifest.xml
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/ColorStat.o: /opt/ros/electric/stacks/driver_common/driver_base/msg_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ColorStat.dir/src/ColorStat.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/ColorStat.dir/src/ColorStat.o -c /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/src/ColorStat.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/ColorStat.dir/src/ColorStat.o -c /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/src/ColorStat.cpp
 
 CMakeFiles/ColorStat.dir/src/ColorStat.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ColorStat.dir/src/ColorStat.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/src/ColorStat.cpp > CMakeFiles/ColorStat.dir/src/ColorStat.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/src/ColorStat.cpp > CMakeFiles/ColorStat.dir/src/ColorStat.i
 
 CMakeFiles/ColorStat.dir/src/ColorStat.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ColorStat.dir/src/ColorStat.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/src/ColorStat.cpp -o CMakeFiles/ColorStat.dir/src/ColorStat.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/src/ColorStat.cpp -o CMakeFiles/ColorStat.dir/src/ColorStat.s
 
 CMakeFiles/ColorStat.dir/src/ColorStat.o.requires:
 .PHONY : CMakeFiles/ColorStat.dir/src/ColorStat.o.requires
@@ -127,70 +127,70 @@ CMakeFiles/ColorStat.dir/src/ColorStat.o.provides.build: CMakeFiles/ColorStat.di
 CMakeFiles/ColorStat.dir/src/stat.o: CMakeFiles/ColorStat.dir/flags.make
 CMakeFiles/ColorStat.dir/src/stat.o: ../src/stat.cpp
 CMakeFiles/ColorStat.dir/src/stat.o: ../manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/ros/tools/rospack/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/ros/core/roslib/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/ros/core/rosbuild/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/ros/core/roslang/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/utilities/cpp_common/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/utilities/rostime/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosconsole/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/clients/rospy/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/ros/tools/rosclean/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosgraph/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosmaster/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosout/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/tools/roslaunch/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/ros/tools/rosunit/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rostest/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbag/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbagmigration/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/vision_opencv/opencv2/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/vision_opencv/cv_bridge/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/common/tinyxml/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/common/pluginlib/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/utilities/message_filters/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/image_common/image_transport/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosmsg/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rostopic/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosservice/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/diagnostics/diagnostic_updater/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/diagnostics/self_test/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/driver_common/driver_base/manifest.xml
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/diamondback/stacks/driver_common/driver_base/msg_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/build/CMakeFiles $(CMAKE_PROGRESS_2)
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/ros/core/roslang/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/ros/tools/rospack/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/ros/core/roslib/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/ros/tools/rosclean/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/tools/rosmaster/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/tools/rosout/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/tools/roslaunch/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/ros/tools/rosunit/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/tools/rostest/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/tools/rosbag/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/tools/rosbagmigration/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/vision_opencv/opencv2/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/vision_opencv/cv_bridge/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/pluginlib/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/utilities/message_filters/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/image_common/image_transport/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/tools/rosmsg/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/tools/rostopic/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/tools/rosservice/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/diagnostics/diagnostic_updater/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/diagnostics/self_test/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/driver_common/driver_base/manifest.xml
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/stat.o: /opt/ros/electric/stacks/driver_common/driver_base/msg_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ColorStat.dir/src/stat.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/ColorStat.dir/src/stat.o -c /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/src/stat.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/ColorStat.dir/src/stat.o -c /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/src/stat.cpp
 
 CMakeFiles/ColorStat.dir/src/stat.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ColorStat.dir/src/stat.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/src/stat.cpp > CMakeFiles/ColorStat.dir/src/stat.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/src/stat.cpp > CMakeFiles/ColorStat.dir/src/stat.i
 
 CMakeFiles/ColorStat.dir/src/stat.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ColorStat.dir/src/stat.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/src/stat.cpp -o CMakeFiles/ColorStat.dir/src/stat.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/src/stat.cpp -o CMakeFiles/ColorStat.dir/src/stat.s
 
 CMakeFiles/ColorStat.dir/src/stat.o.requires:
 .PHONY : CMakeFiles/ColorStat.dir/src/stat.o.requires
@@ -205,70 +205,70 @@ CMakeFiles/ColorStat.dir/src/stat.o.provides.build: CMakeFiles/ColorStat.dir/src
 CMakeFiles/ColorStat.dir/src/error.o: CMakeFiles/ColorStat.dir/flags.make
 CMakeFiles/ColorStat.dir/src/error.o: ../src/error.cpp
 CMakeFiles/ColorStat.dir/src/error.o: ../manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/ros/tools/rospack/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/ros/core/roslib/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/ros/core/rosbuild/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/ros/core/roslang/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/utilities/cpp_common/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/utilities/rostime/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosconsole/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/clients/rospy/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/ros/tools/rosclean/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosgraph/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosmaster/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosout/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/tools/roslaunch/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/ros/tools/rosunit/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/tools/rostest/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbag/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbagmigration/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/vision_opencv/opencv2/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/vision_opencv/cv_bridge/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/common/tinyxml/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/common/pluginlib/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/utilities/message_filters/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/image_common/image_transport/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosmsg/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/tools/rostopic/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosservice/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/diagnostics/diagnostic_updater/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/diagnostics/self_test/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/driver_common/driver_base/manifest.xml
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/msg_gen/generated
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/srv_gen/generated
-CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/diamondback/stacks/driver_common/driver_base/msg_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/build/CMakeFiles $(CMAKE_PROGRESS_3)
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/ros/core/roslang/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/ros/tools/rospack/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/ros/core/roslib/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/ros/tools/rosclean/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/tools/rosmaster/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/tools/rosout/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/tools/roslaunch/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/ros/tools/rosunit/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/tools/rostest/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/tools/rosbag/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/tools/rosbagmigration/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/vision_opencv/opencv2/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/vision_opencv/cv_bridge/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/pluginlib/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/utilities/message_filters/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/image_common/image_transport/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/tools/rosmsg/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/tools/rostopic/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/tools/rosservice/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/diagnostics/diagnostic_updater/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/diagnostics/self_test/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/driver_common/driver_base/manifest.xml
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/msg_gen/generated
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/srv_gen/generated
+CMakeFiles/ColorStat.dir/src/error.o: /opt/ros/electric/stacks/driver_common/driver_base/msg_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/ColorStat.dir/src/error.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/ColorStat.dir/src/error.o -c /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/src/error.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/ColorStat.dir/src/error.o -c /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/src/error.cpp
 
 CMakeFiles/ColorStat.dir/src/error.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ColorStat.dir/src/error.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/src/error.cpp > CMakeFiles/ColorStat.dir/src/error.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/src/error.cpp > CMakeFiles/ColorStat.dir/src/error.i
 
 CMakeFiles/ColorStat.dir/src/error.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ColorStat.dir/src/error.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/src/error.cpp -o CMakeFiles/ColorStat.dir/src/error.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/src/error.cpp -o CMakeFiles/ColorStat.dir/src/error.s
 
 CMakeFiles/ColorStat.dir/src/error.o.requires:
 .PHONY : CMakeFiles/ColorStat.dir/src/error.o.requires
@@ -311,6 +311,6 @@ CMakeFiles/ColorStat.dir/clean:
 .PHONY : CMakeFiles/ColorStat.dir/clean
 
 CMakeFiles/ColorStat.dir/depend:
-	cd /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/build /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/build /home/james/Documents/Joemegatron_IGVC_2012/MST_ColorStat/build/CMakeFiles/ColorStat.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/build /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/build /home/robot/Documents/Jomegatron_IGVC/MST_ColorStat/build/CMakeFiles/ColorStat.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ColorStat.dir/depend
 

@@ -3,9 +3,9 @@ FILE(REMOVE_RECURSE
   "../msg_gen"
   "../msg_gen"
   "CMakeFiles/ROSBUILD_genmsg_cpp"
+  "../msg_gen/cpp/include/MST_Position/inital_gps.h"
   "../msg_gen/cpp/include/MST_Position/Target_Heading.h"
   "../msg_gen/cpp/include/MST_Position/target.h"
-  "../msg_gen/cpp/include/MST_Position/inital_gps.h"
 )
 
 # Per-language clean rules from dependency scanning.

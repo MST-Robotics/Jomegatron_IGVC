@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Potential_Navigation
+CMAKE_SOURCE_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Potential_Navigation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Potential_Navigation/build
+CMAKE_BINARY_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Potential_Navigation/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Pot_Nav.dir/depend.make
@@ -49,83 +49,83 @@ include CMakeFiles/Pot_Nav.dir/flags.make
 CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: CMakeFiles/Pot_Nav.dir/flags.make
 CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: ../src/Pot_Nav.cpp
 CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: ../manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/ros/tools/rospack/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/ros/core/roslib/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/ros/core/rosbuild/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/ros/core/roslang/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/utilities/cpp_common/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/utilities/rostime/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosconsole/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/clients/rospy/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/ros/tools/rosclean/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosgraph/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosmaster/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosout/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/tools/roslaunch/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/ros/tools/rosunit/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/tools/rostest/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbag/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosbagmigration/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/vision_opencv/opencv2/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/vision_opencv/cv_bridge/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/common/tinyxml/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/common/pluginlib/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/utilities/message_filters/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/image_common/image_transport/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /home/james/Documents/Old_Ros_Code/mst_common/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /home/james/Documents/Joemegatron_IGVC_2012/Midg/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/geometry/bullet/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/geometry/angles/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosnode/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosmsg/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/tools/rostopic/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/tools/rosservice/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/utilities/roswtf/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/geometry/tf/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/diagnostics/diagnostic_updater/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/diagnostics/self_test/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/driver_common/driver_base/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /home/james/Documents/Joemegatron_IGVC_2012/MST_Position/manifest.xml
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/msg_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/srv_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/common_msgs/geometry_msgs/msg_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/msg_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/common_msgs/sensor_msgs/srv_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /home/james/Documents/Old_Ros_Code/mst_common/msg_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /home/james/Documents/Joemegatron_IGVC_2012/Midg/msg_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/geometry/tf/msg_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/geometry/tf/srv_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/msg_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/driver_common/dynamic_reconfigure/srv_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/msg_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/common_msgs/diagnostic_msgs/srv_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/diamondback/stacks/driver_common/driver_base/msg_gen/generated
-CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /home/james/Documents/Joemegatron_IGVC_2012/MST_Position/msg_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/james/Documents/Joemegatron_IGVC_2012/MST_Potential_Navigation/build/CMakeFiles $(CMAKE_PROGRESS_1)
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/ros/core/roslang/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/ros/tools/rospack/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/ros/core/roslib/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/ros/tools/rosclean/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/rosmaster/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/rosout/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/roslaunch/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/ros/tools/rosunit/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/rostest/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/rosbag/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/rosbagmigration/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/vision_opencv/opencv2/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/vision_opencv/cv_bridge/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/pluginlib/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/utilities/message_filters/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/image_common/image_transport/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /home/robot/Documents/Jomegatron_IGVC/mst_common/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /home/robot/Documents/Jomegatron_IGVC/Midg/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/bullet/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/geometry/angles/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/rosnode/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/rosmsg/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/rostopic/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/rosservice/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/utilities/roswtf/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/geometry/tf/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/diagnostics/diagnostic_updater/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/diagnostics/self_test/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/driver_common/driver_base/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /home/robot/Documents/Jomegatron_IGVC/MST_Position/manifest.xml
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/msg_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/srv_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /home/robot/Documents/Jomegatron_IGVC/mst_common/msg_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /home/robot/Documents/Jomegatron_IGVC/Midg/msg_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/geometry/tf/msg_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/geometry/tf/srv_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/msg_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/srv_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/msg_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/srv_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /opt/ros/electric/stacks/driver_common/driver_base/msg_gen/generated
+CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o: /home/robot/Documents/Jomegatron_IGVC/MST_Position/msg_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/robot/Documents/Jomegatron_IGVC/MST_Potential_Navigation/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -DBT_USE_DOUBLE_PRECISION -DBT_EULER_DEFAULT_ZYX -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o -c /home/james/Documents/Joemegatron_IGVC_2012/MST_Potential_Navigation/src/Pot_Nav.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -DBT_USE_DOUBLE_PRECISION -DBT_EULER_DEFAULT_ZYX -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o -c /home/robot/Documents/Jomegatron_IGVC/MST_Potential_Navigation/src/Pot_Nav.cpp
 
 CMakeFiles/Pot_Nav.dir/src/Pot_Nav.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Pot_Nav.dir/src/Pot_Nav.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -DBT_USE_DOUBLE_PRECISION -DBT_EULER_DEFAULT_ZYX -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/james/Documents/Joemegatron_IGVC_2012/MST_Potential_Navigation/src/Pot_Nav.cpp > CMakeFiles/Pot_Nav.dir/src/Pot_Nav.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -DBT_USE_DOUBLE_PRECISION -DBT_EULER_DEFAULT_ZYX -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/robot/Documents/Jomegatron_IGVC/MST_Potential_Navigation/src/Pot_Nav.cpp > CMakeFiles/Pot_Nav.dir/src/Pot_Nav.i
 
 CMakeFiles/Pot_Nav.dir/src/Pot_Nav.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Pot_Nav.dir/src/Pot_Nav.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -DTIXML_USE_STL -DBT_USE_DOUBLE_PRECISION -DBT_EULER_DEFAULT_ZYX -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/james/Documents/Joemegatron_IGVC_2012/MST_Potential_Navigation/src/Pot_Nav.cpp -o CMakeFiles/Pot_Nav.dir/src/Pot_Nav.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -DBT_USE_DOUBLE_PRECISION -DBT_EULER_DEFAULT_ZYX -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/robot/Documents/Jomegatron_IGVC/MST_Potential_Navigation/src/Pot_Nav.cpp -o CMakeFiles/Pot_Nav.dir/src/Pot_Nav.s
 
 CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o.requires:
 .PHONY : CMakeFiles/Pot_Nav.dir/src/Pot_Nav.o.requires
@@ -162,6 +162,6 @@ CMakeFiles/Pot_Nav.dir/clean:
 .PHONY : CMakeFiles/Pot_Nav.dir/clean
 
 CMakeFiles/Pot_Nav.dir/depend:
-	cd /home/james/Documents/Joemegatron_IGVC_2012/MST_Potential_Navigation/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/james/Documents/Joemegatron_IGVC_2012/MST_Potential_Navigation /home/james/Documents/Joemegatron_IGVC_2012/MST_Potential_Navigation /home/james/Documents/Joemegatron_IGVC_2012/MST_Potential_Navigation/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Potential_Navigation/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Potential_Navigation/build/CMakeFiles/Pot_Nav.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/robot/Documents/Jomegatron_IGVC/MST_Potential_Navigation/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/Documents/Jomegatron_IGVC/MST_Potential_Navigation /home/robot/Documents/Jomegatron_IGVC/MST_Potential_Navigation /home/robot/Documents/Jomegatron_IGVC/MST_Potential_Navigation/build /home/robot/Documents/Jomegatron_IGVC/MST_Potential_Navigation/build /home/robot/Documents/Jomegatron_IGVC/MST_Potential_Navigation/build/CMakeFiles/Pot_Nav.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Pot_Nav.dir/depend
 

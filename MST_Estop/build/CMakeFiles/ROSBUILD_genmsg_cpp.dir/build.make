@@ -32,69 +32,69 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop
+CMAKE_SOURCE_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Estop
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build
+CMAKE_BINARY_DIR = /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build
 
 # Utility rule file for ROSBUILD_genmsg_cpp.
 
-CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/MST_Estop/Estop_State.h
 CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/MST_Estop/Control_State.h
-
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: ../msg/Estop_State.msg
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/scripts/genmsg_cpp.py
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/ros/core/roslib/scripts/gendeps
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: ../manifest.xml
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/ros/core/rosbuild/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/ros/core/roslang/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/stacks/ros_comm/utilities/cpp_common/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/stacks/ros_comm/utilities/rostime/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/ros/tools/rospack/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/ros/core/roslib/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/stacks/ros_comm/tools/rosconsole/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/msg_gen/generated
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
-../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/cpp/include/MST_Estop/Estop_State.h"
-	/opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/scripts/genmsg_cpp.py /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/msg/Estop_State.msg
+CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/MST_Estop/Estop_State.h
 
 ../msg_gen/cpp/include/MST_Estop/Control_State.h: ../msg/Control_State.msg
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/scripts/genmsg_cpp.py
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/ros/core/roslib/scripts/gendeps
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/genmsg_cpp.py
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/ros/core/roslib/scripts/gendeps
 ../msg_gen/cpp/include/MST_Estop/Control_State.h: ../manifest.xml
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/ros/core/rosbuild/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/ros/core/roslang/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/stacks/ros_comm/utilities/cpp_common/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/stacks/ros_comm/utilities/rostime/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/ros/tools/rospack/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/ros/core/roslib/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/stacks/ros_comm/tools/rosconsole/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/msg_gen/generated
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
-../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build/CMakeFiles $(CMAKE_PROGRESS_2)
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/ros/core/roslang/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/ros/tools/rospack/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/ros/core/roslib/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+../msg_gen/cpp/include/MST_Estop/Control_State.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/cpp/include/MST_Estop/Control_State.h"
-	/opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/scripts/genmsg_cpp.py /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/msg/Control_State.msg
+	/opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/genmsg_cpp.py /home/robot/Documents/Jomegatron_IGVC/MST_Estop/msg/Control_State.msg
+
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: ../msg/Estop_State.msg
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/genmsg_cpp.py
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/ros/core/roslib/scripts/gendeps
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: ../manifest.xml
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/ros/core/roslang/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/ros/tools/rospack/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/ros/core/roslib/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+../msg_gen/cpp/include/MST_Estop/Estop_State.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/cpp/include/MST_Estop/Estop_State.h"
+	/opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/genmsg_cpp.py /home/robot/Documents/Jomegatron_IGVC/MST_Estop/msg/Estop_State.msg
 
 ROSBUILD_genmsg_cpp: CMakeFiles/ROSBUILD_genmsg_cpp
-ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/MST_Estop/Estop_State.h
 ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/MST_Estop/Control_State.h
+ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/MST_Estop/Estop_State.h
 ROSBUILD_genmsg_cpp: CMakeFiles/ROSBUILD_genmsg_cpp.dir/build.make
 .PHONY : ROSBUILD_genmsg_cpp
 
@@ -107,6 +107,6 @@ CMakeFiles/ROSBUILD_genmsg_cpp.dir/clean:
 .PHONY : CMakeFiles/ROSBUILD_genmsg_cpp.dir/clean
 
 CMakeFiles/ROSBUILD_genmsg_cpp.dir/depend:
-	cd /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build /home/james/Documents/Joemegatron_IGVC_2012/MST_Estop/build/CMakeFiles/ROSBUILD_genmsg_cpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/Documents/Jomegatron_IGVC/MST_Estop /home/robot/Documents/Jomegatron_IGVC/MST_Estop /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build /home/robot/Documents/Jomegatron_IGVC/MST_Estop/build/CMakeFiles/ROSBUILD_genmsg_cpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ROSBUILD_genmsg_cpp.dir/depend
 

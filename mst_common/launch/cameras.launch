@@ -1,0 +1,5 @@
+<launch>
+	<include file="$(find mst_common)/launch/stereo.launch"/>
+	<include file="$(find mst_common)/launch/ptgrey.launch"/>
+	<include file="$(find mst_common)/launch/microsoft.launch"/>
+</launch>

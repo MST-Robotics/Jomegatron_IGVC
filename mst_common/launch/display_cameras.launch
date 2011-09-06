@@ -1,0 +1,8 @@
+<launch>
+	<node pkg="image_view" type="image_view" name="image_view">
+		<param name="image" value="ptgrey/camera/image_raw"/>
+	</node>
+	<node pkg="videre_stereo_cam" type="disparity_view" name="disparity_view">
+		<param name="image" value="stereo/left/image_raw"/>
+	</node>
+</launch>

@@ -1,0 +1,14 @@
+<launch>
+	<group ns="stereo">
+		<node name="videre_stereo_cam" pkg="videre_stereo_cam" type="videre_stereo_node" respawn="true" output="screen">
+			<param name="fps" type="double" value="30"/>
+			<param name="frame_id" value="stereo_optical_frame"/>
+			<param name="videre_mode" type="str" value="disparity_raw"/>
+			<param name="convert_to_color" type="bool" value="False"/>
+			<param name="exposure_auto" type="bool" value="True"/>
+			<param name="brightness_auto" type="bool" value="True"/>
+			<param name="gain_auto" type="bool" value="True"/>
+		</node>
+		<node name="stereo_image_proc" pkg="stereo_image_proc" type="stereo_image_proc" output="screen"/>
+	</group>
+</launch>

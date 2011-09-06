@@ -4,8 +4,8 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/src/Motors.cpp" "/home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/build/CMakeFiles/Motors.dir/src/Motors.o"
-  "/home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/src/motorController.cpp" "/home/james/Documents/Joemegatron_IGVC_2012/MST_Motors/build/CMakeFiles/Motors.dir/src/motorController.o"
+  "/home/robot/Documents/Jomegatron_IGVC/MST_Motors/src/Motors.cpp" "/home/robot/Documents/Jomegatron_IGVC/MST_Motors/build/CMakeFiles/Motors.dir/src/Motors.o"
+  "/home/robot/Documents/Jomegatron_IGVC/MST_Motors/src/motorController.cpp" "/home/robot/Documents/Jomegatron_IGVC/MST_Motors/build/CMakeFiles/Motors.dir/src/motorController.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
