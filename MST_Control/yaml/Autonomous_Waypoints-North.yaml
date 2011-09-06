@@ -1,0 +1,48 @@
+{dummy_heading: 3.1415926535900001, dummy_latitude: 14.400000000000006, dummy_longitude: 48.599999999999994,
+  go_to_waypoints: true, pause: false, reset_waypoints: false, skip_waypoint: false,
+  use_dummy: false, use_gpsd: false,
+ way_10_latitude: 1.0, 
+way_10_longitude: 1.0,
+  way_10_priority: 0, 
+way_1_latitude: 42.6790226722222
+, 
+way_1_longitude: -83.1954838166667
+,
+  way_1_priority: 1,
+ way_2_latitude: 42.6790589333333
+
+, 
+way_2_longitude: -83.1947399027778
+,
+ way_2_priority: 2,
+  way_3_latitude: 42.6788625333333
+,
+ way_3_longitude: -83.1949825638889
+, 
+way_3_priority: 3,42.6790226722222
+ way_4_latitude: 42.6787478361111
+,
+  way_4_longitude: -83.1951703916667
+
+, 
+way_4_priority: 4, 
+way_5_latitude: 42.6785923083333
+, 
+way_5_longitude: -83.1954888277778
+,
+  way_5_priority: 5,
+
+ way_6_latitude: 42.6790226722222,
+ way_6_longitude: -83.1954838166667, 
+
+way_6_priority: 6,
+  way_7_latitude: 1.0,
+ way_7_longitude: 1.0,
+ way_7_priority: 0,
+ way_8_latitude: 1.0,
+  way_8_longitude: 1.0,
+ way_8_priority: 0, 
+way_9_latitude: 1.0, 
+way_9_longitude: 1.0,
+  way_9_priority: 0,
+ waypoint_radius: 1.0}

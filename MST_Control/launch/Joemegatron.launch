@@ -2,7 +2,6 @@
 
     
     <arg name="usb" default="0" />
-    <arg name="playback" default="0" />
     <arg name="display" default="1" />
 	<arg name="robot" default="1" />
     
@@ -57,9 +56,9 @@
     
     <group unless="$(arg usb)">
     
-    	<include file="$(find MST_Edge_Detection)/launch/ptgrey.launch" unless="$(arg playback)" />
+    	<include file="$(find MST_Edge_Detection)/launch/ptgrey.launch"  />
 
-		<node pkg="image_proc" type="image_proc" name="image_proc" ns="ptgrey" unless="$(arg playback)" />  
+		<node pkg="image_proc" type="image_proc" name="image_proc" ns="ptgrey"  />  
     
     	<node pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=ptgrey/image_rect_color" >
     	    	
