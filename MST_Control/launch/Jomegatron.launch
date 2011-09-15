@@ -35,23 +35,24 @@
     <node pkg="wiimote" type="wiimote_node.py" name="wiimote" respawn="true" />
     
     <node pkg="sound_play" type="soundplay_node.py" name="sound_play" />
+
     
     <group if="$(arg usb)">
     
-    	<include file="$(find MST_Edge_Detection)/launch/usb.launch" />  	
+    	<include file="$(find MST_Edge_Detection)/launch/usb.launch"  /> 	
 
-    	<node pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=usb_cam/image_raw"  >
+    	<node pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=/image_raw"  >
     	    	
     		<rosparam file="$(find MST_Control)/yaml/Edge_Detection.yaml" command="load" />
 
     	</node>
     	
-    	<node pkg="MST_ColorStat" type="ColorStat" name="ColorStat" args= "image:=usb_cam/image_raw" >
+    	<node pkg="MST_ColorStat" type="ColorStat" name="ColorStat" args= "image:=/image_raw" >
         	
     		<rosparam file="$(find MST_Control)/yaml/ColorStat.yaml" command="load"  />
 
     	</node>
-    	
+
     </group>
     
     <group unless="$(arg usb)">
@@ -84,7 +85,7 @@
     
     <group if="$(arg display)">
     
-		<node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=usb_cam/image_raw" if="$(arg usb)"/>
+		<node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=/image_raw" if="$(arg usb)"/>
 		
 		<node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=ptgrey/image_rect_color" unless="$(arg usb)"/>
 	
