@@ -523,11 +523,6 @@ void navigation_callback(const geometry_msgs::Twist twist)
 ***********************************************************/
 void estop_callback(const MST_Estop::Estop_State::ConstPtr& estop)
 {
-	
-	//This is the callback fot the estop board message 
-	//the code bellow is wrong should play a sound saying robot is estoped
-	//probably mario death theam and 
-	/*
 
 		if(estop->state == 1 && !wii_togg_a)
 		{
@@ -540,7 +535,6 @@ void estop_callback(const MST_Estop::Estop_State::ConstPtr& estop)
 		{
 			wii_togg_a = false;
 		}
-	*/
 
 }
 
