@@ -1,0 +1,8 @@
+sound_play:
+  ubuntu: ros-electric-audio-common
+wiimote:
+  ubuntu: ros-electric-joystick-drivers
+uvc_camera:
+  ubuntu: ros-electric-camera-umd
+camera1394:
+  ubuntu: ros-electric-camera-drivers

@@ -11,11 +11,17 @@
   <url>http://ros.org/wiki/MST_Control</url>
   
   
+  <rosdep name = "sound_play" />
+  <rosdep name = "wiimote" />
+  <rosdep name = "uvc_camera" />
+  <rosdep name = "camera1394" />
+
   <depend package = "sound_play" />
   <depend package = "wiimote" />
   <depend package = "MST_Estop" />
   <depend package = "MST_Position" />
   
+
   
   <!-- depends for using cv_bridge -->  
   <depend package = "sensor_msgs"/>
