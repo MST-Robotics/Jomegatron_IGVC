@@ -1,0 +1,18 @@
+<package>
+  <description brief="MST_JAUS">
+
+     MST_JAUS
+
+  </description>
+  <author>Dalzig</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/MST_JAUS</url>
+  <rosdep name = "jaus++" />
+  <depend package="roscpp"/>
+  <depend package="Midg" />
+  <depend package="geometry_msgs" />
+
+</package>
+
+
