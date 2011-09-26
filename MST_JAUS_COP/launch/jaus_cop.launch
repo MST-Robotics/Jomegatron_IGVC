@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="MST_JAUS_COP" type="jaus_cop_node" name="jaus_cop_node" />
+</launch>
