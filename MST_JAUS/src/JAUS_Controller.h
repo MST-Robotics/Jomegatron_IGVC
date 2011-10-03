@@ -14,18 +14,7 @@
 #include <jaus/core/time.h>
 #include <jaus/core/component.h>
 
-// Literal Constants
-//~ #define SUBSYSTEM_ID        106
-#define SUBSYSTEM_ID		1 
-#define NODE_ID             1
-#define COMPONENT_ID        1
-
-//~ #define COP_IP              "192.168.1.42"
-#define COP_IP				"10.0.200.103"
-//~ #define COP_SUBSYSTEM_ID    42
-#define COP_SUBSYSTEM_ID	103
-#define COP_NODE_ID         1
-#define COP_COMPONENT_ID    1
+#include "JAUS_Constants.h"
 
 class JAUS_Controller
 {

@@ -1,11 +1,11 @@
 #include "ros/ros.h"
-#include "JAUS_Controller.h"
+#include "JAUS_COP.h"
 
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "jaus_cop_node");
     ros::NodeHandle n;
-    JAUS_Controller jaus( n );
+    JAUS_COP jaus( n );
    
     ros::Rate loop_rate(2);    
  

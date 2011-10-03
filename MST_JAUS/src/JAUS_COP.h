@@ -1,4 +1,4 @@
-#ifndef JAUS_CONTROLLER_H
+#ifndef JAUS_COP_H
 
 // ROS Includes
 #include "ros/ros.h"
@@ -12,20 +12,9 @@
 #include <jaus/core/time.h>
 #include <jaus/core/component.h>
 
-// Literal Constants
-//~ #define SUBSYSTEM_ID        106
-#define SUBSYSTEM_ID		1 
-#define NODE_ID             1
-#define COMPONENT_ID        1
+#include "JAUS_Constants.h"
 
-//~ #define COP_IP              "192.168.1.42"
-#define COP_IP				"10.0.200.103"
-//~ #define COP_SUBSYSTEM_ID    42
-#define COP_SUBSYSTEM_ID	103
-#define COP_NODE_ID         1
-#define COP_COMPONENT_ID    1
-
-class JAUS_Controller
+class JAUS_COP
 {
 private:
     bool                fault;
@@ -62,8 +51,8 @@ private:
     void initialize_subs_and_pubs(ros::NodeHandle n);
 
 public:
-	JAUS_Controller( ros::NodeHandle n );
-	~JAUS_Controller();
+	JAUS_COP( ros::NodeHandle n );
+	~JAUS_COP();
     bool run();
     /*-----------------------------------
 	ROS methods

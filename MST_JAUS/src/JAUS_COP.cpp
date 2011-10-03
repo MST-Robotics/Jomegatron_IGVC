@@ -1,7 +1,7 @@
-#include "JAUS_Controller.h"
+#include "JAUS_COP.h"
 #include <jaus/core/time.h>
 
-JAUS_Controller::JAUS_Controller( ros::NodeHandle n )
+JAUS_COP::JAUS_COP( ros::NodeHandle n )
 {
     fault = false;
     mst_jaus_discovered = false;
@@ -21,11 +21,11 @@ JAUS_Controller::JAUS_Controller( ros::NodeHandle n )
     transportService->AddConnection(COP_IP, JAUS::Address(SUBSYSTEM_ID, NODE_ID, COMPONENT_ID));
 }
 
-JAUS_Controller::~JAUS_Controller()
+JAUS_COP::~JAUS_COP()
 {
 }
 
-void JAUS_Controller::initialize_services()
+void JAUS_COP::initialize_services()
 {
     /*globalPoseSensor = new JAUS::GlobalPoseSensor();
     globalPoseSensor->SetSensorUpdateRate(25);      // Updates at 25 Hz (used for periodic events).
@@ -46,11 +46,11 @@ void JAUS_Controller::initialize_services()
     transportService = (JAUS::JUDP*)component.TransportService();
 }
 
-void JAUS_Controller::initialize_subs_and_pubs( ros::NodeHandle n )
+void JAUS_COP::initialize_subs_and_pubs( ros::NodeHandle n )
 {
 }
 
-bool JAUS_Controller::run()
+bool JAUS_COP::run()
 {
     bool status = true;
     if( component.ManagementService()->GetStatus() != JAUS::Management::Status::Shutdown )
