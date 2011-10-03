@@ -19,6 +19,7 @@ class JAUS_COP
 private:
     bool                fault;
     bool                mst_jaus_discovered;
+    bool                mst_jaus_controlled;
 	
     /*-----------------------------------
 	ROS variables
