@@ -18,8 +18,12 @@ class JAUS_COP
 {
 private:
     bool                fault;
+    
+    JAUS::Address       source;
+    JAUS::Address       destination;
     bool                mst_jaus_discovered;
     bool                mst_jaus_controlled;
+    JAUS::Byte          mst_jaus_status;
 	
     /*-----------------------------------
 	ROS variables
@@ -55,6 +59,10 @@ public:
 	JAUS_COP( ros::NodeHandle n );
 	~JAUS_COP();
     bool run();
+    bool discover();
+    bool requestControl();
+    JAUS::Byte requestStatus();
+    
     /*-----------------------------------
 	ROS methods
 	-----------------------------------*/
