@@ -11,3 +11,6 @@
 #define COP_SUBSYSTEM_ID	103
 #define COP_NODE_ID         1
 #define COP_COMPONENT_ID    1
+
+//Print status from ReportStatus?
+#define PRINT_STATUS_MESSAGES   0

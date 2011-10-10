@@ -46,17 +46,29 @@ bool JAUS_COP::run()
     {
         //Check for MST_JAUS until it is discovered
         if(!mst_jaus_discovered)
-            mst_jaus_discovered = discover();
+            mst_jaus_discovered = discover(&status);
         
         else if(!mst_jaus_controlled) //jaus_node was discovered, take control
+        {
             mst_jaus_controlled = requestControl();
+            pthread_create(&inputThread, NULL, getInput, this);
+        }
         
         else //have control of jaus_node component
         {
-            //Query/Report Status, should run every 5 seconds (but we'll run it more often for now)
-            mst_jaus_status = requestStatus();
+            //Query/Report Status, run every 5 seconds
+            if(std::time(NULL) >= statusTimer+5)
+            {
+                mst_jaus_status = requestStatus();
+                statusTimer = std::time(NULL);
+            }
             
-            //TODO
+            if(mst_jaus_status == JAUS::ReportStatus::Shutdown)
+            {
+                //thread should kill itself
+                mst_jaus_discovered = false;
+                mst_jaus_controlled = false;
+            }
         }
     }
     else
@@ -66,7 +78,7 @@ bool JAUS_COP::run()
     return status;
 }
 
-bool JAUS_COP::discover()
+bool JAUS_COP::discover(bool* run)
 {
     JAUS::Subsystem::Ptr subsystem = component.DiscoveryService()->GetSubsystem(SUBSYSTEM_ID);
     if(subsystem != NULL)
@@ -79,8 +91,10 @@ bool JAUS_COP::discover()
             JAUS::ReportServices reportServices(source, destination);
             if(!component.Send(&queryServices, &reportServices, 1000))
             {
-                ROS_ERROR("QueryServices message failed.");
+                ROS_ERROR("QueryServices message failed, MST_JAUS service was probably shutdown. COP exiting.");
+                *run = false;
             }
+            
             else
             {
                 JAUS::ReportServices::Services::iterator is;
@@ -93,7 +107,6 @@ bool JAUS_COP::discover()
                     }
                 }
             }
-            
             return true;
         }
     }
@@ -135,30 +148,62 @@ JAUS::Byte JAUS_COP::requestStatus()
     }
     else
     {
-        switch(reportStatus.GetStatus())
+        if(PRINT_STATUS_MESSAGES)
         {
-        case JAUS::ReportStatus::Init:
-            ROS_INFO("Status: Init");
-            break;
-        case JAUS::ReportStatus::Ready:
-            ROS_INFO("Status: Ready");
-            break;
-        case JAUS::ReportStatus::Standby:
-            ROS_INFO("Status: Standby");
-            break;
-        case JAUS::ReportStatus::Shutdown:
-            ROS_INFO("Status: Shutdown");
-            break;
-        case JAUS::ReportStatus::Failure:
-            ROS_INFO("Status: Failure");
-            break;
-        case JAUS::ReportStatus::Emergency:
-            ROS_INFO("Status: Emergency");
-            break;
+            switch(reportStatus.GetStatus())
+            {
+            case JAUS::ReportStatus::Init:
+                ROS_INFO("Status: Init");
+                break;
+            case JAUS::ReportStatus::Ready:
+                ROS_INFO("Status: Ready");
+                break;
+            case JAUS::ReportStatus::Standby:
+                ROS_INFO("Status: Standby");
+                break;
+            case JAUS::ReportStatus::Shutdown:
+                ROS_INFO("Status: Shutdown");
+                break;
+            case JAUS::ReportStatus::Failure:
+                ROS_INFO("Status: Failure");
+                break;
+            case JAUS::ReportStatus::Emergency:
+                ROS_INFO("Status: Emergency");
+                break;
+            }
         }
         
         return reportStatus.GetStatus();
     }
     
-    return JAUS::ReportStatus::Failure;
+    return JAUS::ReportStatus::Shutdown;
+}
+
+void* JAUS_COP::getInput(void* ptr)
+{
+    ROS_INFO("Input thread started.");
+    
+    JAUS_COP* cop = (JAUS_COP*)ptr;
+    
+    std::string input;
+    bool stop = false; //need stop since will be waiting on cin rather than looping and checking mst_jaus_status
+    while(!stop && cop->mst_jaus_status != JAUS::ReportStatus::Shutdown)
+    {
+        std::cout << "> ";
+        std::cin.clear();
+        fflush(stdin);
+        std::cin >> input;
+        
+        if(input == "shutdown")
+        {
+            JAUS::Shutdown shutdown(cop->destination, cop->source);
+            if(!cop->component.Send(&shutdown))
+                ROS_ERROR("Shutdown message failed.");
+            else
+                stop = true;
+        }
+    }
+    
+    ROS_INFO("Input thread terminating.");
+    return ptr;
 }
