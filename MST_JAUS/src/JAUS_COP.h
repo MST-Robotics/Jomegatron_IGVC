@@ -71,6 +71,7 @@ public:
     bool discover(bool* run);
     bool requestControl();
     JAUS::Byte requestStatus();
+    void printStatus(JAUS::Byte status) const;
     
     static void* getInput(void* ptr);
     
