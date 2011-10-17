@@ -1,15 +1,18 @@
 <launch>
 
-    
+    <!-- Define arguments and defaults  -->
     <arg name="usb" default="0" />
     <arg name="display" default="1" />
-	<arg name="robot" default="1" />
+    <arg name="robot" default="1" />
     
+    <!-- launch potential navigation    -->
     <node pkg="MST_Potential_Navigation" type="Pot_Nav" name="Pot_Nav" >
-    	
-    	<rosparam file="$(find MST_Control)/yaml/Pot_Nav.yaml" command="load" />
+    
+        <!-- load parameters into parameter server  -->
+        <rosparam file="$(find MST_Control)/yaml/Pot_Nav.yaml" command="load" />
 
     </node>
+    
     
     
     <node pkg="MST_Control" type="Control" name="Control"  required="true" >
@@ -23,7 +26,7 @@
     	<param name = "autonomous_waypoints" value = "$(find MST_Control)/yaml/Autonomous_Waypoints.yaml" />
 
     </node>
-    
+
     <node pkg="MST_Position" type="Position" name="Position" >
         	
     	<rosparam file="$(find MST_Control)/yaml/Carrot.yaml" command="load" />
@@ -39,7 +42,7 @@
     
     <group if="$(arg usb)">
     
-    	<include file="$(find MST_Edge_Detection)/launch/usb.launch"  /> 	
+    	<include file="$(find uvc_camera)/launch/camera_node.launch"  /> 	
 
     	<node pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=/image_raw"  >
     	    	
