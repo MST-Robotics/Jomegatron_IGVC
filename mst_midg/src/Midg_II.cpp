@@ -13,7 +13,7 @@
 /***********************************************************
 * Message includes
 ***********************************************************/
-#include "mst_common/IMU.h"
+#include "mst_midg/IMU.h"
 
 /***********************************************************
 * Other includes
@@ -40,14 +40,14 @@ void Process_MIDG_Packets( int );
 /***********************************************************
 * Message Callbacks
 ***********************************************************/
-mst_common::IMU      imu_msg;
+mst_midg::IMU      imu_msg;
 
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "Midg");
     ros::NodeHandle n;
 
-    ros::Publisher imu_pub = n.advertise<mst_common::IMU>( "/midg", 1000 );
+    ros::Publisher imu_pub = n.advertise<mst_midg::IMU>( "/midg", 1000 );
 
     /***********************************************************
     * Midg initialization
