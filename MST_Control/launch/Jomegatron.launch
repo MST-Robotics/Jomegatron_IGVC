@@ -80,7 +80,7 @@
 
     <group if="$(arg robot)">
     	
-    	<node pkg="Midg" type="Midg_node" name="Midge" />
+    	<node pkg="mst_midg" type="Midg" name="Midg" />
 		<node pkg="MST_Motors" type="Motors" name="Motors" />
 		<node pkg="MST_Estop" type="Estop" name="Estop" />
     	

@@ -11,7 +11,7 @@
 
   <depend package="geometry_msgs" />
   <depend package="sensor_msgs" />
-  <depend package="Midg" />
+  <depend package="mst_midg" />
   <depend package="tf" />
 
   <!-- depends for using dynamic reconfigur gui -->

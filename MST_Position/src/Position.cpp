@@ -17,7 +17,7 @@
 * Message includes
 ***********************************************************/
 #include <geometry_msgs/Twist.h>
-#include <Midg/IMU.h>
+#include <mst_midg/IMU.h>
 #include <sensor_msgs/NavSatFix.h>
 #include <MST_Position/Target_Heading.h>
 
@@ -116,7 +116,7 @@ using namespace std;
 * @post image added to the map
 * @param takes in a ros message of a raw or cv image 
 ***********************************************************/
-void midgCallback(const  Midg::IMU::ConstPtr& imu)
+void midgCallback(const  mst_midg::IMU::ConstPtr& imu)
 {
 	ROS_INFO("Position: IMU message receved");
 	

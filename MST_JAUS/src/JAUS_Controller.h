@@ -3,7 +3,7 @@
 // ROS Includes
 #include "ros/ros.h"
 #include "geometry_msgs/Twist.h"
-#include "Midg/IMU.h"
+#include "mst_midg/IMU.h"
 
 // JAUS++ includes
 #include <jaus/mobility/sensors/globalposesensor.h>
@@ -63,7 +63,7 @@ public:
     /*-----------------------------------
 	ROS methods
 	-----------------------------------*/
-	void MidgCallback( const Midg::IMU::ConstPtr& msg );
+	void MidgCallback( const mst_midg::IMU::ConstPtr& msg );
 	//~ void ControlCallback( MST_Control::/* TODO */::ConstPtr& msg );
 	//~ void PositionCallback( MST_Position::/* TODO */::ConstPtr& msg );
 	void MotorsCallback( const geometry_msgs::Twist::ConstPtr& msg );

@@ -71,7 +71,7 @@ bool JAUS_Controller::run()
     return status;
 }
 
-void JAUS_Controller::MidgCallback( const Midg::IMU::ConstPtr& msg )
+void JAUS_Controller::MidgCallback( const mst_midg::IMU::ConstPtr& msg )
 {
     globalPose.SetLatitude( msg->latitude );
     globalPose.SetLongitude( msg->longitude );

@@ -10,7 +10,7 @@
   <url>http://ros.org/wiki/MST_Easy_Waypoints</url>
   <depend package="roscpp"/>
   <depend package="MST_Motors"/>
-  <depend package="Midg"/>
+  <depend package="mst_midg"/>
   <depend package="geometry_msgs"/>
 
 </package>

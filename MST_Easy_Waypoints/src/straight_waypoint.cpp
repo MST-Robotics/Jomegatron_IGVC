@@ -1,6 +1,6 @@
 #include "ros/ros.h"
 
-#include "Midg/IMU.h"
+#include "mst_midg/IMU.h"
 #include "geometry_msgs/Twist.h"
 
 struct waypoint_type
@@ -111,7 +111,7 @@ double compute_hdg(double lat1, double lon1 , double lat2 ,double lon2)
     return heading;
 }
 
-void MidgCallback(const Midg::IMU::ConstPtr& msg)
+void MidgCallback(const mst_midg::IMU::ConstPtr& msg)
 {
     static int active_waypoint = 0;
     

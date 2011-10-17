@@ -10,7 +10,7 @@
   <url>http://ros.org/wiki/MST_JAUS</url>
   <rosdep name = "jaus++" />
   <depend package="roscpp"/>
-  <depend package="Midg" />
+  <depend package="mst_midg" />
   <depend package="geometry_msgs" />
 
 </package>
