@@ -202,12 +202,30 @@ void* JAUS_COP::getInput(void* ptr)
         
         if(input == "help")
         {
-            //TODO
-            std::cout << "Help info not yet available." << std::endl;
+            std::cout << "Supported Messages:\n"
+                      << "  System Management:\n"
+                      << "    queryStatus\n"
+                      << "    resume\n"
+                      << "    standby\n"
+                      << "    shutdown\n"
+                      << "  Velocity State Report:\n"
+                      << "    queryVelocity\n"
+                      << "  Position and Orientation Report:\n"
+                      << "    setLocalPose\n"
+                      << "    queryLocalPose\n"
+                      << "  Waypoint Navigation:\n"
+                      << "    setElement\n"
+                      << "    queryElementList\n"
+                      << "    queryElementCount\n"
+                      << "    executeList\n"
+                      << "    queryActiveElement\n"
+                      << "    queryTravelSpeed\n"
+                      << "    queryLocalWaypoint\n"
+                      << std::endl;
         }
         
         // System Management
-        if(input == "status")
+        else if(input == "queryStatus")
         {
             JAUS::QueryStatus queryStatus(cop->destination, cop->source);
             JAUS::ReportStatus reportStatus(cop->source, cop->destination);
@@ -216,19 +234,19 @@ void* JAUS_COP::getInput(void* ptr)
             else
                 cop->printStatus(reportStatus.GetStatus());
         }
-        if(input == "resume")
+        else if(input == "resume")
         {
             JAUS::Resume resume(cop->destination, cop->source);
             if(!cop->component.Send(&resume))
                 ROS_ERROR("Resume message failed.");
         }
-        if(input == "standby")
+        else if(input == "standby")
         {
             JAUS::Standby standby(cop->destination, cop->source);
             if(!cop->component.Send(&standby))
                 ROS_ERROR("Standby message failed.");
         }
-        if(input == "shutdown")
+        else if(input == "shutdown")
         {
             JAUS::Shutdown shutdown(cop->destination, cop->source);
             if(!cop->component.Send(&shutdown))
@@ -238,7 +256,7 @@ void* JAUS_COP::getInput(void* ptr)
         }
         
         // Velocity State Report
-        if(input == "velocity")
+        else if(input == "queryVelocity")
         {
             JAUS::QueryVelocityState queryVelocityState(cop->destination, cop->source);
             JAUS::ReportVelocityState reportVelocityState(cop->source, cop->destination);
@@ -246,24 +264,133 @@ void* JAUS_COP::getInput(void* ptr)
                 ROS_ERROR("QueryVelocityState message failed.");
             else
             {
-                ROS_INFO("Velocity X: ", reportVelocityState.GetVelocityX());
-                ROS_INFO("Yaw Rate: ", reportVelocityState.GetYawRate());
-                ROS_INFO("Time Stamp: ", reportVelocityState.GetTimeStamp().ToUInt());
+                std::stringstream ss;
+                ss << "Velocity X: " << reportVelocityState.GetVelocityX() << ' ';
+                ss << "Yaw Rate: " << reportVelocityState.GetYawRate() << ' ';
+                ss << "Time Stamp: " << reportVelocityState.GetTimeStamp().ToUInt();
+                ROS_INFO(ss.str().c_str());
             }
         }
         
         // Position and Orientation Report
-        //TODO SetLocalPose
-        //TODO QueryLocalPose
+        else if(input == "setLocalPose")
+        {
+            //get pose from user
+            double x;
+            double y;
+            double yaw;
+            std::cin.clear();
+            fflush(stdin);
+            std::cout << "Enter pose: X Y Yaw\n  > ";
+            std::cin >> x;
+            std::cin >> y;
+            std::cin >> yaw;
+            
+            JAUS::SetLocalPose setLocalPose(cop->destination, cop->source);
+            setLocalPose.SetX(x);
+            setLocalPose.SetY(y);
+            setLocalPose.SetYaw(yaw);
+            if(!cop->component.Send(&setLocalPose))
+                ROS_ERROR("SetLocalPose message failed.");
+        }
+        else if(input == "queryLocalPose")
+        {
+            JAUS::QueryLocalPose queryLocalPose(cop->destination, cop->source);
+            JAUS::ReportLocalPose reportLocalPose(cop->source, cop->destination);
+            if(!cop->component.Send(&queryLocalPose, &reportLocalPose, 1000))
+                ROS_ERROR("QueryLocalPose message failed.");
+            else
+            {
+                std::stringstream ss;
+                ss << "X: " << reportLocalPose.GetX() << ' ';
+                ss << "Y: " << reportLocalPose.GetY() << ' ';
+                ss << "Time Stamp: " << reportLocalPose.GetTimeStamp().ToUInt();
+                ROS_INFO(ss.str().c_str());
+            }
+        }
         
         // Waypoint Navigation
         //TODO SetElement
-        //TODO QueryElementList
-        //TODO QueryElementCount
-        //TODO ExecuteList
-        //TODO QueryActiveElement
-        //TODO QueryTravel
-        //TODO QueryLocalWaypoint
+        else if(input == "queryElementList")
+        {
+            JAUS::QueryElementList queryElementList(cop->destination, cop->source);
+            JAUS::ReportElementList reportElementList(cop->source, cop->destination);
+            if(!cop->component.Send(&queryElementList, &reportElementList, 1000))
+                ROS_ERROR("QueryElementList message failed.");
+            else
+            {
+                for(unsigned int i = 0; i < reportElementList.GetElementList()->size(); ++i) 
+                {
+                    std::stringstream ss;
+                    ss << "Element UID: " << reportElementList.GetElementList()->at(i);
+                    ROS_INFO(ss.str().c_str());
+                }
+            }
+        }
+        else if(input == "queryElementCount")
+        {
+            JAUS::QueryElementCount queryElementCount(cop->destination, cop->source);
+            JAUS::ReportElementCount reportElementCount(cop->source, cop->destination);
+            if(!cop->component.Send(&queryElementCount, &reportElementCount, 1000))
+                ROS_ERROR("QueryElementCount message failed.");
+            else
+            {
+                std::stringstream ss;
+                ss << "Element Count: " << reportElementCount.GetElementCount();
+                ROS_INFO(ss.str().c_str());
+            }
+        }
+        else if(input == "executeList")
+        {
+            JAUS::ExecuteList executeList(cop->destination, cop->source);
+            if(!cop->component.Send(&executeList))
+                ROS_ERROR("ExecuteList message failed.");
+        }
+        else if(input == "queryActiveElement")
+        {
+            JAUS::QueryActiveElement queryActiveElement(cop->destination, cop->source);
+            JAUS::ReportActiveElement reportActiveElement(cop->source, cop->destination);
+            if(!cop->component.Send(&queryActiveElement, &reportActiveElement, 1000))
+                ROS_ERROR("QueryActiveElement message failed.");
+            else
+            {
+                std::stringstream ss;
+                ss << "Element UID: " << reportActiveElement.GetElementUID();
+                ROS_INFO(ss.str().c_str());
+            }
+        }
+        else if(input == "queryTravelSpeed")
+        {
+            JAUS::QueryTravelSpeed queryTravelSpeed(cop->destination, cop->source);
+            JAUS::ReportTravelSpeed reportTravelSpeed(cop->source, cop->destination);
+            if(!cop->component.Send(&queryTravelSpeed, &reportTravelSpeed, 1000))
+                ROS_ERROR("QueryTravelSpeed message failed.");
+            else
+            {
+                std::stringstream ss;
+                ss << "Speed: " << reportTravelSpeed.GetSpeed();
+                ROS_INFO(ss.str().c_str());
+            }
+        }
+        else if(input == "queryLocalWaypoint")
+        {
+            JAUS::QueryLocalWaypoint queryLocalWaypoint(cop->destination, cop->source);
+            JAUS::ReportLocalWaypoint reportLocalWaypoint(cop->source, cop->destination);
+            if(!cop->component.Send(&queryLocalWaypoint, &reportLocalWaypoint, 1000))
+                ROS_ERROR("QueryLocalWaypoint message failed.");
+            else
+            {
+                std::stringstream ss;
+                ss << "X: " << reportLocalWaypoint.GetX() << ' ';
+                ss << "Y: " << reportLocalWaypoint.GetY();
+                ROS_INFO(ss.str().c_str());
+            }
+        }
+        
+        else
+        {
+            std::cout << "Unrecognized command, 'help' for command list." << std::endl;
+        }
     }
     
     ROS_INFO("Input thread terminating.");
