@@ -1,11 +1,15 @@
 sound_play:
   ubuntu: ros-electric-audio-common
+
 wiimote:
   ubuntu: ros-electric-joystick-drivers
+
 uvc_camera:
   ubuntu: ros-electric-camera-umd
+
 camera1394:
   ubuntu: ros-electric-camera-drivers
+
 jaus++:
   ubuntu: |
     #!/bin/bash
@@ -36,3 +40,9 @@ jaus++:
       sudo sh -c "echo '/usr/local/lib/active' >> /etc/ld.so.conf.d/jaus++.conf"
       sudo ldconfig
     fi
+
+pr2_controllers:
+  ubuntu: ros-electric-pr2-controllers
+
+pr2_mechanism:
+  ubuntu: ros-electric-pr2-mechanism

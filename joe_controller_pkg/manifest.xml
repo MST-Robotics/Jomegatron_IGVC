@@ -8,8 +8,13 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/joe_controller_pkg</url>
+
+  <rosdep name = "pr2_controllers" />
+  <rosdep name = "pr2_mechanism" />
+
   <depend package="pr2_controller_interface"/>
   <depend package="pr2_mechanism_model"/>
+
   <depend package="pluginlib"/>
   <depend package="gazebo"/>
 
