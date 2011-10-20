@@ -1,0 +1,18 @@
+<package>
+  <description brief="joe_controller_pkg">
+
+     joe_controller_pkg
+
+  </description>
+  <author>Sean Reichel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/joe_controller_pkg</url>
+  <depend package="pr2_controller_interface"/>
+  <depend package="pr2_mechanism_model"/>
+  <depend package="pluginlib"/>
+  <depend package="gazebo"/>
+
+</package>
+
+
