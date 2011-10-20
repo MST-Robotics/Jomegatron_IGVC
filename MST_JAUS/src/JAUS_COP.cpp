@@ -190,6 +190,10 @@ void* JAUS_COP::getInput(void* ptr)
     
     JAUS_COP* cop = (JAUS_COP*)ptr;
     
+    //current waypoint element ID;
+    JAUS::UShort elementID = 1;
+    JAUS::UShort startElement = elementID;
+    
     std::string input;
     bool stop = false; //need stop since will be waiting on cin rather than looping and checking mst_jaus_status
     while(!stop && cop->mst_jaus_status != JAUS::ReportStatus::Shutdown)
@@ -310,7 +314,34 @@ void* JAUS_COP::getInput(void* ptr)
         }
         
         // Waypoint Navigation
-        //TODO SetElement
+        else if(input == "setElement")
+        {
+            double x;
+            double y;
+            std::cin.clear();
+            fflush(stdin);
+            std::cout << "Enter coordinate: X Y\n  > ";
+            std::cin >> x;
+            std::cin >> y;
+            
+            JAUS::SetElement setElement(cop->destination, cop->source);
+            JAUS::ConfirmElementRequest confirmElementRequest(cop->source, cop->destination);
+            JAUS::SetLocalWaypoint* setLocalWaypoint = new JAUS::SetLocalWaypoint(cop->destination, cop->source);
+            setLocalWaypoint->SetX(x);
+            setLocalWaypoint->SetY(y);
+            JAUS::Element element(elementID, 0, 0);
+            setElement.SetRequestID(elementID);
+            element.mpElement = setLocalWaypoint;
+            setElement.GetElementList()->push_back(element);
+            if(!cop->component.Send(&setElement, &confirmElementRequest, 1000))
+                ROS_ERROR("SetElement failed to add element. ConfirmElementRequest not received.");
+            
+            //DO NOT ENABLE THE NEXT LINE, JAUS::Element::~Element does it already
+            //delete setLocalWaypoint;
+            std::cout << "Added element, UID: " << elementID << std::endl;
+            std::cout << "FOR NOW ONLY ELEMENT UID 1 or " << startElement << " WILL EXECUTE" << std::endl;
+            elementID++;
+        }
         else if(input == "queryElementList")
         {
             JAUS::QueryElementList queryElementList(cop->destination, cop->source);
@@ -342,9 +373,19 @@ void* JAUS_COP::getInput(void* ptr)
         }
         else if(input == "executeList")
         {
+            double speed;
+            std::cin.clear();
+            fflush(stdin);
+            std::cout << "Enter speed:\n  > ";
+            std::cin >> speed;
+            
             JAUS::ExecuteList executeList(cop->destination, cop->source);
+            executeList.SetElementUID(startElement);
+            executeList.SetSpeed(speed);
             if(!cop->component.Send(&executeList))
                 ROS_ERROR("ExecuteList message failed.");
+                
+            startElement = elementID; //since elements deleted when reached
         }
         else if(input == "queryActiveElement")
         {
