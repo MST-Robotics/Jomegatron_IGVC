@@ -23,10 +23,10 @@ void stat::update()
   {
     for(int i = 0; i < IMAGE_WIDTH; i++)
     {
-      lev[i] = 0;
+      lev[i] = 0;//sets brightness equal to 0 throughout when reset is true
       for(int j = 0; j < IMAGE_HEIGHT; j++)
       {
-        chr[j][i] = 0;        
+        chr[j][i] = 0;//sets the chromaticity to 0 when reset is true        
       }
     }
     max = 0;
@@ -117,3 +117,46 @@ void stat::setBounds(int xmin,int xmax,int ymin,int ymax)
   
   return;
 }
+void stat::saveFilter(const char *filename)
+{
+  FILE *file;
+  int lev_write;
+  int chr_write[IMAGE_WIDTH];
+  int close_success;
+
+  file=fopen(filename,"w");
+  
+  fwrite(lev,8,IMAGE_WIDTH,file);
+
+  for (int i=0;i<IMAGE_WIDTH;i++)
+  {
+    fwrite(chr,8,IMAGE_WIDTH,file);
+  }
+
+  close_success=fclose(file);
+
+  return;
+}
+void stat::loadFilter(const char *filename)
+{
+  FILE *file;
+  int fwrite;
+  size_t lev_write;
+  size_t chr_write[IMAGE_WIDTH];
+  int close_success;
+
+  file=fopen(filename,"r");
+  
+  lev_write=fread(lev,8,IMAGE_WIDTH,file);
+
+  for (int i=0;i<IMAGE_WIDTH;i++)
+  {
+    chr_write[i]=fread(chr,8,IMAGE_WIDTH,file);
+  }
+
+  close_success=fclose(file);
+
+
+  return;
+}
+
