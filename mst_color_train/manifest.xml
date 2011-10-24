@@ -1,0 +1,17 @@
+<package>
+  <description brief="mst_color_train">
+
+     mst_color_train
+
+  </description>
+  <author>Travis Bueter</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/mst_color_train</url>
+  <depend package="roscpp"/>
+  <depend package="cv_bridge"/>
+  <depend package="opencv2"/>
+
+</package>
+
+
