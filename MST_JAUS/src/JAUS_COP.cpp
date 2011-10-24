@@ -193,6 +193,8 @@ void* JAUS_COP::getInput(void* ptr)
     //current waypoint element ID;
     JAUS::UShort elementID = 1;
     JAUS::UShort startElement = elementID;
+    JAUS::SetElement setElement(cop->destination, cop->source);
+    bool readyToSend = true;
     
     std::string input;
     bool stop = false; //need stop since will be waiting on cin rather than looping and checking mst_jaus_status
@@ -316,31 +318,55 @@ void* JAUS_COP::getInput(void* ptr)
         // Waypoint Navigation
         else if(input == "setElement")
         {
-            double x;
-            double y;
-            std::cin.clear();
-            fflush(stdin);
-            std::cout << "Enter coordinate: X Y\n  > ";
-            std::cin >> x;
-            std::cin >> y;
-            
-            JAUS::SetElement setElement(cop->destination, cop->source);
-            JAUS::ConfirmElementRequest confirmElementRequest(cop->source, cop->destination);
-            JAUS::SetLocalWaypoint* setLocalWaypoint = new JAUS::SetLocalWaypoint(cop->destination, cop->source);
-            setLocalWaypoint->SetX(x);
-            setLocalWaypoint->SetY(y);
-            JAUS::Element element(elementID, 0, 0);
-            setElement.SetRequestID(elementID);
-            element.mpElement = setLocalWaypoint;
-            setElement.GetElementList()->push_back(element);
-            if(!cop->component.Send(&setElement, &confirmElementRequest, 1000))
-                ROS_ERROR("SetElement failed to add element. ConfirmElementRequest not received.");
-            
-            //DO NOT ENABLE THE NEXT LINE, JAUS::Element::~Element does it already
-            //delete setLocalWaypoint;
-            std::cout << "Added element, UID: " << elementID << std::endl;
-            std::cout << "FOR NOW ONLY ELEMENT UID 1 or " << startElement << " WILL EXECUTE" << std::endl;
-            elementID++;
+            if(!readyToSend) //sending a new list without executing kills jaus_node
+            {
+                ROS_ERROR("Can't currently do a second list. You need to restart the COP to do a new one.");
+            }
+            else
+            {
+                JAUS::ConfirmElementRequest confirmElementRequest(cop->source, cop->destination);
+                setElement.GetElementList()->clear();
+                
+                unsigned int numWaypoints;
+                std::cin.clear();
+                fflush(stdin);
+                std::cout << "Enter number of waypoints:\n  > ";
+                std::cin >> numWaypoints;
+                
+                for(unsigned int i = 0; i < numWaypoints; ++i)
+                {
+                    double x;
+                    double y;
+                    std::cin.clear();
+                    fflush(stdin);
+                    std::cout << "Enter coordinate: X Y\n  > ";
+                    std::cin >> x;
+                    std::cin >> y;
+                    
+                    JAUS::SetLocalWaypoint* setLocalWaypoint = new JAUS::SetLocalWaypoint(cop->destination, cop->source);
+                    setLocalWaypoint->SetX(x);
+                    setLocalWaypoint->SetY(y);
+                    
+                    //Link the element IDs in the list
+                    JAUS::Element element(elementID, ((i == 0) ? 0 : elementID-1), ((i == numWaypoints-1) ? 0 : elementID+1));
+                    
+                    setElement.SetRequestID(elementID);
+                    element.mpElement = setLocalWaypoint;
+                    setElement.GetElementList()->push_back(element);
+                    
+                    //DO NOT ENABLE THE NEXT LINE, JAUS::Element::~Element does it already
+                    //delete setLocalWaypoint;
+                    std::cout << "Added element, UID: " << elementID << std::endl;
+                    elementID++;
+                }
+                
+                if(readyToSend)
+                {
+                    readyToSend = false;
+                    if(!cop->component.Send(&setElement, &confirmElementRequest, 1000))
+                        ROS_ERROR("SetElement failed to add element. ConfirmElementRequest not received.");
+                }
+            }
         }
         else if(input == "queryElementList")
         {
@@ -384,8 +410,9 @@ void* JAUS_COP::getInput(void* ptr)
             executeList.SetSpeed(speed);
             if(!cop->component.Send(&executeList))
                 ROS_ERROR("ExecuteList message failed.");
-                
-            startElement = elementID; //since elements deleted when reached
+            
+            //readyToSend = true; doesn't work with a second list, not quite sure why
+            startElement = elementID; //since elements deleted when reached, start new list
         }
         else if(input == "queryActiveElement")
         {
