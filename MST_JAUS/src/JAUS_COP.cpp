@@ -13,7 +13,7 @@ JAUS_COP::JAUS_COP( ros::NodeHandle n )
     initialize_subs_and_pubs(n);
     component.AccessControlService()->SetTimeoutPeriod(0);
     initialize_services();
-    component.DiscoveryService()->SetSubsystemIdentification(JAUS::Subsystem::Vehicle, "JoeMegatron");
+    component.DiscoveryService()->SetSubsystemIdentification(JAUS::Subsystem::OCU, "TestCOP");
     
     if(component.Initialize(JAUS::Address(COP_SUBSYSTEM_ID, COP_NODE_ID, COP_COMPONENT_ID)) == false)
     {
