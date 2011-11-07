@@ -9,9 +9,8 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/MST_JAUS</url>
   <rosdep name = "jaus++" />
-  <depend package="roscpp"/>
-  <depend package="mst_midg" />
-  <depend package="geometry_msgs" />
+  <depend package="roscpp" />
+  <depend package="MST_Control" />
 
 </package>
 
