@@ -2,8 +2,8 @@
 
 // ROS Includes
 #include "ros/ros.h"
-#include "geometry_msgs/Twist.h"
-#include "mst_midg/IMU.h"
+#include "MST_JAUS/JAUS_in.h"
+#include "MST_JAUS/JAUS_out.h"
 
 // JAUS++ includes
 #include <jaus/mobility/sensors/globalposesensor.h>
@@ -24,10 +24,7 @@ private:
     /*-----------------------------------
 	ROS variables
 	-----------------------------------*/
-	ros::Subscriber 	s_Midg;
-	ros::Subscriber 	s_Control;
-	ros::Subscriber 	s_Position;
-	ros::Subscriber 	s_Motors;
+    ros::Subscriber     s_State;
 	ros::Publisher  	p_Control;
     
 	
@@ -63,10 +60,7 @@ public:
     /*-----------------------------------
 	ROS methods
 	-----------------------------------*/
-	void MidgCallback( const mst_midg::IMU::ConstPtr& msg );
-	//~ void ControlCallback( MST_Control::/* TODO */::ConstPtr& msg );
-	//~ void PositionCallback( MST_Position::/* TODO */::ConstPtr& msg );
-	void MotorsCallback( const geometry_msgs::Twist::ConstPtr& msg );
+    void StateCallback( const MST_JAUS::JAUS_in::ConstPtr& msg );
 };
 
 #endif

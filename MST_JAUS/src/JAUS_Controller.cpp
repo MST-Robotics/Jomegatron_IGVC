@@ -47,12 +47,9 @@ void JAUS_Controller::initialize_services()
 
 void JAUS_Controller::initialize_subs_and_pubs( ros::NodeHandle n )
 {
-    s_Midg = n.subscribe( "/midg", 1, &JAUS_Controller::MidgCallback, this );
-    //~ s_Control = n.subscribe( /* TODO */, 1, ControlCallback );
-    //~ s_Position = n.subscribe( /* TODO */, 1, PositionCallback );
-    s_Motors = n.subscribe( "/cmd_vel", 1, &JAUS_Controller::MotorsCallback, this );
+    s_State = n.subscribe( "/jaus_in", 1, &JAUS_Controller::StateCallback, this );
     
-    //~ p_Control = n.advertise</* TODO */>(/* TODO */, 5 );
+    p_Control = n.advertise<MST_JAUS::JAUS_out>( "/jaus_out", 5 );
 }
 
 bool JAUS_Controller::run()
@@ -71,36 +68,32 @@ bool JAUS_Controller::run()
     return status;
 }
 
-void JAUS_Controller::MidgCallback( const mst_midg::IMU::ConstPtr& msg )
+void JAUS_Controller::StateCallback( const MST_JAUS::JAUS_in::ConstPtr& msg )
 {
-    globalPose.SetLatitude( msg->latitude );
-    globalPose.SetLongitude( msg->longitude );
-    globalPose.SetAltitude( msg->altitude );
-    globalPose.SetYaw( msg->heading );
+    //Global Pose
+    if(msg->position_valid)
+    {
+        globalPose.SetLatitude(msg->latitude);
+        globalPose.SetLongitude(msg->longitude);
+        globalPose.SetAltitude(msg->altitude);
+        JAUS::Time t;
+        t.SetCurrentTime(); //TODO convert msg->gps_time to JAUS::Time
+        globalPose.SetTimeStamp(t);
+    }
+    if(msg->heading_valid)
+        globalPose.SetYaw(msg->heading);
     
-    JAUS::Time t;
-    t.SetCurrentTime();
-    globalPose.SetTimeStamp(t);
+    //Velocty State
+    if(msg->speed_valid)
+        velocityState.SetVelocityX(msg->speed);
+    if(msg->heading_valid)
+        velocityState.SetYawRate(msg->angular_rate);
+    if(msg->speed_valid || msg->heading_valid)
+    {
+        JAUS::Time t;
+        t.SetCurrentTime();
+        velocityState.SetTimeStamp(t);
+    }
 
-    ROS_INFO("Midg data received");
-}
-
-//~ void JAUS_Controller::ControlCallback( MST_Control::/* TODO */::ConstPtr& msg )
-//~ {
-//~ }
-//~ 
-//~ void JAUS_Controller::PositionCallback( MST_Position::/* TODO */::ConstPtr& msg )
-//~ {
-//~ }
-
-void JAUS_Controller::MotorsCallback( const geometry_msgs::Twist::ConstPtr& msg )
-{
-    velocityState.SetVelocityX( msg->linear.x );
-    velocityState.SetYawRate( msg->angular.z );
-    
-    JAUS::Time t;
-    t.SetCurrentTime();
-    velocityState.SetTimeStamp( t );
-
-    ROS_INFO("Motors data received");
+    ROS_INFO("State data received");
 }
