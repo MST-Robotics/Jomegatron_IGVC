@@ -15,6 +15,12 @@ JAUS_Controller::JAUS_Controller( ros::NodeHandle n )
         fault = true;
     }
     
+    controlCallback = new ControlCallback(this);
+    component.TransportService()->RegisterCallback(JAUS::REQUEST_CONTROL, controlCallback);
+    component.TransportService()->RegisterCallback(JAUS::RESUME, controlCallback);
+    component.TransportService()->RegisterCallback(JAUS::STANDBY, controlCallback);
+    component.TransportService()->RegisterCallback(JAUS::SHUTDOWN, controlCallback);
+    
     component.ManagementService()->SetStatus(JAUS::Management::Status::Standby);
 
     transportService->AddConnection(COP_IP, JAUS::Address(COP_SUBSYSTEM_ID, COP_NODE_ID, COP_COMPONENT_ID));
@@ -68,7 +74,7 @@ bool JAUS_Controller::run()
     return status;
 }
 
-void JAUS_Controller::StateCallback( const MST_JAUS::JAUS_in::ConstPtr& msg )
+void JAUS_Controller::StateCallback(const MST_JAUS::JAUS_in::ConstPtr& msg)
 {
     //Global Pose
     if(msg->position_valid)
@@ -96,4 +102,35 @@ void JAUS_Controller::StateCallback( const MST_JAUS::JAUS_in::ConstPtr& msg )
     }
 
     ROS_INFO("State data received");
+}
+
+void JAUS_Controller::ControlCallback::ProcessMessage(const JAUS::Message* message)
+{
+    MST_JAUS::JAUS_out msg;
+    msg.request_control = false;
+    msg.request_resume = false;
+    msg.request_standby = false;
+    msg.request_shutdown = false;
+    
+    if(message->GetMessageCode() == JAUS::REQUEST_CONTROL) {
+        ROS_INFO("RequestControl JAUS message received.");
+        msg.request_control = true;
+    }
+    if(message->GetMessageCode() == JAUS::RESUME) {
+        ROS_INFO("Resume JAUS message received.");
+        parent->component.ManagementService()->SetStatus(JAUS::Management::Status::Ready);
+        msg.request_resume = true;
+    }
+    if(message->GetMessageCode() == JAUS::STANDBY) {
+        ROS_INFO("Standby JAUS message received.");
+        parent->component.ManagementService()->SetStatus(JAUS::Management::Status::Standby);
+        msg.request_standby = true;
+    }
+    if(message->GetMessageCode() == JAUS::SHUTDOWN) {
+        ROS_INFO("Shutdown JAUS message received.");
+        parent->component.ManagementService()->SetStatus(JAUS::Management::Status::Shutdown);
+        msg.request_shutdown = true;
+    }
+    
+    parent->p_Control.publish(msg);
 }

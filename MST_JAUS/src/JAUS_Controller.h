@@ -52,6 +52,16 @@ private:
     
     void initialize_services();
     void initialize_subs_and_pubs(ros::NodeHandle n);
+    
+    class ControlCallback : public JAUS::Discovery::Callback {
+    public:
+        ControlCallback(JAUS_Controller* c): parent(c) {}
+        ~ControlCallback() {}
+        virtual void ProcessMessage(const JAUS::Message* message);
+    private:
+        JAUS_Controller* parent;
+    };
+    ControlCallback* controlCallback;
 
 public:
 	JAUS_Controller( ros::NodeHandle n );
@@ -60,7 +70,7 @@ public:
     /*-----------------------------------
 	ROS methods
 	-----------------------------------*/
-    void StateCallback( const MST_JAUS::JAUS_in::ConstPtr& msg );
+    void StateCallback(const MST_JAUS::JAUS_in::ConstPtr& msg);
 };
 
 #endif
