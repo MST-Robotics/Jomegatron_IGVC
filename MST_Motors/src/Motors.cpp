@@ -88,8 +88,8 @@ int main(int argc, char **argv)
 
     ros::Subscriber sub = n.subscribe("/cmd_vel", 1, motionCallback);
     
-    strcpy( params.left_motor_file, (char*) "/dev/ttyUSB1" );
-    strcpy( params.right_motor_file,(char*) "/dev/ttyUSB2" );
+    strcpy( params.left_motor_file, (char*) "/dev/motor_l" );
+    strcpy( params.right_motor_file,(char*) "/dev/motor_r" );
     params.topspeed = 4.4704;
     params.watchdog_timeout = 1.0;
 
