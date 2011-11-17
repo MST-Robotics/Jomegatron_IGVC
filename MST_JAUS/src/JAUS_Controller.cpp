@@ -21,6 +21,15 @@ JAUS_Controller::JAUS_Controller( ros::NodeHandle n )
     component.TransportService()->RegisterCallback(JAUS::STANDBY, controlCallback);
     component.TransportService()->RegisterCallback(JAUS::SHUTDOWN, controlCallback);
     
+    waypointCallback = new WaypointCallback(this);
+    component.TransportService()->RegisterCallback(JAUS::SET_ELEMENT, waypointCallback);
+    //component.TransportService()->RegisterCallback(JAUS::QUERY_ELEMENT_LIST, waypointCallback);
+    //component.TransportService()->RegisterCallback(JAUS::QUERY_ELEMENT_COUNT, waypointCallback);
+    component.TransportService()->RegisterCallback(JAUS::EXECUTE_LIST, waypointCallback);
+    //component.TransportService()->RegisterCallback(JAUS::QUERY_ACTIVE_ELEMENT, waypointCallback);
+    //component.TransportService()->RegisterCallback(JAUS::QUERY_TRAVEL_SPEED, waypointCallback);
+    //component.TransportService()->RegisterCallback(JAUS::QUERY_LOCAL_WAYPOINT, waypointCallback);
+    
     component.ManagementService()->SetStatus(JAUS::Management::Status::Standby);
 
     transportService->AddConnection(COP_IP, JAUS::Address(COP_SUBSYSTEM_ID, COP_NODE_ID, COP_COMPONENT_ID));
@@ -107,30 +116,59 @@ void JAUS_Controller::StateCallback(const MST_JAUS::JAUS_in::ConstPtr& msg)
 void JAUS_Controller::ControlCallback::ProcessMessage(const JAUS::Message* message)
 {
     MST_JAUS::JAUS_out msg;
-    msg.request_control = false;
-    msg.request_resume = false;
-    msg.request_standby = false;
-    msg.request_shutdown = false;
     
     if(message->GetMessageCode() == JAUS::REQUEST_CONTROL) {
         ROS_INFO("RequestControl JAUS message received.");
         msg.request_control = true;
     }
-    if(message->GetMessageCode() == JAUS::RESUME) {
+    else if(message->GetMessageCode() == JAUS::RESUME) {
         ROS_INFO("Resume JAUS message received.");
         parent->component.ManagementService()->SetStatus(JAUS::Management::Status::Ready);
         msg.request_resume = true;
     }
-    if(message->GetMessageCode() == JAUS::STANDBY) {
+    else if(message->GetMessageCode() == JAUS::STANDBY) {
         ROS_INFO("Standby JAUS message received.");
         parent->component.ManagementService()->SetStatus(JAUS::Management::Status::Standby);
         msg.request_standby = true;
     }
-    if(message->GetMessageCode() == JAUS::SHUTDOWN) {
+    else if(message->GetMessageCode() == JAUS::SHUTDOWN) {
         ROS_INFO("Shutdown JAUS message received.");
         parent->component.ManagementService()->SetStatus(JAUS::Management::Status::Shutdown);
         msg.request_shutdown = true;
     }
+    
+    parent->p_Control.publish(msg);
+}
+
+void JAUS_Controller::WaypointCallback::ProcessMessage(const JAUS::Message* message)
+{
+    MST_JAUS::JAUS_out msg;
+    
+    if(message->GetMessageCode() == JAUS::SET_ELEMENT) {
+        ROS_INFO("SetElement JAUS message received.");
+        msg.set_waypoints = true;
+        //TODO add waypoints to /jaus_out ros message
+        //TODO add waypoints to /jaus_out ros message
+    }
+//    else if(message->GetMessageCode() == JAUS::QUERY_ELEMENT_LIST) {
+//        ROS_INFO("QueryElementList JAUS message received.");
+//    }
+//    else if(message->GetMessageCode() == JAUS::QUERY_ELEMENT_COUNT) {
+//        ROS_INFO("QueryElementCount JAUS message received.");
+//    }
+    else if(message->GetMessageCode() == JAUS::EXECUTE_LIST) {
+        ROS_INFO("ExecuteList JAUS message received.");
+        msg.execute_waypoints = true;
+    }
+//    else if(message->GetMessageCode() == JAUS::QUERY_ACTIVE_ELEMENT) {
+//        ROS_INFO("QueryActiveElement JAUS message received.");
+//    }
+//    else if(message->GetMessageCode() == JAUS::QUERY_TRAVEL_SPEED) {
+//        ROS_INFO("QueryTravelSpeed JAUS message received.");
+//    }
+//    else if(message->GetMessageCode() == JAUS::QUERY_LOCAL_WAYPOINT) {
+//        ROS_INFO("QueryLocalWayoint JAUS message received.");
+//    }
     
     parent->p_Control.publish(msg);
 }

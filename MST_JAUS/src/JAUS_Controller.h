@@ -62,6 +62,16 @@ private:
         JAUS_Controller* parent;
     };
     ControlCallback* controlCallback;
+    
+    class WaypointCallback : public JAUS::Discovery::Callback {
+    public:
+        WaypointCallback(JAUS_Controller* c): parent(c) {}
+        ~WaypointCallback() {}
+        virtual void ProcessMessage(const JAUS::Message* message);
+    private:
+        JAUS_Controller* parent;
+    };
+    WaypointCallback* waypointCallback;
 
 public:
 	JAUS_Controller( ros::NodeHandle n );
