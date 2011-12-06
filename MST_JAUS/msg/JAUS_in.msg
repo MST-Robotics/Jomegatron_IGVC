@@ -1,6 +1,7 @@
 float64     latitude
 float64     longitude
 float64     altitude
+float64     position_accuracy
 float64     heading
 float64     speed
 float64     angular_rate
@@ -9,4 +10,10 @@ bool        position_valid
 bool        heading_valid
 bool        speed_valid
 bool        angular_rate_valid
-float64     position_accuracy
+bool        waypoint_list_valid
+uint16      active_waypoint_id
+uint16[]    waypoint_id
+uint16[]    waypoint_previous_id
+uint16[]    waypoint_next_id
+float64[]   waypoint_x
+float64[]   waypoint_y
