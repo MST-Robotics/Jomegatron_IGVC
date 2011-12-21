@@ -14,6 +14,7 @@
 #include <jaus/core/time.h>
 #include <jaus/core/component.h>
 
+#include <vector>
 #include "JAUS_Constants.h"
 
 class JAUS_Controller
@@ -49,6 +50,12 @@ private:
 	
 	JAUS::GlobalPose 	globalPose;
 	JAUS::VelocityState	velocityState;
+    uint16_t m_activeWaypoint;
+    std::vector<uint16_t> m_waypointID;
+    std::vector<uint16_t> m_waypointPreviousID;
+    std::vector<uint16_t> m_waypointNextID;
+    std::vector<double_t> m_waypointX;
+    std::vector<double_t> m_waypointY;
     
     void initialize_services();
     void initialize_subs_and_pubs(ros::NodeHandle n);
@@ -72,6 +79,16 @@ private:
         JAUS_Controller* parent;
     };
     WaypointCallback* waypointCallback;
+    
+    class QueryCallback : public JAUS::Discovery::Callback {
+    public:
+        QueryCallback(JAUS_Controller* c): parent(c) {}
+        ~QueryCallback() {}
+        virtual void ProcessMessage(const JAUS::Message* message);
+    private:
+        JAUS_Controller* parent;
+    };
+    QueryCallback* queryCallback;
 
 public:
 	JAUS_Controller( ros::NodeHandle n );

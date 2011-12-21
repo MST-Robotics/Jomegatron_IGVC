@@ -4,10 +4,13 @@ import struct
 
 
 class JAUS_in(roslib.message.Message):
-  _md5sum = "9b9f2016656ffff9a61cd6f939a75b4f"
+  _md5sum = "bb3222dc26b3d1dfb41511e21b81bbce"
   _type = "MST_JAUS/JAUS_in"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """float64     altitude
+  _full_text = """float64     latitude
+float64     longitude
+float64     altitude
+float64     position_accuracy
 float64     heading
 float64     speed
 float64     angular_rate
@@ -16,11 +19,17 @@ bool        position_valid
 bool        heading_valid
 bool        speed_valid
 bool        angular_rate_valid
-float64     position_accuracy
+bool        waypoint_list_valid
+uint16      active_waypoint_id
+uint16[]    waypoint_id
+uint16[]    waypoint_previous_id
+uint16[]    waypoint_next_id
+float64[]   waypoint_x
+float64[]   waypoint_y
 
 """
-  __slots__ = ['altitude','heading','speed','angular_rate','gps_time','position_valid','heading_valid','speed_valid','angular_rate_valid','position_accuracy']
-  _slot_types = ['float64','float64','float64','float64','float64','bool','bool','bool','bool','float64']
+  __slots__ = ['latitude','longitude','altitude','position_accuracy','heading','speed','angular_rate','gps_time','position_valid','heading_valid','speed_valid','angular_rate_valid','waypoint_list_valid','active_waypoint_id','waypoint_id','waypoint_previous_id','waypoint_next_id','waypoint_x','waypoint_y']
+  _slot_types = ['float64','float64','float64','float64','float64','float64','float64','float64','bool','bool','bool','bool','bool','uint16','uint16[]','uint16[]','uint16[]','float64[]','float64[]']
 
   def __init__(self, *args, **kwds):
     """
@@ -30,7 +39,7 @@ float64     position_accuracy
     changes.  You cannot mix in-order arguments and keyword arguments.
     
     The available fields are:
-       altitude,heading,speed,angular_rate,gps_time,position_valid,heading_valid,speed_valid,angular_rate_valid,position_accuracy
+       latitude,longitude,altitude,position_accuracy,heading,speed,angular_rate,gps_time,position_valid,heading_valid,speed_valid,angular_rate_valid,waypoint_list_valid,active_waypoint_id,waypoint_id,waypoint_previous_id,waypoint_next_id,waypoint_x,waypoint_y
     
     @param args: complete set of field values, in .msg order
     @param kwds: use keyword arguments corresponding to message field names
@@ -39,8 +48,14 @@ float64     position_accuracy
     if args or kwds:
       super(JAUS_in, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
+      if self.latitude is None:
+        self.latitude = 0.
+      if self.longitude is None:
+        self.longitude = 0.
       if self.altitude is None:
         self.altitude = 0.
+      if self.position_accuracy is None:
+        self.position_accuracy = 0.
       if self.heading is None:
         self.heading = 0.
       if self.speed is None:
@@ -57,10 +72,25 @@ float64     position_accuracy
         self.speed_valid = False
       if self.angular_rate_valid is None:
         self.angular_rate_valid = False
-      if self.position_accuracy is None:
-        self.position_accuracy = 0.
+      if self.waypoint_list_valid is None:
+        self.waypoint_list_valid = False
+      if self.active_waypoint_id is None:
+        self.active_waypoint_id = 0
+      if self.waypoint_id is None:
+        self.waypoint_id = []
+      if self.waypoint_previous_id is None:
+        self.waypoint_previous_id = []
+      if self.waypoint_next_id is None:
+        self.waypoint_next_id = []
+      if self.waypoint_x is None:
+        self.waypoint_x = []
+      if self.waypoint_y is None:
+        self.waypoint_y = []
     else:
+      self.latitude = 0.
+      self.longitude = 0.
       self.altitude = 0.
+      self.position_accuracy = 0.
       self.heading = 0.
       self.speed = 0.
       self.angular_rate = 0.
@@ -69,7 +99,13 @@ float64     position_accuracy
       self.heading_valid = False
       self.speed_valid = False
       self.angular_rate_valid = False
-      self.position_accuracy = 0.
+      self.waypoint_list_valid = False
+      self.active_waypoint_id = 0
+      self.waypoint_id = []
+      self.waypoint_previous_id = []
+      self.waypoint_next_id = []
+      self.waypoint_x = []
+      self.waypoint_y = []
 
   def _get_types(self):
     """
@@ -85,7 +121,27 @@ float64     position_accuracy
     """
     try:
       _x = self
-      buff.write(_struct_5d4Bd.pack(_x.altitude, _x.heading, _x.speed, _x.angular_rate, _x.gps_time, _x.position_valid, _x.heading_valid, _x.speed_valid, _x.angular_rate_valid, _x.position_accuracy))
+      buff.write(_struct_8d5BH.pack(_x.latitude, _x.longitude, _x.altitude, _x.position_accuracy, _x.heading, _x.speed, _x.angular_rate, _x.gps_time, _x.position_valid, _x.heading_valid, _x.speed_valid, _x.angular_rate_valid, _x.waypoint_list_valid, _x.active_waypoint_id))
+      length = len(self.waypoint_id)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sH'%length
+      buff.write(struct.pack(pattern, *self.waypoint_id))
+      length = len(self.waypoint_previous_id)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sH'%length
+      buff.write(struct.pack(pattern, *self.waypoint_previous_id))
+      length = len(self.waypoint_next_id)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sH'%length
+      buff.write(struct.pack(pattern, *self.waypoint_next_id))
+      length = len(self.waypoint_x)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sd'%length
+      buff.write(struct.pack(pattern, *self.waypoint_x))
+      length = len(self.waypoint_y)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sd'%length
+      buff.write(struct.pack(pattern, *self.waypoint_y))
     except struct.error as se: self._check_types(se)
     except TypeError as te: self._check_types(te)
 
@@ -99,12 +155,48 @@ float64     position_accuracy
       end = 0
       _x = self
       start = end
-      end += 52
-      (_x.altitude, _x.heading, _x.speed, _x.angular_rate, _x.gps_time, _x.position_valid, _x.heading_valid, _x.speed_valid, _x.angular_rate_valid, _x.position_accuracy,) = _struct_5d4Bd.unpack(str[start:end])
+      end += 71
+      (_x.latitude, _x.longitude, _x.altitude, _x.position_accuracy, _x.heading, _x.speed, _x.angular_rate, _x.gps_time, _x.position_valid, _x.heading_valid, _x.speed_valid, _x.angular_rate_valid, _x.waypoint_list_valid, _x.active_waypoint_id,) = _struct_8d5BH.unpack(str[start:end])
       self.position_valid = bool(self.position_valid)
       self.heading_valid = bool(self.heading_valid)
       self.speed_valid = bool(self.speed_valid)
       self.angular_rate_valid = bool(self.angular_rate_valid)
+      self.waypoint_list_valid = bool(self.waypoint_list_valid)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sH'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.waypoint_id = struct.unpack(pattern, str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sH'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.waypoint_previous_id = struct.unpack(pattern, str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sH'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.waypoint_next_id = struct.unpack(pattern, str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sd'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.waypoint_x = struct.unpack(pattern, str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sd'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.waypoint_y = struct.unpack(pattern, str[start:end])
       return self
     except struct.error as e:
       raise roslib.message.DeserializationError(e) #most likely buffer underfill
@@ -120,7 +212,27 @@ float64     position_accuracy
     """
     try:
       _x = self
-      buff.write(_struct_5d4Bd.pack(_x.altitude, _x.heading, _x.speed, _x.angular_rate, _x.gps_time, _x.position_valid, _x.heading_valid, _x.speed_valid, _x.angular_rate_valid, _x.position_accuracy))
+      buff.write(_struct_8d5BH.pack(_x.latitude, _x.longitude, _x.altitude, _x.position_accuracy, _x.heading, _x.speed, _x.angular_rate, _x.gps_time, _x.position_valid, _x.heading_valid, _x.speed_valid, _x.angular_rate_valid, _x.waypoint_list_valid, _x.active_waypoint_id))
+      length = len(self.waypoint_id)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sH'%length
+      buff.write(self.waypoint_id.tostring())
+      length = len(self.waypoint_previous_id)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sH'%length
+      buff.write(self.waypoint_previous_id.tostring())
+      length = len(self.waypoint_next_id)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sH'%length
+      buff.write(self.waypoint_next_id.tostring())
+      length = len(self.waypoint_x)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sd'%length
+      buff.write(self.waypoint_x.tostring())
+      length = len(self.waypoint_y)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sd'%length
+      buff.write(self.waypoint_y.tostring())
     except struct.error as se: self._check_types(se)
     except TypeError as te: self._check_types(te)
 
@@ -136,15 +248,51 @@ float64     position_accuracy
       end = 0
       _x = self
       start = end
-      end += 52
-      (_x.altitude, _x.heading, _x.speed, _x.angular_rate, _x.gps_time, _x.position_valid, _x.heading_valid, _x.speed_valid, _x.angular_rate_valid, _x.position_accuracy,) = _struct_5d4Bd.unpack(str[start:end])
+      end += 71
+      (_x.latitude, _x.longitude, _x.altitude, _x.position_accuracy, _x.heading, _x.speed, _x.angular_rate, _x.gps_time, _x.position_valid, _x.heading_valid, _x.speed_valid, _x.angular_rate_valid, _x.waypoint_list_valid, _x.active_waypoint_id,) = _struct_8d5BH.unpack(str[start:end])
       self.position_valid = bool(self.position_valid)
       self.heading_valid = bool(self.heading_valid)
       self.speed_valid = bool(self.speed_valid)
       self.angular_rate_valid = bool(self.angular_rate_valid)
+      self.waypoint_list_valid = bool(self.waypoint_list_valid)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sH'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.waypoint_id = numpy.frombuffer(str[start:end], dtype=numpy.uint16, count=length)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sH'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.waypoint_previous_id = numpy.frombuffer(str[start:end], dtype=numpy.uint16, count=length)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sH'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.waypoint_next_id = numpy.frombuffer(str[start:end], dtype=numpy.uint16, count=length)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sd'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.waypoint_x = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sd'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.waypoint_y = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
       return self
     except struct.error as e:
       raise roslib.message.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = roslib.message.struct_I
-_struct_5d4Bd = struct.Struct("<5d4Bd")
+_struct_8d5BH = struct.Struct("<8d5BH")

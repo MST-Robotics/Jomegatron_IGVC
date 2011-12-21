@@ -22,13 +22,16 @@ JAUS_Controller::JAUS_Controller( ros::NodeHandle n )
     component.TransportService()->RegisterCallback(JAUS::SHUTDOWN, controlCallback);
     
     waypointCallback = new WaypointCallback(this);
+    component.TransportService()->RegisterCallback(JAUS::SET_LOCAL_POSE, waypointCallback);
     component.TransportService()->RegisterCallback(JAUS::SET_ELEMENT, waypointCallback);
-    //component.TransportService()->RegisterCallback(JAUS::QUERY_ELEMENT_LIST, waypointCallback);
-    //component.TransportService()->RegisterCallback(JAUS::QUERY_ELEMENT_COUNT, waypointCallback);
     component.TransportService()->RegisterCallback(JAUS::EXECUTE_LIST, waypointCallback);
-    //component.TransportService()->RegisterCallback(JAUS::QUERY_ACTIVE_ELEMENT, waypointCallback);
-    //component.TransportService()->RegisterCallback(JAUS::QUERY_TRAVEL_SPEED, waypointCallback);
-    //component.TransportService()->RegisterCallback(JAUS::QUERY_LOCAL_WAYPOINT, waypointCallback);
+    
+    queryCallback = new QueryCallback(this);
+    component.TransportService()->RegisterCallback(JAUS::QUERY_ELEMENT_LIST, queryCallback);
+    component.TransportService()->RegisterCallback(JAUS::QUERY_ELEMENT_COUNT, queryCallback);
+    component.TransportService()->RegisterCallback(JAUS::QUERY_ACTIVE_ELEMENT, queryCallback);
+    //component.TransportService()->RegisterCallback(JAUS::QUERY_TRAVEL_SPEED, queryCallback);
+    component.TransportService()->RegisterCallback(JAUS::QUERY_LOCAL_WAYPOINT, queryCallback);
     
     component.ManagementService()->SetStatus(JAUS::Management::Status::Standby);
 
@@ -109,6 +112,16 @@ void JAUS_Controller::StateCallback(const MST_JAUS::JAUS_in::ConstPtr& msg)
         t.SetCurrentTime();
         velocityState.SetTimeStamp(t);
     }
+    
+    //Waypoint List
+    if(msg->waypoint_list_valid) {
+        m_activeWaypoint = msg->active_waypoint_id;
+        m_waypointID = msg->waypoint_id;
+        m_waypointPreviousID = msg->waypoint_previous_id;
+        m_waypointNextID = msg->waypoint_next_id;
+        m_waypointX = msg->waypoint_x;
+        m_waypointY = msg->waypoint_y;
+    }
 
     ROS_INFO("State data received");
 }
@@ -144,31 +157,82 @@ void JAUS_Controller::WaypointCallback::ProcessMessage(const JAUS::Message* mess
 {
     MST_JAUS::JAUS_out msg;
     
-    if(message->GetMessageCode() == JAUS::SET_ELEMENT) {
+    if(message->GetMessageCode() == JAUS::SET_LOCAL_POSE) {
+        ROS_INFO("SetLocalPose JAUS message received.");
+        msg.set_local_pose = true;
+        const JAUS::SetLocalPose* setLocalPose = dynamic_cast<const JAUS::SetLocalPose*>(message);
+        msg.waypoint_pose_x.push_back(setLocalPose->GetX());
+        msg.waypoint_pose_y.push_back(setLocalPose->GetY());
+        msg.pose_yaw.push_back(setLocalPose->GetYaw());
+    }
+    else if(message->GetMessageCode() == JAUS::SET_ELEMENT) {
         ROS_INFO("SetElement JAUS message received.");
         msg.set_waypoints = true;
-        //TODO add waypoints to /jaus_out ros message
-        //TODO add waypoints to /jaus_out ros message
+        const JAUS::SetElement* setElement = dynamic_cast<const JAUS::SetElement*>(message);
+        for(unsigned int i = 0; i < setElement->GetElementList()->size(); ++i) {
+            const JAUS::Element* element = &setElement->GetElementList()->at(i);
+            const JAUS::SetLocalWaypoint* waypoint = dynamic_cast<const JAUS::SetLocalWaypoint*>(element->mpElement);
+            msg.waypoint_id.push_back(element->mID);
+            msg.waypoint_previous_id.push_back(element->mPrevID);
+            msg.waypoint_next_id.push_back(element->mNextID);
+            //TODO next line segfaults
+            msg.waypoint_pose_x.push_back(waypoint->GetX());
+            msg.waypoint_pose_y.push_back(waypoint->GetY());
+        }
     }
-//    else if(message->GetMessageCode() == JAUS::QUERY_ELEMENT_LIST) {
-//        ROS_INFO("QueryElementList JAUS message received.");
-//    }
-//    else if(message->GetMessageCode() == JAUS::QUERY_ELEMENT_COUNT) {
-//        ROS_INFO("QueryElementCount JAUS message received.");
-//    }
     else if(message->GetMessageCode() == JAUS::EXECUTE_LIST) {
         ROS_INFO("ExecuteList JAUS message received.");
         msg.execute_waypoints = true;
+        const JAUS::ExecuteList* executeList = dynamic_cast<const JAUS::ExecuteList*>(message);
+        msg.speed = executeList->GetSpeed();
     }
-//    else if(message->GetMessageCode() == JAUS::QUERY_ACTIVE_ELEMENT) {
-//        ROS_INFO("QueryActiveElement JAUS message received.");
-//    }
-//    else if(message->GetMessageCode() == JAUS::QUERY_TRAVEL_SPEED) {
-//        ROS_INFO("QueryTravelSpeed JAUS message received.");
-//    }
-//    else if(message->GetMessageCode() == JAUS::QUERY_LOCAL_WAYPOINT) {
-//        ROS_INFO("QueryLocalWayoint JAUS message received.");
-//    }
     
     parent->p_Control.publish(msg);
+}
+
+void JAUS_Controller::QueryCallback::ProcessMessage(const JAUS::Message* message)
+{
+    JAUS::Address source = JAUS::Address(SUBSYSTEM_ID, NODE_ID, COMPONENT_ID);
+    JAUS::Address destination = JAUS::Address(COP_SUBSYSTEM_ID, COP_NODE_ID, COP_COMPONENT_ID);
+    
+    if(message->GetMessageCode() == JAUS::QUERY_ELEMENT_LIST) {
+        ROS_INFO("QueryElementList JAUS message received.");
+        JAUS::ReportElementList reportElementList(destination, source);
+        for(uint16_t i=0; i < parent->m_waypointID.size(); ++i) {
+            reportElementList.GetElementList()->push_back(parent->m_waypointID.at(i));
+        }
+        if(!parent->component.Send(&reportElementList))
+            ROS_ERROR("ReportElementList message failed.");
+    }
+    else if(message->GetMessageCode() == JAUS::QUERY_ELEMENT_COUNT) {
+        ROS_INFO("QueryElementCount JAUS message received.");
+        JAUS::ReportElementCount reportElementCount(destination, source);
+        reportElementCount.SetElementCount(parent->m_waypointID.size());
+        if(!parent->component.Send(&reportElementCount))
+            ROS_ERROR("ReportElementCount message failed.");
+    }
+    else if(message->GetMessageCode() == JAUS::QUERY_ACTIVE_ELEMENT) {
+        ROS_INFO("QueryActiveElement JAUS message received.");
+        JAUS::ReportActiveElement reportActiveElement(destination, source);
+        reportActiveElement.SetElementUID(parent->m_activeWaypoint);
+        if(!parent->component.Send(&reportActiveElement))
+            ROS_ERROR("ReportActiveElement message failed.");
+    }
+    /*else if(message->GetMessageCode() == JAUS::QUERY_TRAVEL_SPEED) {
+        ROS_INFO("QueryTravelSpeed JAUS message received.");
+        //TODO send latest from MST_Control
+    }*/
+    else if(message->GetMessageCode() == JAUS::QUERY_LOCAL_WAYPOINT) {
+        ROS_INFO("QueryLocalWayoint JAUS message received.");
+        JAUS::ReportLocalWaypoint reportLocalWaypoint(destination, source);
+        for(uint16_t i=0; i < parent->m_waypointID.size(); ++i) {
+            if(parent->m_waypointID.at(i) == parent->m_activeWaypoint) {
+                reportLocalWaypoint.SetX(parent->m_waypointX.at(i));
+                reportLocalWaypoint.SetY(parent->m_waypointY.at(i));
+                break;
+            }
+        }
+        if(!parent->component.Send(&reportLocalWaypoint))
+            ROS_ERROR("ReportLocalWaypoint message failed.");
+    }
 }
