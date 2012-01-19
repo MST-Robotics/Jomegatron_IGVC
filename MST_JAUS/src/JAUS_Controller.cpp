@@ -171,13 +171,14 @@ void JAUS_Controller::WaypointCallback::ProcessMessage(const JAUS::Message* mess
         const JAUS::SetElement* setElement = dynamic_cast<const JAUS::SetElement*>(message);
         for(unsigned int i = 0; i < setElement->GetElementList()->size(); ++i) {
             const JAUS::Element* element = &setElement->GetElementList()->at(i);
-            const JAUS::SetLocalWaypoint* waypoint = dynamic_cast<const JAUS::SetLocalWaypoint*>(element->mpElement);
+            JAUS::SetLocalWaypoint waypoint;
+            waypoint.Read(element->mPayload);
             msg.waypoint_id.push_back(element->mID);
             msg.waypoint_previous_id.push_back(element->mPrevID);
             msg.waypoint_next_id.push_back(element->mNextID);
-            //TODO next line segfaults
-            msg.waypoint_pose_x.push_back(waypoint->GetX());
-            msg.waypoint_pose_y.push_back(waypoint->GetY());
+            msg.waypoint_pose_x.push_back(waypoint.GetX());
+            msg.waypoint_pose_y.push_back(waypoint.GetY());
+            std::cout<<"id: "<<element->mID<<' '<<waypoint.GetX()<<' '<<waypoint.GetY()<<std::endl;
         }
     }
     else if(message->GetMessageCode() == JAUS::EXECUTE_LIST) {

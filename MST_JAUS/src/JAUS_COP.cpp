@@ -352,6 +352,8 @@ void* JAUS_COP::getInput(void* ptr)
                     
                     setElement.SetRequestID(elementID);
                     element.mpElement = setLocalWaypoint;
+                    JAUS::Header header;
+                    (*setLocalWaypoint).Write(element.mPayload, header);
                     setElement.GetElementList()->push_back(element);
                     
                     //DO NOT ENABLE THE NEXT LINE, JAUS::Element::~Element does it already
