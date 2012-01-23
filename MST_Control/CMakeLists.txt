@@ -29,7 +29,14 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
 
+#add executables
 rosbuild_add_executable(Control src/control.cpp)
+
+#link open cv libraries
+find_package(OpenCV REQUIRED)
+#define some target ...
+target_link_libraries(Control ${OpenCV_LIBS})
+
 
 #dynamic reconfigure stuff
 rosbuild_find_ros_package(dynamic_reconfigure)

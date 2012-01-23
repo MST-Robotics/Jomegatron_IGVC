@@ -15,6 +15,7 @@
   <rosdep name = "wiimote" />
   <rosdep name = "uvc_camera" />
   <rosdep name = "camera1394" />
+  <rosdep name=  "opencv2.3"/>
 
   <depend package = "sound_play" />
   <depend package = "wiimote" />
@@ -25,7 +26,6 @@
   
   <!-- depends for using cv_bridge -->  
   <depend package = "sensor_msgs"/>
-  <depend package = "opencv2"/>
   <depend package = "cv_bridge"/>
   <depend package = "roscpp"/>
   <depend package = "std_msgs"/>
