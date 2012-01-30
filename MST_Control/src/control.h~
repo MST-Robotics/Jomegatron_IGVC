@@ -24,6 +24,7 @@
 #include <wiimote/RumbleControl.h>
 #include <sound_play/SoundRequest.h>
 #include <wiimote/TimedSwitch.h>
+#include <MST_Estop/Control_State.h>
 #include <MST_Estop/Estop_State.h>
 #include <MST_Position/Target_Heading.h>
 
@@ -39,43 +40,6 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <dynamic_reconfigure/server.h>
 #include <MST_Control/Control_ParamsConfig.h>
-
-/***********************************************************
-* Defines
-***********************************************************/
-#define MSG_BTN_1      0
-#define MSG_BTN_2      1
-#define MSG_BTN_A      2
-#define MSG_BTN_B      3
-#define MSG_BTN_PLUS   4
-#define MSG_BTN_MINUS  5
-#define MSG_BTN_LEFT   6
-#define MSG_BTN_RIGHT  7
-#define MSG_BTN_UP     8
-#define MSG_BTN_DOWN   9
-#define MSG_BTN_HOME   10
-
-//start at +11 in togg
-#define MSG_BTN_Z      0
-#define MSG_BTN_C      1
-
-//start at +13 in togg
-#define MSG_CLASSIC_BTN_X        0
-#define MSG_CLASSIC_BTN_Y        1
-#define MSG_CLASSIC_BTN_A        2
-#define MSG_CLASSIC_BTN_B        3
-#define MSG_CLASSIC_BTN_PLUS     4
-#define MSG_CLASSIC_BTN_MINUS    5
-#define MSG_CLASSIC_BTN_LEFT     6
-#define MSG_CLASSIC_BTN_RIGHT    7
-#define MSG_CLASSIC_BTN_UP       8
-#define MSG_CLASSIC_BTN_DOWN     9
-#define MSG_CLASSIC_BTN_HOME     10
-#define MSG_CLASSIC_BTN_L        11
-#define MSG_CLASSIC_BTN_R        12
-#define MSG_CLASSIC_BTN_ZL       13
-#define MSG_CLASSIC_BTN_ZR       14
-
 
 /***********************************************************
 * Subscribers
@@ -112,7 +76,7 @@ enum
     jaus
 }   Mode;
 
-Mode mode_;
+Mode mode;
 
 //enumerator for the autonomous mode
 enum
@@ -124,7 +88,9 @@ enum
 
 //storage for wiimote toggle bools 
 //last one is for the disconect and starts empty
-bool wii_togg[30] ;
+bool wii_togg[15] = { false,false,false,false,false,
+                      false,false,false,false,false,
+                      false,false,false,false,false } ;
 
 
 
@@ -143,7 +109,16 @@ geometry_msgs::Twist            nav_twist;
 bool                            wii_updated;
 bool                            nav_updated;
 
-
+bool                            wii_togg_one;
+bool                            wii_togg_two;
+bool                            wii_togg_up;
+bool                            wii_togg_down;
+bool                            wii_togg_left;
+bool                            wii_togg_right;
+bool                            wii_togg_plus;
+bool                            wii_togg_minus;
+bool                            wii_togg_home;
+bool                            wii_togg_a;
 bool                            wii_dis;
 bool                            estop_togg = 0;
 bool                            done_togg = 0;
@@ -158,14 +133,5 @@ MST_Position::Target_Heading  target;
 ***********************************************************/
 namespace enc = sensor_msgs::image_encodings;
 using namespace std;
-
-/***********************************************************
-* Function prototypes
-***********************************************************/
-static void change_mode(Mode new_mode);
-static void say(std::string );
-static void play(std::string );
-static void stop_robot();
-static bool check_togg(bool, wiimote::State);
 
 

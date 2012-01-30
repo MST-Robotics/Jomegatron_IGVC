@@ -7,6 +7,181 @@
 ******************************************************************************/
 #include    "control.h"
 
+/***********************************************************
+* Function prototypes
+***********************************************************/
+void change_mode(Mode new_mode);
+void say(std::string );
+void play(std::string );
+void stop_robot();
+bool check_togg(bool, wiimote::State);
+
+
+//checks the button toggle and switches states
+//will return true on rising edge of press
+bool check_togg(bool button_position, wiimote::State state)
+{
+    if(state.buttons[button_position] && !wii_togg[button_position])
+    {
+        change_mode(wiimote_mode);
+        wii_togg[button_position] = true;
+        
+        return true;
+    }
+    else if (!state.buttons[button_position])
+    {
+        wii_togg[button_position] = false;
+    }
+    
+    return false;
+}
+
+
+void change_mode(Mode new_mode)
+{
+    
+    wiimote::LEDControl led;
+    sound_play::SoundRequest sound;
+    
+    mode = new_mode;
+    
+    if (mode == standby)
+    {
+        ROS_INFO("Control: Standby Mode");
+        
+        if(!wiimote_init)
+        {
+            say("Joe-Mega-Tron standing by");
+        }
+     
+        int lights[] ={0,1,1,0};
+
+        led.set_timed_switch_array_size(4);
+        for(int i=0; i < 4 ;i++)
+        {
+            led.timed_switch_array[i].switch_mode = lights[i];
+            
+        }
+        
+        /*
+        //setup nightrider
+        float sizes[] ={4,6,6,4};
+        float arrays[4][6]={{2 ,9,2,0,-1,-1},
+                            {-1,1,3,5, 3, 1},
+                            {-1,3,3,1, 3, 3},
+                            {-1,5,3,5,-1,-1}};
+        
+        led.set_timed_switch_array_size(4);
+        for(int i=0; i < 4 ;i++)
+        {
+            led.timed_switch_array[i].switch_mode = led.timed_switch_array[i].REPEAT;
+            led.timed_switch_array[i].num_cycles = -1;
+            led.timed_switch_array[i].set_pulse_pattern_size(sizes[i]);
+            for(int j=0;j<sizes[i];j++)
+            {
+                led.timed_switch_array[i].pulse_pattern[j]=arrays[i][j] * (.05);
+            }
+        }
+        */
+        
+    }
+    
+    if (mode == wiimote_mode)
+    {
+        ROS_INFO("Control: Wiimote Mode");
+        
+        say("Joe-Mega-Tron at you command");
+        
+     
+        //turn on light 1
+        int lights[] ={1,0,0,0};
+
+        led.set_timed_switch_array_size(4);
+        for(int i=0; i < 4 ;i++)
+        {
+            led.timed_switch_array[i].switch_mode = lights[i];
+            
+
+        }
+        
+    }
+
+    if (mode == autonomous)
+    {
+        ROS_INFO("Control: Autonomous Mode");
+        
+        say("Intializing autonomous navigation");
+     
+        //turn on light 2
+        int lights[] ={0,1,0,0};
+
+        led.set_timed_switch_array_size(4);
+        for(int i=0; i < 4 ;i++)
+        {
+            led.timed_switch_array[i].switch_mode = lights[i];
+        }
+        
+    }
+    
+    if (mode == jaus)
+    {
+        ROS_INFO("Control: Wiimote Mode");
+        
+        say("Joe-Mega-Tron under jaus control");
+     
+        //turn on light 3
+        int lights[] ={0,0,1,0};
+
+        led.set_timed_switch_array_size(4);
+        for(int i=0; i < 4 ;i++)
+        {
+            led.timed_switch_array[i].switch_mode = lights[i];
+        }
+        
+    }
+    
+    wiimote_led_pub.publish(led);
+    
+}
+
+void say(std::string say)
+{
+    sound_play::SoundRequest sound;
+    
+    sound.sound = sound.SAY;
+    sound.command = sound.PLAY_ONCE;
+    sound.arg = say;
+    
+    sound_pub.publish(sound);
+}
+
+
+void play(std::string play)
+{
+    sound_play::SoundRequest sound;
+    
+    sound.sound = sound.PLAY_FILE;
+    sound.command = sound.PLAY_ONCE;
+    sound.arg = play;
+    
+    sound_pub.publish(sound);
+}
+
+void stop_robot()
+{
+    geometry_msgs::Twist stop_twist;
+
+    stop_twist.angular.x = 0;
+    stop_twist.angular.y = 0;
+    stop_twist.angular.z = 0;
+    stop_twist.linear.x = 0;
+    stop_twist.linear.y = 0;
+    stop_twist.linear.z = 0;
+    
+    motor_pub.publish(stop_twist);
+}
+
+
 
 /***********************************************************
 * Message Callbacks
@@ -114,7 +289,7 @@ void wiimote_callback(const wiimote::State state)
 
     
     //behavior in stanby or jaus mode
-    if(mode_ == standby || mode_ == jaus)
+    if(mode == standby || mode == jaus)
     {
         //1 button
         if(check_togg(state.MSG_BTN_1, state))
@@ -131,7 +306,7 @@ void wiimote_callback(const wiimote::State state)
     }
     
     //wiimote behavior in wiimote mode
-    if(mode_ == wiimote_mode)
+    if(mode == wiimote_mode)
     {
     
         //initalize twist
@@ -227,7 +402,7 @@ void wiimote_callback(const wiimote::State state)
     }
     
     //wiimote behavior in autonomous mode
-    if(mode_==autonomous)
+    if(mode==autonomous)
     {
         //button 2 moves back to standby
         if(state.buttons[state.MSG_BTN_2] && !wii_togg_two)
@@ -380,7 +555,7 @@ void wiimote_callback(const wiimote::State state)
 ***********************************************************/
 void navigation_callback(const geometry_msgs::Twist twist)
 {
-    if(mode_==autonomous || mode==jaus)      
+    if(mode==autonomous || mode==jaus)      
     {
         //initalize twist
         nav_twist.angular.x = 0;
@@ -448,21 +623,25 @@ int main(int argc, char **argv)
     ros::NodeHandle n;
  
     std::string nav;
-
+    MST_Estop::Control_State  control_state;
     
     bool stoped = true;
     wiimote_init = true; 
     robot_init =true;  
     wii_dis = true;
-    mode_ = standby;
+    mode = standby;
     autonmous_mode = carrot;
     system("rosrun dynamic_reconfigure dynparam set /Position go_to_waypoints false");
-    
-    //initalize toggles 
-    for (int i = 0; i < 30 ; i++)
-    {
-        wii_togg[i] = false;
-    }
+    wii_togg_one = false;
+    wii_togg_two = false;
+    wii_togg_up  = false;
+    wii_togg_down = false;
+    wii_togg_left = false;
+    wii_togg_right = false;
+    wii_togg_plus = false;
+    wii_togg_minus = false;
+    wii_togg_home = false;
+    wii_togg_a = false;
     
     
     
@@ -485,7 +664,7 @@ int main(int argc, char **argv)
     }
     
     
-    // create subscriptions
+    
     nav_sub = n.subscribe( nav ,100, navigation_callback);
     
     pos_sub = n.subscribe( "/target" ,100, pos_callback);
@@ -499,12 +678,11 @@ int main(int argc, char **argv)
     wiimote_rum_pub = n.advertise<wiimote::RumbleControl>("wiimote/rumble" ,100);
 
     
-    //create publications
     motor_pub = n.advertise<geometry_msgs::Twist>("cmd_vel" ,100);
     
     sound_pub = n.advertise<sound_play::SoundRequest>("robotsound" ,100);
     
-
+    estop_pub = n.advertise<MST_Estop::Control_State>("controlstate" ,100);
     
     //set rate to 30 hz
     ros::Rate loop_rate(30);
@@ -517,8 +695,9 @@ int main(int argc, char **argv)
         //check calbacks
         ros::spinOnce();
         
+        control_state.mode = mode;  
         
-
+        estop_pub.publish(control_state);   
         
         if(robot_init)
         {
@@ -552,172 +731,5 @@ int main(int argc, char **argv)
     }
     
     return 0;
-}
-
-//checks the button toggle and switches states
-//will return true on rising edge of press
-bool check_togg(bool button_state, int button_position)
-{
-    bool togg = false;
-    
-    if(button_state && !wii_togg[button_position])
-    {
-        change_mode(wiimote_mode);
-        wii_togg[button_position] = true;
-        
-        togg = true;
-    }
-    else if (!state.buttons[button_position])
-    {
-        wii_togg[button_position] = false;
-    }
-    
-    return togg;
-}
-
-
-void change_mode(Mode new_mode)
-{
-    
-    wiimote::LEDControl led;
-    sound_play::SoundRequest sound;
-    
-    mode_ = new_mode;
-    
-    if (mode_ == standby)
-    {
-        ROS_INFO("Control: Standby Mode");
-        
-        if(!wiimote_init)
-        {
-            say("Joe-Mega-Tron standing by");
-        }
-        
-        /*
-        int lights[] ={0,1,1,0};
-
-        led.set_timed_switch_array_size(4);
-        for(int i=0; i < 4 ;i++)
-        {
-            led.timed_switch_array[i].switch_mode = lights[i];
-            
-        }
-        */
-        
-        //setup nightrider
-        float sizes[] ={4,6,6,4};
-        //                    o f o  f o f
-        float arrays[4][6]={{ 2,9,1,-1,0,0},
-                            {-1,1,3, 5,3,1},
-                            {-1,3,3, 1,3,3},
-                            {-1,5,3, 5,0,0}};
-        
-        led.set_timed_switch_array_size(4);
-        for(int i=0; i < 4 ;i++)
-        {
-            led.timed_switch_array[i].switch_mode = led.timed_switch_array[i].REPEAT;
-            led.timed_switch_array[i].num_cycles = led.timed_switch_array[i].FOREVER;
-            led.timed_switch_array[i].set_pulse_pattern_size(sizes[i]);
-            for(int j=0;j<sizes[i];j++)
-            {
-                led.timed_switch_array[i].pulse_pattern[j]=arrays[i][j] * (.05);
-            }
-        }
-        
-        
-    }
-    
-    if (mode_ == wiimote_mode)
-    {
-        ROS_INFO("Control: Wiimote Mode");
-        
-        say("Joe-Mega-Tron at you command");
-        
-     
-        //turn on light 1
-        int lights[] ={1,0,0,0};
-
-        led.set_timed_switch_array_size(4);
-        for(int i=0; i < 4 ;i++)
-        {
-            led.timed_switch_array[i].switch_mode = lights[i];
-            
-        }
-        
-    }
-
-    if (mode_ == autonomous)
-    {
-        ROS_INFO("Control: Autonomous Mode");
-        
-        say("Intializing autonomous navigation");
-     
-        //turn on light 2
-        int lights[] ={0,1,0,0};
-
-        led.set_timed_switch_array_size(4);
-        for(int i=0; i < 4 ;i++)
-        {
-            led.timed_switch_array[i].switch_mode = lights[i];
-        }
-        
-    }
-    
-    if (mode_ == jaus)
-    {
-        ROS_INFO("Control: Wiimote Mode");
-        
-        say("Joe-Mega-Tron under jaus control");
-     
-        //turn on light 3
-        int lights[] ={0,0,1,0};
-
-        led.set_timed_switch_array_size(4);
-        for(int i=0; i < 4 ;i++)
-        {
-            led.timed_switch_array[i].switch_mode = lights[i];
-        }
-        
-    }
-    
-    wiimote_led_pub.publish(led);
-    
-}
-
-void say(std::string say)
-{
-    sound_play::SoundRequest sound;
-    
-    sound.sound = sound.SAY;
-    sound.command = sound.PLAY_ONCE;
-    sound.arg = say;
-    
-    sound_pub.publish(sound);
-}
-
-
-void play(std::string play)
-{
-    sound_play::SoundRequest sound;
-    
-    sound.sound = sound.PLAY_FILE;
-    sound.command = sound.PLAY_ONCE;
-    sound.arg = play;
-    
-    sound_pub.publish(sound);
-}
-
-void stop_robot()
-{
-    geometry_msgs::Twist stop_twist;
-
-    stop_twist.angular.x = 0;
-    stop_twist.angular.y = 0;
-    stop_twist.angular.z = 0;
-    stop_twist.linear.x = 0;
-    stop_twist.linear.y = 0;
-    stop_twist.linear.z = 0;
-    
-    motor_pub.publish(stop_twist);
 }
 
