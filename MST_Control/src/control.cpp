@@ -42,12 +42,12 @@ void pos_callback( const MST_Position::Target_Heading::ConstPtr& msg)
 * @pre takes in a wiimote state message
 * @post computes wii_twist variable and changes mode
 ***********************************************************/
-void wiimote_callback(const wiimote::State state)
+void wiimote_callback(const wiimote::State::ConstPtr& state)
 {
     //sets inital conection and resets if node restarted
     //when wiimote is killed and restarted it continuously
     // publishes its last message the checking of home handels this 
-    if(wiimote_init && (!state.buttons[state.MSG_BTN_HOME] && wii_dis))
+    if(wiimote_init && (!state->buttons[MSG_BTN_HOME] && wii_dis))
     {
         ROS_INFO("Control: Wiimote Conected");
         
@@ -75,35 +75,34 @@ void wiimote_callback(const wiimote::State state)
     //a and b in the the apis map
     
     //plus
-    if(check_togg(2, state))
+    if(check_togg(state->buttons[MSG_BTN_PLUS], MSG_BTN_PLUS))
     {
         say(params.plus_mesage);
     }
     
     //minus
-    if(check_togg(3, state))
+    if(check_togg(state->buttons[MSG_BTN_MINUS], MSG_BTN_MINUS))
     {
         play(params.minus_sound);
-
     }
     
     //shut down code on 
-    if(state.buttons[state.MSG_BTN_HOME] && !wii_dis)
+    if(state->buttons[MSG_BTN_HOME] && !wii_dis)
     {
         //must be held for 3 seconds
-        if(!wii_togg[state.MSG_BTN_HOME])
+        if(!wii_togg[MSG_BTN_HOME])
         {
             home_press_begin = ros::Time::now();
 
-            wii_togg[state.MSG_BTN_HOME] = true;
+            wii_togg[MSG_BTN_HOME] = true;
         }
         
         
-        if(wii_togg[state.MSG_BTN_HOME] && state.buttons[state.MSG_BTN_HOME] && (ros::Time::now() - home_press_begin) > ros::Duration(3))
+        if(wii_togg[MSG_BTN_HOME] && state->buttons[MSG_BTN_HOME] && (ros::Time::now() - home_press_begin) > ros::Duration(3))
         {
             stop_robot();
             system("rosnode kill wiimote");
-            wii_togg[state.MSG_BTN_HOME] = false;
+            wii_togg[MSG_BTN_HOME] = false;
             wii_dis = true;
             wiimote_init = true;
             say("wiimote disconnected..  Please press the one and two buttons to reconnect");
@@ -117,13 +116,13 @@ void wiimote_callback(const wiimote::State state)
     if(mode_ == standby || mode_ == jaus)
     {
         //1 button
-        if(check_togg(state.MSG_BTN_1, state))
+        if(check_togg(state->buttons[MSG_BTN_1], MSG_BTN_1))
         {
             change_mode(wiimote_mode);
         }
         
         //two button
-        if(check_togg(state.MSG_BTN_2, state))
+        if(check_togg(state->buttons[MSG_BTN_2], MSG_BTN_2))
         {
             change_mode(autonomous);     
         }
@@ -143,13 +142,13 @@ void wiimote_callback(const wiimote::State state)
         wii_twist.linear.z = 0;
     
         //button 1 moves to standby
-        if(check_togg(state.MSG_BTN_1, state))
+        if(check_togg(state->buttons[MSG_BTN_1], MSG_BTN_1))
         {
             change_mode(standby);
         }
 
         //button 2 moves to autonomous
-        if(check_togg(state.MSG_BTN_2))
+        if(check_togg(state->buttons[MSG_BTN_2], MSG_BTN_2))
         {
             change_mode(autonomous);
         }
@@ -159,8 +158,8 @@ void wiimote_callback(const wiimote::State state)
         double turbo_x = 1;
         double turbo_y = 1;
     
-        if( state.nunchuk_joystick_raw[0] != 0 ||
-            state.nunchuk_joystick_raw[1] != 0 )
+        if( state->nunchuk_joystick_raw[0] != 0 ||
+            state->nunchuk_joystick_raw[1] != 0 )
         {
             nunchuk_conected = true;
         }
@@ -168,55 +167,54 @@ void wiimote_callback(const wiimote::State state)
         if(nunchuk_conected)
         {
             //nunchuk boost handlers
-            if(state.nunchuk_buttons[state.MSG_BTN_Z])
+            if(state->nunchuk_buttons[MSG_BTN_Z])
             {
-                turbo_x = turbo_x + params.turbo_x;
-                turbo_y = turbo_y + params.turbo_y;
+                turbo_x += params.turbo_x;
+                turbo_y += params.turbo_y;
             }
-            if(state.nunchuk_buttons[state.MSG_BTN_C])
+            if(state->nunchuk_buttons[MSG_BTN_C])
             {
-                turbo_x = turbo_x + params.turbo_x;
-                turbo_y = turbo_y + params.turbo_y;
+                turbo_x += params.turbo_x;
+                turbo_y += params.turbo_y;
             }
             
             //compute controlls
-            wii_twist.angular.z = state.nunchuk_joystick_zeroed[0] * params.base_rot_speed * turbo_x;
-            wii_twist.linear.y  = state.nunchuk_joystick_zeroed[1] * params.base_linear_speed * turbo_y;
+            wii_twist.angular.z = state->nunchuk_joystick_zeroed[0] * params.base_rot_speed * turbo_x;
+            wii_twist.linear.y  = state->nunchuk_joystick_zeroed[1] * params.base_linear_speed * turbo_y;
         }
         else
         {
             //there constants for the buttons are wrong
             //b button boost
-            if(state.buttons[5])
+            if(state->buttons[MSG_BTN_B])
             {
-                turbo_x = turbo_x + params.turbo_x;
-                turbo_y = turbo_y + params.turbo_y;
+                turbo_x += params.turbo_x;
+                turbo_y += params.turbo_y;
             }
             
             //accelerometer handlers a button
-            if(state.buttons[4])
+            if(state->buttons[MSG_BTN_A])
             {
-                wii_twist.angular.z = (state.linear_acceleration_raw.x - 125) / 30  * params.base_rot_speed * turbo_x;
-                wii_twist.linear.y  = -(state.linear_acceleration_raw.y - 125) / 30  * params.base_linear_speed * turbo_y;
+                wii_twist.angular.z = (state->linear_acceleration_zeroed.x) / 10  * params.base_rot_speed * turbo_x;
+                wii_twist.linear.y  = -(state->linear_acceleration_zeroed.y) / 10  * params.base_linear_speed * turbo_y;
             }
             //dpad handlers
             else
-
             { 
                 //buttons are named with the wiimote on the side
-                if(state.buttons[state.MSG_BTN_LEFT])
+                if(state->buttons[MSG_BTN_LEFT])
                 {
                     wii_twist.linear.y = params.base_linear_speed * turbo_y * params.d_pad_percent/100;
                 }
-                else if(state.buttons[state.MSG_BTN_RIGHT])
+                else if(state->buttons[MSG_BTN_RIGHT])
                 {
                     wii_twist.linear.y = -params.base_linear_speed * turbo_y * params.d_pad_percent/100;
                 }
-                if(state.buttons[state.MSG_BTN_UP])
+                if(state->buttons[MSG_BTN_UP])
                 {
                     wii_twist.angular.z = params.base_rot_speed * turbo_x * params.d_pad_percent/100;
                 }
-                else if(state.buttons[state.MSG_BTN_DOWN])
+                else if(state->buttons[MSG_BTN_DOWN])
                 {
                     wii_twist.angular.z = -params.base_rot_speed * turbo_x * params.d_pad_percent/100;
                 }
@@ -230,56 +228,37 @@ void wiimote_callback(const wiimote::State state)
     if(mode_==autonomous)
     {
         //button 2 moves back to standby
-        if(state.buttons[state.MSG_BTN_2] && !wii_togg_two)
+        if(check_togg(state->buttons[MSG_BTN_2], MSG_BTN_2))
         {
             change_mode(standby);
-            wii_togg_two = true;
-        }
-        else if(!state.buttons[state.MSG_BTN_2])
-        {
-            wii_togg_two = false;
         }
         
         //button 1 moves to wiimote mode
-        if(state.buttons[state.MSG_BTN_1] && !wii_togg_one)
+        if(check_togg(state->buttons[MSG_BTN_1], MSG_BTN_1))
         {
             change_mode(wiimote_mode);
-            wii_togg_one = true;
-        }
-        else if(!state.buttons[state.MSG_BTN_1])
-        {
-            wii_togg_one = false;
         }
         
         //right button skips waypoint
-        if(state.buttons[state.MSG_BTN_UP] && !wii_togg_up)
+        if(check_togg(state->buttons[MSG_BTN_UP], MSG_BTN_UP))
         {
             //resets waypoints
             say("reseting waypoints");
             system("rosrun dynamic_reconfigure dynparam set /Position reset_waypoints true");
-            wii_togg_up = true;
-        }
-        else if(!state.buttons[state.MSG_BTN_UP])
-        {
-            wii_togg_up = false;
         }
         
         //left button resets waypoints
-        if(state.buttons[state.MSG_BTN_DOWN] && !wii_togg_down)
+        if(check_togg(state->buttons[MSG_BTN_DOWN], MSG_BTN_DOWN))
         {
 
             //skips waypoint
             say("skip-ing waypoint");
             system("rosrun dynamic_reconfigure dynparam set /Position skip_waypoint true");
-            wii_togg_down = true;
-        }
-        else if(!state.buttons[state.MSG_BTN_DOWN])
-        {
-            wii_togg_down = false;
+
         }
         
         //up button switches autonomous mode
-        if(state.buttons[state.MSG_BTN_LEFT] && !wii_togg_left)
+        if(check_togg(state->buttons[MSG_BTN_LEFT], MSG_BTN_LEFT))
         {
             if(autonmous_mode == navigation)
             {
@@ -307,15 +286,11 @@ void wiimote_callback(const wiimote::State state)
                 system(temp.c_str());   
                 
             }
-            wii_togg_left = true;
-        }
-        else if(!state.buttons[state.MSG_BTN_LEFT])
-        {
-            wii_togg_left = false;
+
         }
         
         //down button switches autonomous mode
-        if(state.buttons[state.MSG_BTN_RIGHT] && !wii_togg_right)
+        if(check_togg(state->buttons[MSG_BTN_RIGHT], MSG_BTN_RIGHT))
         {
             if(autonmous_mode == navigation)
             {
@@ -324,8 +299,6 @@ void wiimote_callback(const wiimote::State state)
                 string temp = "rosrun dynamic_reconfigure dynparam load /Position " ;
                 temp += params.autonomous_waypoints;
                 system(temp.c_str());
-
-;
             }
             else if(autonmous_mode == autonomous_waypoints)
             {
@@ -344,24 +317,14 @@ void wiimote_callback(const wiimote::State state)
                 
             }
 
-            wii_togg_right = true;
-        }
-        else if(!state.buttons[state.MSG_BTN_RIGHT])
-        {
-            wii_togg_right = false;
         }
         
         //a button pauses operation
-        if(state.buttons[4] && !wii_togg_a)
+        if(check_togg(state->buttons[MSG_BTN_A], MSG_BTN_A))
         {
             //pauses
             say("pausing waypoint navigation");
             system("rosrun dynamic_reconfigure dynparam set /Position pause true");
-            wii_togg_a = true;
-        }
-        else if(!state.buttons[4])
-        {
-            wii_togg_a = false;
         }
         
         
@@ -380,14 +343,14 @@ void wiimote_callback(const wiimote::State state)
 ***********************************************************/
 void navigation_callback(const geometry_msgs::Twist twist)
 {
-    if(mode_==autonomous || mode==jaus)      
+    if(mode_==autonomous || mode_==jaus)      
     {
         //initalize twist
         nav_twist.angular.x = 0;
-        nav_twist.angular.y = 0;  c
+        nav_twist.angular.y = 0;  
         nav_twist.angular.z = twist.angular.z;
-        nav_twist.linear.x = 0;
-        nav_twist.linear.y = twist.linear.y;
+        nav_twist.linear.x = twist.linear.x;
+        nav_twist.linear.y = 0;
         nav_twist.linear.z = 0; 
     }
 }
@@ -403,16 +366,16 @@ void navigation_callback(const geometry_msgs::Twist twist)
 void estop_callback(const MST_Estop::Estop_State::ConstPtr& estop)
 {
 
-        if(estop->state == 1 && !wii_togg_a)
+        if(estop->state == 1 && !estop_togg)
         {
             //pauses
-            say("pausing waypoint navigation");
+            say("Joe-Mega-Tron E-Stopped");
             system("rosrun dynamic_reconfigure dynparam set /Position pause true");
-            wii_togg_a = true;
+            estop_togg = true;
         }
         else if(!estop->state)
         {
-            wii_togg_a = false;
+            estop_togg = false;
         }
 
 }
@@ -452,7 +415,7 @@ int main(int argc, char **argv)
     
     bool stoped = true;
     wiimote_init = true; 
-    robot_init =true;  
+    robot_init = true;  
     wii_dis = true;
     mode_ = standby;
     autonmous_mode = carrot;
@@ -528,7 +491,7 @@ int main(int argc, char **argv)
             
             robot_init = false;
         }
-        if(mode==standby)
+        if(mode_==standby)
         {
             if(!stoped)
             {
@@ -536,12 +499,12 @@ int main(int argc, char **argv)
                 stoped = true;
             }
         }
-        else if(mode == wiimote_mode)
+        else if(mode_ == wiimote_mode)
         {
             motor_pub.publish(wii_twist);
             stoped = false;
         }
-        else if(mode == autonomous)
+        else if(mode_ == autonomous)
         {
             motor_pub.publish(nav_twist);
             stoped = false;
@@ -567,7 +530,7 @@ bool check_togg(bool button_state, int button_position)
         
         togg = true;
     }
-    else if (!state.buttons[button_position])
+    else if (!button_state)
     {
         wii_togg[button_position] = false;
     }
@@ -620,7 +583,7 @@ void change_mode(Mode new_mode)
             led.timed_switch_array[i].set_pulse_pattern_size(sizes[i]);
             for(int j=0;j<sizes[i];j++)
             {
-                led.timed_switch_array[i].pulse_pattern[j]=arrays[i][j] * (.05);
+                led.timed_switch_array[i].pulse_pattern[j] = arrays[i][j] * (.1);
             }
         }
         

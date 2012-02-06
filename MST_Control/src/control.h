@@ -45,10 +45,10 @@
 ***********************************************************/
 #define MSG_BTN_1      0
 #define MSG_BTN_2      1
-#define MSG_BTN_A      2
-#define MSG_BTN_B      3
-#define MSG_BTN_PLUS   4
-#define MSG_BTN_MINUS  5
+#define MSG_BTN_A      4
+#define MSG_BTN_B      5
+#define MSG_BTN_PLUS   2
+#define MSG_BTN_MINUS  3
 #define MSG_BTN_LEFT   6
 #define MSG_BTN_RIGHT  7
 #define MSG_BTN_UP     8
@@ -105,22 +105,26 @@ ros::Publisher                  estop_pub;
 
 //enumorator for robot mode
 enum 
+Mode
 {
     standby,
     wiimote_mode,
     autonomous,
     jaus
-}   Mode;
+};
 
 Mode mode_;
 
 //enumerator for the autonomous mode
 enum
+Autonmous_Mode
 {
     navigation,
     autonomous_waypoints,
     carrot
-}   autonmous_mode;
+};
+
+Autonmous_Mode autonmous_mode;
 
 //storage for wiimote toggle bools 
 //last one is for the disconect and starts empty
@@ -166,6 +170,6 @@ static void change_mode(Mode new_mode);
 static void say(std::string );
 static void play(std::string );
 static void stop_robot();
-static bool check_togg(bool, wiimote::State);
+static bool check_togg(bool, int);
 
 
