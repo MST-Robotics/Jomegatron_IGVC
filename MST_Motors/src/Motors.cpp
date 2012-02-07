@@ -77,7 +77,7 @@ static void        softStart( double &, double &);
 void motionCallback(const geometry_msgs::Twist::ConstPtr& msg)
 {
     g_watchdog_tripped = true;
-    g_linear_velocity  = msg->linear.y;
+    g_linear_velocity  = msg->linear.x;
     g_angular_velocity = msg->angular.z;
 }
 

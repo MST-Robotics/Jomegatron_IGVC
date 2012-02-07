@@ -180,7 +180,7 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
             
             //compute controlls
             wii_twist.angular.z = state->nunchuk_joystick_zeroed[0] * params.base_rot_speed * turbo_x;
-            wii_twist.linear.y  = state->nunchuk_joystick_zeroed[1] * params.base_linear_speed * turbo_y;
+            wii_twist.linear.x  = state->nunchuk_joystick_zeroed[1] * params.base_linear_speed * turbo_y;
         }
         else
         {
@@ -196,7 +196,7 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
             if(state->buttons[MSG_BTN_A])
             {
                 wii_twist.angular.z = (state->linear_acceleration_zeroed.x) / 10  * params.base_rot_speed * turbo_x;
-                wii_twist.linear.y  = -(state->linear_acceleration_zeroed.y) / 10  * params.base_linear_speed * turbo_y;
+                wii_twist.linear.x  = -(state->linear_acceleration_zeroed.y) / 10  * params.base_linear_speed * turbo_y;
             }
             //dpad handlers
             else
@@ -204,11 +204,11 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
                 //buttons are named with the wiimote on the side
                 if(state->buttons[MSG_BTN_LEFT])
                 {
-                    wii_twist.linear.y = params.base_linear_speed * turbo_y * params.d_pad_percent/100;
+                    wii_twist.linear.x = params.base_linear_speed * turbo_y * params.d_pad_percent/100;
                 }
                 else if(state->buttons[MSG_BTN_RIGHT])
                 {
-                    wii_twist.linear.y = -params.base_linear_speed * turbo_y * params.d_pad_percent/100;
+                    wii_twist.linear.x = -params.base_linear_speed * turbo_y * params.d_pad_percent/100;
                 }
                 if(state->buttons[MSG_BTN_UP])
                 {
@@ -525,7 +525,6 @@ bool check_togg(bool button_state, int button_position)
     
     if(button_state && !wii_togg[button_position])
     {
-        change_mode(wiimote_mode);
         wii_togg[button_position] = true;
         
         togg = true;
@@ -556,7 +555,7 @@ void change_mode(Mode new_mode)
             say("Joe-Mega-Tron standing by");
         }
         
-        /*
+        
         int lights[] ={0,1,1,0};
 
         led.set_timed_switch_array_size(4);
@@ -565,8 +564,8 @@ void change_mode(Mode new_mode)
             led.timed_switch_array[i].switch_mode = lights[i];
             
         }
-        */
         
+        /*
         //setup nightrider
         float sizes[] ={4,6,6,4};
         //                    o f o  f o f
@@ -586,7 +585,7 @@ void change_mode(Mode new_mode)
                 led.timed_switch_array[i].pulse_pattern[j] = arrays[i][j] * (.1);
             }
         }
-        
+        */
         
     }
     
@@ -594,9 +593,9 @@ void change_mode(Mode new_mode)
     {
         ROS_INFO("Control: Wiimote Mode");
         
-        say("Joe-Mega-Tron at you command");
-        
-     
+        say("Joe-Mega-Tron at your command");
+
+
         //turn on light 1
         int lights[] ={1,0,0,0};
 

@@ -50,8 +50,10 @@ cv_bridge::CvImage              map_dis;
 cv::Mat                         stat;
 cv::Mat                         edges;
 
+/*
 std::queue<cv::Mat>             stat_q;
 std::queue<cv::Mat>             edges_q;
+*/
 
 image_transport::Subscriber     image_sub_edges;
 image_transport::Subscriber     image_sub_line;
@@ -94,7 +96,7 @@ geometry_msgs::Twist find_twist();
 ***********************************************************/
 
 
-
+// Edges are not currently used
 /***********************************************************
 * @fn edgesCallback(const sensor_msgs::ImageConstPtr& msg)
 * @brief adds the edges image to map using a weight 
@@ -102,6 +104,7 @@ geometry_msgs::Twist find_twist();
 * @post image added to the map
 * @param takes in a ros message of a raw or cv image 
 ***********************************************************/
+/*
 void edgesCallback( const sensor_msgs::ImageConstPtr& msg)
 {
 	//ROS_INFO("Pot_Nav: Edges image receieved");
@@ -140,6 +143,7 @@ void edgesCallback( const sensor_msgs::ImageConstPtr& msg)
 	map.header = cv_ptr_src->header;
 
 }
+*/
 
 /***********************************************************
 * @fn edgesCallback(const sensor_msgs::ImageConstPtr& msg)
@@ -181,10 +185,12 @@ void statCallback( const sensor_msgs::ImageConstPtr& msg)
     
     
     
-
+    /*
 	stat_q.push( Chanels[1] * params.stat_per/100) ;
 	stat_time_q.push( cv_ptr_src->header.stamp) ;
+	*/
 	
+	stat = Chanels[1] * params.stat_per/100;
 	
 	map.header = cv_ptr_src->header;
 
@@ -193,7 +199,7 @@ void statCallback( const sensor_msgs::ImageConstPtr& msg)
     
     
    
-    
+    map_changed = 1;
 
     
     
@@ -273,8 +279,8 @@ geometry_msgs::Twist find_twist()
 	cv::circle(map_dis.image, robot_center, params.search_radius, 255);
 	
     //initalize twist and apply forward foring funciton
-	twist.linear.x = 0;
-	twist.linear.y = params.carrot_on_a_stick;
+	twist.linear.y = 0;
+	twist.linear.x = params.carrot_on_a_stick;
     twist.linear.z = 0;
     
     twist.angular.x = 0;
@@ -282,7 +288,7 @@ geometry_msgs::Twist find_twist()
     twist.angular.z = 0;
     
     //add  in target
-    twist.linear.y =  twist.linear.y + (params.target_weight_y/100.0) * sin(target.target_heading)/ (target.distance * params.target_dist_scale/1000) ;
+    twist.linear.x =  twist.linear.x + (params.target_weight_y/100.0) * sin(target.target_heading)/ (target.distance * params.target_dist_scale/1000) ;
     twist.angular.z = twist.angular.z + (params.target_weight_z/100.0) * cos(target.target_heading)/ (target.distance * params.target_dist_scale/1000);
     
 	ROS_INFO("y: %f x: %f" , sin(target.target_heading) , cos(target.target_heading));
@@ -345,11 +351,11 @@ geometry_msgs::Twist find_twist()
         		
 
 			    
-				twist.linear.y -= (params.twist_scalar_y/1000  * mag/dist * sin(theta));
+				twist.linear.x -= (params.twist_scalar_y/1000  * mag/dist * sin(theta));
 				twist.angular.z += (params.twist_scalar_z/1000  * mag/dist * cos(theta));	   
 
  			} 
- 			//twist.linear.y = twist.linear.y*100/params.search_res ;
+ 			//twist.linear.x = twist.linear.x*100/params.search_res ;
  			//twist.angular.z = twist.angular.z*100/params.search_res ;
  			
 		}
@@ -363,7 +369,7 @@ geometry_msgs::Twist find_twist()
 	cv::Point2i line;
 
 	line.x = robot_center.x - params.compas_length * twist.angular.z;
-	line.y = robot_center.y - params.compas_length * twist.linear.y;
+	line.y = robot_center.y - params.compas_length * twist.linear.x;
 			
 	//draw movement
 	cv::line(map_dis.image, robot_center, line , 255 , 5);
@@ -398,6 +404,7 @@ geometry_msgs::Twist stop_robot()
     return twist;
 }
 
+/*
 void check_queue()
 {
 
@@ -425,6 +432,7 @@ void check_queue()
 	}
 	
 }
+*/
 
 /***********************************************************
 * @fn main(int argc, char **argv)
@@ -451,7 +459,7 @@ int main(int argc, char **argv)
 	srv.setCallback(f);
 
 	//create subsctiptions
-    image_sub_edges = it.subscribe( n.resolveName("image_edges") , 10, edgesCallback );
+    //image_sub_edges = it.subscribe( n.resolveName("image_edges") , 10, edgesCallback );
     
     image_sub_stat = it.subscribe( n.resolveName("image_stat") , 10, statCallback );
     
@@ -471,17 +479,21 @@ int main(int argc, char **argv)
 		ros::spinOnce();
 		
 		//finds and publishes new twist
-		check_queue();
+		//check_queue();
 		if(map_changed )
 		{
 			geometry_msgs::Twist twist;
 			
+			/*
 			map.image = map.image * params.previous_per/100 + stat_q.front() + edges_q.front() ;
 			
 			stat_time_q.pop();
 			stat_q.pop();
 			edges_time_q.pop();
 			edges_q.pop();
+			*/
+			
+			map.image = map.image * params.previous_per/100 + stat;
 			
 			if(target.stop_robot)
 			{

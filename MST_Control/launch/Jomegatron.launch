@@ -4,6 +4,7 @@
     <arg name="usb" default="0" />
     <arg name="display" default="1" />
     <arg name="robot" default="1" />
+    <arg name="edges" default="0" />
     
     <!-- launch potential navigation    -->
     <node pkg="MST_Potential_Navigation" type="Pot_Nav" name="Pot_Nav" >
@@ -44,11 +45,13 @@
     
     	<include file="$(find uvc_camera)/launch/camera_node.launch"  /> 	
 
-    	<node pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=/image_raw"  >
+        
+    	<node if="$(arg edges)" pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=/image_raw"  >
     	    	
     		<rosparam file="$(find MST_Control)/yaml/Edge_Detection.yaml" command="load" />
 
     	</node>
+    	
     	
     	<node pkg="MST_ColorStat" type="ColorStat" name="ColorStat" args= "image:=/image_raw" >
         	
@@ -64,11 +67,13 @@
 
 		<node pkg="image_proc" type="image_proc" name="image_proc" ns="ptgrey"  />  
     
-    	<node pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=ptgrey/image_rect_color" >
+        
+    	<node if="$(arg edges)" pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=ptgrey/image_rect_color" >
     	    	
     		<rosparam file="$(find MST_Control)/yaml/Edge_Detection.yaml" command="load" />
 
     	</node>
+    	
     	
     	<node pkg="MST_ColorStat" type="ColorStat" name="ColorStat" args= "image:=ptgrey/image_rect_color" >
         	
@@ -92,7 +97,7 @@
 		
 		<node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=ptgrey/image_rect_color" unless="$(arg usb)"/>
 	
-		<node pkg="image_view" type="image_view" name="edges_display" args="image:=image_edges" />
+		<node if="$(arg edges)" pkg="image_view" type="image_view" name="edges_display" args="image:=image_edges" />
 		
 		<node pkg="image_view" type="image_view" name="stat_display" args="image:=image_stat" />
 	
