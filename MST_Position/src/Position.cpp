@@ -20,6 +20,7 @@
 #include <mst_midg/IMU.h>
 #include <sensor_msgs/NavSatFix.h>
 #include <MST_Position/Target_Heading.h>
+#include <nav_msgs/Odometry.h>
 
 /***********************************************************
 * Other includes
@@ -41,6 +42,7 @@ ros::Subscriber                 midg_sub;
 ros::Subscriber                 garmin_sub;
 
 ros::Publisher                  target_pub;
+ros::Publisher                  odom_pub;
 
 ros::ServiceServer              gps_to_pose;
 
@@ -49,6 +51,7 @@ bool                            first_callback = 1;
 
 bool                            gps_fix;
 
+ros::Time                       current_time;
 double                          current_lat;
 double                          current_lon;
 double                          current_head;
@@ -127,9 +130,9 @@ void midgCallback(const  mst_midg::IMU::ConstPtr& imu)
 		if(1)
 		{
 		 	gps_fix = true;
+            current_time = ros::Time(imu->gps_time);
 		 	current_lat = imu->latitude / 180 * pi;
 		 	current_lon = imu->longitude / 180 * pi;
-		 	
 		}
 		
 		current_head = imu->heading;
@@ -177,6 +180,7 @@ void setparamsCallback(MST_Position::Position_ParamsConfig &config, uint32_t lev
 	{
 
 	 	gps_fix = true;
+        current_time = ros::Time::now();
 	 	current_lat = config.dummy_latitude / 180 * pi;
 	 	current_lon = config.dummy_longitude / 180 * pi;
 	 	current_head = config.dummy_heading;	
@@ -488,6 +492,27 @@ MST_Position::Target_Heading compute_msg(int target)
 	return heading;
 }
 
+nav_msgs::Odometry odom_msg()
+{
+    nav_msgs::Odometry odom;
+    odom.header.stamp = current_time;
+    odom.header.frame_id = "base_footprint";
+    odom.pose.pose.position.x = current_lat;
+    odom.pose.pose.position.y = current_lon;
+    odom.pose.pose.position.z = 0;
+    odom.pose.pose.orientation.x = 1;
+    odom.pose.pose.orientation.y = 0;
+    odom.pose.pose.orientation.z = 0;
+    odom.pose.pose.orientation.w = 0;
+    /*odom.pose.covariance = {cov_x, 0, 0, 0, 0, 0,
+                            0, cov_y, 0, 0, 0, 0,
+                            0, 0, cov_z, 0, 0, 0,
+                            0, 0, 0, 99999, 0, 0,
+                            0, 0, 0, 0, 99999, 0,
+                            0, 0, 0, 0, 0, 99999};*/
+    return odom;
+}
+
 /***********************************************************
 * @fn main(int argc, char **argv)
 * @brief starts the Pot_Nav node and publishises twist when 
@@ -516,6 +541,8 @@ int main(int argc, char **argv)
 
     //create publishers
     target_pub = n.advertise<MST_Position::Target_Heading>( "target" , 5 );
+    
+    odom_pub = n.advertise<nav_msgs::Odometry>( "vo", 5 );
    
     reset_waypoints();
     
@@ -567,6 +594,8 @@ int main(int argc, char **argv)
 			}
 
 			target_pub.publish(target_heading);
+            
+            odom_pub.publish(odom_msg());
 			
 		}
 		
