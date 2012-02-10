@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+	xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+	xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+	xmlns:xacro="http://ros.org/wiki/xacro" name="JoeMegaTron">
+
+	<property name="pi" value="3.1415"/>
+	<property name="wheel_separation" value="0.21"/>
+	<property name="wheel_radius" value="0.08"/>
+	<property name="wheel_width" value="0.05"/>
+	<property name="wheel_distance_from_front" value="0.103"/>
+	<property name="wheel_distance_below_body" value="0.02"/>
+	<property name="box_width" value="0.28"/>
+	<property name="box_length" value="0.40"/>
+	<property name="box_height" value="0.24"/>
+	<property name="tower_height" value="0.27"/>
+	<property name="tower_width" value="0.02"/>
+	<property name="tower_length" value="0.01"/>
+	<property name="tower_distance_from_back" value="0.17"/>
+	<property name="boom_forward" value="0.08"/>
+	<property name="boom_down" value="0.03"/>
+	<property name="pivot_distance_from_back" value="0.04"/>
+	<property name="pivot_height" value="0.05"/>
+	<property name="pivot_offset" value="0.03"/>
+	<property name="pivot_wheel_radius" value="0.04"/>
+	<property name="pivot_wheel_width" value="0.03"/>
+
+
+    <material name="Green">
+        <color rgba="0.0 0.8 0.0 1.0"/>
+    </material>
+
+    <macro name="turtlebot">
+    <xacro:macro name="default_inertial" params="mass">
+        <inertial>
+            <mass value="${mass}" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                 iyy="1.0" iyz="0.0"
+                 izz="1.0" />
+        </inertial>
+    </xacro:macro>
+
+
+
+	<xacro:macro name="wheel" params="name radius width parent *origin">
+		<link name="${name}">
+			<visual>
+				<geometry>
+					<cylinder radius="${radius}" length="${width}"/>
+				</geometry>
+				<origin xyz="0 0 0" rpy="0 ${PI/2} 0"/>
+			</visual>
+			<inertial>
+				<mass value="3.0"/>
+				<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+			</inertial>
+			<collision>
+				<geometry>
+					<cylinder radius="${radius}" length="${width}"/>
+				</geometry>
+				<origin xyz="0 0 0" rpy="0 ${PI/2} 0"/>
+			</collision>
+		</link>
+
+		<gazebo reference="${name}">
+			<material>Gazebo/Black</material>
+			<mu1 value="100.0"/>
+			<mu2 value="100.0"/>
+			<kp value="1000000.0"/>
+			<kd value="1.0"/>
+		</gazebo>
+
+		<joint name="${name}_axis" type="continuous">
+			<limits effort="1000.0" velocity="50.0"/>
+			<axis xyz="1 0 0"/>
+			<child link="${name}"/>
+			<parent link="${parent}"/>
+			<xacro:insert_block name="origin"/>
+		</joint>
+
+	</xacro:macro>
+
+	<xacro:macro name="BoxBody" params="name width length height *origin">
+
+		<link name="${name}">
+			<inertial>
+				<mass value="1.0"/>
+				<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+				<xacro:insert_block name="origin"/>
+			</inertial>
+			<visual>
+				<geometry>
+					<box size="${width} ${length} ${height}"/>
+				</geometry>
+				<xacro:insert_block name="origin"/>
+			</visual>
+			<collision>
+				<geometry>
+					<box size="${width} ${length} ${height}"/>
+				</geometry>
+				<xacro:insert_block name="origin"/>
+			</collision>
+		</link>
+
+		<gazebo reference="${name}">
+			<material>Gazebo/Green</material>
+		</gazebo>
+
+	</xacro:macro>
+
+        <xacro:macro name="BoxBody2" params="name width length height *origin">
+
+		<link name="${name}">
+			<inertial>
+				<mass value="30.0"/>
+				<inertia ixx="30.0" ixy="0.0" ixz="0.0" iyy="30.0" iyz="0.0" izz="30.0"/>
+				<xacro:insert_block name="origin"/>
+			</inertial>
+			<visual>
+				<geometry>
+					<box size="${width} ${length} ${height}"/>
+				</geometry>
+				<xacro:insert_block name="origin"/>
+			</visual>
+			<collision>
+				<geometry>
+					<box size="${width} ${length} ${height}"/>
+				</geometry>
+				<xacro:insert_block name="origin"/>
+			</collision>
+		</link>
+
+		<gazebo reference="${name}">
+			<material>Gazebo/Green</material>
+		</gazebo>
+
+	</xacro:macro>
+
+	<xacro:BoxBody2 name="Joe_body" width="${box_width}" length="${box_length}" height="${box_height}">
+
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+
+	</xacro:BoxBody2>
+
+	<xacro:wheel name="left_wheel" radius="${wheel_radius}" width="${wheel_width}" parent="Joe_body">
+
+		<origin xyz="${wheel_separation/2} ${box_length/2 - wheel_distance_from_front} ${-wheel_distance_below_body - box_height/2}" rpy="0 0 0"/>
+
+	</xacro:wheel>
+
+	<xacro:wheel name="right_wheel" radius="${wheel_radius}" width="${wheel_width}" parent="Joe_body">
+
+		<origin xyz="${-wheel_separation/2} ${box_length/2 - wheel_distance_from_front} ${-wheel_distance_below_body - box_height/2}" rpy="0 0 0"/>
+
+	</xacro:wheel>
+
+	<xacro:BoxBody name="pivot_box" width="${pivot_wheel_width + 0.02}" length="${pivot_offset}" height="${pivot_height}">
+
+		<origin xyz="0 ${-pivot_offset/2} ${-pivot_height/2}" rpy="0 0 0"/>
+
+	</xacro:BoxBody>
+
+	<joint name="pivot_joint" type="continuous">
+		<axis xyz="0 0 1"/>
+		<limits effort="1000.0" velocity="3.0"/>
+		<parent link="Joe_body"/>
+		<child link="pivot_box"/>
+		<origin xyz="0 ${-box_length/2 + pivot_distance_from_back} ${-box_height/2}" rpy="0 0 0"/>
+	</joint>
+
+	<xacro:wheel name="pivot_wheel" radius="${pivot_wheel_radius}" width="${pivot_wheel_width}" parent="pivot_box">
+
+		<origin xyz="0 ${-pivot_offset} ${-pivot_height}" rpy="0 0 0"/>
+
+	</xacro:wheel>
+
+	<xacro:BoxBody name="tower_base" width="${tower_width}" length="${tower_length}" height="${tower_height}">
+
+		<origin xyz="0 0 ${tower_height/2}" rpy="0 0 0"/>
+
+	</xacro:BoxBody>
+
+	<joint name="tower_base_joint" type="fixed">
+		<parent link="Joe_body"/>
+		<child link="tower_base"/>
+		<origin xyz="0 ${-box_length/2 + tower_distance_from_back} ${box_height/2}" rpy="0 0 0"/>
+	</joint>
+
+	<xacro:BoxBody name="tower_boom_1" width="${tower_width}" length="${boom_forward}" height="${tower_length}">
+
+		<origin xyz="0 ${boom_forward/2} 0" rpy="0 0 0"/>
+
+	</xacro:BoxBody>
+
+	<joint name="tower_boom_joint" type="fixed">
+		<parent link="tower_base"/>
+		<child link="tower_boom_1"/>
+		<origin xyz="0 0 ${tower_height}" rpy="0 0 0"/>
+	</joint>
+
+	<xacro:BoxBody name="tower_boom_2" width="${tower_width}" length="${tower_length}" height="${boom_down}">
+
+		<origin xyz="0 0 ${-boom_down/2}" rpy="0 0 0"/>
+
+	</xacro:BoxBody>
+
+	<joint name="boom_boom_joint" type="fixed">
+		<parent link="tower_boom_1"/>
+		<child link="tower_boom_2"/>
+		<origin xyz="0 ${boom_forward} 0" rpy="0 0 0"/>
+	</joint>
+</robot>
