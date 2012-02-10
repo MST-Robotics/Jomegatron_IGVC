@@ -1,0 +1,14 @@
+<package>
+  <description brief="jomegatron_description">
+
+     jomegatron_description
+
+  </description>
+  <author>lagr</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/jomegatron_description</url>
+
+</package>
+
+
