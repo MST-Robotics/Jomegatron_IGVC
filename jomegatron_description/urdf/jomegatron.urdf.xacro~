@@ -50,7 +50,7 @@
     
     <property name="pt_grey_height" value="2"/>
     <property name="pt_grey_width" value="3"/>
-    <property name="pt_grey_length" value="1.5"/>
+    <property name="pt_grey_length" value="1"/>
 
     
 
