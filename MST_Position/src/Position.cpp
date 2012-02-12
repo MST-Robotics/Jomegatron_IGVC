@@ -520,8 +520,8 @@ nav_msgs::Odometry odom_msg()
     odom.pose.pose.position.y = dist_y;
     odom.pose.pose.position.z = 0;
     odom.pose.pose.orientation = tf::createQuaternionMsgFromYaw(heading);
-    double cov_x, cov_y, cov_z = 0;
-    double cov_qx, cov_qy, cov_qz = 10;
+    double cov_x = 9999999, cov_y = 9999999, cov_z = 9999999;
+    double cov_qx = 10, cov_qy = 10, cov_qz = 10;
     if(gps_fix)
     {
         cov_x = 10;
@@ -536,8 +536,14 @@ nav_msgs::Odometry odom_msg()
                      0, 0, 0, 0, 0, cov_qz};
     for(int i=0; i<36; ++i)
         odom.pose.covariance[i] = temp[i];
+    double temp2[] = {9999999, 0, 0, 0, 0, 0,
+                     0, 9999999, 0, 0, 0, 0,
+                     0, 0, 9999999, 0, 0, 0,
+                     0, 0, 0, 9999999, 0, 0,
+                     0, 0, 0, 0, 9999999, 0,
+                     0, 0, 0, 0, 0, 9999999};
     for(int i=0; i<36; ++i)
-        odom.twist.covariance[i] = 9999999;
+        odom.twist.covariance[i] = temp2[i];
     
     return odom;
 }
