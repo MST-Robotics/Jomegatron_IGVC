@@ -29,12 +29,12 @@
     <property name="castor_radius" value="4"/>
     
     
-    <property name="mast_base_height" value="16"/>
+    <property name="mast_base_height" value="12"/>
     <property name="mast_base_width" value="28"/>
     <property name="mast_base_length" value="1"/>
     <property name="mast_base_setback" value="13"/>
     
-    <property name="mast_vertical_height" value="5"/>
+    <property name="mast_vertical_height" value="14"/>
     <property name="mast_vertical_width" value="1"/>
     <property name="mast_vertical_length" value="1"/>
     
@@ -213,7 +213,7 @@
         </visual>
 
         <collision>
-            <origin xyz="0 0 ${castor_bar_height/2*in_m}" rpy="0 0 0" />
+            <origin xyz="0 0 ${-castor_bar_height/2*in_m}" rpy="0 0 0" />
             <geometry>
                 <box size="${castor_bar_length*in_m} ${castor_bar_width*in_m} ${castor_bar_height*in_m}" />
             </geometry>
@@ -245,7 +245,7 @@
         </visual>
 
         <collision>
-            <origin xyz="0 0 ${castor_bar_height/2*in_m}" rpy="0 0 0" />
+            <origin xyz="0 0 ${-castor_bar_height/2*in_m}" rpy="0 0 0" />
             <geometry>
                 <box size="${castor_bar_length*in_m} ${castor_bar_width*in_m} ${castor_bar_height*in_m}" />
             </geometry>
@@ -341,7 +341,7 @@
         </visual>
 
         <collision>
-            <origin xyz="${(mast_base_height/2)*in_m} 0 0" rpy="0 0 0" />
+            <origin xyz="0 0 ${(mast_base_height/2)*in_m}" rpy="0 0 0" />
             <geometry>
                 <box size="${mast_base_length*in_m} ${mast_base_width*in_m} ${mast_base_height*in_m}" />
             </geometry>
