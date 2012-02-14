@@ -5,6 +5,8 @@
     <arg name="display" default="1" />
     <arg name="robot" default="1" />
     <arg name="edges" default="0" />
+    <arg name="rviz" default="False" />
+	<arg name="joint_gui" default="False" />
     
     <!-- launch potential navigation    -->
     <node pkg="MST_Potential_Navigation" type="Pot_Nav" name="Pot_Nav" >
@@ -35,6 +37,14 @@
     </node>
     
     
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find jomegatron_description)/urdf/jomegatron.urdf.xacro'" />
+    <param name="use_gui" value="$(arg joint_gui)"/>
+    
+    
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find urdf_tutorial)/urdf.vcg" if="$(arg rviz)"/>
+    
     
     <node pkg="wiimote" type="wiimote_node.py" name="wiimote" respawn="true" />
     
@@ -43,8 +53,9 @@
     
     <group if="$(arg usb)">
     
-    	<include file="$(find uvc_camera)/launch/camera_node.launch"  /> 	
-
+    	<include file="$(find uvc_camera)/launch/camera_node.launch"  />
+        
+        <param name="uvc_camera/frame" value="pt_grey_link" />
         
     	<node if="$(arg edges)" pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=/image_raw"  >
     	    	
