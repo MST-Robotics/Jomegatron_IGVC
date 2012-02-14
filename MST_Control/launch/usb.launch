@@ -1,0 +1,5 @@
+<launch>
+	<group>
+		<node pkg="uvc_camera" type="camera_node" name="usb_cam" />
+	</group>
+</launch>

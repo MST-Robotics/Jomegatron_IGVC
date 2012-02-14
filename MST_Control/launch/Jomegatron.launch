@@ -2,11 +2,12 @@
 
     <!-- Define arguments and defaults  -->
     <arg name="usb" default="0" />
-    <arg name="display" default="1" />
+    <arg name="display" default="0" />
     <arg name="robot" default="1" />
     <arg name="edges" default="0" />
-    <arg name="rviz" default="False" />
-	<arg name="joint_gui" default="False" />
+    <arg name="rviz" default="1" />
+	<arg name="joint_gui" default="0" />
+	<arg name="config" default="1" />
     
     <!-- launch potential navigation    -->
     <node pkg="MST_Potential_Navigation" type="Pot_Nav" name="Pot_Nav" >
@@ -43,7 +44,7 @@
     
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find urdf_tutorial)/urdf.vcg" if="$(arg rviz)"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find MST_Control)/vcg/Jomegatron.vcg" if="$(arg rviz)"/>
     
     
     <node pkg="wiimote" type="wiimote_node.py" name="wiimote" respawn="true" />
@@ -53,7 +54,7 @@
     
     <group if="$(arg usb)">
     
-    	<include file="$(find uvc_camera)/launch/camera_node.launch"  />
+    	<include file="$(find MST_Control)/launch/uvc.launch"  />
         
         <param name="uvc_camera/frame" value="pt_grey_link" />
         
@@ -74,24 +75,24 @@
     
     <group unless="$(arg usb)">
     
-    	<include file="$(find MST_Edge_Detection)/launch/ptgrey.launch"  />
+    	<include file="$(find MST_Control)/launch/ptgrey.launch"  />
 
 		<node pkg="image_proc" type="image_proc" name="image_proc" ns="ptgrey"  />  
     
         
     	<node if="$(arg edges)" pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=ptgrey/image_rect_color" >
-    	    	
-    		<rosparam file="$(find MST_Control)/yaml/Edge_Detection.yaml" command="load" />
+            
+            <rosparam file="$(find MST_Control)/yaml/Edge_Detection.yaml" command="load" />
 
-    	</node>
-    	
-    	
-    	<node pkg="MST_ColorStat" type="ColorStat" name="ColorStat" args= "image:=ptgrey/image_rect_color" >
-        	
-    		<rosparam file="$(find MST_Control)/yaml/ColorStat.yaml" command="load"  />
+        </node>
+        
+        
+        <node pkg="MST_ColorStat" type="ColorStat" name="ColorStat" args= "image:=ptgrey/image_rect_color" >
+            
+            <rosparam file="$(find MST_Control)/yaml/ColorStat.yaml" command="load"  />
 
-    	</node>
-    	
+        </node>
+        
     </group>
 
     <group if="$(arg robot)">
@@ -113,9 +114,9 @@
 		<node pkg="image_view" type="image_view" name="stat_display" args="image:=image_stat" />
 	
 		<node pkg="image_view" type="image_view" name="map_display" args="image:=map" />
-	
-		<node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui" />
 		
 	</group>
+	
+	<node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui" if="$(arg config)" />
 
 </launch>
