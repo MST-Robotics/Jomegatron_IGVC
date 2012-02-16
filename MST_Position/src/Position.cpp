@@ -20,7 +20,7 @@
 #include <mst_midg/IMU.h>
 #include <sensor_msgs/NavSatFix.h>
 #include <MST_Position/Target_Heading.h>
-#include <nav_msgs/Odometry.h>
+//#include <nav_msgs/Odometry.h>
 
 /***********************************************************
 * Other includes
@@ -42,7 +42,7 @@ ros::Subscriber                 midg_sub;
 ros::Subscriber                 garmin_sub;
 
 ros::Publisher                  target_pub;
-ros::Publisher                  odom_pub;
+//ros::Publisher                  odom_pub;
 
 ros::ServiceServer              gps_to_pose;
 
@@ -492,11 +492,11 @@ MST_Position::Target_Heading compute_msg(int target)
 	return heading;
 }
 
-nav_msgs::Odometry odom_msg()
+/*nav_msgs::Odometry odom_msg()
 {
     nav_msgs::Odometry odom;
     odom.header.stamp = current_time;
-    odom.header.frame_id = "base_footprint";
+    odom.header.frame_id = "midg_link";
     odom.pose.pose.position.x = current_lat;
     odom.pose.pose.position.y = current_lon;
     odom.pose.pose.position.z = 0;
@@ -504,14 +504,23 @@ nav_msgs::Odometry odom_msg()
     odom.pose.pose.orientation.y = 0;
     odom.pose.pose.orientation.z = 0;
     odom.pose.pose.orientation.w = 0;
-    /*odom.pose.covariance = {cov_x, 0, 0, 0, 0, 0,
+    double cov_x, cov_y, cov_z = 0, 0, 0;
+    if(gps_fix)
+    {
+        cov_x = 5000;
+        cov_y = 5000;
+        cov_z = 5000;
+    }
+    double temp[] = {cov_x, 0, 0, 0, 0, 0,
                             0, cov_y, 0, 0, 0, 0,
                             0, 0, cov_z, 0, 0, 0,
                             0, 0, 0, 99999, 0, 0,
                             0, 0, 0, 0, 99999, 0,
-                            0, 0, 0, 0, 0, 99999};*/
+                            0, 0, 0, 0, 0, 99999};
+    for(int i=0; i<36; ++i)
+        odom.pose.covariance[i] = temp[i];
     return odom;
-}
+}*/
 
 /***********************************************************
 * @fn main(int argc, char **argv)
@@ -542,7 +551,7 @@ int main(int argc, char **argv)
     //create publishers
     target_pub = n.advertise<MST_Position::Target_Heading>( "target" , 5 );
     
-    odom_pub = n.advertise<nav_msgs::Odometry>( "vo", 5 );
+    //odom_pub = n.advertise<nav_msgs::Odometry>( "vo", 5 );
    
     reset_waypoints();
     
@@ -595,7 +604,7 @@ int main(int argc, char **argv)
 
 			target_pub.publish(target_heading);
             
-            odom_pub.publish(odom_msg());
+            //odom_pub.publish(odom_msg());
 			
 		}
 		
