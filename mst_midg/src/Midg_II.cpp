@@ -33,7 +33,8 @@ double heading = 0;
 double reading_count = 0;
 
 // sensor_msgs::NavSatFix
-const bool FIXED_COVARIANCE = false;
+const bool FIX_COVARIANCE = false;
+const double FIXED_COVARIANCE_VALUE = 5000;
 
 /***********************************************************
 * Function prototypes
@@ -126,7 +127,8 @@ void Process_MIDG_Packets( int fd )
             if( !msg_navpv.positionvalid )
             {
                 imu_msg.position_valid = false;
-                navSatFix.position_covariance = {0,0,0,0,0,0,0,0,0};
+                for(int i=0; i<9; ++i)
+                    navSatFix_msg.position_covariance[i] = 0;
             }
             else
             {
@@ -137,7 +139,7 @@ void Process_MIDG_Packets( int fd )
                 }
                 GPSPV_LONG_DATA.push_back( msg_navpv.xPos );
                 imu_msg.longitude = average( GPSPV_LONG_DATA );
-                navSatFix.longitude = imu_msg.longitude;
+                navSatFix_msg.longitude = imu_msg.longitude;
 
                 if( GPSPV_LAT_DATA.size() >= sample_size )
                 {
@@ -151,12 +153,13 @@ void Process_MIDG_Packets( int fd )
                 imu_msg.latitude  = msg_navpv.yPos;
                 imu_msg.altitude  = msg_navpv.zPos;
                 imu_msg.position_valid = true;
-                navSatFix.longitude = msg_navpv.xPos;
+                
+                navSatFix_msg.longitude = msg_navpv.xPos;
                 navSatFix_msg.latitude  = msg_navpv.yPos;
                 navSatFix_msg.altitude  = msg_navpv.zPos;
-                navSatFix_msg.postition_covariance = {5000, 0, 0
-                                                      0, 5000, 0
-                                                      0, 0, 5000};
+                navSatFix_msg.position_covariance[0] = FIXED_COVARIANCE_VALUE;
+                navSatFix_msg.position_covariance[4] = FIXED_COVARIANCE_VALUE;
+                navSatFix_msg.position_covariance[8] = FIXED_COVARIANCE_VALUE;
             }
             break;
 
@@ -167,7 +170,8 @@ void Process_MIDG_Packets( int fd )
             if( !msg_gpspv.gpsfixvalid )
             {
                 imu_msg.position_valid = false;
-                navSatFix_msg.position_covariance = {0,0,0,0,0,0,0,0,0}
+                for(int i=0; i<9; ++i)
+                    navSatFix_msg.position_covariance[i] = 0;
                 imu_msg.heading_valid = false;
                 imu_msg.position_accuracy = msg_gpspv.positionaccuracy;
             }
@@ -199,18 +203,19 @@ void Process_MIDG_Packets( int fd )
                 imu_msg.altitude  = msg_gpspv.GPS_PosZ;
                 imu_msg.position_valid = true;
                 imu_msg.position_accuracy = msg_gpspv.positionaccuracy;
-                navSatFix.longitude = msg_gpspv.xPos;
-                navSatFix_msg.latitude  = msg_gpspv.yPos;
-                navSatFix_msg.altitude  = msg_gpspv.zPos;
-                if(FIXED_COVARIANCE)
-                    navSatFix_msg.postition_covariance = {5000, 0, 0
-                                                          0, 5000, 0
-                                                          0, 0, 5000};
-                else
-                    navSatFix_msg.postition_covariance = {msg_gpspv.positionaccuracy, 0, 0
-                                                          0, msg_gpspv.positionaccuracy, 0
-                                                          0, 0, msg_gpspv.positionaccuracy};
-
+                
+                navSatFix_msg.longitude = msg_gpspv.GPS_PosX;
+                navSatFix_msg.latitude  = msg_gpspv.GPS_PosY;
+                navSatFix_msg.altitude  = msg_gpspv.GPS_PosZ;
+                float temp[] = {msg_gpspv.positionaccuracy, 0, 0,
+                                0, msg_gpspv.positionaccuracy, 0,
+                                0, 0, msg_gpspv.positionaccuracy};
+                if(FIX_COVARIANCE)
+                    temp[0] = FIXED_COVARIANCE_VALUE;
+                    temp[4] = FIXED_COVARIANCE_VALUE;
+                    temp[8] = FIXED_COVARIANCE_VALUE;
+                for(int i=0; i<9; ++i)
+                    navSatFix_msg.position_covariance[i] = temp[i];
             }
             break;
 
@@ -252,7 +257,7 @@ void Process_MIDG_Packets( int fd )
             msg_utctime = msg_temp.handle_msg_UTCTIME();
 
             imu_msg.gps_time = ( msg_utctime.timestamp - 15 );
-            navSatFix_msg.header.time = imu_msg.gps_time;
+            navSatFix_msg.header.stamp = ros::Time( imu_msg.gps_time );
             break;
 
         case MIDG_MESSAGE_NAVHDGDATA:

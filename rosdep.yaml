@@ -10,6 +10,9 @@ uvc_camera:
 camera1394:
   ubuntu: ros-electric-camera-drivers
 
+gps_utm:
+  ubuntu: ros-electric-gps-umd
+
 jaus++:
   ubuntu: |
     #!/bin/bash
