@@ -1,0 +1,31 @@
+<package>
+  <description brief="mst_homography">
+
+     mst_homography
+
+  </description>
+  <author>lagr</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/mst_homography</url>
+
+  <rosdep name=  "opencv2.3"/>
+
+  <!-- depends for using cv_bridge -->
+  <depend package = "sensor_msgs"/>
+  <depend package = "opencv2"/>
+  <depend package = "cv_bridge"/>
+  <depend package = "roscpp"/>
+  <depend package = "std_msgs"/>
+  <depend package = "image_transport"/>
+  
+  <depend package = "image_geometry"/>
+  
+  <!-- depends for using dynamic reconfigur gui -->
+  <depend package="dynamic_reconfigure" />
+  <depend package="driver_base" />
+
+
+</package>
+
+
