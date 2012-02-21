@@ -51,7 +51,14 @@
     <property name="pt_grey_height" value="2"/>
     <property name="pt_grey_width" value="3"/>
     <property name="pt_grey_length" value="1.5"/>
-
+    
+    <property name="midg_height" value="1.5"/>
+    <property name="midg_width" value="3"/>
+    <property name="midg_length" value="4"/>
+    <property name="midg_offset" value="2.5"/>
+    
+    
+    
     
 
 
@@ -353,6 +360,38 @@
         <parent link="base_link"/>
         <child link="mast_base_link"/>
         <axis xyz="0 1 0"/>
+    </joint>
+    
+    <!-- midg -->
+    <link name="midg_link">
+        <inertial>
+            <origin xyz="0 0 0"/>
+            <mass value=".5" />
+            <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+            iyy="0.001" iyz="0.0" izz="0.001" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 ${(midg_height/2)*in_m}" rpy="0 0 0" />
+            <geometry>
+                <box size="${midg_length*in_m} ${midg_width*in_m} ${midg_height*in_m}" />
+            </geometry>
+            <material name="Grey" />
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 ${(midg_height/2)*in_m}" rpy="0 0 0" />
+            <geometry>
+                <box size="${midg_length*in_m} ${midg_width*in_m} ${midg_height*in_m}" />
+            </geometry>
+        </collision>
+    </link>
+    
+    <joint name="midg_joint" type="fixed">
+        <origin xyz="0 ${midg_offset} ${mast_base_height*in_m}" rpy="0 0 ${-pi/2}"/>
+        <parent link="mast_base_link"/>
+        <child link="midg_link"/>
+        <axis xyz="0 0 1"/>
     </joint>
     
     <!-- mast vertical -->
