@@ -3,6 +3,12 @@ Background\ ColorG=0
 Background\ ColorB=0.466667
 Fixed\ Frame=/base_footprint
 Target\ Frame=<Fixed Frame>
+Camera.Enabled=1
+Camera.Image\ Rendering=background & overlay
+Camera.Image\ Topic=/ptgrey/image_color
+Camera.Overlay\ Alpha=0.5
+Camera.Transport\ Hint=raw
+Camera.Zoom\ Factor=1
 Grid.Alpha=0.5
 Grid.Cell\ Size=0.5
 Grid.ColorR=0.898039
@@ -19,14 +25,11 @@ Grid.Plane=0
 Grid.Plane\ Cell\ Count=10
 Grid.Reference\ Frame=<Fixed Frame>
 Image.Enabled=1
-Image.Image\ Topic=/image_raw
+Image.Image\ Topic=/image_stat
 Image.Transport\ Hint=raw
 Image2.Enabled=1
 Image2.Image\ Topic=/map
 Image2.Transport\ Hint=compressed
-Image3.Enabled=1
-Image3.Image\ Topic=/image_stat
-Image3.Transport\ Hint=raw
 Robot\ Model.Alpha=1
 Robot\ Model.Collision\ Enabled=0
 Robot\ Model.Enabled=1
@@ -52,6 +55,8 @@ Robot\:\ Robot\ Model\ Link\ mast_horizontal_linkShow\ Axes=0
 Robot\:\ Robot\ Model\ Link\ mast_horizontal_linkShow\ Trail=0
 Robot\:\ Robot\ Model\ Link\ mast_vertical_linkShow\ Axes=0
 Robot\:\ Robot\ Model\ Link\ mast_vertical_linkShow\ Trail=0
+Robot\:\ Robot\ Model\ Link\ midg_linkShow\ Axes=0
+Robot\:\ Robot\ Model\ Link\ midg_linkShow\ Trail=0
 Robot\:\ Robot\ Model\ Link\ pt_grey_linkShow\ Axes=0
 Robot\:\ Robot\ Model\ Link\ pt_grey_linkShow\ Trail=0
 Robot\:\ Robot\ Model\ Link\ right_castor_bar_linkShow\ Axes=0
@@ -60,8 +65,7 @@ Robot\:\ Robot\ Model\ Link\ right_castor_linkShow\ Axes=0
 Robot\:\ Robot\ Model\ Link\ right_castor_linkShow\ Trail=0
 Robot\:\ Robot\ Model\ Link\ right_wheel_linkShow\ Axes=0
 Robot\:\ Robot\ Model\ Link\ right_wheel_linkShow\ Trail=0
-TF.All\ Enabled=1
-TF.Enabled=1
+TF.Enabled=0
 TF.Frame\ Timeout=15
 TF.Marker\ Scale=1
 TF.Show\ Arrows=1
@@ -71,8 +75,8 @@ TF.Update\ Interval=0.05
 Tool\ 2D\ Nav\ GoalTopic=goal
 Tool\ 2D\ Pose\ EstimateTopic=initialpose
 Camera\ Type=rviz::OrbitViewController
-Camera\ Config=1.01059 4.11763 3.29994 0.0598663 0.660443 0.437569
-Property\ Grid\ State=selection=Image2.Enabled;expanded=.Global Options,Grid.Enabled,Robot Model.Enabled,TF./base_footprint/base_footprint,TF./base_link/base_link,TF./camera_mount_link/camera_mount_link,TF./left_castor_bar_link/left_castor_bar_link,TF./left_castor_link/left_castor_link,TF./left_wheel_link/left_wheel_link,TF./mast_base_link/mast_base_link,TF./mast_horizontal_link/mast_horizontal_link,TF./mast_vertical_link/mast_vertical_link,TF./pt_grey_link/pt_grey_link,TF./right_castor_bar_link/right_castor_bar_link,TF./right_castor_link/right_castor_link,TF./right_wheel_link/right_wheel_link,TF.Enabled.TF.Tree,TF./base_footprintTree/base_footprint,TF./base_linkTree/base_link,TF./left_castor_bar_linkTree/left_castor_bar_link,TF./left_castor_linkTree/left_castor_link,TF./left_wheel_linkTree/left_wheel_link,TF./mast_base_linkTree/mast_base_link,TF./mast_vertical_linkTree/mast_vertical_link,TF./mast_horizontal_linkTree/mast_horizontal_link,TF./camera_mount_linkTree/camera_mount_link,TF./pt_grey_linkTree/pt_grey_link,TF./right_castor_bar_linkTree/right_castor_bar_link,TF./right_castor_linkTree/right_castor_link,TF./right_wheel_linkTree/right_wheel_link,Image.Enabled,Image2.Enabled,Image3.Enabled;scrollpos=0,0;splitterpos=213,427;ispageselected=1
+Camera\ Config=1.11779 6.134 4.15381 0 0 0
+Property\ Grid\ State=selection=Fixed Frame;expanded=.Global Options,Grid.Enabled,Robot Model.Enabled,TF.Enabled.TF.Frames,TF.Enabled.TF.Tree,Camera.Enabled.Camera.StatusTopStatus;scrollpos=0,0;splitterpos=150,301;ispageselected=1
 [Display0]
 Name=Grid
 Package=rviz
@@ -86,28 +90,14 @@ Name=TF
 Package=rviz
 ClassName=rviz::TFDisplay
 [Display3]
+Name=Camera
+Package=rviz
+ClassName=rviz::CameraDisplay
+[Display4]
 Name=Image
 Package=rviz
 ClassName=rviz::ImageDisplay
-[Display4]
+[Display5]
 Name=Image2
 Package=rviz
 ClassName=rviz::ImageDisplay
-[Display5]
-Name=Image3
-Package=rviz
-ClassName=rviz::ImageDisplay
-[TF.]
-base_footprintEnabled=1
-base_linkEnabled=1
-camera_mount_linkEnabled=1
-left_castor_bar_linkEnabled=1
-left_castor_linkEnabled=1
-left_wheel_linkEnabled=1
-mast_base_linkEnabled=1
-mast_horizontal_linkEnabled=1
-mast_vertical_linkEnabled=1
-pt_grey_linkEnabled=1
-right_castor_bar_linkEnabled=1
-right_castor_linkEnabled=1
-right_wheel_linkEnabled=1

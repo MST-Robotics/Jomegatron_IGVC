@@ -29,12 +29,12 @@
     <property name="castor_radius" value="4"/>
     
     
-    <property name="mast_base_height" value="16"/>
+    <property name="mast_base_height" value="12"/>
     <property name="mast_base_width" value="28"/>
     <property name="mast_base_length" value="1"/>
     <property name="mast_base_setback" value="13"/>
     
-    <property name="mast_vertical_height" value="5"/>
+    <property name="mast_vertical_height" value="14"/>
     <property name="mast_vertical_width" value="1"/>
     <property name="mast_vertical_length" value="1"/>
     
@@ -50,8 +50,15 @@
     
     <property name="pt_grey_height" value="2"/>
     <property name="pt_grey_width" value="3"/>
-    <property name="pt_grey_length" value="1"/>
-
+    <property name="pt_grey_length" value="1.5"/>
+    
+    <property name="midg_height" value="1.5"/>
+    <property name="midg_width" value="3"/>
+    <property name="midg_length" value="4"/>
+    <property name="midg_offset" value="2.5"/>
+    
+    
+    
     
 
 
@@ -213,7 +220,7 @@
         </visual>
 
         <collision>
-            <origin xyz="0 0 ${castor_bar_height/2*in_m}" rpy="0 0 0" />
+            <origin xyz="0 0 ${-castor_bar_height/2*in_m}" rpy="0 0 0" />
             <geometry>
                 <box size="${castor_bar_length*in_m} ${castor_bar_width*in_m} ${castor_bar_height*in_m}" />
             </geometry>
@@ -245,7 +252,7 @@
         </visual>
 
         <collision>
-            <origin xyz="0 0 ${castor_bar_height/2*in_m}" rpy="0 0 0" />
+            <origin xyz="0 0 ${-castor_bar_height/2*in_m}" rpy="0 0 0" />
             <geometry>
                 <box size="${castor_bar_length*in_m} ${castor_bar_width*in_m} ${castor_bar_height*in_m}" />
             </geometry>
@@ -341,7 +348,7 @@
         </visual>
 
         <collision>
-            <origin xyz="${(mast_base_height/2)*in_m} 0 0" rpy="0 0 0" />
+            <origin xyz="0 0 ${(mast_base_height/2)*in_m}" rpy="0 0 0" />
             <geometry>
                 <box size="${mast_base_length*in_m} ${mast_base_width*in_m} ${mast_base_height*in_m}" />
             </geometry>
@@ -353,6 +360,38 @@
         <parent link="base_link"/>
         <child link="mast_base_link"/>
         <axis xyz="0 1 0"/>
+    </joint>
+    
+    <!-- midg -->
+    <link name="midg_link">
+        <inertial>
+            <origin xyz="0 0 0"/>
+            <mass value=".5" />
+            <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+            iyy="0.001" iyz="0.0" izz="0.001" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 ${(midg_height/2)*in_m}" rpy="0 0 0" />
+            <geometry>
+                <box size="${midg_length*in_m} ${midg_width*in_m} ${midg_height*in_m}" />
+            </geometry>
+            <material name="Grey" />
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 ${(midg_height/2)*in_m}" rpy="0 0 0" />
+            <geometry>
+                <box size="${midg_length*in_m} ${midg_width*in_m} ${midg_height*in_m}" />
+            </geometry>
+        </collision>
+    </link>
+    
+    <joint name="midg_joint" type="fixed">
+        <origin xyz="0 ${midg_offset} ${mast_base_height*in_m}" rpy="0 0 ${-pi/2}"/>
+        <parent link="mast_base_link"/>
+        <child link="midg_link"/>
+        <axis xyz="0 0 1"/>
     </joint>
     
     <!-- mast vertical -->

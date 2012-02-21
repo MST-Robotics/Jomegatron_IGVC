@@ -388,7 +388,7 @@
     </link>
     
     <joint name="midg_joint" type="fixed">
-        <origin xyz="0 ${midg_offset} ${mast_base_height*in_m}" rpy="0 0 ${-pi/2}"/>
+        <origin xyz="0 ${-midg_offset * in_m} ${mast_base_height*in_m}" rpy="0 0 ${-pi/2}"/>
         <parent link="mast_base_link"/>
         <child link="midg_link"/>
         <axis xyz="0 0 1"/>
