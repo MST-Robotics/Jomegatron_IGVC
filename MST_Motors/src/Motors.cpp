@@ -21,7 +21,8 @@
 ***********************************************************/
 //#include "mst_common/Velocity.h"
 #include <geometry_msgs/Twist.h>
-
+#include <nav_msgs/Odometry.h>
+#include <tf/transform_broadcaster.h>
 
 /***********************************************************
 * Other includes
@@ -38,6 +39,12 @@ bool   g_watchdog_tripped;      // TRUE if message receieved in last N seconds
 bool   g_motors_enabled;        // TRUE if all motors are turned on
 double g_linear_velocity;
 double g_angular_velocity;
+
+nav_msgs::Odometry odom_msg;
+ros::Time g_odom_last_time;
+double g_odom_x;
+double g_odom_y;
+double g_odom_th;
 
 static struct
 {
@@ -62,6 +69,7 @@ static struct
     #define RIGHT_MOTOR_WARP    -1
     #define LEFT_MOTOR_CHANNEL  1
     #define LEFT_MOTOR_WARP     1
+#define ODOM_STATIC_COVARIANCE 100.0
 
 /***********************************************************
 * Function prototypes
@@ -70,6 +78,7 @@ static bool        setVelocity( motorController*, double, double );
 static bool        initMotors( motorController* );
 static bool        killMotors( motorController* );
 static void        softStart( double &, double &);
+static void        updateOdomMsg();
 
 /***********************************************************
 * Message Callbacks
@@ -88,6 +97,8 @@ int main(int argc, char **argv)
 
     ros::Subscriber sub = n.subscribe("/cmd_vel", 1, motionCallback);
     
+    ros::Publisher odom_pub = n.advertise<nav_msgs::Odometry>("/odom", 1000);
+    
     strcpy( params.left_motor_file, (char*) "/dev/motor_l" );
     strcpy( params.right_motor_file,(char*) "/dev/motor_r" );
     params.topspeed = 4.4704;
@@ -100,6 +111,10 @@ int main(int argc, char **argv)
     g_motors_enabled = false;
     g_linear_velocity = 0.0;
     g_angular_velocity = 0.0;
+    
+    g_odom_x = 0.0;
+    g_odom_y = 0.0;
+    g_odom_th = 0.0;
 
     /***********************************************************
     * Motor initialization
@@ -136,6 +151,9 @@ int main(int argc, char **argv)
             softStart( g_linear_velocity, g_angular_velocity );
             setVelocity( m, g_linear_velocity, g_angular_velocity );
         }
+        
+        updateOdomMsg();
+        odom_pub.publish(odom_msg);
     }
 
     return 0;
@@ -315,4 +333,65 @@ void softStart( double & V, double & Omega )
   V = Vcur;
   Omega = -Ocur;
 
+}
+
+// Programmer: Jason Gassel  Date: 2-20-12
+// Descr: updates current position and Odometry message
+void updateOdomMsg()
+{
+    //Time
+    ros::Time current_time = ros::Time::now();
+    double dt = (current_time - g_odom_last_time).toSec();
+    g_odom_last_time = current_time;
+    
+    //Velocity
+    double vx = 0.0;
+    double vy = 0.0;
+    double vth = 0.0;
+    if(g_motors_enabled)
+    {
+        vx = g_linear_velocity * cos(g_odom_th);
+        vy = g_linear_velocity * sin(g_odom_th);
+        vth = g_angular_velocity;
+    }
+    
+    //Theta
+    double delta_th = vth * dt;
+    g_odom_th += delta_th;
+    
+    //X and Y
+    double delta_x = (vx * cos(g_odom_th) - vy * sin(g_odom_th)) * dt;
+    double delta_y = (vx * sin(g_odom_th) + vy * cos(g_odom_th)) * dt;
+    g_odom_x += delta_x;
+    g_odom_y += delta_y;
+    
+    //Quaternion
+    geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(g_odom_th);
+    
+    //Covariance
+    double covariance[36] = {ODOM_STATIC_COVARIANCE, 0, 0, 0, 0, 0,
+                             0, ODOM_STATIC_COVARIANCE, 0, 0, 0, 0,
+                             0, 0, ODOM_STATIC_COVARIANCE, 0, 0, 0,
+                             0, 0, 0, ODOM_STATIC_COVARIANCE, 0, 0,
+                             0, 0, 0, 0, ODOM_STATIC_COVARIANCE, 0,
+                             0, 0, 0, 0, 0, ODOM_STATIC_COVARIANCE};
+    
+    //Update message
+    odom_msg.header.stamp = current_time;
+    odom_msg.header.frame_id = "odom";
+    odom_msg.pose.pose.position.x = g_odom_x;
+    odom_msg.pose.pose.position.y = g_odom_y;
+    odom_msg.pose.pose.position.z = 0.0;
+    odom_msg.pose.pose.orientation = odom_quat;
+    odom_msg.child_frame_id = "base_link";
+    odom_msg.twist.twist.linear.x = vx;
+    odom_msg.twist.twist.linear.y = vy;
+    odom_msg.twist.twist.angular.z = vth;
+    for(int i=0; i<36; ++i)
+    {
+        odom_msg.pose.covariance[i] = covariance[i];
+        odom_msg.twist.covariance[i] = covariance[i];
+    }
+    
+    return;
 }
