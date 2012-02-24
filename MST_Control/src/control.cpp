@@ -195,8 +195,8 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
             //accelerometer handlers a button
             if(state->buttons[MSG_BTN_A])
             {
-                wii_twist.angular.z = (state->linear_acceleration_zeroed.x) / 10  * params.base_rot_speed * turbo_x;
-                wii_twist.linear.x  = -(state->linear_acceleration_zeroed.y) / 10  * params.base_linear_speed * turbo_y;
+                wii_twist.angular.z = -(state->linear_acceleration_zeroed.x) / 10  * params.base_rot_speed * turbo_x;
+                wii_twist.linear.x  = (state->linear_acceleration_zeroed.y) / 10  * params.base_linear_speed * turbo_y;
             }
             //dpad handlers
             else

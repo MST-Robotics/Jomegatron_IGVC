@@ -6,7 +6,7 @@
     <arg name="robot" default="1" />
     <arg name="edges" default="0" />
     <arg name="rviz" default="1" />
-	<arg name="joint_gui" default="1" />
+	<arg name="joint_gui" default="0" />
 	<arg name="config" default="1" />
     
     <!-- launch potential navigation    -->

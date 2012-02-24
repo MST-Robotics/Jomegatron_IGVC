@@ -48,9 +48,9 @@
     <property name="camera_mount_length" value="1"/>
     <property name="camera_mount_setback" value="1"/>
     
-    <property name="pt_grey_height" value="2"/>
-    <property name="pt_grey_width" value="3"/>
-    <property name="pt_grey_length" value="1.5"/>
+    <property name="pt_grey_height" value="1.5"/>
+    <property name="pt_grey_width" value="2"/>
+    <property name="pt_grey_length" value="3"/>
     
     <property name="midg_height" value="1.5"/>
     <property name="midg_width" value="3"/>
@@ -376,7 +376,7 @@
             <geometry>
                 <box size="${midg_length*in_m} ${midg_width*in_m} ${midg_height*in_m}" />
             </geometry>
-            <material name="Grey" />
+            <material name="Black" />
         </visual>
 
         <collision>
@@ -388,7 +388,7 @@
     </link>
     
     <joint name="midg_joint" type="fixed">
-        <origin xyz="0 ${midg_offset} ${mast_base_height*in_m}" rpy="0 0 ${-pi/2}"/>
+        <origin xyz="0 ${-midg_offset * in_m} ${mast_base_height*in_m}" rpy="0 0 ${-pi/2}"/>
         <parent link="mast_base_link"/>
         <child link="midg_link"/>
         <axis xyz="0 0 1"/>
@@ -516,7 +516,7 @@
     </link>
     
     <joint name="pt_grey_joint" type="continuous">
-        <origin xyz="0 0 ${-(camera_mount_height-1)*in_m}" rpy="0 0 0"/>
+        <origin xyz="0 0 ${-(camera_mount_height-1)*in_m}" rpy="${-pi/2} 0 ${-pi/2}"/>
         <parent link="camera_mount_link"/>
         <child link="pt_grey_link"/>
         <axis xyz="0 1 0"/>

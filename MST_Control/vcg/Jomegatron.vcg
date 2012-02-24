@@ -65,6 +65,7 @@ Robot\:\ Robot\ Model\ Link\ right_castor_linkShow\ Axes=0
 Robot\:\ Robot\ Model\ Link\ right_castor_linkShow\ Trail=0
 Robot\:\ Robot\ Model\ Link\ right_wheel_linkShow\ Axes=0
 Robot\:\ Robot\ Model\ Link\ right_wheel_linkShow\ Trail=0
+TF.All\ Enabled=1
 TF.Enabled=0
 TF.Frame\ Timeout=15
 TF.Marker\ Scale=1
@@ -75,8 +76,8 @@ TF.Update\ Interval=0.05
 Tool\ 2D\ Nav\ GoalTopic=goal
 Tool\ 2D\ Pose\ EstimateTopic=initialpose
 Camera\ Type=rviz::OrbitViewController
-Camera\ Config=1.11779 6.134 4.15381 0 0 0
-Property\ Grid\ State=selection=Fixed Frame;expanded=.Global Options,Grid.Enabled,Robot Model.Enabled,TF.Enabled.TF.Frames,TF.Enabled.TF.Tree,Camera.Enabled.Camera.StatusTopStatus;scrollpos=0,0;splitterpos=150,301;ispageselected=1
+Camera\ Config=0.962791 3.81898 4.47873 -0.286354 0.325426 0.235626
+Property\ Grid\ State=selection=Robot Model.Enabled.Robot Model.Visual Enabled;expanded=.Global Options,Grid.Enabled,Robot Model.Enabled,TF.Enabled.TF.StatusTopStatus,TF.Enabled.TF.Tree;scrollpos=0,16;splitterpos=150,300;ispageselected=1
 [Display0]
 Name=Grid
 Package=rviz
