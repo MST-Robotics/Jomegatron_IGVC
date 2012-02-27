@@ -350,9 +350,9 @@ void updateOdomMsg()
     double vth = 0.0;
     if(g_motors_enabled)
     {
-        vx = g_linear_velocity * cos(g_odom_th);
-        vy = g_linear_velocity * sin(g_odom_th);
-        vth = g_angular_velocity;
+        vx = g_linear_velocity;
+        vy = 0;
+        vth = -1 * g_angular_velocity;
     }
     
     //Theta
