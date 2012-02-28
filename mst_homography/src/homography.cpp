@@ -21,14 +21,15 @@
 * @post image added to the map
 * @param takes in a ros message of a raw or cv image 
 ***********************************************************/
-void statCallback( const sensor_msgs::ImageConstPtr& msg)
+void homographyCallback( const sensor_msgs::ImageConstPtr& image_msg,
+                         const sensor_msgs::CameraInfoConstPtr& info_msg)
 {
-	//ROS_INFO("Pot_Nav: Statistics image receieved");
-	
-	cv_bridge::CvImagePtr cv_ptr_src;
-	std::vector<cv::Mat> Chanels;
-	
-	//takes in the image
+    //ROS_INFO("Pot_Nav: Statistics image receieved");
+
+    cv_bridge::CvImagePtr cv_ptr_src;
+    std::vector<cv::Mat> Chanels;
+
+    //takes in the image
     try
     {
       cv_ptr_src = cv_bridge::toCvCopy(msg, "rgb8");
@@ -39,37 +40,26 @@ void statCallback( const sensor_msgs::ImageConstPtr& msg)
       return;
     }
     
-    if(first_callback)
-    {
-		//initalize map
-		map.image = cv::Mat::zeros(cv_ptr_src->image.size(),CV_32FC1);
-		map.encoding = "32FC1";
-		
-		first_callback = 0;
-	}
-
-    cv::split(cv_ptr_src->image , Chanels);
+    //get camera model from message
+    cam_model_.fromCameraInfo(info_msg);
     
-    Chanels[1].convertTo(Chanels[1],CV_32FC1);
+    //crate transform to ground frame
+    tf::StampedTransform transform;
     
-    
-    
-    /*
-	stat_q.push( Chanels[1] * params.stat_per/100) ;
-	stat_time_q.push( cv_ptr_src->header.stamp) ;
-	*/
-	
-	stat = Chanels[1] * params.stat_per/100;
-	
-	map.header = cv_ptr_src->header;
-
-    
-    //adds them together using weghted persentage
+    try {
+    ros::Time acquisition_time = info_msg->header.stamp;
+    ros::Duration timeout(1.0 / 30);
+    tf_listener_.waitForTransform(cam_model_.tfFrame(), params.frame_id,
+                                  acquisition_time, timeout);
+    tf_listener_.lookupTransform(cam_model_.tfFrame(), params.frame_id,
+                                 acquisition_time, transform);
+    }
+    catch (tf::TransformException& ex) {
+        ROS_WARN("[draw_frames] TF exception:\n%s", ex.what());
+        return;
+    }
     
     
-   
-    map_changed = 1;
-
     
     
 
@@ -95,7 +85,7 @@ void targetCallback( const MST_Position::Target_Heading::ConstPtr& msg)
 * @pre has to have the setup for the reconfigure gui
 * @post changes the parameters
 ***********************************************************/
-void setparamsCallback(MST_Potential_Navigation::Pot_Nav_ParamsConfig &config, uint32_t level)
+void setparamsCallback(mst_homography::mst_homography_ParamsConfig &config, uint32_t level)
 {
 
   
@@ -314,21 +304,13 @@ int main(int argc, char **argv)
     ros::NodeHandle n;
     image_transport::ImageTransport it(n);
     
-    target.target_heading = pi/2;
-    target.distance = 0;
-    target.waypoint = 0;
-    target.stop_robot = false;
-    target.done = false;
-
-    
     //setup dynamic reconfigure
-	dynamic_reconfigure::Server<MST_Potential_Navigation::Pot_Nav_ParamsConfig> srv;
-    dynamic_reconfigure::Server<MST_Potential_Navigation::Pot_Nav_ParamsConfig>::CallbackType f;
+	dynamic_reconfigure::Server<mst_homography::mst_homography_ParamsConfig> srv;
+    dynamic_reconfigure::Server<mst_homography::mst_homography_ParamsConfig>::CallbackType f;
     f = boost::bind(&setparamsCallback, _1, _2);
 	srv.setCallback(f);
 
-	//create subsctiptions
-    //image_sub_edges = it.subscribe( n.resolveName("image_edges") , 10, edgesCallback );
+    //create subsctiptions
     
     image_sub_stat = it.subscribe( n.resolveName("image_stat") , 10, statCallback );
     

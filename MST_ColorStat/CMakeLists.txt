@@ -28,6 +28,7 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
+
 rosbuild_add_executable(ColorStat src/ColorStat.cpp src/stat.cpp src/error.cpp)
 
 #dynamic reconfigure stuff
