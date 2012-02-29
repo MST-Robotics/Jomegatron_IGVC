@@ -79,6 +79,13 @@ void homographyCallback( const sensor_msgs::ImageConstPtr& image_msg,
 
 }
 
+//this function finds the perspective transform matrix given the angle between the two frames
+Mat find_perspective(float theta_x, float theta_y, float, theta_z))
+{
+    Mat M = (Mat <float>(3, 3) <<
+    1, 0, 0, 0, cos(theta_x), -sin(theta_x));
+}
+
 /***********************************************************
 * @fn targetCallback( const MST_Position::Target_Heading::ConstPtr& msg)
 * @brief copys taget message to global variable 
