@@ -59,8 +59,24 @@ void homographyCallback( const sensor_msgs::ImageConstPtr& image_msg,
         return;
     }
     
+    //find the roll pitch and yaw
+    float alpha, theta_x, theta_y, theta_z;
+    
+    alpha = 2*acos(transform.getRotation().w());
+    theta_x = acos(transform.getRotation().x()/sin(alph/2))
+    theta_y = acos(transform.getRotation().y()/sin(alph/2))
+    theta_z = acos(transform.getRotation().z()/sin(alph/2))
+    
+    //find the transform matrix
+    Mat T = find_perspective(theta_x, theta_y, theta_z);
+    
+    T
+    
+    /* This is the start of a hacky way where 4 imaginary points on the ground 
+    plain are used to find the transform
     //arrays of perpective points for perspective and raw images
     cv::Point2d32f objPts[4], imgPts[4];
+    
     
     for(int i; i<4, i++)
     {
@@ -76,14 +92,33 @@ void homographyCallback( const sensor_msgs::ImageConstPtr& image_msg,
         cam_model_.project3dToPixel(pt_cv, uv);
     }
     cv::getPerspectiveTransform()
+    */
 
 }
 
 //this function finds the perspective transform matrix given the angle between the two frames
 Mat find_perspective(float theta_x, float theta_y, float, theta_z))
 {
-    Mat M = (Mat <float>(3, 3) <<
-    1, 0, 0, 0, cos(theta_x), -sin(theta_x));
+    //these are the matricies for the transform they could be combined but 
+    //I dont have my calculator or matlab and dont feel linke doing it by hand
+    Mat A = (Mat <float>(3, 3) <<
+     1, 0, 0,
+     0, cos(theta_x), -sin(theta_x),
+     0, sin(theta_x),  cos(theta_x));
+    
+    Mat B = (Mat <float>(3, 3) <<
+     cos(theta_y), 0, sin(theta_y),
+     0, 1, 0, 
+    -sin(theta_y), 0, cos(theta_y));
+    
+    Mat B = (Mat <float>(3, 3) <<
+     cos(theta_z), -sin(theta_z), 0,
+     sin(theta_z),  cos(theta_z), 0, 
+     0, 0, 1);
+     
+     Mat T = A*B*C;
+     
+     return T;
 }
 
 /***********************************************************
