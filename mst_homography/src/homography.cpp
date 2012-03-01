@@ -59,10 +59,31 @@ void homographyCallback( const sensor_msgs::ImageConstPtr& image_msg,
         return;
     }
     
+    //arrays of perpective points for perspective and raw images
+    cv::Point2d32f objPts[4], imgPts[4];
     
-    
-    
+    for(int i; i<4, i++)
+    {
+        //point on the ground plane
+        tf::Point pt();
+        //point transformed to camera frame
+        tf::Point pt_tf = transform();
+        //changed to cv point
+        cv::Point3d pt_cv(pt_tf.x(), pt_tf.y(), pt.z());
+        //2D point
+        cv::Point2d uv;
+        //find the point in the image
+        cam_model_.project3dToPixel(pt_cv, uv);
+    }
+    cv::getPerspectiveTransform()
 
+}
+
+//this function finds the perspective transform matrix given the angle between the two frames
+Mat find_perspective(float theta_x, float theta_y, float, theta_z))
+{
+    Mat M = (Mat <float>(3, 3) <<
+    1, 0, 0, 0, cos(theta_x), -sin(theta_x));
 }
 
 /***********************************************************

@@ -66,6 +66,7 @@ image_transport::Subscriber     image_sub_grass;
 image_transport::Subscriber     image_sub_stat;
 
 
+//new stuff
 image_geometry::PinholeCameraModel cam_model_;
 
 
