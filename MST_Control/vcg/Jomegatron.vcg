@@ -5,7 +5,7 @@ Fixed\ Frame=/base_footprint
 Target\ Frame=<Fixed Frame>
 Camera.Enabled=1
 Camera.Image\ Rendering=background & overlay
-Camera.Image\ Topic=/ptgrey/image_color
+Camera.Image\ Topic=/ptgrey/image_rect_color
 Camera.Overlay\ Alpha=0.5
 Camera.Transport\ Hint=raw
 Camera.Zoom\ Factor=1
@@ -77,7 +77,7 @@ Tool\ 2D\ Nav\ GoalTopic=goal
 Tool\ 2D\ Pose\ EstimateTopic=initialpose
 Camera\ Type=rviz::OrbitViewController
 Camera\ Config=0.962791 3.81898 4.47873 -0.286354 0.325426 0.235626
-Property\ Grid\ State=selection=Robot Model.Enabled.Robot Model.Visual Enabled;expanded=.Global Options,Grid.Enabled,Robot Model.Enabled,TF.Enabled.TF.StatusTopStatus,TF.Enabled.TF.Tree;scrollpos=0,16;splitterpos=150,300;ispageselected=1
+Property\ Grid\ State=selection=Camera.Enabled.Camera.Image Topic;expanded=.Global Options,Grid.Enabled,Robot Model.Enabled,TF.Enabled.TF.StatusTopStatus,TF.Enabled.TF.Tree,Camera.Enabled;scrollpos=0,16;splitterpos=150,300;ispageselected=1
 [Display0]
 Name=Grid
 Package=rviz

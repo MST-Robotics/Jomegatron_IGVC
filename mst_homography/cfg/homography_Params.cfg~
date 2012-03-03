@@ -18,7 +18,7 @@ gen.add("theta_y",        double_t, SensorLevels.RECONFIGURE_STOP,    "camera ro
 gen.add("theta_z",        double_t, SensorLevels.RECONFIGURE_STOP,    "camera rotation aplied to perspective.",          0,       -pi,  pi)
 gen.add("center_x",        double_t, SensorLevels.RECONFIGURE_STOP,    "center rotation is aplied on.",          0,       0,  360)
 gen.add("center_y",        double_t, SensorLevels.RECONFIGURE_STOP,    "center rotation is aplied on.",          0,       0,  480)
-gen.add("scale",        int_t, SensorLevels.RECONFIGURE_STOP,    "center rotation is aplied on.",          0,       0,  10)
+gen.add("scale",        double_t, SensorLevels.RECONFIGURE_STOP,    "center rotation is aplied on.",          0,       0,  10)
 
 
 exit(gen.generate(PACKAGE, "dynamic_reconfigure_node", "homography_Params"))
