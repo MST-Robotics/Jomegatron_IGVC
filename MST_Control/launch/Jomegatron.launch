@@ -62,21 +62,23 @@
     <node pkg="sound_play" type="soundplay_node.py" name="sound_play" />
 
     
-    <!--  launch usb cammera driver and color proc  -->
+    <!--  launch usb camera driver and color proc  -->
     <group if="$(arg usb)">
     
     	<include file="$(find MST_Control)/launch/uvc.launch"  />
         
-        <param name="uvc_camera/frame" value="pt_grey_link" />
         
-    	<node if="$(arg edges)" pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=/image_raw"  >
+        <node pkg="image_proc" type="image_proc" name="image_proc" ns="ptgrey"  />  
+        
+        
+    	<node if="$(arg edges)" pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=ptgrey/image_raw"  >
     	    	
     		<rosparam file="$(find MST_Control)/yaml/Edge_Detection.yaml" command="load" />
 
     	</node>
     	
     	
-    	<node pkg="MST_ColorStat" type="ColorStat" name="ColorStat" args= "image:=/image_raw" >
+    	<node pkg="MST_ColorStat" type="ColorStat" name="ColorStat" args= "image:=ptgrey/image_raw" >
         	
     		<rosparam file="$(find MST_Control)/yaml/ColorStat.yaml" command="load"  />
 
