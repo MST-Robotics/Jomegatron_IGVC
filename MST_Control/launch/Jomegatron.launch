@@ -1,4 +1,11 @@
 <launch>
+<!-- 
+     This is the main launch file for Jomegatron
+     Author: James Anderson
+     Date: 3/3/11
+-->
+
+
 
     <!-- Define arguments and defaults  -->
     <arg name="usb" default="0" />
@@ -18,40 +25,44 @@
     </node>
     
     
-    
+    <!-- lanch controll and load yaml making it requied for the rest of the code  -->
     <node pkg="MST_Control" type="Control" name="Control"  required="true" >
-        	
-    	<rosparam file="$(find MST_Control)/yaml/Control.yaml" command="load" />
-    	
-    	<param name = "minus_sound" value = "$(find MST_Control)/sounds/Ahooga_Car_Horn.wav" />
-    	
-    	<param name = "navigation_waypoints" value = "$(find MST_Control)/yaml/Navigation_Waypoints.yaml" />
-    	
-    	<param name = "autonomous_waypoints" value = "$(find MST_Control)/yaml/Autonomous_Waypoints.yaml" />
+        
+        <rosparam file="$(find MST_Control)/yaml/Control.yaml" command="load" />
+        
+        <param name = "minus_sound" value = "$(find MST_Control)/sounds/Ahooga_Car_Horn.wav" />
+        
+        <param name = "navigation_waypoints" value = "$(find MST_Control)/yaml/Navigation_Waypoints.yaml" />
+        
+        <param name = "autonomous_waypoints" value = "$(find MST_Control)/yaml/Autonomous_Waypoints.yaml" />
 
     </node>
 
+    <!-- launch position and load the yaml file  -->
     <node pkg="MST_Position" type="Position" name="Position" >
-        	
-    	<rosparam file="$(find MST_Control)/yaml/Carrot.yaml" command="load" />
-
+        
+        <rosparam file="$(find MST_Control)/yaml/Carrot.yaml" command="load" />
+        
     </node>
     
-    
+    <!-- creat robot descrition and decide if gui wil launch  -->
     <param name="robot_description" command="$(find xacro)/xacro.py '$(find jomegatron_description)/urdf/jomegatron.urdf.xacro'" />
     <param name="use_gui" value="$(arg joint_gui)"/>
     
     
+    <!-- lauch the joint state publisher and robot state publisher  -->
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find MST_Control)/vcg/Jomegatron.vcg" if="$(arg rviz)"/>
     
-    
+    <!-- launch wiimote node  -->
     <node pkg="wiimote" type="wiimote_node.py" name="wiimote" respawn="true" />
     
+    <!-- launch soud play for speach syth  -->
     <node pkg="sound_play" type="soundplay_node.py" name="sound_play" />
 
     
+    <!--  launch usb cammera driver and color proc  -->
     <group if="$(arg usb)">
     
     	<include file="$(find MST_Control)/launch/uvc.launch"  />
@@ -73,6 +84,7 @@
 
     </group>
     
+    <!-- launch firewire and driver and color proc  -->
     <group unless="$(arg usb)">
     
     	<include file="$(find MST_Control)/launch/ptgrey.launch"  />
@@ -95,9 +107,12 @@
         
     </group>
 
+    <!-- launch the midg motors and estop drivers if on robot  -->
     <group if="$(arg robot)">
-    	
-    	<include file="$(find mst_midg)/launch/midg.launch" />
+
+        <include file="$(find mst_midg)/launch/midg.launch" />
+
+        <!-- launch the ekf to track robot movement  -->
         <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
             <param name="output_frame" value="odom"/>
             <param name="freq" value="30.0"/>
@@ -108,25 +123,29 @@
             <param name="debug" value="false"/>
             <param name="self_diagnose" value="false"/>
         </node>
-		<node pkg="MST_Motors" type="Motors" name="Motors" />
-		<node pkg="MST_Estop" type="Estop" name="Estop" />
-    	
+        
+        <node pkg="MST_Motors" type="Motors" name="Motors" />
+        
+        <node pkg="MST_Estop" type="Estop" name="Estop" />
+
     </group>
     
+    <!-- launch image veiws if display is requested  -->
     <group if="$(arg display)">
-    
-		<node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=/image_raw" if="$(arg usb)"/>
-		
-		<node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=ptgrey/image_rect_color" unless="$(arg usb)"/>
-	
-		<node if="$(arg edges)" pkg="image_view" type="image_view" name="edges_display" args="image:=image_edges" />
-		
-		<node pkg="image_view" type="image_view" name="stat_display" args="image:=image_stat" />
-	
-		<node pkg="image_view" type="image_view" name="map_display" args="image:=map" />
-		
-	</group>
-	
-	<node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui" if="$(arg config)" />
+
+        <node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=/image_raw" if="$(arg usb)"/>
+
+        <node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=ptgrey/image_rect_color" unless="$(arg usb)"/>
+
+        <node if="$(arg edges)" pkg="image_view" type="image_view" name="edges_display" args="image:=image_edges" />
+
+        <node pkg="image_view" type="image_view" name="stat_display" args="image:=image_stat" />
+
+        <node pkg="image_view" type="image_view" name="map_display" args="image:=map" />
+
+    </group>
+
+    <!-- launch the dynamic reconfigure gui  -->
+    <node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui" if="$(arg config)" />
 
 </launch>
