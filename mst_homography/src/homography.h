@@ -30,10 +30,11 @@
 #include <image_transport/image_transport.h>
 #include <cv.h>
 #include <highgui.h>
-#include <dynamic_reconfigure/server.h>
-#include <mst_homography/mst_homography_ParamsConfig.h>
 #include <tf/transform_listener.h>
 #include <image_geometry/pinhole_camera_model.h>
+#include <sensor_msgs/LaserScan.h>
+#include <dynamic_reconfigure/server.h>
+#include <mst_homography/homography_ParamsConfig.h>
 
 /***********************************************************
 * Namespace Changes
@@ -62,13 +63,13 @@ tf::TransformListener tf_listener_;
 
 
 
-mst_homography::mst_homography_ParamsConfig params;
+mst_homography::homography_ParamsConfig params;
 
 /***********************************************************
 * Function prototypes
 ***********************************************************/
 
-Mat find_perspective(float theta_x, float theta_y, float, theta_z));
+cv::Mat find_perspective(float theta_x, float theta_y, float theta_z);
 
 
 /***********************************************************

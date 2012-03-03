@@ -20,6 +20,8 @@
   <depend package = "image_transport"/>
 
   <depend package = "image_geometry"/>
+  <depend package = "tf"/>
+  <depend package = "sensor_msgs"/>
   
   <!-- depends for using dynamic reconfigur gui -->
   <depend package="dynamic_reconfigure" />

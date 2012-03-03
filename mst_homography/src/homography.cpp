@@ -5,7 +5,7 @@
 * @brief findes the forward and angular velocity to move the robot at 
 * given a fuzzy model
 ******************************************************************************/
-
+#include "homography.h"
 
 
 
@@ -33,7 +33,7 @@ void homographyCallback( const sensor_msgs::ImageConstPtr& image_sub_msg,
     //crete pointer to source image
     try
     {
-      cv_ptr_src = cv_bridge::toCvCopy(msg, "rgb8");
+      cv_ptr_src = cv_bridge::toCvCopy(image_sub_msg, "rgb8");
     }
     catch (cv_bridge::Exception& e)
     {
@@ -65,12 +65,12 @@ void homographyCallback( const sensor_msgs::ImageConstPtr& image_sub_msg,
     float alpha, theta_x, theta_y, theta_z;
     
     alpha = 2*acos(transform.getRotation().w());
-    theta_x = acos(transform.getRotation().x()/sin(alph/2));
-    theta_y = acos(transform.getRotation().y()/sin(alph/2));
-    theta_z = acos(transform.getRotation().z()/sin(alph/2));
+    theta_x = acos(transform.getRotation().x()/sin(alpha/2));
+    theta_y = acos(transform.getRotation().y()/sin(alpha/2));
+    theta_z = acos(transform.getRotation().z()/sin(alpha/2));
     
     //find the transform matrix
-    cv::Mat T = find_perspective(theta_x, theta_y, theta_z);
+    T = find_perspective(theta_x, theta_y, theta_z);
     
     //setup dst
     dst.encoding = "rgb8";
@@ -115,26 +115,26 @@ void homographyCallback( const sensor_msgs::ImageConstPtr& image_sub_msg,
 }
 
 //this function finds the perspective transform matrix given the angle between the two frames
-Mat find_perspective(float theta_x, float theta_y, float, theta_z))
+cv::Mat find_perspective(float theta_x, float theta_y, float theta_z)
 {
     //these are the matricies for the transform they could be combined but 
     //I dont have my calculator or matlab and dont feel linke doing it by hand
-    Mat A = (Mat <float>(3, 3) <<
+     cv::Mat A = (cv::Mat_<float>(3, 3) <<
      1, 0, 0,
      0, cos(theta_x), -sin(theta_x),
      0, sin(theta_x),  cos(theta_x));
     
-    Mat B = (Mat <float>(3, 3) <<
+     cv::Mat B = (cv::Mat_<float>(3, 3) <<
      cos(theta_y), 0, sin(theta_y),
      0, 1, 0, 
     -sin(theta_y), 0, cos(theta_y));
     
-    Mat B = (Mat <float>(3, 3) <<
+     cv::Mat C = (cv::Mat_<float>(3, 3) <<
      cos(theta_z), -sin(theta_z), 0,
      sin(theta_z),  cos(theta_z), 0, 
      0, 0, 1);
      
-     Mat T = A*B*C;
+     cv::Mat T = A*B*C;
      
      return T;
 }
@@ -147,7 +147,7 @@ Mat find_perspective(float theta_x, float theta_y, float, theta_z))
 * @pre has to have the setup for the reconfigure gui
 * @post changes the parameters
 ***********************************************************/
-void setparamsCallback(mst_homography::mst_homography_ParamsConfig &config, uint32_t level)
+void setparamsCallback(mst_homography::homography_ParamsConfig &config, uint32_t level)
 {
 
   
@@ -174,13 +174,13 @@ int main(int argc, char **argv)
     image_transport::ImageTransport it(n);
     
     //setup dynamic reconfigure
-    dynamic_reconfigure::Server<mst_homography::mst_homography_ParamsConfig> srv;
-    dynamic_reconfigure::Server<mst_homography::mst_homography_ParamsConfig>::CallbackType f;
+    dynamic_reconfigure::Server<mst_homography::homography_ParamsConfig> srv;
+    dynamic_reconfigure::Server<mst_homography::homography_ParamsConfig>::CallbackType f;
     f = boost::bind(&setparamsCallback, _1, _2);
     srv.setCallback(f);
     
     
-    std::string topic = n.resolveName("image_rect")
+    std::string topic = n.resolveName("image_rect");
     
     //check to see if user has defined an image to subscribe to 
     if (topic == "/image_rect") 
@@ -191,7 +191,7 @@ int main(int argc, char **argv)
     
 
     //create subsctiptions
-    image_sub_cam = it.subscribeCamera( n.resolveName("image_rect"), 1, homographyCallback , this);
+    image_sub_cam = it.subscribeCamera( n.resolveName("image_rect"), 1, homographyCallback);
     
 
     //create publishers

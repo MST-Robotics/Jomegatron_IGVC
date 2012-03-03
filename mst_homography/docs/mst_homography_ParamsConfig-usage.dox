@@ -1,0 +1,7 @@
+\subsubsection usage Usage
+\verbatim
+<node name="dynamic_reconfigure_node" pkg="mst_homography" type="dynamic_reconfigure_node">
+  <param name="frame_id" type="str" value="/base_footprint" />
+</node>
+\endverbatim
+
