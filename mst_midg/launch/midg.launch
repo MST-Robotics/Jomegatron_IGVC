@@ -2,7 +2,7 @@
     <node pkg="mst_midg" type="Midg" name="Midg" />
     <node name="gps_conv" pkg="gps_common" type="utm_odometry_node">
         <remap from="odom" to="vo"/>
-        <remap from="fix" to="/gps/fix" />
+        <remap from="fix" to="/fix" />
         <param name="rot_covariance" value="99999" />
         <param name="frame_id" value="midg_link" />
     </node>
