@@ -8,7 +8,7 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/Midg</url>
-  <rosdep name="gps_utm" />
+  <!--<rosdep name="gps_utm" />-->
   <depend package="roscpp"/>
   <depend package="sensor_msgs" />
 

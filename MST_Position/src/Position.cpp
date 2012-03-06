@@ -20,7 +20,7 @@
 #include <mst_midg/IMU.h>
 #include <sensor_msgs/NavSatFix.h>
 #include <MST_Position/Target_Heading.h>
-//#include <nav_msgs/Odometry.h>
+#include <nav_msgs/Odometry.h>
 
 /***********************************************************
 * Other includes
@@ -42,7 +42,7 @@ ros::Subscriber                 midg_sub;
 ros::Subscriber                 garmin_sub;
 
 ros::Publisher                  target_pub;
-//ros::Publisher                  odom_pub;
+ros::Publisher                  odom_pub;
 
 ros::ServiceServer              gps_to_pose;
 
@@ -58,6 +58,7 @@ double                          current_head;
 
 double                          inital_lat;
 double                          inital_lon;
+double                          inital_head;
 
 double                          way_lat[10];
 double                          way_lon[10];
@@ -92,6 +93,8 @@ double find_dist(double, double , double ,double );
 double find_heading(double, double , double ,double );
 int find_target();
 MST_Position::Target_Heading compute_msg(int);
+nav_msgs::Odometry odom_msg();
+void odom_set_origin();
 
 
 /***********************************************************
@@ -127,15 +130,20 @@ void midgCallback(const  mst_midg::IMU::ConstPtr& imu)
 	if(!params.use_gpsd && !params.use_dummy)
 	{
 
-		if(1)
+		if(imu->position_valid)
 		{
 		 	gps_fix = true;
             current_time = ros::Time(imu->gps_time);
 		 	current_lat = imu->latitude / 180 * pi;
 		 	current_lon = imu->longitude / 180 * pi;
 		}
+        else
+        {
+            gps_fix =false;
+        }
 		
-		current_head = imu->heading;
+        if(imu->heading)
+            current_head = imu->heading;
 		
 	}
 	
@@ -492,19 +500,28 @@ MST_Position::Target_Heading compute_msg(int target)
 	return heading;
 }
 
-/*nav_msgs::Odometry odom_msg()
+// Programmer: Jason Gassel  Date: 3-5-12
+// Descr: Generates Odometry message
+nav_msgs::Odometry odom_msg()
 {
     nav_msgs::Odometry odom;
     odom.header.stamp = current_time;
     odom.header.frame_id = "midg_link";
-    odom.pose.pose.position.x = current_lat;
-    odom.pose.pose.position.y = current_lon;
+    
+    //Calculate local coord from lat/lon
+    double dist = find_dist(inital_lat, inital_lon, current_lat, current_lon);
+    double theta = find_heading(inital_lat, inital_lon, current_lat, current_lon);
+    double dist_x = cos(theta) * dist;
+    double dist_y = sin(theta) * dist;
+    double heading = current_head - inital_head;
+    
+    //Fill in odom message
+    odom.pose.pose.position.x = dist_x;
+    odom.pose.pose.position.y = dist_y;
     odom.pose.pose.position.z = 0;
-    odom.pose.pose.orientation.x = 1;
-    odom.pose.pose.orientation.y = 0;
-    odom.pose.pose.orientation.z = 0;
-    odom.pose.pose.orientation.w = 0;
-    double cov_x, cov_y, cov_z = 0, 0, 0;
+    odom.pose.pose.orientation = tf::createQuaternionMsgFromYaw(heading);
+    double cov_x, cov_y, cov_z = 0;
+    double cov_qx, cov_qy, cov_qz = 5000;
     if(gps_fix)
     {
         cov_x = 5000;
@@ -512,15 +529,25 @@ MST_Position::Target_Heading compute_msg(int target)
         cov_z = 5000;
     }
     double temp[] = {cov_x, 0, 0, 0, 0, 0,
-                            0, cov_y, 0, 0, 0, 0,
-                            0, 0, cov_z, 0, 0, 0,
-                            0, 0, 0, 99999, 0, 0,
-                            0, 0, 0, 0, 99999, 0,
-                            0, 0, 0, 0, 0, 99999};
+                     0, cov_y, 0, 0, 0, 0,
+                     0, 0, cov_z, 0, 0, 0,
+                     0, 0, 0, cov_qx, 0, 0,
+                     0, 0, 0, 0, cov_qy, 0,
+                     0, 0, 0, 0, 0, cov_qz};
     for(int i=0; i<36; ++i)
         odom.pose.covariance[i] = temp[i];
+    
     return odom;
-}*/
+}
+
+void odom_set_origin()
+{
+    inital_lat = current_lat;
+    inital_lon = current_lon;
+    inital_head = current_head;
+    
+    return;
+}
 
 /***********************************************************
 * @fn main(int argc, char **argv)
@@ -550,8 +577,8 @@ int main(int argc, char **argv)
 
     //create publishers
     target_pub = n.advertise<MST_Position::Target_Heading>( "target" , 5 );
-    
-    //odom_pub = n.advertise<nav_msgs::Odometry>( "vo", 5 );
+        
+    odom_pub = n.advertise<nav_msgs::Odometry>( "vo", 5 );
    
     reset_waypoints();
     
@@ -570,6 +597,7 @@ int main(int argc, char **argv)
 			if (inital_gps)
 			{
 				target_waypoint = find_target();
+                odom_set_origin();
 				inital_gps = false;
 			}
 						
@@ -604,7 +632,7 @@ int main(int argc, char **argv)
 
 			target_pub.publish(target_heading);
             
-            //odom_pub.publish(odom_msg());
+            odom_pub.publish(odom_msg());
 			
 		}
 		
