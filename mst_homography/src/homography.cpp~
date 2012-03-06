@@ -21,8 +21,7 @@
 * @post image added to the map
 * @param takes in a ros message of a raw or cv image 
 ***********************************************************/
-void homographyCallback( const sensor_msgs::ImageConstPtr& image_sub_msg,
-                         const sensor_msgs::CameraInfoConstPtr& info_msg)
+void homographyCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
 {
     //ROS_INFO("Pot_Nav: Statistics image receieved");
 
@@ -47,6 +46,7 @@ void homographyCallback( const sensor_msgs::ImageConstPtr& image_sub_msg,
       return;
     }
     
+    /*
     if(params.use_trans)
     {
         //get camera model from message
@@ -81,12 +81,12 @@ void homographyCallback( const sensor_msgs::ImageConstPtr& image_sub_msg,
         T = find_perspective(theta_x, theta_y, theta_z, 
                              params.center_x, params.center_y);
     }
-    else
-    {
-        //find the transform matrix
-        T = find_perspective(params.theta_x, params.theta_y, params.theta_z, 
-                             params.center_x, params.center_y);
-    }
+    */
+
+    //find the transform matrix
+    T = find_perspective(params.theta_x, params.theta_y, params.theta_z, 
+                         params.center_x, params.center_y);
+    
     
     //setup dst
     dst.encoding = "rgb8";
@@ -158,15 +158,15 @@ cv::Mat find_perspective(float theta_x, float theta_y, float theta_z,float cente
      0, 1, -center_y, 
      0, 0, 1);
      
-     cv::Mat T = D*A*B*C;
+     cv::Mat T = A*B*C*D;
      
      //shift back by sclaed ammounts
      cv::Mat E = (cv::Mat_<float>(3, 3) <<
-     1, 0, center_x * T.row(0).col(0),
-     0, 1, center_y * T.row(1).col(1), 
+     (T.at<float>(2,2) / T.at<float>(0,0) )* 4, 0, center_x  ,
+     0, (T.at<float>(2,2) / T.at<float>(1,1) )* 4, center_y  , 
      0, 0, 1);
      
-     T *= E;
+     T = E*T;
      
      
      
@@ -225,7 +225,7 @@ int main(int argc, char **argv)
     
 
     //create subsctiptions
-    image_sub_cam = it.subscribeCamera( n.resolveName("image_rect"), 1, homographyCallback);
+    image_sub_cam = it.subscribe( n.resolveName("image_rect"), 1, homographyCallback);
     
 
     //create publishers

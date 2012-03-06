@@ -49,7 +49,7 @@ namespace enc = sensor_msgs::image_encodings;
 
 
 //Subscriptions
-image_transport::CameraSubscriber     image_sub_cam;
+image_transport::Subscriber     image_sub_cam;
 
 //Publications
 image_transport::Publisher      image_pub_homography;
