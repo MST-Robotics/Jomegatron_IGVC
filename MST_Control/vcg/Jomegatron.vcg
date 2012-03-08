@@ -1,8 +1,8 @@
 Background\ ColorR=0.0941176
 Background\ ColorG=0
 Background\ ColorB=0.466667
-Fixed\ Frame=/base_footprint
-Target\ Frame=<Fixed Frame>
+Fixed\ Frame=/odom_combined
+Target\ Frame=/base_footprint
 Camera.Enabled=1
 Camera.Image\ Rendering=background & overlay
 Camera.Image\ Topic=/ptgrey/image_rect_color
@@ -30,6 +30,9 @@ Image.Transport\ Hint=raw
 Image2.Enabled=1
 Image2.Image\ Topic=/map
 Image2.Transport\ Hint=compressed
+Image3.Enabled=1
+Image3.Image\ Topic=/homography_image
+Image3.Transport\ Hint=raw
 Robot\ Model.Alpha=1
 Robot\ Model.Collision\ Enabled=0
 Robot\ Model.Enabled=1
@@ -76,8 +79,8 @@ TF.Update\ Interval=0.05
 Tool\ 2D\ Nav\ GoalTopic=goal
 Tool\ 2D\ Pose\ EstimateTopic=initialpose
 Camera\ Type=rviz::OrbitViewController
-Camera\ Config=0.962791 3.81898 4.47873 -0.286354 0.325426 0.235626
-Property\ Grid\ State=selection=Camera.Enabled.Camera.Image Topic;expanded=.Global Options,Grid.Enabled,Robot Model.Enabled,TF.Enabled.TF.StatusTopStatus,TF.Enabled.TF.Tree,Camera.Enabled;scrollpos=0,16;splitterpos=150,300;ispageselected=1
+Camera\ Config=1.05779 4.35398 13.304 -0.286354 0.325426 0.235626
+Property\ Grid\ State=selection=Target Frame;expanded=.Global Options,Grid.Enabled,Robot Model.Enabled,TF.Enabled.TF.StatusTopStatus,TF.Enabled.TF.Tree,Camera.Enabled,Image3.Enabled;scrollpos=0,0;splitterpos=133,266;ispageselected=1
 [Display0]
 Name=Grid
 Package=rviz
@@ -100,5 +103,9 @@ Package=rviz
 ClassName=rviz::ImageDisplay
 [Display5]
 Name=Image2
+Package=rviz
+ClassName=rviz::ImageDisplay
+[Display6]
+Name=Image3
 Package=rviz
 ClassName=rviz::ImageDisplay
