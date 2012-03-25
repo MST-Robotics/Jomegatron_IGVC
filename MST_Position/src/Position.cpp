@@ -43,6 +43,7 @@ ros::Subscriber                 garmin_sub;
 
 ros::Publisher                  target_pub;
 ros::Publisher                  odom_pub;
+ros::Publisher                  goal_pub;
 
 ros::ServiceServer              gps_to_pose;
 
@@ -557,6 +558,21 @@ void odom_set_origin()
     return;
 }
 
+geometry_msgs::PoseStamped relative_waypoint(int target)
+{
+    geometry_msgs::PoseStamped waypoint;
+    waypoint.header.stamp = current_time;
+    waypoint.header.frame_id = "goal";
+    
+    double dist = find_dist(current_lat, current_lon, way_lat[target], way_lon[target]);
+    double theta = find_heading(current_lat, current_lon, way_lat[target], way_lon[target]);
+    waypoint.pose.position.x = cos(theta) * dist;
+    waypoint.pose.position.y = sin(theta) * dist;
+    waypoint.pose.position.z = 0;
+    
+    return waypoint;
+}
+
 /***********************************************************
 * @fn main(int argc, char **argv)
 * @brief starts the Pot_Nav node and publishises twist when 
@@ -587,6 +603,8 @@ int main(int argc, char **argv)
     target_pub = n.advertise<MST_Position::Target_Heading>( "target" , 5 );
         
     odom_pub = n.advertise<nav_msgs::Odometry>( "vo", 5 );
+    
+    goal_pub = n.advertise<geometry_msgs::PoseStamped>( "move_base_simple/goal", 5 );
    
     reset_waypoints();
     
@@ -641,6 +659,8 @@ int main(int argc, char **argv)
 			target_pub.publish(target_heading);
             
             odom_pub.publish(odom_msg());
+            
+            goal_pub.publish(relative_waypoint(target_waypoint));
 			
 		}
 		
