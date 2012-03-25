@@ -1,0 +1,48 @@
+<launch>
+    <!-- 
+     This is the desktop visuliser launch file for Jomegatron
+     Author: James Anderson
+     Date: 4/23/12
+    -->
+    
+    
+    <!-- Define arguments and defaults  -->
+    <arg name="robot_addr" default="localhost" />
+    <arg name="rviz" default="1" />
+    <arg name="wiimote" default="0" />
+    <arg name="sound" default="1" />
+    <arg name="config" default="1" />
+    <arg name="display" default="0" />
+    
+    <!-- conect to the specified master  -->
+    <env name="ROS_MASTER_URI" value="http://$(arg robot_addr):11311" />
+    
+    <!-- launch rviz if requested -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find MST_Control)/vcg/Jomegatron.vcg" if="$(arg rviz)"/>
+    
+    <!-- launch wiimote node if requested -->
+    <node pkg="wiimote" type="wiimote_node.py" name="wiimote_desktop" respawn="true" if="$(arg wiimote)"/>
+    
+    <!-- launch soud play for speach syth  -->
+    <node pkg="sound_play" type="soundplay_node.py" name="sound_play" if="$(arg sound)"/>
+    
+    <!-- launch the dynamic reconfigure gui  -->
+    <node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui" if="$(arg config)" />
+    
+    <!-- launch image veiws if display is requested  -->
+    <group if="$(arg display)">
+
+        <node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=/image_raw" if="$(arg usb)"/>
+
+        <node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=ptgrey/image_rect_color" unless="$(arg usb)"/>
+
+        <node if="$(arg edges)" pkg="image_view" type="image_view" name="edges_display" args="image:=image_edges" />
+
+        <node pkg="image_view" type="image_view" name="stat_display" args="image:=image_stat" />
+
+        <node pkg="image_view" type="image_view" name="map_display" args="image:=map" />
+
+    </group>
+    
+</launch>
+
