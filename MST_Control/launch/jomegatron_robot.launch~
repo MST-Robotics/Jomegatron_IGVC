@@ -14,6 +14,7 @@
     <arg name="usb" default="0" />
     <arg name="robot" default="1" />
     <arg name="edges" default="0" />
+    <arg name="color" default="0" />
     <arg name="joint_gui" default="1" />
 
     
@@ -27,10 +28,10 @@
     <node pkg="sound_play" type="soundplay_node.py" name="sound_play_robot" if="$(arg sound)"/>
     
     <!-- launch the dynamic reconfigure gui  -->
-    <node pkg="dynamic_reconfigure_" type="reconfigure_gui" name="reconfigure_gui_robot" if="$(arg config)" />
+    <node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui_robot" if="$(arg config)" />
     
     
-    <!-- creat robot descrition and decide if gui will launch  -->
+    <!-- creat robot description and decide if gui will launch  -->
     <param name="robot_description" command="$(find xacro)/xacro.py '$(find jomegatron_description)/urdf/jomegatron.urdf.xacro'" />
     <param name="use_gui" value="$(arg joint_gui)"/>
     
@@ -93,6 +94,9 @@
     		<rosparam file="$(find MST_Control)/yaml/ColorStat.yaml" command="load"  />
 
     	</node>
+        
+        
+        <node pkg="mst_color" type="color" name="color" args= "image:=ptgrey/image_raw" if="$(arg color)"/>
 
     </group>
     
@@ -116,6 +120,8 @@
             <rosparam file="$(find MST_Control)/yaml/ColorStat.yaml" command="load"  />
 
         </node>
+        
+        <node pkg="mst_color" type="color" name="color" args= "image:=ptgrey/image_rect_color" if="$(arg color)"/>
         
     </group>
 

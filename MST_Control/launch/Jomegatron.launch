@@ -16,6 +16,7 @@
     <arg name="robot" default="1" />
     <arg name="edges" default="0" />
     <arg name="joint_gui" default="1" />
+    <arg name="color" default="0" />
 
     
     <include file="$(find MST_Control)/launch/jomegatron_robot.launch">
@@ -27,6 +28,7 @@
         <arg name="robot" value="$(arg robot)" />
         <arg name="edges" value="$(arg edges)" />
         <arg name="joint_gui" value="$(arg joint_gui)" />
+        <arg name="color" value="$(arg color)" />
     </include>
     
 
