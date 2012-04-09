@@ -1,0 +1,449 @@
+/*******************************************************************************
+ * @file Edge_Detection.cpp
+ * @author James Anderson <jra798>
+ * @date 4/7/12
+ * @version 1.0
+ * @brief gradiant based edge detection
+ ******************************************************************************/
+#include    "color.h"
+
+
+
+/***********************************************************
+* Message Callbacks
+***********************************************************/
+/***********************************************************
+* @fn depthCallback(const sensor_msgs::ImageConstPtr& msg)
+* @brief preforms x and y sobel on images
+* @pre takes in a ros message of a raw or cv image
+* @post publishes a CV_32FC1 image using cv_bridge
+* @param takes in a ros message of a raw or cv image 
+***********************************************************/
+void imageCallback(const sensor_msgs::ImageConstPtr& msg)
+{
+
+    cv_bridge::CvImagePtr cv_ptr_src;
+
+    //takes in the image
+    try
+    {
+      cv_ptr_src = cv_bridge::toCvCopy(msg, "rgb8");
+    }
+    catch (cv_bridge::Exception& e)
+    {
+      ROS_ERROR("cv_bridge exception: %s", e.what());
+      return;
+    }
+    
+    
+    //create internal images
+    cv::Mat sobel_x(cv_ptr_src->image.size(), CV_32FC3);
+    cv::Mat sobel_y(cv_ptr_src->image.size(), CV_32FC3);
+    cv::Mat dbg(cv_ptr_src->image.size(), CV_8UC3);
+    cv_bridge::CvImage dbg_msg;
+    
+    
+    //set debug to zero
+    dbg = cv::Mat::zeros(cv_ptr_src->image.size(), CV_8UC3);
+    
+    //preforms x and y sobels
+    cv::Sobel(cv_ptr_src->image, sobel_x, cv_ptr_src->image.depth(), params.sobel_order, 0, params.sobel_size, params.sobel_scaler);
+    cv::Sobel(cv_ptr_src->image, sobel_y, cv_ptr_src->image.depth(), 0, params.sobel_order, params.sobel_size, params.sobel_scaler);
+    
+    //create pixel pointer data
+    //TODO could be created globaly?
+    pixel pixels[cv_ptr_src->image.cols][cv_ptr_src->image.rows];
+    for(int y = 0; y < cv_ptr_src->image.rows; y++)
+    {
+        for(int x = 0; x < cv_ptr_src->image.cols; x++)
+        {
+            
+            pixels[x][y].x = x;
+            pixels[x][y].y = y;
+        }
+    }
+    
+    //run lengh vectors
+    std::vector<run_length> x_run_lengths;
+    std::vector<run_length> y_run_lengths;
+    
+    //find xrun lengths
+    for (int y = 0; y < sobel_x.rows; y++)
+    {
+        run_length current;
+        current.start = &pixels[0][y];
+        current.members.push_back(&pixels[0][y]);
+        
+        current.avg.y = y;
+        current.avg.x = 0;
+        //calculate sums 
+        for (int c = 0; c < sobel_x.depth(); c++)
+        {
+            //start average 
+            current.avg.chanel[c] = cv_ptr_src->image.at<int>(0,y,c);
+        }
+        
+        
+        //initalize slope_var and pre_val
+        int pre_val[sobel_x.depth()];
+        double slope_var = 0;
+        for (int c = 0; c < sobel_x.depth(); c++)
+        {
+            pre_val[c] = sobel_x.at<int>(0,y,c);
+        }
+        
+        
+        //move along cols
+        for(int x = 1; x < sobel_x.cols; x++)
+        {
+            for (int c = 0; c < sobel_x.depth(); c++)
+            {
+                //calculate variance accoss image
+                slope_var += abs(sobel_x.at<int>(x,y,c) - pre_val[c]);
+            }
+            
+            //check to see if we need a new run
+            if(slope_var > params.slope_var_thresh)
+            {
+                //set end as previous pixel
+                current.end = &pixels[x-1][y];
+                
+                current.linked = false;
+                
+                /*do this after linking
+                //calculate average
+                for (int c = 0; c < sobel_x.depth)
+                {
+                    //divide sum by nuber of pixels 
+                    current.avg.chanel[c] /= current.members.size;
+                }
+                */
+                
+                
+                //push back run_lengh
+                x_run_lengths.push_back(current);
+                
+                //link members to run_lengh
+                for (unsigned int i = 0; i < x_run_lengths.back().members.size() ; i++ )
+                {
+                    x_run_lengths.back().members.at(i)->x_parent = &x_run_lengths.back();
+                } 
+                
+                //start new run
+                current.start = &pixels[x][y];
+                current.members.push_back(&pixels[x][y]);
+                
+                current.avg.y = y;
+                current.avg.x = x;
+                //calculate sums 
+                for (int c = 0; c < sobel_x.depth(); c++)
+                {
+                    //start average 
+                    current.avg.chanel[c] = cv_ptr_src->image.at<int>(x,y,c);
+                }
+                
+                
+                //initalize slope_var and pre_val
+                slope_var = 0;
+                for (int c = 0; c < sobel_x.depth(); c++)
+                {
+                    pre_val[c] = sobel_x.at<int>(0,y,c);
+                }
+                
+            }
+            else
+            {
+                //pixel is part of current run
+                
+                //add pixel as a member
+                current.members.push_back(&pixels[x][y]);
+                
+                //calculate sums 
+                for (int c = 0; c < sobel_x.depth(); c++)
+                {
+                    //add average 
+                    current.avg.chanel[c] += cv_ptr_src->image.at<int>(x,y,c);
+                }
+                current.avg.x += x;
+            }
+        }
+    
+    }
+    
+    
+    //find yrun lengths
+    for (int x = 0; x < sobel_y.rows; x++)
+    {
+        run_length current;
+        current.start = &pixels[x][0];
+        current.members.push_back(&pixels[x][0]);
+        
+        current.avg.x = x;
+        current.avg.y = 0;
+        //calculate sums 
+        for (int c = 0; c < sobel_y.depth(); c++)
+        {
+            //start average 
+            current.avg.chanel[c] = cv_ptr_src->image.at<int>(x,0,c);
+        }
+        
+        
+        //initalize slope_var and pre_val
+        int pre_val[sobel_y.depth()];
+        double slope_var = 0;
+        for (int c = 0; c < sobel_y.depth(); c++)
+        {
+            pre_val[c] = sobel_y.at<int>(x,0,c);
+        }
+        
+        
+        //move along cols
+        for(int y = 1; y < sobel_y.cols; y++)
+        {
+            for (int c = 0; c < sobel_y.depth(); c++)
+            {
+                //calculate variance accoss image
+                slope_var += abs(sobel_y.at<int>(x,y,c) - pre_val[c]);
+            }
+            
+            //check to see if we need a new run
+            if(slope_var > params.slope_var_thresh)
+            {
+                //set end as previous pixel
+                current.end = &pixels[x][y-1];
+                
+                current.linked = false;
+                
+                /* do this after linking
+                //calculate average
+                for (int c = 0; c < sobel_y.depth)
+                {
+                    //divide sum by nuber of pixels 
+                    current.avg.chanel[c] /= current.members.size;
+                }
+                */
+                
+                //push back run_lengh
+                y_run_lengths.push_back(current);
+                
+                //link members to run_lengh
+                for (unsigned int i = 0; i < y_run_lengths.back().members.size() ; i++ )
+                {
+                    y_run_lengths.back().members.at(i)->y_parent = &y_run_lengths.back();
+                }
+                
+                //start new run
+                current.start = &pixels[x][y];
+                current.members.push_back(&pixels[x][y]);
+                
+                current.avg.y = y;
+                current.avg.x = x;
+                //calculate sums 
+                for (int c = 0; c < sobel_y.depth(); c++)
+                {
+                    //start average 
+                    current.avg.chanel[c] = cv_ptr_src->image.at<int>(x,y,c);
+                }
+                
+                
+                //initalize slope_var and pre_val
+                slope_var = 0;
+                for (int c = 0; c < sobel_y.depth(); c++)
+                {
+                    pre_val[c] = sobel_y.at<int>(0,y,c);
+                }
+                
+            }
+            else
+            {
+                //pixel is part of current run
+                
+                //add pixel as a member
+                current.members.push_back( &pixels[x][y] );
+                
+                //calculate sums 
+                for(int c = 0; c < sobel_y.depth(); c++)
+                {
+                    //add average 
+                    current.avg.chanel[c] += cv_ptr_src->image.at<int>(x,y,c);
+                }
+                current.avg.y += y;
+            }
+        }
+    
+    }
+    
+    
+    //call recursive function to link the runs
+    std::vector<segment> segments;
+    
+    //for all unlinked runs create segments
+    for(unsigned int i = 0; i < x_run_lengths.size(); i++)
+    {
+        if(!x_run_lengths.at(i).linked)
+        {
+            //intialize segment
+            segment seg;
+            seg.avg.x=0;
+            seg.avg.y=0;
+            for (int c = 0; c < 4; c++)
+            {
+                seg.avg.chanel[c] = 0;
+            }
+            
+            pixel  *point = pixels[0];
+            
+            link_runs(&x_run_lengths, &y_run_lengths, cv_ptr_src->image.cols, cv_ptr_src->image.rows , point, &seg, &x_run_lengths.at(i));
+            
+            
+            for (int c = 0; c < 4; c++)
+            {
+                //divide sum by nuber of pixels 
+                seg.avg.chanel[c] /= seg.members.size();
+            }
+            seg.avg.x /= seg.members.size();
+            seg.avg.y /= seg.members.size();
+            
+            segments.push_back(seg);
+        }
+    }
+    
+    
+    //paint debug image with average values
+    for( unsigned int s=0; s < segments.size(); s++)
+    {
+        for(unsigned int p=0; p < segments.at(s).members.size(); p++)
+        {
+            for(int c=0; c < 3; c++)
+            {
+                dbg.at<int>(segments.at(s).members.at(p)->x,segments.at(s).members.at(p)->x,c) = segments.at(s).avg.chanel[c];
+            }
+        }
+    }
+    
+    
+    //setup and publish message for debug image
+    dbg_msg.header = cv_ptr_src->header;
+    dbg_msg.encoding = "CV_8UC3";
+    dbg_msg.image = dbg ;
+    
+    //publish debug
+    dbg_pub.publish(dbg_msg.toImageMsg());
+    
+
+    
+}
+
+void link_runs(std::vector<run_length>* x_run_lengths, std::vector<run_length>* y_run_lengths, int a, int b, pixel* pixels, segment* seg, run_length *first_run)
+{
+    //mark as being handelded
+    first_run->linked = true;
+    
+    //add members 
+    for(unsigned int i=0; i < first_run->members.size(); i++)
+    {
+        seg->members.push_back(first_run->members.at(i));
+        seg->avg.x += first_run->members.at(i)->x ;
+        seg->avg.y += first_run->members.at(i)->y;
+    }
+    //add averages
+    for (int c = 0; c < 4; c++)
+    {
+        //divide sum by nuber of pixels 
+        seg->avg.chanel[c] += first_run->avg.chanel[c];
+    }
+    
+    
+    //move through horizontal unlinked runs
+    for(unsigned int x = 0; x < first_run->members.size(); x++)
+    {
+        //get the linked vertical run
+        run_length *vert_run;
+        vert_run = pixels[(x + ((int)first_run->avg.y * a))].y_parent;
+        
+        //see if we have already handelded this run
+        if(!vert_run->linked)
+        {
+            //mark as being handelded
+            vert_run->linked = true;
+            
+            //move through unlinked vertical runs
+            for(unsigned int y = 0; y < vert_run->members.size(); y++)
+            {
+                //if the run is not linked link it
+                if(!pixels[x + (y * a)].x_parent->linked)
+                {
+                    //Recursion!!
+                    link_runs(x_run_lengths, y_run_lengths, a, b, pixels, seg, first_run);
+                }
+            }
+        }
+    }
+}
+
+
+
+/***********************************************************
+* Parameter Callbacks
+***********************************************************/
+/***********************************************************
+* @fn setparamsCallback(const sensor_msgs::ImageConstPtr& msg)
+* @brief callback for the reconfigure gui
+* @pre has to have the setup for the reconfigure gui
+* @post changes the parameters
+***********************************************************/
+void setparamsCallback(mst_color::color_paramsConfig &config, uint32_t level)
+{
+    
+    // set params
+    params = config;
+}
+
+
+/***********************************************************
+* Main
+***********************************************************/
+/***********************************************************
+* @fn main(int argc, char **argv)
+* @brief starts the pre processing node
+***********************************************************/
+int main(int argc, char **argv)
+{
+    //setup topic names
+    std::string image_topic;
+    
+    //setup node and image transport
+    ros::init(argc, argv, "color");
+    ros::NodeHandle node;
+    image_transport::ImageTransport it(node);
+    
+    //setup dynamic reconfigure gui
+    dynamic_reconfigure::Server<mst_color::color_paramsConfig> srv;
+    dynamic_reconfigure::Server<mst_color::color_paramsConfig>::CallbackType f;
+    f = boost::bind(&setparamsCallback, _1, _2);
+    srv.setCallback(f);
+    
+    
+    //get depth topic name
+    image_topic = node.resolveName("image");
+
+    //check to see if user has defined an image to subscribe to 
+    if (image_topic == "/image") 
+    {
+        ROS_WARN("color: image has not been remapped! Typical command-line usage:\n"
+                 "\t$ ./color image:=<image topic> [transport]");
+    }
+    
+    
+    //create image subscriptions
+    image_sub = it.subscribe( image_topic , 1, imageCallback  );
+
+    //create image publishers
+    dbg_pub = it.advertise( "color/dbg" , 5 );
+
+    //start node
+    ros::spin();
+    
+    return 0;
+}
+

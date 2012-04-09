@@ -1,0 +1,27 @@
+<package>
+  <description brief="mst_color">
+
+     mst_color
+
+  </description>
+  <author>James Anderson</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/MST_Color</url>
+
+  <!-- depends for using cv_bridge -->  
+  <depend package = "sensor_msgs"/>
+  <depend package = "cv_bridge"/>
+  <rosdep name="opencv2.3"/>
+  <depend package = "roscpp"/>
+  <depend package = "std_msgs"/>
+  <depend package = "image_transport"/>
+
+  <!-- depends for using dynamic reconfigur gui -->
+  <depend package="dynamic_reconfigure" />
+  <depend package="driver_base" />
+
+
+</package>
+
+

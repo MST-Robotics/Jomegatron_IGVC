@@ -1,0 +1,10 @@
+\subsubsection usage Usage
+\verbatim
+<node name="dynamic_reconfigure_node" pkg="mst_color" type="dynamic_reconfigure_node">
+  <param name="sobel_size" type="int" value="3" />
+  <param name="sobel_order" type="int" value="1" />
+  <param name="sobel_scaler" type="double" value="1.0" />
+  <param name="slope_var_thresh" type="double" value="1.0" />
+</node>
+\endverbatim
+
