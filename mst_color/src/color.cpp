@@ -1,5 +1,5 @@
 /*******************************************************************************
- * @file Edge_Detection.cpp
+ * @file color.cpp
  * @author James Anderson <jra798>
  * @date 4/7/12
  * @version 1.0
@@ -13,8 +13,8 @@
 * Message Callbacks
 ***********************************************************/
 /***********************************************************
-* @fn depthCallback(const sensor_msgs::ImageConstPtr& msg)
-* @brief preforms x and y sobel on images
+* @fn imageCallback(const sensor_msgs::ImageConstPtr& msg)
+* @brief segments image
 * @pre takes in a ros message of a raw or cv image
 * @post publishes a CV_32FC1 image using cv_bridge
 * @param takes in a ros message of a raw or cv image 
