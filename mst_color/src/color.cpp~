@@ -1,5 +1,5 @@
 /*******************************************************************************
- * @file Edge_Detection.cpp
+ * @file color.cpp
  * @author James Anderson <jra798>
  * @date 4/7/12
  * @version 1.0
@@ -13,8 +13,8 @@
 * Message Callbacks
 ***********************************************************/
 /***********************************************************
-* @fn depthCallback(const sensor_msgs::ImageConstPtr& msg)
-* @brief preforms x and y sobel on images
+* @fn imageCallback(const sensor_msgs::ImageConstPtr& msg)
+* @brief segments image
 * @pre takes in a ros message of a raw or cv image
 * @post publishes a CV_32FC1 image using cv_bridge
 * @param takes in a ros message of a raw or cv image 
@@ -359,7 +359,7 @@ void link_runs(std::vector<run_length>* x_run_lengths, std::vector<run_length>* 
     {
         //get the linked vertical run
         run_length *vert_run;
-        vert_run = pixels[(x + ((int)first_run->avg.y * a))].y_parent;
+        vert_run = pixels[(x + (static_cast<int>(first_run->avg.y) * a))].y_parent;
         
         //see if we have already handelded this run
         if(!vert_run->linked)

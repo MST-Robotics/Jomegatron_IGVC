@@ -324,7 +324,7 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
     
     //setup and publish message for debug image
     dbg_msg.header = cv_ptr_src->header;
-    dbg_msg.encoding = "CV_8UC3";
+    dbg_msg.encoding = "rgb8";
     dbg_msg.image = dbg ;
     
     //publish debug
