@@ -1,0 +1,147 @@
+<launch>
+
+    <!-- 
+         This is the robot software launch file for Jomegatron
+         Author: James Anderson
+         Date: 4/23/12
+    -->
+
+    <!-- Define arguments and defaults  -->
+    <arg name="rviz" default="1" />
+    <arg name="wiimote" default="1" />
+    <arg name="sound" default="1" />
+    <arg name="config" default="1" />
+    <arg name="usb" default="0" />
+    <arg name="robot" default="1" />
+    <arg name="edges" default="0" />
+    <arg name="joint_gui" default="1" />
+
+    
+    <!-- launch rviz if requested -->
+    <node name="rviz_robot" pkg="rviz" type="rviz" args="-d $(find MST_Control)/vcg/Jomegatron.vcg" if="$(arg rviz)"/>
+    
+    <!-- launch wiimote node if requesed -->
+    <node pkg="wiimote" type="wiimote_node.py" name="wiimote_robot" respawn="true" if="$(arg wiimote)"/>
+    
+    <!-- launch soud play for speach syth if requested -->
+    <node pkg="sound_play" type="soundplay_node.py" name="sound_play_robot" if="$(arg sound)"/>
+    
+    <!-- launch the dynamic reconfigure gui  -->
+    <node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui_robot" if="$(arg config)" />
+    
+    
+    <!-- creat robot descrition and decide if gui will launch  -->
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find jomegatron_description)/urdf/jomegatron.urdf.xacro'" />
+    <param name="use_gui" value="$(arg joint_gui)"/>
+    
+    
+    <!-- lauch the joint state publisher and robot state publisher  -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+    
+    
+    <!-- launch control and load yaml making it requied for the rest of the code  -->
+    <node pkg="MST_Control" type="Control" name="Control"  required="true" >
+        
+        <rosparam file="$(find MST_Control)/yaml/Control.yaml" command="load" />
+        
+        <param name = "minus_sound" value = "$(find MST_Control)/sounds/Ahooga_Car_Horn.wav" />
+        
+        <param name = "navigation_waypoints" value = "$(find MST_Control)/yaml/Navigation_Waypoints.yaml" />
+        
+        <param name = "autonomous_waypoints" value = "$(find MST_Control)/yaml/Autonomous_Waypoints.yaml" />
+
+    </node>
+    
+    
+    
+    <!-- launch potential navigation    -->
+    <node pkg="MST_Potential_Navigation" type="Pot_Nav" name="Pot_Nav" >
+    
+        <!-- load parameters into parameter server  -->
+        <rosparam file="$(find MST_Control)/yaml/Pot_Nav.yaml" command="load" />
+
+    </node>
+    
+
+    <!-- launch position and load the yaml file  -->
+    <node pkg="MST_Position" type="Position" name="Position" >
+        
+        <rosparam file="$(find MST_Control)/yaml/Carrot.yaml" command="load" />
+        
+    </node>
+    
+
+    <!--  launch usb camera driver and color proc  -->
+    <group if="$(arg usb)">
+    
+    	<include file="$(find MST_Control)/launch/uvc.launch"  />
+        
+        
+        <node pkg="image_proc" type="image_proc" name="image_proc" ns="ptgrey"  />  
+        
+        
+    	<node if="$(arg edges)" pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=ptgrey/image_raw"  >
+    	    	
+    		<rosparam file="$(find MST_Control)/yaml/Edge_Detection.yaml" command="load" />
+
+    	</node>
+    	
+    	
+    	<node pkg="MST_ColorStat" type="ColorStat" name="ColorStat" args= "image:=ptgrey/image_raw" >
+        	
+    		<rosparam file="$(find MST_Control)/yaml/ColorStat.yaml" command="load"  />
+
+    	</node>
+
+    </group>
+    
+    <!-- launch firewire and driver and color proc  -->
+    <group unless="$(arg usb)">
+    
+    	<include file="$(find MST_Control)/launch/ptgrey.launch"  />
+
+		<node pkg="image_proc" type="image_proc" name="image_proc" ns="ptgrey"  />  
+    
+        
+    	<node if="$(arg edges)" pkg="MST_Edge_Detection" type="Edge_Detection" name="Edge_Detection" args= "image:=ptgrey/image_rect_color" >
+            
+            <rosparam file="$(find MST_Control)/yaml/Edge_Detection.yaml" command="load" />
+
+        </node>
+        
+        
+        <node pkg="MST_ColorStat" type="ColorStat" name="ColorStat" args= "image:=ptgrey/image_rect_color" >
+            
+            <rosparam file="$(find MST_Control)/yaml/ColorStat.yaml" command="load"  />
+
+        </node>
+        
+    </group>
+
+    <!-- launch the midg motors and estop drivers if on robot  -->
+    <group if="$(arg robot)">
+
+        <include file="$(find mst_midg)/launch/midg.launch" />
+
+        <!-- launch the ekf to track robot movement  -->
+        <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
+            <param name="output_frame" value="odom_combined"/>
+            <param name="freq" value="30.0"/>
+            <param name="sensor_timeout" value="1.0"/>
+            <param name="odom_used" value="true"/>
+            <param name="imu_used" value="false"/>
+            <param name="vo_used" value="true"/>
+            <param name="debug" value="false"/>
+            <param name="self_diagnose" value="false"/>
+        </node>
+        
+        <node pkg="MST_Motors" type="Motors" name="Motors" />
+        
+        <node pkg="MST_Estop" type="Estop" name="Estop" />
+
+    </group>
+    
+
+
+</launch>
