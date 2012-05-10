@@ -13,7 +13,7 @@ class error
 {
   public:
   image* in;
-  stat* stats;
+  Stat* stats;
   image out;
   image out2;
   

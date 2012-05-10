@@ -355,6 +355,28 @@ void navigation_callback(const geometry_msgs::Twist twist)
     }
 }
 
+//TODO doc
+void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
+{
+    if(msg->request_control)
+    {
+        mode_ = jaus;
+    }
+    
+    if(mode_ == jaus)
+    {
+        if(msg->request_resume)
+            jaus_mode = jaus_resume;
+        else if(msg->request_standby)
+            jaus_mode = jaus_standby;
+        else if(msg->request_shutdown)
+        {
+            jaus_mode = jaus_shutdown;
+            mode_ = standby; //BAD, just handing control to w/e fro now
+        }
+    }
+}
+
 /***********************************************************
 * @fn navigation_callback(const geometry_msgs::Twist::ConstPtr& twist)
 * @brief decides on forwarding navigation comands to the motors
@@ -413,7 +435,7 @@ int main(int argc, char **argv)
     std::string nav;
 
     
-    bool stoped = true;
+    bool stopped = true;
     wiimote_init = true; 
     robot_init = true;  
     wii_dis = true;
@@ -454,6 +476,8 @@ int main(int argc, char **argv)
     pos_sub = n.subscribe( "/target" ,100, pos_callback);
 
     wiimote_state_sub = n.subscribe("wiimote/state" ,100,wiimote_callback);
+    
+    jaus_sub = n.subscribe("/jaus_out" ,100, jaus_callback);
 
     estop_sub = n.subscribe("/EStop" ,100 , estop_callback);
     
@@ -493,21 +517,25 @@ int main(int argc, char **argv)
         }
         if(mode_==standby)
         {
-            if(!stoped)
+            if(!stopped)
             {
                 stop_robot();
-                stoped = true;
+                stopped = true;
             }
         }
         else if(mode_ == wiimote_mode)
         {
             motor_pub.publish(wii_twist);
-            stoped = false;
+            stopped = false;
         }
         else if(mode_ == autonomous)
         {
             motor_pub.publish(nav_twist);
-            stoped = false;
+            stopped = false;
+        }
+        else if(mode_ == jaus)
+        {
+            stopped = false;
         }
         
         
@@ -627,7 +655,7 @@ void change_mode(Mode new_mode)
     
     if (mode_ == jaus)
     {
-        ROS_INFO("Control: Wiimote Mode");
+        ROS_INFO("Control: JAUS Mode");
         
         say("Joe-Mega-Tron under jaus control");
      

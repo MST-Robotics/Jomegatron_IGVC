@@ -11,11 +11,11 @@
 
 #define SIZE 48
 
-class stat
+class Stat
 {
   friend class error;
   public:
-  stat();
+  Stat();
   
   void update();
   

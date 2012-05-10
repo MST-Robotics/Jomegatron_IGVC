@@ -10,7 +10,6 @@
   <url>http://ros.org/wiki/MST_JAUS</url>
   <rosdep name = "jaus++" />
   <depend package="roscpp" />
-  <depend package="MST_Control" />
 
 </package>
 
