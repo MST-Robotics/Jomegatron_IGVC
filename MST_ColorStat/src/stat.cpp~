@@ -131,7 +131,7 @@ void Stat::saveFilter(const char *filename)
     ROS_ERROR("Failed to open file for save.");
     return;
   }
-  write(fd,this,sizeof(Stat));
+  write(fd,this,sizeof(stat));
   close(fd);
   return;
 }
@@ -144,7 +144,7 @@ void Stat::loadFilter(const char *filename)
     ROS_ERROR("Failed to open file for load.");
     return;
   }
-  read(fd,this,sizeof(Stat));
+  read(fd,this,sizeof(stat));
   close(fd);
   in = inTemp;
   return;

@@ -162,13 +162,6 @@ void setparamsCallback(MST_ColorStat::ColorStat_ParamsConfig &config, uint32_t l
     config.load = false;
   }
   
-  config.xMin = stat1.xMin;
-  config.yMin = stat1.yMin;
-  config.xMax = stat1.xMax;
-  config.yMax = stat1.yMax;
-  //config.reset = stat1.reset;
-  config.enabled = stat1.enabled;
-  
   // set params
   params = config;
   
