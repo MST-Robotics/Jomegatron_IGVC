@@ -209,10 +209,11 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
 
         float theta = (PI/2 - (params.laser_angle/2)) + (i * (params.laser_angle/params.laser_res));
         cv::Point2f search_edge;
-        double max_range;
+        
         
         //clear range
         ranges[i] = 0;
+        float win_avg = 0;
         
         //compute the edge point
         search_edge.x = (robot_center.x + ((cos(theta) * params.laser_range_max)));
@@ -220,39 +221,37 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
         
         cv::LineIterator ray(dst.image, robot_center, search_edge , 8);
         
-        for(int pos=0; pos < ray.count; pos++ , ++ray)
-        {
+        cv::LineIterator window(dst.image, robot_center, search_edge , 8);
         
+        //move window window size ahead
+        for(int win=0; win < params.window_size; win++ , ++window)
+        {   
+            
+            win_avg += dst.image.at<int>( window.pos().y , window.pos().x , 2);
+            
+        }
+        //undo first operation
+        win_avg -= dst.image.at<int>( window.pos().y , window.pos().x , 1);
+        win_avg += dst.image.at<int>( ray.pos().y , ray.pos().x , 1);
+        
+        for(int pos=0; pos < ray.count; pos++ , ++ray, ++window)
+        {
+            
+            win_avg += dst.image.at<int>( window.pos().y , window.pos().x , 1);
+            win_avg -= dst.image.at<int>( ray.pos().y , ray.pos().x , 1);
+            
             //outside of box
             if(ray.pos().x > robot_center.x + params.robot_x || 
                ray.pos().x < robot_center.x - params.robot_x ||
                ray.pos().y < robot_center.y - params.robot_y )
             {
-                float win_avg = 0;
                 
-                //take window average
-                //this is a slow way to do this but easy to read
-                for(int win=0; win < params.window_size; win++)
-                {   
-                    
-                    win_avg += Chanels[1].at<float>( ray.pos().y , ray.pos().x );
-                    
-                    //increment ray
-                    ray;
-                }
-                for(int dec=0; dec < params.window_size; dec++)
-                {
-                    //decrement ray
-                    ray--;
-                }
-                
-                win_avg /= params.window_size;
-                
+
                 //see if its an obsticale
-                if (win_avg >= params.laser_threshold)
+                if ((win_avg/params.window_size) >= params.laser_threshold)
                 {
                     //mark the obsticle
-                    dst.image.at<float>( ray.pos().y , ray.pos().x) = cv::Scalar(200,0,0);
+                    dst.image.at<int>( ray.pos().y , ray.pos().x , 0) = 200;
                     
                     //give the distance in meters
                     ranges[i] = (ray.pos().x/cos(theta) / params.pixels_per_meter);
@@ -263,19 +262,22 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
                 else
                 {
                     //display the ray
-                    dst.image.at<float>( ray.pos().y , ray.pos().x = cv::Scalar(0,0,200);
+                    dst.image.at<int>( ray.pos().y , ray.pos().x ,2)= 200;
                 }
             }
+            
         }
     }
     
-    laser_scan.ranges = ranges;
-    
+    for(int i = 0; i <= params.laser_res; i++)
+    {
+        laser_scan.ranges[i] = ranges[i];
+    }
     //publish the laser scan
     laser_pub.publish(laser_scan);
     
     //draw the search radius
-    cv::circle(dst.image, robot_center, params.search_radius, cv::Scalar(0,0,255));
+    cv::circle(dst.image, robot_center, (params.laser_range_max * params.pixels_per_meter), cv::Scalar(0,0,255));
     
     //draw a box in place of the robot
     box_1.x = robot_center.x - params.robot_x;
@@ -383,7 +385,7 @@ int main(int argc, char **argv)
                 "\t$ ./Edge_Detection image_masked:=<image topic> [transport]");
     }
     
-    std::string topic = n.resolveName("image_masked");
+    topic = n.resolveName("image_masked");
     
     //check to see if user has defined an image to subscribe to 
     if (topic == "/image_masked") 
