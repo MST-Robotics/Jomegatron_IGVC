@@ -49,14 +49,17 @@ namespace enc = sensor_msgs::image_encodings;
 
 
 //Subscriptions
-image_transport::Subscriber     image_sub_cam;
+image_transport::Subscriber     image_sub_color;
+image_transport::Subscriber     image_sub_masked;
 
 //Publications
-image_transport::Publisher      image_pub_homography;
+image_transport::Publisher      image_pub_color;
+image_transport::Publisher      image_pub_masked;
 
 ros::Publisher                  laser_pub;
 
-
+//transformation matrix
+cv::Mat                         _transform; 
 
 
 mst_homography::homography_ParamsConfig params;
@@ -72,4 +75,4 @@ cv::Mat find_perspective(float theta_x, float theta_y, float theta_z, float cent
 * Defines
 ***********************************************************/
 
-#define pi 3.14159265
+#define PI 3.14159265

@@ -14,26 +14,91 @@
 ***********************************************************/
 
 
-/***********************************************************
-* @fn edgesCallback(const sensor_msgs::ImageConstPtr& msg)
-* @brief adds the edges image to map using a weight 
-* @pre takes in a ros message of a raw or cv image
-* @post image added to the map
-* @param takes in a ros message of a raw or cv image 
-***********************************************************/
-void homographyCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
+//calback for color image
+void homographyColorCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
 {
     //ROS_INFO("Pot_Nav: Statistics image receieved");
 
     cv_bridge::CvImagePtr cv_ptr_src; // source image pointer
     cv_bridge::CvImage           dst; // destination image
-    cv::Mat                        T; // transform matrix
+    cv::Point2i robot_center;         //center of the robot
+    cv::Point2i box_1;
+    cv::Point2i box_2;
+    
+    
+    
+    //crete pointer to source image
+    try
+    {
+      cv_ptr_src = cv_bridge::toCvCopy(image_sub_msg, "rgb8");
+    }
+    catch (cv_bridge::Exception& e)
+    {
+      ROS_ERROR("cv_bridge exception: %s", e.what());
+      return;
+    }
+    
+
+    //pull in center
+    robot_center.x = params.center_x;
+    robot_center.y = params.center_y;
+
+    //setup dst
+    dst.encoding = "rgb8";
+    dst.header = cv_ptr_src->header;
+    
+    //transform image
+    warpPerspective(cv_ptr_src->image, dst.image, _transform, cv_ptr_src->image.size() * (params.scale));
+    
+    
+    //draw all debug data
+    
+    //draw a box in place of the robot
+    box_1.x = robot_center.x - params.robot_x;
+    box_1.y = robot_center.y - params.robot_y;
+    
+    box_2.x = robot_center.x + params.robot_x;
+    box_2.y = robot_center.y + params.robot_y;
+    
+    cv::rectangle(dst.image, box_1, box_2 , cv::Scalar(0,0,255) ,0);
+    
+    //draw the calibration box
+    box_1.x = robot_center.x - (((params.calibration_width/2) - params.calibration_x) * params.pixels_per_meter);
+    box_1.y = robot_center.y - (((params.calibration_height/2) + params.calibration_y) * params.pixels_per_meter);
+    
+    box_2.x = robot_center.x + (((params.calibration_width/2) + params.calibration_x) * params.pixels_per_meter);
+    box_2.y = robot_center.y + (((params.calibration_width/2) - params.calibration_y) * params.pixels_per_meter);
+    
+    cv::rectangle(dst.image, box_1, box_2 , cv::Scalar(255,0,0) ,0);
+    
+    //draw robot center
+    cv::circle(dst.image, robot_center, 5, cv::Scalar(0,0,255));
+
+    //draw the search radius
+    cv::circle(dst.image, robot_center, (params.laser_range_max * params.pixels_per_meter), 255);
+    
+    //publish the image
+    image_pub_color.publish(dst.toImageMsg());
+
+}
+
+//calback for color image
+void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
+{
+    //ROS_INFO("Pot_Nav: Statistics image receieved");
+
+    cv_bridge::CvImagePtr cv_ptr_src; // source image pointer
+    cv_bridge::CvImage           dst; // destination image
+    cv::Point2i         robot_center; // holds the center of the robot
+    std::vector<cv::Mat> Chanels;
+    cv::Point2i box_1;
+    cv::Point2i box_2;
 
     //camera model
-    image_geometry::PinholeCameraModel cam_model;
+    //image_geometry::PinholeCameraModel cam_model;
 
     //tranform listener
-    tf::TransformListener tf_listener;
+    //tf::TransformListener tf_listener;
 
     //crete pointer to source image
     try
@@ -82,31 +147,7 @@ void homographyCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
                              params.center_x, params.center_y);
     }
     */
-
-    //find the transform matrix
-    T = find_perspective(params.theta_x, params.theta_y, params.theta_z, 
-                         params.center_x, params.center_y);
-    
-    
-    //setup dst
-    dst.encoding = "rgb8";
-    
-    //transform image
-    warpPerspective(cv_ptr_src->image, dst.image, T, cv_ptr_src->image.size() * (params.scale));
-    
-    image_pub_homography.publish(dst.toImageMsg());
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /* This is the start of a hacky way where 4 imaginary points on the ground 
+        /* This is the start of a hacky way where 4 imaginary points on the ground 
     plain are used to find the transform it is not recomended
     //arrays of perpective points for perspective and raw images
     cv::Point2d32f objPts[4], imgPts[4];
@@ -127,6 +168,125 @@ void homographyCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
     }
     cv::getPerspectiveTransform()
     */
+    
+    //pull in center
+    robot_center.x = params.center_x;
+    robot_center.y = params.center_y;
+    
+    //setup dst
+    dst.encoding = "rgb8";
+    dst.header = cv_ptr_src->header;
+    
+    //transform image
+    warpPerspective(cv_ptr_src->image, dst.image, _transform, cv_ptr_src->image.size() * (params.scale));
+    
+    //compute the laser scan
+    sensor_msgs::LaserScan laser_scan;
+    
+    laser_scan.header = dst.header;
+    laser_scan.header.frame_id = params.laser_frame;
+    
+    laser_scan.angle_min = -(params.laser_angle/2);
+    laser_scan.angle_max = (params.laser_angle/2);
+    laser_scan.angle_increment = (params.laser_angle/params.laser_res);
+    
+    laser_scan.time_increment = params.laser_time_increment;
+    laser_scan.scan_time = params.laser_scan_time;
+    
+    laser_scan.range_min = params.laser_range_min;
+    laser_scan.range_max = params.laser_range_max;
+    
+    //split chanels
+    cv::split(cv_ptr_src->image , Chanels);
+    
+    Chanels[1].convertTo(Chanels[1],CV_32FC1);
+    
+    float ranges[params.laser_res];
+    
+    //fill ranges
+    for(int i = 0; i <= params.laser_res; i++)
+    {
+
+        float theta = (PI/2 - (params.laser_angle/2)) + (i * (params.laser_angle/params.laser_res));
+        cv::Point2f search_edge;
+        double max_range;
+        
+        //clear range
+        ranges[i] = 0;
+        
+        //compute the edge point
+        search_edge.x = (robot_center.x + ((cos(theta) * params.laser_range_max)));
+        search_edge.y = (robot_center.y - ((sin(theta) * params.laser_range_max)));
+        
+        cv::LineIterator ray(dst.image, robot_center, search_edge , 8);
+        
+        for(int pos=0; pos < ray.count; pos++ , ++ray)
+        {
+        
+            //outside of box
+            if(ray.pos().x > robot_center.x + params.robot_x || 
+               ray.pos().x < robot_center.x - params.robot_x ||
+               ray.pos().y < robot_center.y - params.robot_y )
+            {
+                float win_avg = 0;
+                
+                //take window average
+                //this is a slow way to do this but easy to read
+                for(int win=0; win < params.window_size; win++)
+                {   
+                    
+                    win_avg += Chanels[1].at<float>( ray.pos().y , ray.pos().x );
+                    
+                    //increment ray
+                    ray;
+                }
+                for(int dec=0; dec < params.window_size; dec++)
+                {
+                    //decrement ray
+                    ray--;
+                }
+                
+                win_avg /= params.window_size;
+                
+                //see if its an obsticale
+                if (win_avg >= params.laser_threshold)
+                {
+                    //mark the obsticle
+                    dst.image.at<float>( ray.pos().y , ray.pos().x) = cv:Scalar(200,0,0);
+                    
+                    //give the distance in meters
+                    ranges[i] = (ray.pos().x/cos(theta) / params.pixels_per_meter);
+                    
+                    //done with this ray
+                    break;
+                }
+                else
+                {
+                    //display the ray
+                    dst.image.at<float>( ray.pos().y , ray.pos().x = cv:Scalar(0,0,200);
+                }
+            }
+        }
+    }
+    
+    laser_scan.ranges = ranges;
+    
+    //publish the laser scan
+    laser_pub.publish(laser_scan);
+    
+    //draw the search radius
+    cv::circle(dst.image, robot_center, params.search_radius, cv::Scalar(0,0,255));
+    
+    //draw a box in place of the robot
+    box_1.x = robot_center.x - params.robot_x;
+    box_1.y = robot_center.y - params.robot_y;
+    
+    box_2.x = robot_center.x + params.robot_x;
+    box_2.y = robot_center.y + params.robot_y;
+    
+    cv::rectangle(dst.image, box_1, box_2 , cv::Scalar(0,0,255) ,0);
+    
+    image_pub_masked.publish(dst.toImageMsg());
 
 }
 
@@ -162,8 +322,8 @@ cv::Mat find_perspective(float theta_x, float theta_y, float theta_z,float cente
      
      //shift back by sclaed ammounts
      cv::Mat E = (cv::Mat_<float>(3, 3) <<
-     (T.at<float>(2,2) / T.at<float>(0,0) )* 4, 0, center_x  ,
-     0, (T.at<float>(2,2) / T.at<float>(1,1) )* 4, center_y  , 
+     (T.at<float>(2,2) / T.at<float>(0,0) ), 0, center_x  ,
+     0, (T.at<float>(2,2) / T.at<float>(1,1) ), center_y  , 
      0, 0, 1);
      
      T = E*T;
@@ -214,24 +374,35 @@ int main(int argc, char **argv)
     srv.setCallback(f);
     
     
-    std::string topic = n.resolveName("image_rect");
+    std::string topic = n.resolveName("image_color");
     
     //check to see if user has defined an image to subscribe to 
-    if (topic == "/image_rect") 
+    if (topic == "/image_color") 
     {
         ROS_WARN("homography: image has not been remapped! Typical command-line usage:\n"
-                "\t$ ./Edge_Detection image_rect:=<image topic> [transport]");
+                "\t$ ./Edge_Detection image_masked:=<image topic> [transport]");
+    }
+    
+    std::string topic = n.resolveName("image_masked");
+    
+    //check to see if user has defined an image to subscribe to 
+    if (topic == "/image_masked") 
+    {
+        ROS_WARN("homography: image has not been remapped! Typical command-line usage:\n"
+                "\t$ ./Edge_Detection image_masked:=<image topic> [transport]");
     }
     
 
     //create subsctiptions
-    image_sub_cam = it.subscribe( n.resolveName("image_rect"), 1, homographyCallback);
+    image_sub_color = it.subscribe( n.resolveName("image_color"), 1, homographyColorCallback);
+    image_sub_masked = it.subscribe( n.resolveName("image_masked"), 1, homographyMaskedCallback);
     
 
     //create publishers
     laser_pub = n.advertise<sensor_msgs::LaserScan>( "homography_scan" , 5 );
     
-    image_pub_homography = it.advertise( "homography_image" , 1 );
+    image_pub_color = it.advertise( "homography_color" , 1 );
+    image_pub_color = it.advertise( "homography_masked" , 1 );
     
     //let a rip
     ros::spin();

@@ -134,49 +134,55 @@ namespace mst_homography
     };
 
 //#line 14 "../cfg/homography_Params.cfg"
-      int robot_x;
+      std::string frame_id;
 //#line 15 "../cfg/homography_Params.cfg"
-      int robot_y;
+      bool use_trans;
 //#line 16 "../cfg/homography_Params.cfg"
-      bool robot_filled;
+      double theta_x;
 //#line 17 "../cfg/homography_Params.cfg"
-      int search_radius;
+      double theta_y;
 //#line 18 "../cfg/homography_Params.cfg"
-      int search_res;
+      double theta_z;
 //#line 19 "../cfg/homography_Params.cfg"
-      bool display_rays;
+      double center_x;
 //#line 20 "../cfg/homography_Params.cfg"
-      double compas_length;
-//#line 21 "../cfg/homography_Params.cfg"
-      double carrot_on_a_stick;
+      double center_y;
 //#line 22 "../cfg/homography_Params.cfg"
-      double target_weight_y;
-//#line 23 "../cfg/homography_Params.cfg"
-      double target_weight_z;
+      int scale;
 //#line 24 "../cfg/homography_Params.cfg"
-      double target_dist_scale;
+      std::string laser_frame;
 //#line 25 "../cfg/homography_Params.cfg"
-      double dist_scale_x;
+      double laser_angle;
 //#line 26 "../cfg/homography_Params.cfg"
-      double dist_scale_y;
+      int laser_scans;
 //#line 27 "../cfg/homography_Params.cfg"
-      double twist_scalar_y;
+      double laser_range_min;
 //#line 28 "../cfg/homography_Params.cfg"
-      double twist_scalar_z;
+      double laser_range_max;
 //#line 29 "../cfg/homography_Params.cfg"
-      double edges_per;
+      int laser_res;
 //#line 30 "../cfg/homography_Params.cfg"
-      double stat_per;
+      double laser_time_increment;
 //#line 31 "../cfg/homography_Params.cfg"
-      double previous_per;
+      double laser_scan_time;
 //#line 32 "../cfg/homography_Params.cfg"
-      double lines_per;
+      int window_size;
 //#line 33 "../cfg/homography_Params.cfg"
-      double flags_per;
-//#line 34 "../cfg/homography_Params.cfg"
-      double obst_per;
+      double laser_threshold;
 //#line 35 "../cfg/homography_Params.cfg"
-      double grass_per;
+      double pixels_per_meter;
+//#line 36 "../cfg/homography_Params.cfg"
+      double calibration_height;
+//#line 37 "../cfg/homography_Params.cfg"
+      double calibration_width;
+//#line 38 "../cfg/homography_Params.cfg"
+      double calibration_x;
+//#line 39 "../cfg/homography_Params.cfg"
+      double calibration_y;
+//#line 42 "../cfg/homography_Params.cfg"
+      int robot_x;
+//#line 43 "../cfg/homography_Params.cfg"
+      int robot_y;
 //#line 138 "/opt/ros/electric/stacks/driver_common/dynamic_reconfigure/templates/ConfigType.h"
 
     bool __fromMessage__(dynamic_reconfigure::Config &msg)
@@ -278,181 +284,205 @@ namespace mst_homography
     homography_ParamsConfigStatics()
     {
 //#line 14 "../cfg/homography_Params.cfg"
+      __min__.frame_id = "";
+//#line 14 "../cfg/homography_Params.cfg"
+      __max__.frame_id = "";
+//#line 14 "../cfg/homography_Params.cfg"
+      __default__.frame_id = "/base_footprint";
+//#line 14 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<std::string>("frame_id", "str", 1, "The base footprint of the robot", "", &homography_ParamsConfig::frame_id)));
+//#line 15 "../cfg/homography_Params.cfg"
+      __min__.use_trans = 0;
+//#line 15 "../cfg/homography_Params.cfg"
+      __max__.use_trans = 1;
+//#line 15 "../cfg/homography_Params.cfg"
+      __default__.use_trans = 0;
+//#line 15 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<bool>("use_trans", "bool", 1, "option to use tf to find angle", "", &homography_ParamsConfig::use_trans)));
+//#line 16 "../cfg/homography_Params.cfg"
+      __min__.theta_x = -0.01;
+//#line 16 "../cfg/homography_Params.cfg"
+      __max__.theta_x = 0.01;
+//#line 16 "../cfg/homography_Params.cfg"
+      __default__.theta_x = 0.0;
+//#line 16 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("theta_x", "double", 1, "camera rotation aplied to perspective.", "", &homography_ParamsConfig::theta_x)));
+//#line 17 "../cfg/homography_Params.cfg"
+      __min__.theta_y = -0.01;
+//#line 17 "../cfg/homography_Params.cfg"
+      __max__.theta_y = 0.01;
+//#line 17 "../cfg/homography_Params.cfg"
+      __default__.theta_y = 0.0;
+//#line 17 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("theta_y", "double", 1, "camera rotation aplied to perspective.", "", &homography_ParamsConfig::theta_y)));
+//#line 18 "../cfg/homography_Params.cfg"
+      __min__.theta_z = -3.14159265359;
+//#line 18 "../cfg/homography_Params.cfg"
+      __max__.theta_z = 3.14159265359;
+//#line 18 "../cfg/homography_Params.cfg"
+      __default__.theta_z = 0.0;
+//#line 18 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("theta_z", "double", 1, "camera rotation aplied to perspective.", "", &homography_ParamsConfig::theta_z)));
+//#line 19 "../cfg/homography_Params.cfg"
+      __min__.center_x = 0.0;
+//#line 19 "../cfg/homography_Params.cfg"
+      __max__.center_x = 360.0;
+//#line 19 "../cfg/homography_Params.cfg"
+      __default__.center_x = 0.0;
+//#line 19 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("center_x", "double", 1, "center rotation is aplied on.", "", &homography_ParamsConfig::center_x)));
+//#line 20 "../cfg/homography_Params.cfg"
+      __min__.center_y = 0.0;
+//#line 20 "../cfg/homography_Params.cfg"
+      __max__.center_y = 480.0;
+//#line 20 "../cfg/homography_Params.cfg"
+      __default__.center_y = 0.0;
+//#line 20 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("center_y", "double", 1, "center rotation is aplied on.", "", &homography_ParamsConfig::center_y)));
+//#line 22 "../cfg/homography_Params.cfg"
+      __min__.scale = 0;
+//#line 22 "../cfg/homography_Params.cfg"
+      __max__.scale = 10;
+//#line 22 "../cfg/homography_Params.cfg"
+      __default__.scale = 0;
+//#line 22 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<int>("scale", "int", 1, "scale applied to the transform", "", &homography_ParamsConfig::scale)));
+//#line 24 "../cfg/homography_Params.cfg"
+      __min__.laser_frame = "";
+//#line 24 "../cfg/homography_Params.cfg"
+      __max__.laser_frame = "";
+//#line 24 "../cfg/homography_Params.cfg"
+      __default__.laser_frame = "bob";
+//#line 24 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<std::string>("laser_frame", "str", 1, "name of the laser frame", "", &homography_ParamsConfig::laser_frame)));
+//#line 25 "../cfg/homography_Params.cfg"
+      __min__.laser_angle = 0.0;
+//#line 25 "../cfg/homography_Params.cfg"
+      __max__.laser_angle = 3.14159265359;
+//#line 25 "../cfg/homography_Params.cfg"
+      __default__.laser_angle = 3.14159265359;
+//#line 25 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("laser_angle", "double", 1, "angle through wich the scan searches in rad", "", &homography_ParamsConfig::laser_angle)));
+//#line 26 "../cfg/homography_Params.cfg"
+      __min__.laser_scans = 0;
+//#line 26 "../cfg/homography_Params.cfg"
+      __max__.laser_scans = 360;
+//#line 26 "../cfg/homography_Params.cfg"
+      __default__.laser_scans = 180;
+//#line 26 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<int>("laser_scans", "int", 1, "number of scans to preform", "", &homography_ParamsConfig::laser_scans)));
+//#line 27 "../cfg/homography_Params.cfg"
+      __min__.laser_range_min = 0.0;
+//#line 27 "../cfg/homography_Params.cfg"
+      __max__.laser_range_min = 30.0;
+//#line 27 "../cfg/homography_Params.cfg"
+      __default__.laser_range_min = 0.5;
+//#line 27 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("laser_range_min", "double", 1, "The search radius of the laser in m.", "", &homography_ParamsConfig::laser_range_min)));
+//#line 28 "../cfg/homography_Params.cfg"
+      __min__.laser_range_max = 0.0;
+//#line 28 "../cfg/homography_Params.cfg"
+      __max__.laser_range_max = 30.0;
+//#line 28 "../cfg/homography_Params.cfg"
+      __default__.laser_range_max = 10.0;
+//#line 28 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("laser_range_max", "double", 1, "The search radius of the laser in m.", "", &homography_ParamsConfig::laser_range_max)));
+//#line 29 "../cfg/homography_Params.cfg"
+      __min__.laser_res = 1;
+//#line 29 "../cfg/homography_Params.cfg"
+      __max__.laser_res = 360;
+//#line 29 "../cfg/homography_Params.cfg"
+      __default__.laser_res = 180;
+//#line 29 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<int>("laser_res", "int", 1, "The search  degrees of laser", "", &homography_ParamsConfig::laser_res)));
+//#line 30 "../cfg/homography_Params.cfg"
+      __min__.laser_time_increment = 0.0;
+//#line 30 "../cfg/homography_Params.cfg"
+      __max__.laser_time_increment = 30.0;
+//#line 30 "../cfg/homography_Params.cfg"
+      __default__.laser_time_increment = 0.0;
+//#line 30 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("laser_time_increment", "double", 1, "the increment time increment of the laser in sec", "", &homography_ParamsConfig::laser_time_increment)));
+//#line 31 "../cfg/homography_Params.cfg"
+      __min__.laser_scan_time = 0.0;
+//#line 31 "../cfg/homography_Params.cfg"
+      __max__.laser_scan_time = 30.0;
+//#line 31 "../cfg/homography_Params.cfg"
+      __default__.laser_scan_time = 0.0;
+//#line 31 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("laser_scan_time", "double", 1, "the scan time increment of the laser in sec", "", &homography_ParamsConfig::laser_scan_time)));
+//#line 32 "../cfg/homography_Params.cfg"
+      __min__.window_size = 1;
+//#line 32 "../cfg/homography_Params.cfg"
+      __max__.window_size = 50;
+//#line 32 "../cfg/homography_Params.cfg"
+      __default__.window_size = 8;
+//#line 32 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<int>("window_size", "int", 1, "The number of pixels to average for the threshold", "", &homography_ParamsConfig::window_size)));
+//#line 33 "../cfg/homography_Params.cfg"
+      __min__.laser_threshold = 0.0;
+//#line 33 "../cfg/homography_Params.cfg"
+      __max__.laser_threshold = 500.0;
+//#line 33 "../cfg/homography_Params.cfg"
+      __default__.laser_threshold = 200.0;
+//#line 33 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("laser_threshold", "double", 1, "the threshold to qulify as obsticale", "", &homography_ParamsConfig::laser_threshold)));
+//#line 35 "../cfg/homography_Params.cfg"
+      __min__.pixels_per_meter = 0.0001;
+//#line 35 "../cfg/homography_Params.cfg"
+      __max__.pixels_per_meter = 300.0;
+//#line 35 "../cfg/homography_Params.cfg"
+      __default__.pixels_per_meter = 20.0;
+//#line 35 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("pixels_per_meter", "double", 1, "number of pixels per meter", "", &homography_ParamsConfig::pixels_per_meter)));
+//#line 36 "../cfg/homography_Params.cfg"
+      __min__.calibration_height = 0.0001;
+//#line 36 "../cfg/homography_Params.cfg"
+      __max__.calibration_height = 300.0;
+//#line 36 "../cfg/homography_Params.cfg"
+      __default__.calibration_height = 1.0;
+//#line 36 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("calibration_height", "double", 1, "height of the calibration square in meters", "", &homography_ParamsConfig::calibration_height)));
+//#line 37 "../cfg/homography_Params.cfg"
+      __min__.calibration_width = 0.0001;
+//#line 37 "../cfg/homography_Params.cfg"
+      __max__.calibration_width = 300.0;
+//#line 37 "../cfg/homography_Params.cfg"
+      __default__.calibration_width = 1.0;
+//#line 37 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("calibration_width", "double", 1, "width of the calibration square in meters", "", &homography_ParamsConfig::calibration_width)));
+//#line 38 "../cfg/homography_Params.cfg"
+      __min__.calibration_x = 0.0001;
+//#line 38 "../cfg/homography_Params.cfg"
+      __max__.calibration_x = 300.0;
+//#line 38 "../cfg/homography_Params.cfg"
+      __default__.calibration_x = 1.0;
+//#line 38 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("calibration_x", "double", 1, "distance to botom center  in meters", "", &homography_ParamsConfig::calibration_x)));
+//#line 39 "../cfg/homography_Params.cfg"
+      __min__.calibration_y = 0.0001;
+//#line 39 "../cfg/homography_Params.cfg"
+      __max__.calibration_y = 300.0;
+//#line 39 "../cfg/homography_Params.cfg"
+      __default__.calibration_y = 1.0;
+//#line 39 "../cfg/homography_Params.cfg"
+      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("calibration_y", "double", 1, "distance to bottom center in meters", "", &homography_ParamsConfig::calibration_y)));
+//#line 42 "../cfg/homography_Params.cfg"
       __min__.robot_x = 0;
-//#line 14 "../cfg/homography_Params.cfg"
+//#line 42 "../cfg/homography_Params.cfg"
       __max__.robot_x = 400;
-//#line 14 "../cfg/homography_Params.cfg"
+//#line 42 "../cfg/homography_Params.cfg"
       __default__.robot_x = 200;
-//#line 14 "../cfg/homography_Params.cfg"
+//#line 42 "../cfg/homography_Params.cfg"
       __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<int>("robot_x", "int", 1, "The height of the robot mask.", "", &homography_ParamsConfig::robot_x)));
-//#line 15 "../cfg/homography_Params.cfg"
+//#line 43 "../cfg/homography_Params.cfg"
       __min__.robot_y = 0;
-//#line 15 "../cfg/homography_Params.cfg"
+//#line 43 "../cfg/homography_Params.cfg"
       __max__.robot_y = 400;
-//#line 15 "../cfg/homography_Params.cfg"
+//#line 43 "../cfg/homography_Params.cfg"
       __default__.robot_y = 100;
-//#line 15 "../cfg/homography_Params.cfg"
+//#line 43 "../cfg/homography_Params.cfg"
       __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<int>("robot_y", "int", 1, "The width of the robot mask.", "", &homography_ParamsConfig::robot_y)));
-//#line 16 "../cfg/homography_Params.cfg"
-      __min__.robot_filled = 0;
-//#line 16 "../cfg/homography_Params.cfg"
-      __max__.robot_filled = 1;
-//#line 16 "../cfg/homography_Params.cfg"
-      __default__.robot_filled = 0;
-//#line 16 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<bool>("robot_filled", "bool", 1, "Option to disply the robot mask as a filed box", "", &homography_ParamsConfig::robot_filled)));
-//#line 17 "../cfg/homography_Params.cfg"
-      __min__.search_radius = 0;
-//#line 17 "../cfg/homography_Params.cfg"
-      __max__.search_radius = 1000;
-//#line 17 "../cfg/homography_Params.cfg"
-      __default__.search_radius = 100;
-//#line 17 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<int>("search_radius", "int", 1, "The search radius of potential navigation.", "", &homography_ParamsConfig::search_radius)));
-//#line 18 "../cfg/homography_Params.cfg"
-      __min__.search_res = 1;
-//#line 18 "../cfg/homography_Params.cfg"
-      __max__.search_res = 360;
-//#line 18 "../cfg/homography_Params.cfg"
-      __default__.search_res = 180;
-//#line 18 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<int>("search_res", "int", 1, "The search  degrees of potential navigation.", "", &homography_ParamsConfig::search_res)));
-//#line 19 "../cfg/homography_Params.cfg"
-      __min__.display_rays = 0;
-//#line 19 "../cfg/homography_Params.cfg"
-      __max__.display_rays = 1;
-//#line 19 "../cfg/homography_Params.cfg"
-      __default__.display_rays = 0;
-//#line 19 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<bool>("display_rays", "bool", 1, "Option to disply rays on debug image", "", &homography_ParamsConfig::display_rays)));
-//#line 20 "../cfg/homography_Params.cfg"
-      __min__.compas_length = 0.0;
-//#line 20 "../cfg/homography_Params.cfg"
-      __max__.compas_length = 1000.0;
-//#line 20 "../cfg/homography_Params.cfg"
-      __default__.compas_length = 200.0;
-//#line 20 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("compas_length", "double", 1, "The length of the target and movement.", "", &homography_ParamsConfig::compas_length)));
-//#line 21 "../cfg/homography_Params.cfg"
-      __min__.carrot_on_a_stick = 0.0;
-//#line 21 "../cfg/homography_Params.cfg"
-      __max__.carrot_on_a_stick = 10.0;
-//#line 21 "../cfg/homography_Params.cfg"
-      __default__.carrot_on_a_stick = 1.0;
-//#line 21 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("carrot_on_a_stick", "double", 1, "The forward forcing velocity on robot.", "", &homography_ParamsConfig::carrot_on_a_stick)));
-//#line 22 "../cfg/homography_Params.cfg"
-      __min__.target_weight_y = 0.0;
-//#line 22 "../cfg/homography_Params.cfg"
-      __max__.target_weight_y = 100.0;
-//#line 22 "../cfg/homography_Params.cfg"
-      __default__.target_weight_y = 1.0;
-//#line 22 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("target_weight_y", "double", 1, "The scalar aplied to the y target component.", "", &homography_ParamsConfig::target_weight_y)));
-//#line 23 "../cfg/homography_Params.cfg"
-      __min__.target_weight_z = 0.0;
-//#line 23 "../cfg/homography_Params.cfg"
-      __max__.target_weight_z = 100.0;
-//#line 23 "../cfg/homography_Params.cfg"
-      __default__.target_weight_z = 1.0;
-//#line 23 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("target_weight_z", "double", 1, "The scalar aplied to the z target component.", "", &homography_ParamsConfig::target_weight_z)));
-//#line 24 "../cfg/homography_Params.cfg"
-      __min__.target_dist_scale = 0.0;
-//#line 24 "../cfg/homography_Params.cfg"
-      __max__.target_dist_scale = 1000.0;
-//#line 24 "../cfg/homography_Params.cfg"
-      __default__.target_dist_scale = 200.0;
-//#line 24 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("target_dist_scale", "double", 1, "Percentage of pixel distace aplied", "", &homography_ParamsConfig::target_dist_scale)));
-//#line 25 "../cfg/homography_Params.cfg"
-      __min__.dist_scale_x = 0.0;
-//#line 25 "../cfg/homography_Params.cfg"
-      __max__.dist_scale_x = 1000.0;
-//#line 25 "../cfg/homography_Params.cfg"
-      __default__.dist_scale_x = 200.0;
-//#line 25 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("dist_scale_x", "double", 1, "Percentage of pixel distace aplied", "", &homography_ParamsConfig::dist_scale_x)));
-//#line 26 "../cfg/homography_Params.cfg"
-      __min__.dist_scale_y = 0.0;
-//#line 26 "../cfg/homography_Params.cfg"
-      __max__.dist_scale_y = 1000.0;
-//#line 26 "../cfg/homography_Params.cfg"
-      __default__.dist_scale_y = 200.0;
-//#line 26 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("dist_scale_y", "double", 1, "Percentage of pixel distace aplied", "", &homography_ParamsConfig::dist_scale_y)));
-//#line 27 "../cfg/homography_Params.cfg"
-      __min__.twist_scalar_y = 0.0;
-//#line 27 "../cfg/homography_Params.cfg"
-      __max__.twist_scalar_y = 100.0;
-//#line 27 "../cfg/homography_Params.cfg"
-      __default__.twist_scalar_y = 1.0;
-//#line 27 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("twist_scalar_y", "double", 1, "The scalar aplied to the y twist values.", "", &homography_ParamsConfig::twist_scalar_y)));
-//#line 28 "../cfg/homography_Params.cfg"
-      __min__.twist_scalar_z = 0.0;
-//#line 28 "../cfg/homography_Params.cfg"
-      __max__.twist_scalar_z = 100.0;
-//#line 28 "../cfg/homography_Params.cfg"
-      __default__.twist_scalar_z = 1.0;
-//#line 28 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("twist_scalar_z", "double", 1, "The scalar aplied to the z twist values.", "", &homography_ParamsConfig::twist_scalar_z)));
-//#line 29 "../cfg/homography_Params.cfg"
-      __min__.edges_per = 0.0;
-//#line 29 "../cfg/homography_Params.cfg"
-      __max__.edges_per = 100.0;
-//#line 29 "../cfg/homography_Params.cfg"
-      __default__.edges_per = 100.0;
-//#line 29 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("edges_per", "double", 1, "The percentage that edges are added at.", "", &homography_ParamsConfig::edges_per)));
-//#line 30 "../cfg/homography_Params.cfg"
-      __min__.stat_per = 0.0;
-//#line 30 "../cfg/homography_Params.cfg"
-      __max__.stat_per = 100.0;
-//#line 30 "../cfg/homography_Params.cfg"
-      __default__.stat_per = 40.0;
-//#line 30 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("stat_per", "double", 1, "The percentage that grass is subtracted at.", "", &homography_ParamsConfig::stat_per)));
-//#line 31 "../cfg/homography_Params.cfg"
-      __min__.previous_per = 0.0;
-//#line 31 "../cfg/homography_Params.cfg"
-      __max__.previous_per = 100.0;
-//#line 31 "../cfg/homography_Params.cfg"
-      __default__.previous_per = 40.0;
-//#line 31 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("previous_per", "double", 1, "The percentage that grass is subtracted at.", "", &homography_ParamsConfig::previous_per)));
-//#line 32 "../cfg/homography_Params.cfg"
-      __min__.lines_per = 0.0;
-//#line 32 "../cfg/homography_Params.cfg"
-      __max__.lines_per = 100.0;
-//#line 32 "../cfg/homography_Params.cfg"
-      __default__.lines_per = 40.0;
-//#line 32 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("lines_per", "double", 1, "The percentage that edges are added at.", "", &homography_ParamsConfig::lines_per)));
-//#line 33 "../cfg/homography_Params.cfg"
-      __min__.flags_per = 0.0;
-//#line 33 "../cfg/homography_Params.cfg"
-      __max__.flags_per = 100.0;
-//#line 33 "../cfg/homography_Params.cfg"
-      __default__.flags_per = 40.0;
-//#line 33 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("flags_per", "double", 1, "The percentage that edges are added at.", "", &homography_ParamsConfig::flags_per)));
-//#line 34 "../cfg/homography_Params.cfg"
-      __min__.obst_per = 0.0;
-//#line 34 "../cfg/homography_Params.cfg"
-      __max__.obst_per = 100.0;
-//#line 34 "../cfg/homography_Params.cfg"
-      __default__.obst_per = 40.0;
-//#line 34 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("obst_per", "double", 1, "The percentage that edges are added at.", "", &homography_ParamsConfig::obst_per)));
-//#line 35 "../cfg/homography_Params.cfg"
-      __min__.grass_per = 0.0;
-//#line 35 "../cfg/homography_Params.cfg"
-      __max__.grass_per = 100.0;
-//#line 35 "../cfg/homography_Params.cfg"
-      __default__.grass_per = 40.0;
-//#line 35 "../cfg/homography_Params.cfg"
-      __param_descriptions__.push_back(homography_ParamsConfig::AbstractParamDescriptionConstPtr(new homography_ParamsConfig::ParamDescription<double>("grass_per", "double", 1, "The percentage that grass is subtracted at.", "", &homography_ParamsConfig::grass_per)));
 //#line 239 "/opt/ros/electric/stacks/driver_common/dynamic_reconfigure/templates/ConfigType.h"
     
       for (std::vector<homography_ParamsConfig::AbstractParamDescriptionConstPtr>::const_iterator i = __param_descriptions__.begin(); i != __param_descriptions__.end(); i++)

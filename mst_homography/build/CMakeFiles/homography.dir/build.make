@@ -82,9 +82,14 @@ CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/pluginlib/m
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/ros_comm/utilities/message_filters/manifest.xml
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/image_common/image_transport/manifest.xml
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/vision_opencv/image_geometry/manifest.xml
+CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/bullet/manifest.xml
+CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/geometry/angles/manifest.xml
+CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/ros_comm/tools/rosnode/manifest.xml
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/ros_comm/tools/rosmsg/manifest.xml
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/ros_comm/tools/rostopic/manifest.xml
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/ros_comm/tools/rosservice/manifest.xml
+CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/ros_comm/utilities/roswtf/manifest.xml
+CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/geometry/tf/manifest.xml
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/manifest.xml
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/manifest.xml
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/diagnostics/diagnostic_updater/manifest.xml
@@ -98,6 +103,8 @@ CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/ros_comm/to
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/msg_gen/generated
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/common_msgs/sensor_msgs/srv_gen/generated
+CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/geometry/tf/msg_gen/generated
+CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/geometry/tf/srv_gen/generated
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/msg_gen/generated
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/srv_gen/generated
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/msg_gen/generated
@@ -105,15 +112,15 @@ CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/common_msgs
 CMakeFiles/homography.dir/src/homography.o: /opt/ros/electric/stacks/driver_common/driver_base/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/robot/Code/Jomegatron_IGVC/mst_homography/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/homography.dir/src/homography.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/homography.dir/src/homography.o -c /home/robot/Code/Jomegatron_IGVC/mst_homography/src/homography.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -DBT_USE_DOUBLE_PRECISION -DBT_EULER_DEFAULT_ZYX -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/homography.dir/src/homography.o -c /home/robot/Code/Jomegatron_IGVC/mst_homography/src/homography.cpp
 
 CMakeFiles/homography.dir/src/homography.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/homography.dir/src/homography.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/robot/Code/Jomegatron_IGVC/mst_homography/src/homography.cpp > CMakeFiles/homography.dir/src/homography.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -DBT_USE_DOUBLE_PRECISION -DBT_EULER_DEFAULT_ZYX -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/robot/Code/Jomegatron_IGVC/mst_homography/src/homography.cpp > CMakeFiles/homography.dir/src/homography.i
 
 CMakeFiles/homography.dir/src/homography.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/homography.dir/src/homography.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/robot/Code/Jomegatron_IGVC/mst_homography/src/homography.cpp -o CMakeFiles/homography.dir/src/homography.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -DBT_USE_DOUBLE_PRECISION -DBT_EULER_DEFAULT_ZYX -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/robot/Code/Jomegatron_IGVC/mst_homography/src/homography.cpp -o CMakeFiles/homography.dir/src/homography.s
 
 CMakeFiles/homography.dir/src/homography.o.requires:
 .PHONY : CMakeFiles/homography.dir/src/homography.o.requires
@@ -132,17 +139,6 @@ homography_OBJECTS = \
 homography_EXTERNAL_OBJECTS =
 
 ../bin/homography: CMakeFiles/homography.dir/src/homography.o
-../bin/homography: /usr/lib/libopencv_contrib.so.2.3.1
-../bin/homography: /usr/lib/libopencv_legacy.so.2.3.1
-../bin/homography: /usr/lib/libopencv_objdetect.so.2.3.1
-../bin/homography: /usr/lib/libopencv_calib3d.so.2.3.1
-../bin/homography: /usr/lib/libopencv_features2d.so.2.3.1
-../bin/homography: /usr/lib/libopencv_video.so.2.3.1
-../bin/homography: /usr/lib/libopencv_highgui.so.2.3.1
-../bin/homography: /usr/lib/libopencv_ml.so.2.3.1
-../bin/homography: /usr/lib/libopencv_imgproc.so.2.3.1
-../bin/homography: /usr/lib/libopencv_flann.so.2.3.1
-../bin/homography: /usr/lib/libopencv_core.so.2.3.1
 ../bin/homography: /usr/lib/libopencv_gpu.so.2.3.1
 ../bin/homography: /usr/lib/libopencv_contrib.so.2.3.1
 ../bin/homography: /usr/lib/libopencv_legacy.so.2.3.1
@@ -155,7 +151,6 @@ homography_EXTERNAL_OBJECTS =
 ../bin/homography: /usr/lib/libopencv_imgproc.so.2.3.1
 ../bin/homography: /usr/lib/libopencv_flann.so.2.3.1
 ../bin/homography: /usr/lib/libopencv_core.so.2.3.1
-../bin/homography: /usr/lib/libopencv_gpu.so.2.3.1
 ../bin/homography: CMakeFiles/homography.dir/build.make
 ../bin/homography: CMakeFiles/homography.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable ../bin/homography"

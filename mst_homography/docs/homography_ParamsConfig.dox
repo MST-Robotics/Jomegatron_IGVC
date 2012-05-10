@@ -2,26 +2,29 @@
 
 Reads and maintains the following parameters on the ROS server
 
+- \b "~frame_id" : \b [str] The base footprint of the robot min: , default: /base_footprint, max: 
+- \b "~use_trans" : \b [bool] option to use tf to find angle min: False, default: False, max: True
+- \b "~theta_x" : \b [double] camera rotation aplied to perspective. min: -0.01, default: 0.0, max: 0.01
+- \b "~theta_y" : \b [double] camera rotation aplied to perspective. min: -0.01, default: 0.0, max: 0.01
+- \b "~theta_z" : \b [double] camera rotation aplied to perspective. min: -3.14159265359, default: 0.0, max: 3.14159265359
+- \b "~center_x" : \b [double] center rotation is aplied on. min: 0.0, default: 0.0, max: 360.0
+- \b "~center_y" : \b [double] center rotation is aplied on. min: 0.0, default: 0.0, max: 480.0
+- \b "~scale" : \b [int] scale applied to the transform min: 0, default: 0, max: 10
+- \b "~laser_frame" : \b [str] name of the laser frame min: , default: bob, max: 
+- \b "~laser_angle" : \b [double] angle through wich the scan searches in rad min: 0.0, default: 3.14159265359, max: 3.14159265359
+- \b "~laser_scans" : \b [int] number of scans to preform min: 0, default: 180, max: 360
+- \b "~laser_range_min" : \b [double] The search radius of the laser in m. min: 0.0, default: 0.5, max: 30.0
+- \b "~laser_range_max" : \b [double] The search radius of the laser in m. min: 0.0, default: 10.0, max: 30.0
+- \b "~laser_res" : \b [int] The search  degrees of laser min: 1, default: 180, max: 360
+- \b "~laser_time_increment" : \b [double] the increment time increment of the laser in sec min: 0.0, default: 0.0, max: 30.0
+- \b "~laser_scan_time" : \b [double] the scan time increment of the laser in sec min: 0.0, default: 0.0, max: 30.0
+- \b "~window_size" : \b [int] The number of pixels to average for the threshold min: 1, default: 8, max: 50
+- \b "~laser_threshold" : \b [double] the threshold to qulify as obsticale min: 0.0, default: 200.0, max: 500.0
+- \b "~pixels_per_meter" : \b [double] number of pixels per meter min: 0.0001, default: 20.0, max: 300.0
+- \b "~calibration_height" : \b [double] height of the calibration square in meters min: 0.0001, default: 1.0, max: 300.0
+- \b "~calibration_width" : \b [double] width of the calibration square in meters min: 0.0001, default: 1.0, max: 300.0
+- \b "~calibration_x" : \b [double] distance to botom center  in meters min: 0.0001, default: 1.0, max: 300.0
+- \b "~calibration_y" : \b [double] distance to bottom center in meters min: 0.0001, default: 1.0, max: 300.0
 - \b "~robot_x" : \b [int] The height of the robot mask. min: 0, default: 200, max: 400
 - \b "~robot_y" : \b [int] The width of the robot mask. min: 0, default: 100, max: 400
-- \b "~robot_filled" : \b [bool] Option to disply the robot mask as a filed box min: False, default: False, max: True
-- \b "~search_radius" : \b [int] The search radius of potential navigation. min: 0, default: 100, max: 1000
-- \b "~search_res" : \b [int] The search  degrees of potential navigation. min: 1, default: 180, max: 360
-- \b "~display_rays" : \b [bool] Option to disply rays on debug image min: False, default: False, max: True
-- \b "~compas_length" : \b [double] The length of the target and movement. min: 0.0, default: 200.0, max: 1000.0
-- \b "~carrot_on_a_stick" : \b [double] The forward forcing velocity on robot. min: 0.0, default: 1.0, max: 10.0
-- \b "~target_weight_y" : \b [double] The scalar aplied to the y target component. min: 0.0, default: 1.0, max: 100.0
-- \b "~target_weight_z" : \b [double] The scalar aplied to the z target component. min: 0.0, default: 1.0, max: 100.0
-- \b "~target_dist_scale" : \b [double] Percentage of pixel distace aplied min: 0.0, default: 200.0, max: 1000.0
-- \b "~dist_scale_x" : \b [double] Percentage of pixel distace aplied min: 0.0, default: 200.0, max: 1000.0
-- \b "~dist_scale_y" : \b [double] Percentage of pixel distace aplied min: 0.0, default: 200.0, max: 1000.0
-- \b "~twist_scalar_y" : \b [double] The scalar aplied to the y twist values. min: 0.0, default: 1.0, max: 100.0
-- \b "~twist_scalar_z" : \b [double] The scalar aplied to the z twist values. min: 0.0, default: 1.0, max: 100.0
-- \b "~edges_per" : \b [double] The percentage that edges are added at. min: 0.0, default: 100.0, max: 100.0
-- \b "~stat_per" : \b [double] The percentage that grass is subtracted at. min: 0.0, default: 40.0, max: 100.0
-- \b "~previous_per" : \b [double] The percentage that grass is subtracted at. min: 0.0, default: 40.0, max: 100.0
-- \b "~lines_per" : \b [double] The percentage that edges are added at. min: 0.0, default: 40.0, max: 100.0
-- \b "~flags_per" : \b [double] The percentage that edges are added at. min: 0.0, default: 40.0, max: 100.0
-- \b "~obst_per" : \b [double] The percentage that edges are added at. min: 0.0, default: 40.0, max: 100.0
-- \b "~grass_per" : \b [double] The percentage that grass is subtracted at. min: 0.0, default: 40.0, max: 100.0
 

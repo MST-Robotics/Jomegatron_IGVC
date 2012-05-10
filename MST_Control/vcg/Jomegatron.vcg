@@ -3,12 +3,9 @@ Background\ ColorG=0
 Background\ ColorB=0.466667
 Fixed\ Frame=/odom_combined
 Target\ Frame=/base_footprint
-Camera.Enabled=1
-Camera.Image\ Rendering=background & overlay
-Camera.Image\ Topic=/ptgrey/image_rect_color
-Camera.Overlay\ Alpha=0.5
-Camera.Transport\ Hint=raw
-Camera.Zoom\ Factor=1
+ColorStat.Enabled=1
+ColorStat.Image\ Topic=/image_stat
+ColorStat.Transport\ Hint=raw
 Grid.Alpha=0.5
 Grid.Cell\ Size=0.5
 Grid.ColorR=0.898039
@@ -24,15 +21,18 @@ Grid.OffsetZ=0
 Grid.Plane=0
 Grid.Plane\ Cell\ Count=10
 Grid.Reference\ Frame=<Fixed Frame>
-Image.Enabled=1
-Image.Image\ Topic=/image_stat
-Image.Transport\ Hint=raw
-Image2.Enabled=1
-Image2.Image\ Topic=/map
-Image2.Transport\ Hint=compressed
-Image3.Enabled=1
-Image3.Image\ Topic=/homography_image
-Image3.Transport\ Hint=raw
+Homography.Enabled=1
+Homography.Image\ Topic=/homography_image
+Homography.Transport\ Hint=compressed
+PotNav.Enabled=1
+PotNav.Image\ Topic=/map
+PotNav.Transport\ Hint=compressed
+PtGrey.Enabled=1
+PtGrey.Image\ Rendering=background & overlay
+PtGrey.Image\ Topic=/ptgrey/image_rect_color
+PtGrey.Overlay\ Alpha=0.5
+PtGrey.Transport\ Hint=raw
+PtGrey.Zoom\ Factor=1
 Robot\ Model.Alpha=1
 Robot\ Model.Collision\ Enabled=0
 Robot\ Model.Enabled=1
@@ -79,8 +79,8 @@ TF.Update\ Interval=0.05
 Tool\ 2D\ Nav\ GoalTopic=goal
 Tool\ 2D\ Pose\ EstimateTopic=initialpose
 Camera\ Type=rviz::OrbitViewController
-Camera\ Config=1.05779 4.35398 13.304 -0.286354 0.325426 0.235626
-Property\ Grid\ State=selection=Target Frame;expanded=.Global Options,Grid.Enabled,Robot Model.Enabled,TF.Enabled.TF.StatusTopStatus,TF.Enabled.TF.Tree,Camera.Enabled,Image3.Enabled;scrollpos=0,0;splitterpos=133,266;ispageselected=1
+Camera\ Config=1.08279 3.61398 2.86929 0.19236 0.588121 0.214326
+Property\ Grid\ State=selection=PotNav.Enabled;expanded=.Global Options,Grid.Enabled,Robot Model.Enabled,TF.Enabled.TF.StatusTopStatus,TF.Enabled.TF.Tree,Homography.Enabled;scrollpos=0,23;splitterpos=150,301;ispageselected=1
 [Display0]
 Name=Grid
 Package=rviz
@@ -94,18 +94,18 @@ Name=TF
 Package=rviz
 ClassName=rviz::TFDisplay
 [Display3]
-Name=Camera
+Name=PtGrey
 Package=rviz
 ClassName=rviz::CameraDisplay
 [Display4]
-Name=Image
+Name=ColorStat
 Package=rviz
 ClassName=rviz::ImageDisplay
 [Display5]
-Name=Image2
+Name=PotNav
 Package=rviz
 ClassName=rviz::ImageDisplay
 [Display6]
-Name=Image3
+Name=Homography
 Package=rviz
 ClassName=rviz::ImageDisplay
