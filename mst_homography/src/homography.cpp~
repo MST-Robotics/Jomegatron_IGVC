@@ -47,6 +47,7 @@ void homographyColorCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
     dst.encoding = "rgb8";
     dst.header = cv_ptr_src->header;
     
+    
     //transform image
     warpPerspective(cv_ptr_src->image, dst.image, _transform, cv_ptr_src->image.size() * (params.scale));
     
@@ -64,10 +65,10 @@ void homographyColorCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
     
     //draw the calibration box
     box_1.x = robot_center.x - (((params.calibration_width/2) - params.calibration_x) * params.pixels_per_meter);
-    box_1.y = robot_center.y - (((params.calibration_height/2) + params.calibration_y) * params.pixels_per_meter);
+    box_1.y = robot_center.y - (((params.calibration_height) + params.calibration_y) * params.pixels_per_meter);
     
     box_2.x = robot_center.x + (((params.calibration_width/2) + params.calibration_x) * params.pixels_per_meter);
-    box_2.y = robot_center.y + (((params.calibration_width/2) - params.calibration_y) * params.pixels_per_meter);
+    box_2.y = robot_center.y - (params.calibration_y * params.pixels_per_meter);
     
     cv::rectangle(dst.image, box_1, box_2 , cv::Scalar(255,0,0) ,0);
     
@@ -346,9 +347,10 @@ cv::Mat find_perspective(float theta_x, float theta_y, float theta_z,float cente
 void setparamsCallback(mst_homography::homography_ParamsConfig &config, uint32_t level)
 {
 
-  
   // set params
   params = config;
+  
+    _transform = find_perspective(params.theta_x, params.theta_y, params.theta_z, params.center_x, params.center_y);
   
 }
 
@@ -382,7 +384,7 @@ int main(int argc, char **argv)
     if (topic == "/image_color") 
     {
         ROS_WARN("homography: image has not been remapped! Typical command-line usage:\n"
-                "\t$ ./Edge_Detection image_masked:=<image topic> [transport]");
+                "\t$ ./Edge_Detection image_color:=<image topic> [transport]");
     }
     
     topic = n.resolveName("image_masked");
