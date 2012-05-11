@@ -170,6 +170,7 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
     cv::getPerspectiveTransform()
     */
     
+    
     //pull in center
     robot_center.x = params.center_x;
     robot_center.y = params.center_y;
@@ -197,17 +198,19 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
     laser_scan.range_min = params.laser_range_min;
     laser_scan.range_max = params.laser_range_max;
     
+    
+    
     //split chanels
     cv::split(cv_ptr_src->image , Chanels);
     
     Chanels[1].convertTo(Chanels[1],CV_32FC1);
     
-    float ranges[params.laser_res];
+    double ranges[params.laser_res];
     
     //fill ranges
     for(int i = 0; i <= params.laser_res; i++)
     {
-
+        
         float theta = (PI/2 - (params.laser_angle/2)) + (i * (params.laser_angle/params.laser_res));
         cv::Point2f search_edge;
         
@@ -217,8 +220,9 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
         float win_avg = 0;
         
         //compute the edge point
-        search_edge.x = (robot_center.x + ((cos(theta) * params.laser_range_max)));
-        search_edge.y = (robot_center.y - ((sin(theta) * params.laser_range_max)));
+        search_edge.x = (robot_center.x + ((cos(theta) * params.laser_range_max * params.pixels_per_meter)));
+        search_edge.y = (robot_center.y - ((sin(theta) * params.laser_range_max * params.pixels_per_meter)));
+        
         
         cv::LineIterator ray(dst.image, robot_center, search_edge , 8);
         
@@ -228,7 +232,7 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
         for(int win=0; win < params.window_size; win++ , ++window)
         {   
             
-            win_avg += dst.image.at<int>( window.pos().y , window.pos().x , 2);
+            win_avg += dst.image.at<float>( window.pos().y , window.pos().x , 1);
             
         }
         //undo first operation
@@ -242,20 +246,26 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
             win_avg -= dst.image.at<int>( ray.pos().y , ray.pos().x , 1);
             
             //outside of box
-            if(ray.pos().x > robot_center.x + params.robot_x || 
+            if((ray.pos().x > robot_center.x + params.robot_x || 
                ray.pos().x < robot_center.x - params.robot_x ||
-               ray.pos().y < robot_center.y - params.robot_y )
+               ray.pos().y < robot_center.y - params.robot_y ) /*&& 
+               (ray.pos().x < dst.image.cols &&
+                ray.pos().x >= 0)  &&
+                ray.pos().y < dst.image.rows &&
+                ray.pos().y >= 0)*/)
             {
                 
 
                 //see if its an obsticale
                 if ((win_avg/params.window_size) >= params.laser_threshold)
                 {
+                    ROS_INFO("threshold: %f ", win_avg/params.window_size);
+                    
                     //mark the obsticle
                     dst.image.at<int>( ray.pos().y , ray.pos().x , 0) = 200;
                     
                     //give the distance in meters
-                    ranges[i] = (ray.pos().x/cos(theta) / params.pixels_per_meter);
+                    ranges[i] = (sqrt(pow(ray.pos().x,2) + sqrt(pow(ray.pos().y,2)) ) / params.pixels_per_meter);
                     
                     //done with this ray
                     break;
@@ -263,17 +273,20 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
                 else
                 {
                     //display the ray
-                    dst.image.at<int>( ray.pos().y , ray.pos().x ,2)= 200;
+                    dst.image.at<int>( ray.pos().y , ray.pos().x , 2) = 200;
                 }
             }
             
         }
     }
     
+    
     for(int i = 0; i <= params.laser_res; i++)
     {
-        laser_scan.ranges[i] = ranges[i];
+        laser_scan.ranges.push_back( ranges[i]);
+        
     }
+    
     //publish the laser scan
     laser_pub.publish(laser_scan);
     
@@ -406,7 +419,7 @@ int main(int argc, char **argv)
     laser_pub = n.advertise<sensor_msgs::LaserScan>( "homography_scan" , 5 );
     
     image_pub_color = it.advertise( "homography_color" , 1 );
-    image_pub_color = it.advertise( "homography_masked" , 1 );
+    image_pub_masked = it.advertise( "homography_masked" , 1 );
     
     //let a rip
     ros::spin();

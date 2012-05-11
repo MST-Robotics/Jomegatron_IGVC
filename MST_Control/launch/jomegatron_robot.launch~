@@ -123,7 +123,7 @@
         
         <node pkg="mst_homography" type="homography" name="Homography" args= "image_color:=ptgrey/image_rect_color image_masked:=image_stat" >
             
-            <rosparam file="$(find MST_Control)/yaml/ColorStat.yaml" command="load"  />
+            <rosparam file="$(find MST_Control)/yaml/homography.yaml" command="load"  />
 
         </node>
         

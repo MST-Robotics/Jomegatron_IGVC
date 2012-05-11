@@ -21,18 +21,18 @@ Grid.OffsetZ=0
 Grid.Plane=0
 Grid.Plane\ Cell\ Count=10
 Grid.Reference\ Frame=<Fixed Frame>
-Homography.Enabled=1
-Homography.Image\ Topic=/homography_image
-Homography.Transport\ Hint=compressed
+Homography_Color.Enabled=1
+Homography_Color.Image\ Topic=/homography_color
+Homography_Color.Transport\ Hint=compressed
+Homography_Masked.Enabled=1
+Homography_Masked.Image\ Topic=/homography_masked
+Homography_Masked.Transport\ Hint=raw
 PotNav.Enabled=1
 PotNav.Image\ Topic=/map
 PotNav.Transport\ Hint=compressed
 PtGrey.Enabled=1
-PtGrey.Image\ Rendering=background & overlay
 PtGrey.Image\ Topic=/ptgrey/image_rect_color
-PtGrey.Overlay\ Alpha=0.5
 PtGrey.Transport\ Hint=raw
-PtGrey.Zoom\ Factor=1
 Robot\ Model.Alpha=1
 Robot\ Model.Collision\ Enabled=0
 Robot\ Model.Enabled=1
@@ -80,32 +80,36 @@ Tool\ 2D\ Nav\ GoalTopic=goal
 Tool\ 2D\ Pose\ EstimateTopic=initialpose
 Camera\ Type=rviz::OrbitViewController
 Camera\ Config=1.08279 3.61398 2.86929 0.19236 0.588121 0.214326
-Property\ Grid\ State=selection=PotNav.Enabled;expanded=.Global Options,Grid.Enabled,Robot Model.Enabled,TF.Enabled.TF.StatusTopStatus,TF.Enabled.TF.Tree,Homography.Enabled;scrollpos=0,23;splitterpos=150,301;ispageselected=1
+Property\ Grid\ State=selection=;expanded=TF.Enabled.TF.StatusTopStatus,TF.Enabled.TF.Tree;scrollpos=0,0;splitterpos=254,509;ispageselected=1
 [Display0]
-Name=Grid
-Package=rviz
-ClassName=rviz::GridDisplay
-[Display1]
-Name=Robot Model
-Package=rviz
-ClassName=rviz::RobotModelDisplay
-[Display2]
-Name=TF
-Package=rviz
-ClassName=rviz::TFDisplay
-[Display3]
 Name=PtGrey
 Package=rviz
-ClassName=rviz::CameraDisplay
-[Display4]
+ClassName=rviz::ImageDisplay
+[Display1]
 Name=ColorStat
 Package=rviz
 ClassName=rviz::ImageDisplay
-[Display5]
+[Display2]
 Name=PotNav
 Package=rviz
 ClassName=rviz::ImageDisplay
-[Display6]
-Name=Homography
+[Display3]
+Name=Homography_Color
 Package=rviz
 ClassName=rviz::ImageDisplay
+[Display4]
+Name=Homography_Masked
+Package=rviz
+ClassName=rviz::ImageDisplay
+[Display5]
+Name=Grid
+Package=rviz
+ClassName=rviz::GridDisplay
+[Display6]
+Name=Robot Model
+Package=rviz
+ClassName=rviz::RobotModelDisplay
+[Display7]
+Name=TF
+Package=rviz
+ClassName=rviz::TFDisplay
