@@ -205,7 +205,7 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
     
     Chanels[1].convertTo(Chanels[1],CV_32FC1);
     
-    double ranges[params.laser_res];
+    float ranges[params.laser_res];
     
     //fill ranges
     for(int i = 0; i <= params.laser_res; i++)
@@ -217,7 +217,7 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
         
         //clear range
         ranges[i] = 0;
-        float win_avg = 0;
+        int win_avg = 0;
         
         //compute the edge point
         search_edge.x = (robot_center.x + ((cos(theta) * params.laser_range_max * params.pixels_per_meter)));
@@ -236,14 +236,14 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
             
         }
         //undo first operation
-        win_avg -= dst.image.at<int>( window.pos().y , window.pos().x , 1);
-        win_avg += dst.image.at<int>( ray.pos().y , ray.pos().x , 1);
+        win_avg -= dst.image.at<float>( window.pos().y , window.pos().x , 1);
+        win_avg += dst.image.at<float>( ray.pos().y , ray.pos().x , 1);
         
         for(int pos=0; pos < ray.count; pos++ , ++ray, ++window)
         {
             
-            win_avg += dst.image.at<int>( window.pos().y , window.pos().x , 1);
-            win_avg -= dst.image.at<int>( ray.pos().y , ray.pos().x , 1);
+            win_avg += dst.image.at<float>( window.pos().y , window.pos().x , 1);
+            win_avg -= dst.image.at<float>( ray.pos().y , ray.pos().x , 1);
             
             //outside of box
             if((ray.pos().x > robot_center.x + params.robot_x || 
@@ -259,13 +259,13 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
                 //see if its an obsticale
                 if ((win_avg/params.window_size) >= params.laser_threshold)
                 {
-                    ROS_INFO("threshold: %f ", win_avg/params.window_size);
+                    //ROS_INFO("threshold: %f ", win_avg/params.window_size);
                     
                     //mark the obsticle
                     dst.image.at<int>( ray.pos().y , ray.pos().x , 0) = 200;
                     
                     //give the distance in meters
-                    ranges[i] = (sqrt(pow(ray.pos().x,2) + sqrt(pow(ray.pos().y,2)) ) / params.pixels_per_meter);
+                    ranges[i] =  sqrt(pow((ray.pos().x - robot_center.x),2) + pow((ray.pos().y - robot_center.y),2) )  / params.pixels_per_meter;
                     
                     //done with this ray
                     break;
@@ -273,8 +273,9 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
                 else
                 {
                     //display the ray
-                    dst.image.at<int>( ray.pos().y , ray.pos().x , 2) = 200;
+                    dst.image.at<float>( ray.pos().y , ray.pos().x , 2) = 200;
                 }
+                
             }
             
         }

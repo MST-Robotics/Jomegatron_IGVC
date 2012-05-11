@@ -1,7 +1,7 @@
 Background\ ColorR=0.0941176
 Background\ ColorG=0
 Background\ ColorB=0.466667
-Fixed\ Frame=/odom_combined
+Fixed\ Frame=/base_footprint
 Target\ Frame=/base_footprint
 ColorStat.Enabled=1
 ColorStat.Image\ Topic=/image_stat
@@ -79,8 +79,8 @@ TF.Update\ Interval=0.05
 Tool\ 2D\ Nav\ GoalTopic=goal
 Tool\ 2D\ Pose\ EstimateTopic=initialpose
 Camera\ Type=rviz::OrbitViewController
-Camera\ Config=1.08279 3.61398 2.86929 0.19236 0.588121 0.214326
-Property\ Grid\ State=selection=;expanded=TF.Enabled.TF.StatusTopStatus,TF.Enabled.TF.Tree;scrollpos=0,0;splitterpos=254,509;ispageselected=1
+Camera\ Config=1.09779 2.92398 5.26728 0.19236 0.588121 0.214326
+Property\ Grid\ State=selection=TF.Enabled;expanded=.Global Options,TF.Enabled.TF.StatusTopStatus,TF.Enabled.TF.Tree;scrollpos=0,0;splitterpos=248,496;ispageselected=1
 [Display0]
 Name=PtGrey
 Package=rviz
