@@ -1,1 +1,2 @@
-{enabled: false, reset: false, xMax: 363, xMin: 182, yMax: 130, yMin: 91}
+{enabled: false, filename: tent.stat, load: false, reset: false, save: false, xMax: 363,
+  xMin: 182, yMax: 130, yMin: 91}

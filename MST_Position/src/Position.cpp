@@ -64,6 +64,7 @@ double                          inital_head;
 double                          way_lat[10];
 double                          way_lon[10];
 int                             way_priority[10];
+double                          way_limit[10];
 bool                            waypoint_complete[10];
 
 bool                            skip_waypoint;
@@ -144,7 +145,7 @@ void midgCallback(const  mst_midg::IMU::ConstPtr& imu)
         }
 		
         if(imu->heading)
-            current_head = imu->heading;
+            current_head = imu->heading + params.heading_offset;
 		
 	}
 	
@@ -327,9 +328,20 @@ void reset_waypoints()
 	read_waypoints();
     for(int i = 0 ; i < 10 ; i++)
     {
+        //reset the waypoint complete values
     	waypoint_complete[i] = false;
-    	current_priority = 1;
+    	
     }
+    
+    if(params.reverse_order)
+	{
+	    current_priority = 10;
+	}
+	else
+	{
+	    current_priority = 1;
+	}
+    
 	inital_gps = true;
 }
 
@@ -364,14 +376,13 @@ double find_dist(double lat1, double lon1 , double lat2 ,double lon2)
 double find_heading(double lat1, double lon1 , double lat2 ,double lon2)
 {
 	// find bearing between two gps points
-
 	double delta_lon = lon2 - lon1;
 	double heading;
 
     // magic forumla #2 we have no idea how it works, if it works or why it works
 
 	//find the bearing 
-     double x = sin(delta_lon) * cos(lat2);
+    double x = sin(delta_lon) * cos(lat2);
 
 	double y = cos(lat1) * sin(lat2) -
 				sin(lat1) * cos(lat1) * cos(delta_lon);
@@ -399,52 +410,61 @@ void read_waypoints()
 	way_lat[0] = params.way_1_latitude;
 	way_lon[0] = params.way_1_longitude;
     way_priority[0] = params.way_1_priority;
+	way_limit[0] = params.way_1_limit;
     
     //read in waypoint 2
 	way_lat[1] = params.way_2_latitude;
 	way_lon[1] = params.way_2_longitude;
     way_priority[1] = params.way_2_priority;
+	way_limit[1] = params.way_2_limit;
     
     //read in waypoint 3
 	way_lat[2] = params.way_3_latitude;
 	way_lon[2] = params.way_3_longitude;
     way_priority[2] = params.way_3_priority;
+	way_limit[2] = params.way_3_limit;
     
     //read in waypoint 4
 	way_lat[3] = params.way_4_latitude;
 	way_lon[3] = params.way_4_longitude;
     way_priority[3] = params.way_4_priority;
+	way_limit[3] = params.way_4_limit;
     
     //read in waypoint 5
 	way_lat[4] = params.way_5_latitude;
 	way_lon[4] = params.way_5_longitude;
     way_priority[4] = params.way_5_priority;
+	way_limit[4] = params.way_5_limit;
     
     //read in waypoint 6
 	way_lat[5] = params.way_6_latitude;
 	way_lon[5] = params.way_6_longitude;
     way_priority[5] = params.way_6_priority;
+	way_limit[5] = params.way_5_limit;
     
     //read in waypoint 7
-
 	way_lat[6] = params.way_7_latitude;
 	way_lon[6] = params.way_7_longitude;
     way_priority[6] = params.way_7_priority;
+	way_limit[6] = params.way_7_limit;
     
     //read in waypoint 8
 	way_lat[7] = params.way_8_latitude;
 	way_lon[7] = params.way_8_longitude;
     way_priority[7] = params.way_8_priority;
+	way_limit[7] = params.way_7_limit;
     
     //read in waypoint 9
 	way_lat[8] = params.way_9_latitude;
 	way_lon[8] = params.way_9_longitude;
     way_priority[8] = params.way_9_priority;
+	way_limit[8] = params.way_8_limit;
     
     //read in waypoint 10
 	way_lat[9] = params.way_10_latitude;
 	way_lon[9] = params.way_10_longitude;
     way_priority[9] = params.way_10_priority;
+	way_limit[9] = params.way_10_limit;
     
     
 }
@@ -475,11 +495,16 @@ int find_target()
 		}
 		if(closest_target == -1)
 		{
-			current_priority ++;
-		}	
+		    if(params.reverse_order)
+		    {   
+		        current_priority--;
+		    }
+		    else
+		    {
+			    current_priority ++;
+		}	}
 	}
 	
-		
 
 	return closest_target;	
 	
@@ -617,7 +642,8 @@ int main(int argc, char **argv)
 		//check calbacks
 		ros::spinOnce();
 		
-		if(gps_fix)
+		//want heding to update with last so were going to greenwich
+		if(gps_fix || true)
 		{
 			//send the target to navigation
 			if (inital_gps)

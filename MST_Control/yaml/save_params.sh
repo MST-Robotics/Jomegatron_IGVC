@@ -4,7 +4,7 @@
 
 rosrun dynamic_reconfigure dynparam dump /Control Control.yaml
 
-rosrun dynamic_reconfigure dynparam dump /Edge_Detection Edge_Detection.yaml
+#rosrun dynamic_reconfigure dynparam dump /Edge_Detection Edge_Detection.yaml
 
 rosrun dynamic_reconfigure dynparam dump /Pot_Nav Pot_Nav.yaml
 
