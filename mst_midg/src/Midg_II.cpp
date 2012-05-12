@@ -81,8 +81,8 @@ int Open_MIDG_Connection()
     int fd;
     struct termios newtio;
 
-    fd = open("/dev/ttyUSB0", O_RDWR | O_NOCTTY | O_NONBLOCK );
-    if (fd <0) {perror("/dev/ttyUSB0"); exit(-1); }
+    fd = open("/dev/ttyUSB1", O_RDWR | O_NOCTTY | O_NONBLOCK );
+    if (fd <0) {perror("/dev/ttyUSB1"); exit(-1); }
 
     memset( &newtio, 0x00, sizeof(newtio) );
 

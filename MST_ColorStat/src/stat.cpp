@@ -39,9 +39,9 @@ void Stat::update()
   }
   
   //generate new stats
-  for(int j = yMin; j <= yMax; j++)
+  for(int j = yMin; j < yMax; j++)
   {
-    for(int i = xMin; i <= xMax; i++)
+    for(int i = xMin; i < xMax; i++)
     {
       int r = in->rgb[j][i][0];
       int g = in->rgb[j][i][1];

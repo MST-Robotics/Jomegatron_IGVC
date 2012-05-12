@@ -292,7 +292,7 @@ geometry_msgs::Twist find_twist()
     /*twist.linear.x += (params.target_weight_y/100.0) * sin(target.target_heading)/ (target.distance * params.target_dist_scale/1000) ;*/
     
     int sign = 1;
-    if (cos(target.target_heading) < 0)
+    if (sign < 0)
     {
         sign = -1;
     } 

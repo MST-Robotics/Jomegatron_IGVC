@@ -474,11 +474,11 @@ int find_target()
 
 	double lowest_dist = -1;
 	int closest_target = -1;
-	while (closest_target == -1 && current_priority <= 10 )
+	while (closest_target == -1 && ((current_priority <= 10 && !params.reverse_order) || (current_priority >= 1 && !params.reverse_order)) )
 	{
 		for(int i = 0 ; i < 10 ; i++)
 		{
-			if(!waypoint_complete[i] && way_priority[i] !=0 && way_priority[i] <= current_priority)
+			if(!waypoint_complete[i] && way_priority[i] !=0 && (((way_priority[i] <= current_priority) && !params.reverse_order) || ((way_priority[i] >= current_priority) && params.reverse_order)))
 			{
 				double lat = way_lat[i]/180 * pi ;
 				double lon = way_lon[i]/180 * pi;
@@ -642,7 +642,8 @@ int main(int argc, char **argv)
 		//check calbacks
 		ros::spinOnce();
 		
-		if(gps_fix)
+		//want heding to update with last so were going to greenwich
+		if(gps_fix || true)
 		{
 			//send the target to navigation
 			if (inital_gps)

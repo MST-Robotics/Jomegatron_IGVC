@@ -46,11 +46,6 @@
         
         <rosparam file="$(find MST_Control)/yaml/Control.yaml" command="load" />
         
-        <param name = "minus_sound" value = "$(find MST_Control)/sounds/Ahooga_Car_Horn.wav" />
-        
-        <param name = "navigation_waypoints" value = "$(find MST_Control)/yaml/Navigation_Waypoints.yaml" />
-        
-        <param name = "autonomous_waypoints" value = "$(find MST_Control)/yaml/Autonomous_Waypoints.yaml" />
 
     </node>
     
@@ -151,7 +146,7 @@
         
         <node pkg="MST_Motors" type="Motors" name="Motors" />
         
-        <node pkg="MST_Estop" type="Estop" name="Estop" />
+        <!-- <node pkg="MST_Estop" type="Estop" name="Estop" /> -->
 
     </group>
     

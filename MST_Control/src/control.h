@@ -166,6 +166,8 @@ bool                            wii_dis;
 bool                            estop_togg = 0;
 bool                            done_togg = 0;
 
+int last_msg_waypoint = 0;
+
 
 MST_Control::Control_ParamsConfig params;
 MST_Position::Target_Heading  target;
