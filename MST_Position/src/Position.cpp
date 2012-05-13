@@ -658,7 +658,7 @@ int main(int argc, char **argv)
 				target_heading = compute_msg(target_waypoint);
 			}
 
-			if(target_heading.distance <= params.waypoint_radius || skip_waypoint)
+			if(target_heading.distance <= params.waypoint_radius || skip_waypoint || (way_limit[target_waypoint] == 0 && target_heading.distance <= params.dummy_point_radius))
 			{
 				waypoint_complete[target_waypoint] = true;	
 				target_waypoint = find_target();
@@ -679,6 +679,11 @@ int main(int argc, char **argv)
 					//go to next
 					
 					target_heading = compute_msg(target_waypoint);
+					if(way_limit[target_waypoint] == 0)
+					{
+					    target_heading.target_heading = pi/2;
+						target_heading.distance = 2200000;
+					}
 				}
 				skip_waypoint = false;
 			}
