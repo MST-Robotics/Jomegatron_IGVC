@@ -672,18 +672,15 @@ int main(int argc, char **argv)
 						target_heading.distance = 2200000;
 						
 					}
-					target_heading.stop_robot = true;
+					target_heading.stop_robot = false;
 				}
 				else
 				{
 					//go to next
 					
 					target_heading = compute_msg(target_waypoint);
-					if(way_limit[target_waypoint] == 0)
-					{
-					    target_heading.target_heading = pi/2;
-						target_heading.distance = 2200000;
-					}
+					
+
 				}
 				skip_waypoint = false;
 			}
@@ -694,6 +691,11 @@ int main(int argc, char **argv)
 	    		target_heading.target_heading = pi/2;
 				target_heading.distance = 2200000;
 				
+			}
+			
+			if(way_limit[target_waypoint] == 0)
+			{
+			    target_heading.target_heading = pi/2;
 			}
 
 			target_pub.publish(target_heading);

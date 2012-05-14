@@ -670,7 +670,7 @@ int main(int argc, char **argv)
             ros::Duration(6).sleep();
             
             say("Hello World. My name is Joe-Mega-Tron. Please press the one and two buttons on the wiimote to connect");
-            ros::Duration(6).sleep();
+            ros::Duration(12).sleep();
             robot_init = false;
         }
         if(mode_==standby)

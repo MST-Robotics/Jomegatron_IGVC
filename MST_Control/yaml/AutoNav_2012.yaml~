@@ -11,4 +11,4 @@
   way_6_priority: 3, way_7_latitude: 42.6788150972, way_7_limit: 1.0, way_7_longitude: -83.1951414722,
   way_7_priority: 3, way_8_latitude: 42.6787540917, way_8_limit: 1.0, way_8_longitude: -83.1948398694,
   way_8_priority: 4, way_9_latitude: 1.0, way_9_limit: 1.0, way_9_longitude: 1.0,
-  way_9_priority: 0, waypoint_radius: 2.0}
+  way_9_priority: 0, waypoint_radius: 1.0}
