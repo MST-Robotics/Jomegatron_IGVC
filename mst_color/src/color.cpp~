@@ -170,6 +170,7 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
     
     }
     
+    ROS_INFO("color: x_run_lengths:%i", x_run_lengths.size());
     
     //find yrun lengths
     for (int x = 0; x < sobel_y.rows; x++)
@@ -273,6 +274,8 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
     
     }
     
+    ROS_INFO("color: y_run_lengths:%i", y_run_lengths.size());
+    
     
     //call recursive function to link the runs
     std::vector<segment> segments;
@@ -308,6 +311,8 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
         }
     }
     
+    ROS_INFO("color: segments:%i", segments.size());
+    
     
     //paint debug image with average values
     for( unsigned int s=0; s < segments.size(); s++)
@@ -324,7 +329,7 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
     
     //setup and publish message for debug image
     dbg_msg.header = cv_ptr_src->header;
-    dbg_msg.encoding = "CV_8UC3";
+    dbg_msg.encoding = "rgb8";
     dbg_msg.image = dbg ;
     
     //publish debug

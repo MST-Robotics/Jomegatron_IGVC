@@ -76,6 +76,7 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
         
         current.avg.y = y;
         current.avg.x = 0;
+        
         //calculate sums 
         for (int c = 0; c < sobel_x.depth(); c++)
         {
@@ -170,6 +171,7 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
     
     }
     
+    ROS_INFO("color: x_run_lengths:%i", x_run_lengths.size());
     
     //find yrun lengths
     for (int x = 0; x < sobel_y.rows; x++)
@@ -273,6 +275,8 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
     
     }
     
+    ROS_INFO("color: y_run_lengths:%i", y_run_lengths.size());
+    
     
     //call recursive function to link the runs
     std::vector<segment> segments;
@@ -307,6 +311,8 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
             segments.push_back(seg);
         }
     }
+    
+    ROS_INFO("color: segments:%i", segments.size());
     
     
     //paint debug image with average values
