@@ -1,0 +1,47 @@
+\subsubsection usage Usage
+\verbatim
+<node name="dynamic_reconfigure_node" pkg="MST_Position" type="dynamic_reconfigure_node">
+  <param name="use_gpsd" type="bool" value="False" />
+  <param name="continue_when_done" type="bool" value="False" />
+  <param name="go_to_waypoints" type="bool" value="False" />
+  <param name="waypoint_radius" type="double" value="1.0" />
+  <param name="reset_waypoints" type="bool" value="False" />
+  <param name="skip_waypoint" type="bool" value="False" />
+  <param name="pause" type="bool" value="False" />
+  <param name="use_dummy" type="bool" value="True" />
+  <param name="dummy_latitude" type="double" value="1.0" />
+  <param name="dummy_longitude" type="double" value="1.0" />
+  <param name="dummy_heading" type="double" value="1.0" />
+  <param name="way_1_latitude" type="double" value="1.0" />
+  <param name="way_1_longitude" type="double" value="1.0" />
+  <param name="way_1_priority" type="int" value="1" />
+  <param name="way_2_latitude" type="double" value="1.0" />
+  <param name="way_2_longitude" type="double" value="1.0" />
+  <param name="way_2_priority" type="int" value="1" />
+  <param name="way_3_latitude" type="double" value="1.0" />
+  <param name="way_3_longitude" type="double" value="1.0" />
+  <param name="way_3_priority" type="int" value="1" />
+  <param name="way_4_latitude" type="double" value="1.0" />
+  <param name="way_4_longitude" type="double" value="1.0" />
+  <param name="way_4_priority" type="int" value="1" />
+  <param name="way_5_latitude" type="double" value="1.0" />
+  <param name="way_5_longitude" type="double" value="1.0" />
+  <param name="way_5_priority" type="int" value="1" />
+  <param name="way_6_latitude" type="double" value="1.0" />
+  <param name="way_6_longitude" type="double" value="1.0" />
+  <param name="way_6_priority" type="int" value="1" />
+  <param name="way_7_latitude" type="double" value="1.0" />
+  <param name="way_7_longitude" type="double" value="1.0" />
+  <param name="way_7_priority" type="int" value="1" />
+  <param name="way_8_latitude" type="double" value="1.0" />
+  <param name="way_8_longitude" type="double" value="1.0" />
+  <param name="way_8_priority" type="int" value="1" />
+  <param name="way_9_latitude" type="double" value="1.0" />
+  <param name="way_9_longitude" type="double" value="1.0" />
+  <param name="way_9_priority" type="int" value="1" />
+  <param name="way_10_latitude" type="double" value="1.0" />
+  <param name="way_10_longitude" type="double" value="1.0" />
+  <param name="way_10_priority" type="int" value="1" />
+</node>
+\endverbatim
+
