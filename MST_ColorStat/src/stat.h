@@ -30,8 +30,6 @@ class Stat
   bool drawBounds;
   bool reset;
   bool enabled;
-  bool save;
-  bool load;
   
   int xMin,xMax,yMin,yMax;
   private:
