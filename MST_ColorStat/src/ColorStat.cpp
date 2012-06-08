@@ -38,7 +38,7 @@
 * Global variables
 ***********************************************************/
 
-stat stat1;
+Stat stat1;
 error error1;
 
 //~ sensor_msgs::Image              image;
@@ -159,7 +159,17 @@ void setparamsCallback(MST_ColorStat::ColorStat_ParamsConfig &config, uint32_t l
   	config.reset =false;
   }
   
-  
+  if(config.save)
+  {
+     stat1.saveFilter(config.filename.c_str());
+     config.save = false;
+  }
+
+  if(config.load)
+  {
+    stat1.loadFilter(config.filename.c_str());
+    config.load = false;
+  }
   
   // set params
   params = config;

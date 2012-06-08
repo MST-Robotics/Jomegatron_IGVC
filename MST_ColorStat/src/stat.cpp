@@ -5,9 +5,11 @@
 #include "stat.h"
 
 #include <iostream>
+#include <unistd.h>
+#include <fcntl.h>
 using namespace std;
 
-stat::stat()
+Stat::Stat()
 {
   setBounds(IMAGE_WIDTH/2 - SIZE, IMAGE_WIDTH/2 + SIZE, IMAGE_HEIGHT/2 - SIZE, IMAGE_HEIGHT/2 + SIZE);
   drawBounds = true;
@@ -15,7 +17,7 @@ stat::stat()
   enabled = true;
 }
 
-void stat::update()
+void Stat::update()
 {
   if(!enabled) return;
   //clear stats
@@ -104,7 +106,7 @@ void stat::update()
   
 }
 
-void stat::setBounds(int xmin,int xmax,int ymin,int ymax)
+void Stat::setBounds(int xmin,int xmax,int ymin,int ymax)
 {
   xMin = xmin;
   xMax = xmax;
@@ -117,46 +119,22 @@ void stat::setBounds(int xmin,int xmax,int ymin,int ymax)
   
   return;
 }
-void stat::saveFilter(const char *filename)
+void Stat::saveFilter(const char *filename)
 {
-  FILE *file;
-  int lev_write;
-  int chr_write[IMAGE_WIDTH];
-  int close_success;
-
-  file=fopen(filename,"w");
-  
-  fwrite(lev,8,IMAGE_WIDTH,file);
-
-  for (int i=0;i<IMAGE_WIDTH;i++)
-  {
-    fwrite(chr,8,IMAGE_WIDTH,file);
-  }
-
-  close_success=fclose(file);
-
+  int fd = open(filename,O_RDWR | O_TRUNC | O_CREAT, 0664);
+  if(fd==-1) return;
+  write(fd,this,sizeof(stat));
+  close(fd);
   return;
 }
-void stat::loadFilter(const char *filename)
+void Stat::loadFilter(const char *filename)
 {
-  FILE *file;
-  int fwrite;
-  size_t lev_write;
-  size_t chr_write[IMAGE_WIDTH];
-  int close_success;
-
-  file=fopen(filename,"r");
-  
-  lev_write=fread(lev,8,IMAGE_WIDTH,file);
-
-  for (int i=0;i<IMAGE_WIDTH;i++)
-  {
-    chr_write[i]=fread(chr,8,IMAGE_WIDTH,file);
-  }
-
-  close_success=fclose(file);
-
-
+  image* inTemp = in;
+  int fd = open(filename,O_RDWR);
+  if(fd==-1) return;
+  read(fd,this,sizeof(stat));
+  close(fd);
+  in = inTemp;
   return;
 }
 
