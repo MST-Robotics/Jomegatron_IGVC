@@ -355,7 +355,14 @@ void navigation_callback(const geometry_msgs::Twist twist)
     }
 }
 
-//TODO doc
+/***********************************************************
+* @fn jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
+* @brief receives instructions from JAUS
+* @pre takes in a message containing instructions from JAUS
+* @post gives control to JAUS if requested, sets JAUS mode,
+*       and passes on waypoints and speed
+* @param takes in a message from MST_JAUS 
+***********************************************************/
 void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
 {
     if(msg->request_control)
@@ -372,7 +379,12 @@ void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
         else if(msg->request_shutdown)
         {
             jaus_mode = jaus_shutdown;
-            mode_ = standby; //BAD, just handing control to w/e fro now
+            mode_ = standby; //BAD, just handing control to w/e for now
+        }
+        
+        if(jaus_mode = jaus_resume)
+        {
+            //TODO send waypoint message
         }
     }
 }
@@ -491,6 +503,7 @@ int main(int argc, char **argv)
     
     sound_pub = n.advertise<sound_play::SoundRequest>("robotsound" ,100);
     
+    jaus_pub = n.advertise<MST_JAUS::JAUS_in>("/jaus_in" ,100);
 
     
     //set rate to 30 hz
@@ -535,7 +548,17 @@ int main(int argc, char **argv)
         }
         else if(mode_ == jaus)
         {
-            stopped = false;
+            if(jaus_mode == jaus_resume)
+            {
+                motor_pub.publish(nav_twist);
+                jaus_pub.publish(jaus_msg);
+                stopped = false;
+            }
+            else
+            {
+                stop_robot();
+                stopped = true;
+            }
         }
         
         

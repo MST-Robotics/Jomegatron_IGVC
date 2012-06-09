@@ -99,6 +99,7 @@ ros::Publisher                  wiimote_rum_pub;
 ros::Publisher                  motor_pub;
 ros::Publisher                  sound_pub;
 ros::Publisher                  estop_pub;
+ros::Publisher                  jaus_pub;
 
 
 
@@ -158,8 +159,7 @@ MST_Estop::Estop_State          estop;
 
 geometry_msgs::Twist            wii_twist;
 geometry_msgs::Twist            nav_twist;
-bool                            wii_updated;
-bool                            nav_updated;
+MST_JAUS::JAUS_in               jaus_msg;
 
 
 bool                            wii_dis;
