@@ -390,6 +390,32 @@ void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
 }
 
 /***********************************************************
+* @fn midg_callback(const mst_midg::IMU::ConstPtr& msg)
+* @brief receives GPS info to send to JAUS
+* @pre takes in a message from midg
+* @post sets the appropriate jaus_msg fields
+* @param takes in an IMU message from mst_midg
+***********************************************************/
+void midg_callback(const mst_midg::IMU::ConstPtr& imu)
+{
+    jaus_msg.position_valid = imu->position_valid;
+    jaus_msg.gps_time = imu->gps_time;
+    jaus_msg.latitude = imu->latitude;
+    jaus_msg.longitude = imu->longitude;
+    jaus_msg.altitude = imu->altitude;
+    jaus_msg.position_accuracy = imu->position_accuracy;
+
+    jaus_msg.heading_valid = imu->heading_valid;
+    jaus_msg.heading = imu->heading;
+    
+    jaus_msg.speed_valid = imu->speed_valid;
+    jaus_msg.speed = imu->speed;
+    
+    jaus_msg.angular_rate_valid = imu->angular_rate_valid;
+    jaus_msg.angular_rate = imu->angular_rate;
+}
+
+/***********************************************************
 * @fn navigation_callback(const geometry_msgs::Twist::ConstPtr& twist)
 * @brief decides on forwarding navigation comands to the motors
 * @pre takes in a ros message of a twist from navigation and 
@@ -553,11 +579,21 @@ int main(int argc, char **argv)
                 motor_pub.publish(nav_twist);
                 jaus_pub.publish(jaus_msg);
                 stopped = false;
+                
+                //reset jaus_msg until new data from midg
+                jaus_msg.position_valid = false;
+                jaus_msg.heading_valid = false;
+                jaus_msg.speed_valid = false;
+                jaus_msg.angular_rate_valid = false;
+                jaus_msg.waypoint_list_valid = false;
             }
             else
             {
-                stop_robot();
-                stopped = true;
+                if(!stopped)
+                {
+                    stop_robot();
+                    stopped = true;
+                }
             }
         }
         

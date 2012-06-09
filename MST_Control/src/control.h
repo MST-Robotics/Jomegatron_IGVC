@@ -28,6 +28,7 @@
 #include <MST_Position/Target_Heading.h>
 #include "MST_JAUS/JAUS_in.h"
 #include "MST_JAUS/JAUS_out.h"
+#include "mst_midg/IMU.h"
 
 /***********************************************************
 * Other includes
