@@ -382,8 +382,18 @@ void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
             mode_ = standby; //BAD, just handing control to w/e for now
         }
         
-        if(jaus_mode = jaus_resume)
-            jaus_execute = msg->execute_waypoints;
+        //Handle execution of waypoint list and speed
+        if(!jaus_execute && jaus_mode == jaus_resume && msg->execute_waypoints)
+        {
+            jaus_execute = true;
+            ros::param::get("/Control/base_linear_speed", non_jaus_speed);
+            ros::param::set("/Control/base_linear_speed", msg->speed);
+        }
+        else if(jaus_execute && (jaus_mode != jaus_resume || mode_ != jaus))
+        {
+            jaus_execute = false;
+            ros::param::set("/Control/base_linear_speed", non_jaus_speed);
+        }
         
         //Create/update list of waypoints
         for(int i = 0; i < msg->waypoint_id.size(); i++)

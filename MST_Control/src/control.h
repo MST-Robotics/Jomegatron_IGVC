@@ -169,6 +169,9 @@ bool                            done_togg = 0;
 bool                            jaus_execute = false;
 
 
+double                          non_jaus_speed = 2.4;
+
+
 MST_Control::Control_ParamsConfig params;
 MST_Position::Target_Heading  target;
 
