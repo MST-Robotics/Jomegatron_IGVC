@@ -166,10 +166,24 @@ MST_JAUS::JAUS_in               jaus_msg;
 bool                            wii_dis;
 bool                            estop_togg = 0;
 bool                            done_togg = 0;
+bool                            jaus_execute = false;
 
 
 MST_Control::Control_ParamsConfig params;
 MST_Position::Target_Heading  target;
+
+
+struct jaus_waypoint
+{
+    int priority;
+    uint16_t ID;
+    uint16_t nextID;
+    uint16_t previousID;
+    double_t x;
+    double_t y;
+    double_t yaw;
+};
+std::vector<jaus_waypoint*> jaus_waypoints;
 
 
 /***********************************************************

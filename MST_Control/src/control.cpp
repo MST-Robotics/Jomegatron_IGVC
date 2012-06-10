@@ -370,7 +370,7 @@ void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
         mode_ = jaus;
     }
     
-    if(mode_ == jaus)
+    if(mode_ == jaus) //JAUS COP has control
     {
         if(msg->request_resume)
             jaus_mode = jaus_resume;
@@ -383,8 +383,79 @@ void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
         }
         
         if(jaus_mode = jaus_resume)
+            jaus_execute = msg->execute_waypoints;
+        
+        //Create/update list of waypoints
+        for(int i = 0; i < msg->waypoint_id.size(); i++)
         {
-            //TODO send waypoint message
+            bool updated = false;
+            
+            for(int j = 0; j < jaus_waypoints.size(); j++)
+            {
+                if(jaus_waypoints[j]->ID = msg->waypoint_id[i])
+                {
+                    //Update
+                    jaus_waypoints[j]->nextID = msg->waypoint_previous_id[i];
+                    jaus_waypoints[j]->previousID = msg->waypoint_next_id[i];
+                    jaus_waypoints[j]->x = msg->waypoint_pose_x[i];
+                    jaus_waypoints[j]->y = msg->waypoint_pose_y[i];
+                    jaus_waypoints[j]->yaw = msg->pose_yaw[i];
+                    
+                    updated = true;
+                }
+            }
+            
+            if(!updated)
+            {
+                jaus_waypoints.push_back(new jaus_waypoint);
+                jaus_waypoints.back()->ID = msg->waypoint_id[i];
+                jaus_waypoints.back()->nextID = msg->waypoint_previous_id[i];
+                jaus_waypoints.back()->previousID = msg->waypoint_next_id[i];
+                jaus_waypoints.back()->x = msg->waypoint_pose_x[i];
+                jaus_waypoints.back()->y = msg->waypoint_pose_y[i];
+                jaus_waypoints.back()->yaw = msg->pose_yaw[i];
+            }
+        }
+        
+        //Sort waypoints
+        int current = -1;
+        for(int i = 0; i < jaus_waypoints.size(); i++) //find first
+        {
+            if(jaus_waypoints[i]->previousID == 0) {
+                current = i;
+                break;
+            }
+        }
+        for(int i = 0; i < jaus_waypoints.size(); i++)
+        {
+            jaus_waypoints[current]->priority = i+1;
+            
+            //find next
+            for(int j = 0; j < jaus_waypoints.size(); i++)
+            {
+                if(jaus_waypoints[current]->nextID == jaus_waypoints[j]->ID)
+                {
+                    current = j;
+                    break;
+                }
+            }
+        }
+        
+        //TODO ros::param::set("/node/param", value);
+        char buf[27];
+        for(int i=0; i<10; i++)
+        {
+            sprintf(buf, "/Position/way_%d_priority", i+1);
+            if(jaus_waypoints.size() > i)
+            {
+                ros::param::set(buf, jaus_waypoints[8]->priority);
+                sprintf(buf, "/Position/way_%d_latitude", i+1);
+                ros::param::set(buf, jaus_waypoints[8]->y);//latitude);
+                sprintf(buf, "/Position/way_%d_logitude", i+1);
+                ros::param::set(buf, jaus_waypoints[8]->x);//longitude);
+            }
+            else
+                ros::param::set(buf, 0);
         }
     }
 }
@@ -576,7 +647,8 @@ int main(int argc, char **argv)
         {
             if(jaus_mode == jaus_resume)
             {
-                motor_pub.publish(nav_twist);
+                if(jaus_execute)
+                    motor_pub.publish(nav_twist);
                 jaus_pub.publish(jaus_msg);
                 stopped = false;
                 
