@@ -441,7 +441,7 @@ void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
             }
         }
         
-        //TODO ros::param::set("/node/param", value);
+        //Send to ROS param server
         char buf[27];
         for(int i=0; i<10; i++)
         {
@@ -457,6 +457,34 @@ void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
             else
                 ros::param::set(buf, 0);
         }
+        
+        //Set waypoint list to reply message
+        jaus_msg.waypoint_id.clear();
+        jaus_msg.waypoint_previous_id.clear();
+        jaus_msg.waypoint_next_id.clear();
+        jaus_msg.waypoint_x.clear();
+        jaus_msg.waypoint_y.clear();
+        for(int i = 0; i < jaus_waypoints.size(); i++)
+        {
+            jaus_msg.waypoint_id.push_back(jaus_waypoints[i]->ID);
+            jaus_msg.waypoint_previous_id.push_back(jaus_waypoints[i]->previousID);
+            jaus_msg.waypoint_next_id.push_back(jaus_waypoints[i]->nextID);
+            jaus_msg.waypoint_x.push_back(jaus_waypoints[i]->x);
+            jaus_msg.waypoint_y.push_back(jaus_waypoints[i]->y);
+        }
+        jaus_msg.waypoint_list_valid = true;
+        
+        //Find active waypoint ID
+        int active = 0;
+        for(int i=10; i>0; i--)
+        {
+            sprintf(buf, "/Position/way_%d_priority", i);
+            int temp = 0;
+            ros::param::get(buf, temp);
+            if(temp != 0 && temp < active)
+                active = temp;
+        }
+        jaus_msg.active_waypoint_id = jaus_waypoints[current]->ID;
     }
 }
 
