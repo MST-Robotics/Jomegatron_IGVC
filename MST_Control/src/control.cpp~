@@ -25,7 +25,7 @@ void pos_callback( const MST_Position::Target_Heading::ConstPtr& msg)
         {
             play(params.done_sound);
             ros::Duration(6).sleep();
-            change_mode( standby );
+            //change_mode( standby );
             done_togg = true;
         }
         else if (!msg->done)
@@ -251,6 +251,7 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
         {
             //resets waypoints
             say("reseting waypoints");
+            ros::Duration(6).sleep();
             system("rosrun dynamic_reconfigure dynparam set /Position reset_waypoints true");
         }
         
@@ -260,6 +261,7 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
 
             //skips waypoint
             say("skip-ing waypoint");
+            ros::Duration(6).sleep();
             system("rosrun dynamic_reconfigure dynparam set /Position skip_waypoint true");
 
         }
@@ -271,13 +273,14 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
             {
                 autonmous_mode = carrot;
                 say("Auto-bots,,, roll out!");
+                ros::Duration(6).sleep();
                 system("rosrun dynamic_reconfigure dynparam set /Position go_to_waypoints false");
             }
             else if(autonmous_mode == autonomous_waypoints)
             {
 
                 autonmous_mode = navigation;
-                say("moving to navigation waypoints");
+                say("moving to auto nav waypoints");
                 string temp = "rosrun dynamic_reconfigure dynparam load /Position " ;
                 temp += params.navigation_waypoints;
                 system(temp.c_str() );
@@ -286,7 +289,7 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
             else if(autonmous_mode == carrot)
             {
                 autonmous_mode = autonomous_waypoints;
-                say("moving to autonomous waypoints");
+                say("moving to qualification waypoints");
                 string temp = "rosrun dynamic_reconfigure dynparam load /Position " ;
                 temp += params.autonomous_waypoints;
                 ROS_INFO("%s",temp.c_str());
@@ -331,6 +334,7 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
         {
             //pauses
             say("pausing waypoint navigation");
+            ros::Duration(6).sleep();
             system("rosrun dynamic_reconfigure dynparam set /Position pause true");
         }
         
@@ -362,7 +366,14 @@ void navigation_callback(const geometry_msgs::Twist twist)
     }
 }
 
-//TODO doc
+/***********************************************************
+* @fn jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
+* @brief receives instructions from JAUS
+* @pre takes in a message containing instructions from JAUS
+* @post gives control to JAUS if requested, sets JAUS mode,
+*       and passes on waypoints and speed
+* @param takes in a message from MST_JAUS 
+***********************************************************/
 void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
 {
     if(msg->request_control)
@@ -370,7 +381,7 @@ void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
         mode_ = jaus;
     }
     
-    if(mode_ == jaus)
+    if(mode_ == jaus) //JAUS COP has control
     {
         if(msg->request_resume)
             jaus_mode = jaus_resume;
@@ -379,9 +390,149 @@ void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
         else if(msg->request_shutdown)
         {
             jaus_mode = jaus_shutdown;
-            mode_ = standby; //BAD, just handing control to w/e fro now
+            mode_ = standby; //BAD, just handing control to w/e for now
         }
+        
+        //Handle execution of waypoint list and speed
+        if(!jaus_execute && jaus_mode == jaus_resume && msg->execute_waypoints)
+        {
+            jaus_execute = true;
+            ros::param::get("/Control/base_linear_speed", non_jaus_speed);
+            ros::param::set("/Control/base_linear_speed", msg->speed);
+        }
+        else if(jaus_execute && (jaus_mode != jaus_resume || mode_ != jaus))
+        {
+            jaus_execute = false;
+            ros::param::set("/Control/base_linear_speed", non_jaus_speed);
+        }
+        
+        //Create/update list of waypoints
+        for(int i = 0; i < msg->waypoint_id.size(); i++)
+        {
+            bool updated = false;
+            
+            for(int j = 0; j < jaus_waypoints.size(); j++)
+            {
+                if(jaus_waypoints[j]->ID = msg->waypoint_id[i])
+                {
+                    //Update
+                    jaus_waypoints[j]->nextID = msg->waypoint_previous_id[i];
+                    jaus_waypoints[j]->previousID = msg->waypoint_next_id[i];
+                    jaus_waypoints[j]->x = msg->waypoint_pose_x[i];
+                    jaus_waypoints[j]->y = msg->waypoint_pose_y[i];
+                    jaus_waypoints[j]->yaw = msg->pose_yaw[i];
+                    
+                    updated = true;
+                }
+            }
+            
+            if(!updated)
+            {
+                jaus_waypoints.push_back(new jaus_waypoint);
+                jaus_waypoints.back()->ID = msg->waypoint_id[i];
+                jaus_waypoints.back()->nextID = msg->waypoint_previous_id[i];
+                jaus_waypoints.back()->previousID = msg->waypoint_next_id[i];
+                jaus_waypoints.back()->x = msg->waypoint_pose_x[i];
+                jaus_waypoints.back()->y = msg->waypoint_pose_y[i];
+                jaus_waypoints.back()->yaw = msg->pose_yaw[i];
+            }
+        }
+        
+        //Sort waypoints
+        int current = -1;
+        for(int i = 0; i < jaus_waypoints.size(); i++) //find first
+        {
+            if(jaus_waypoints[i]->previousID == 0) {
+                current = i;
+                break;
+            }
+        }
+        for(int i = 0; i < jaus_waypoints.size(); i++)
+        {
+            jaus_waypoints[current]->priority = i+1;
+            
+            //find next
+            for(int j = 0; j < jaus_waypoints.size(); i++)
+            {
+                if(jaus_waypoints[current]->nextID == jaus_waypoints[j]->ID)
+                {
+                    current = j;
+                    break;
+                }
+            }
+        }
+        
+        //Send to ROS param server
+        char buf[27];
+        for(int i=0; i<10; i++)
+        {
+            sprintf(buf, "/Position/way_%d_priority", i+1);
+            if(jaus_waypoints.size() > i)
+            {
+                ros::param::set(buf, jaus_waypoints[8]->priority);
+                sprintf(buf, "/Position/way_%d_latitude", i+1);
+                ros::param::set(buf, jaus_waypoints[8]->y);//latitude);
+                sprintf(buf, "/Position/way_%d_logitude", i+1);
+                ros::param::set(buf, jaus_waypoints[8]->x);//longitude);
+            }
+            else
+                ros::param::set(buf, 0);
+        }
+        
+        //Set waypoint list to reply message
+        jaus_msg.waypoint_id.clear();
+        jaus_msg.waypoint_previous_id.clear();
+        jaus_msg.waypoint_next_id.clear();
+        jaus_msg.waypoint_x.clear();
+        jaus_msg.waypoint_y.clear();
+        for(int i = 0; i < jaus_waypoints.size(); i++)
+        {
+            jaus_msg.waypoint_id.push_back(jaus_waypoints[i]->ID);
+            jaus_msg.waypoint_previous_id.push_back(jaus_waypoints[i]->previousID);
+            jaus_msg.waypoint_next_id.push_back(jaus_waypoints[i]->nextID);
+            jaus_msg.waypoint_x.push_back(jaus_waypoints[i]->x);
+            jaus_msg.waypoint_y.push_back(jaus_waypoints[i]->y);
+        }
+        jaus_msg.waypoint_list_valid = true;
+        
+        //Find active waypoint ID
+        int active = 0;
+        for(int i=10; i>0; i--)
+        {
+            sprintf(buf, "/Position/way_%d_priority", i);
+            int temp = 0;
+            ros::param::get(buf, temp);
+            if(temp != 0 && temp < active)
+                active = temp;
+        }
+        jaus_msg.active_waypoint_id = jaus_waypoints[current]->ID;
     }
+}
+
+/***********************************************************
+* @fn midg_callback(const mst_midg::IMU::ConstPtr& msg)
+* @brief receives GPS info to send to JAUS
+* @pre takes in a message from midg
+* @post sets the appropriate jaus_msg fields
+* @param takes in an IMU message from mst_midg
+***********************************************************/
+void midg_callback(const mst_midg::IMU::ConstPtr& imu)
+{
+    jaus_msg.position_valid = imu->position_valid;
+    jaus_msg.gps_time = imu->gps_time;
+    jaus_msg.latitude = imu->latitude;
+    jaus_msg.longitude = imu->longitude;
+    jaus_msg.altitude = imu->altitude;
+    jaus_msg.position_accuracy = imu->position_accuracy;
+
+    jaus_msg.heading_valid = imu->heading_valid;
+    jaus_msg.heading = imu->heading;
+    
+    jaus_msg.speed_valid = imu->speed_valid;
+    jaus_msg.speed = imu->speed;
+    
+    jaus_msg.angular_rate_valid = imu->angular_rate_valid;
+    jaus_msg.angular_rate = imu->angular_rate;
 }
 
 /***********************************************************
@@ -498,6 +649,7 @@ int main(int argc, char **argv)
     
     sound_pub = n.advertise<sound_play::SoundRequest>("robotsound" ,100);
     
+    jaus_pub = n.advertise<MST_JAUS::JAUS_in>("/jaus_in" ,100);
 
     
     //set rate to 30 hz
@@ -516,7 +668,7 @@ int main(int argc, char **argv)
         
         if(robot_init)
         {
-            ros::Duration(9).sleep();
+            ros::Duration(20).sleep();
             
             say("Hello World. My name is Joe-Mega-Tron. Please press the one and two buttons on the wiimote to connect");
             
@@ -542,7 +694,28 @@ int main(int argc, char **argv)
         }
         else if(mode_ == jaus)
         {
-            stopped = false;
+            if(jaus_mode == jaus_resume)
+            {
+                if(jaus_execute)
+                    motor_pub.publish(nav_twist);
+                jaus_pub.publish(jaus_msg);
+                stopped = false;
+                
+                //reset jaus_msg until new data from midg
+                jaus_msg.position_valid = false;
+                jaus_msg.heading_valid = false;
+                jaus_msg.speed_valid = false;
+                jaus_msg.angular_rate_valid = false;
+                jaus_msg.waypoint_list_valid = false;
+            }
+            else
+            {
+                if(!stopped)
+                {
+                    stop_robot();
+                    stopped = true;
+                }
+            }
         }
         
         

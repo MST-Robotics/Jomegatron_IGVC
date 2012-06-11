@@ -25,7 +25,7 @@ void pos_callback( const MST_Position::Target_Heading::ConstPtr& msg)
         {
             play(params.done_sound);
             ros::Duration(6).sleep();
-            change_mode( standby );
+            //change_mode( standby );
             done_togg = true;
         }
         else if (!msg->done)
@@ -251,6 +251,7 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
         {
             //resets waypoints
             say("reseting waypoints");
+            ros::Duration(6).sleep();
             system("rosrun dynamic_reconfigure dynparam set /Position reset_waypoints true");
         }
         
@@ -260,6 +261,7 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
 
             //skips waypoint
             say("skip-ing waypoint");
+            ros::Duration(6).sleep();
             system("rosrun dynamic_reconfigure dynparam set /Position skip_waypoint true");
 
         }
@@ -271,13 +273,14 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
             {
                 autonmous_mode = carrot;
                 say("Auto-bots,,, roll out!");
+                ros::Duration(6).sleep();
                 system("rosrun dynamic_reconfigure dynparam set /Position go_to_waypoints false");
             }
             else if(autonmous_mode == autonomous_waypoints)
             {
 
                 autonmous_mode = navigation;
-                say("moving to navigation waypoints");
+                say("moving to auto nav waypoints");
                 string temp = "rosrun dynamic_reconfigure dynparam load /Position " ;
                 temp += params.navigation_waypoints;
                 system(temp.c_str() );
@@ -286,7 +289,7 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
             else if(autonmous_mode == carrot)
             {
                 autonmous_mode = autonomous_waypoints;
-                say("moving to autonomous waypoints");
+                say("moving to qualification waypoints");
                 string temp = "rosrun dynamic_reconfigure dynparam load /Position " ;
                 temp += params.autonomous_waypoints;
                 ROS_INFO("%s",temp.c_str());
@@ -331,6 +334,7 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
         {
             //pauses
             say("pausing waypoint navigation");
+            ros::Duration(6).sleep();
             system("rosrun dynamic_reconfigure dynparam set /Position pause true");
         }
         
@@ -660,14 +664,13 @@ int main(int argc, char **argv)
         ros::spinOnce();
         
         
-
         
         if(robot_init)
         {
-            ros::Duration(20).sleep();
+            ros::Duration(6).sleep();
             
             say("Hello World. My name is Joe-Mega-Tron. Please press the one and two buttons on the wiimote to connect");
-            
+            ros::Duration(6).sleep();
             robot_init = false;
         }
         if(mode_==standby)
