@@ -99,8 +99,8 @@ int main(int argc, char **argv)
     
     ros::Publisher odom_pub = n.advertise<nav_msgs::Odometry>("/odom", 1000);
     
-    strcpy( params.left_motor_file, (char*) "/dev/motor_l" );
-    strcpy( params.right_motor_file,(char*) "/dev/motor_r" );
+    strcpy( params.left_motor_file, (char*) "/dev/ttyUSB3" );
+    strcpy( params.right_motor_file,(char*) "/dev/ttyUSB2" );
     params.topspeed = 4.4704;
     params.watchdog_timeout = 1.0;
 

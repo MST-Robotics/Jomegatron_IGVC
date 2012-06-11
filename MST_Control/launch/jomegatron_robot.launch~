@@ -121,6 +121,13 @@
 
         </node>
         
+        <node pkg="mst_homography" type="homography" name="Homography" args= "image_color:=ptgrey/image_rect_color image_masked:=image_stat" >
+            
+            <rosparam file="$(find MST_Control)/yaml/Homography.yaml" command="load"  />
+
+        </node>
+        
+        
         <node pkg="mst_color" type="color" name="color" args= "image:=ptgrey/image_rect_color" if="$(arg color)"/>
         
     </group>
@@ -144,7 +151,7 @@
         
         <node pkg="MST_Motors" type="Motors" name="Motors" />
         
-        <node pkg="MST_Estop" type="Estop" name="Estop" />
+        <!-- <node pkg="MST_Estop" type="Estop" name="Estop" /> -->
 
     </group>
     

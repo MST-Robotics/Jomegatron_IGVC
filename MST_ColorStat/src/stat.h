@@ -5,6 +5,7 @@
 #ifndef STAT_H
 #define STAT_H
 
+#include "ros/ros.h"
 #include <cmath>
 #include "image.h"
 #include <stdio.h>

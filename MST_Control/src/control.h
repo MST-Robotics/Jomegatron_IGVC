@@ -171,6 +171,8 @@ bool                            jaus_execute = false;
 
 double                          non_jaus_speed = 2.4;
 
+int last_msg_waypoint = 0;
+
 
 MST_Control::Control_ParamsConfig params;
 MST_Position::Target_Heading  target;

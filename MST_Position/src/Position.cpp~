@@ -43,6 +43,7 @@ ros::Subscriber                 garmin_sub;
 
 ros::Publisher                  target_pub;
 ros::Publisher                  odom_pub;
+ros::Publisher                  goal_pub;
 
 ros::ServiceServer              gps_to_pose;
 
@@ -63,6 +64,7 @@ double                          inital_head;
 double                          way_lat[10];
 double                          way_lon[10];
 int                             way_priority[10];
+double                          way_limit[10];
 bool                            waypoint_complete[10];
 
 bool                            skip_waypoint;
@@ -143,7 +145,7 @@ void midgCallback(const  mst_midg::IMU::ConstPtr& imu)
         }
 		
         if(imu->heading)
-            current_head = imu->heading;
+            current_head = imu->heading + params.heading_offset;
 		
 	}
 	
@@ -326,9 +328,20 @@ void reset_waypoints()
 	read_waypoints();
     for(int i = 0 ; i < 10 ; i++)
     {
+        //reset the waypoint complete values
     	waypoint_complete[i] = false;
-    	current_priority = 1;
+    	
     }
+    
+    if(params.reverse_order)
+	{
+	    current_priority = 10;
+	}
+	else
+	{
+	    current_priority = 1;
+	}
+    
 	inital_gps = true;
 }
 
@@ -363,14 +376,13 @@ double find_dist(double lat1, double lon1 , double lat2 ,double lon2)
 double find_heading(double lat1, double lon1 , double lat2 ,double lon2)
 {
 	// find bearing between two gps points
-
 	double delta_lon = lon2 - lon1;
 	double heading;
 
     // magic forumla #2 we have no idea how it works, if it works or why it works
 
 	//find the bearing 
-     double x = sin(delta_lon) * cos(lat2);
+    double x = sin(delta_lon) * cos(lat2);
 
 	double y = cos(lat1) * sin(lat2) -
 				sin(lat1) * cos(lat1) * cos(delta_lon);
@@ -398,52 +410,61 @@ void read_waypoints()
 	way_lat[0] = params.way_1_latitude;
 	way_lon[0] = params.way_1_longitude;
     way_priority[0] = params.way_1_priority;
+	way_limit[0] = params.way_1_limit;
     
     //read in waypoint 2
 	way_lat[1] = params.way_2_latitude;
 	way_lon[1] = params.way_2_longitude;
     way_priority[1] = params.way_2_priority;
+	way_limit[1] = params.way_2_limit;
     
     //read in waypoint 3
 	way_lat[2] = params.way_3_latitude;
 	way_lon[2] = params.way_3_longitude;
     way_priority[2] = params.way_3_priority;
+	way_limit[2] = params.way_3_limit;
     
     //read in waypoint 4
 	way_lat[3] = params.way_4_latitude;
 	way_lon[3] = params.way_4_longitude;
     way_priority[3] = params.way_4_priority;
+	way_limit[3] = params.way_4_limit;
     
     //read in waypoint 5
 	way_lat[4] = params.way_5_latitude;
 	way_lon[4] = params.way_5_longitude;
     way_priority[4] = params.way_5_priority;
+	way_limit[4] = params.way_5_limit;
     
     //read in waypoint 6
 	way_lat[5] = params.way_6_latitude;
 	way_lon[5] = params.way_6_longitude;
     way_priority[5] = params.way_6_priority;
+	way_limit[5] = params.way_5_limit;
     
     //read in waypoint 7
-
 	way_lat[6] = params.way_7_latitude;
 	way_lon[6] = params.way_7_longitude;
     way_priority[6] = params.way_7_priority;
+	way_limit[6] = params.way_7_limit;
     
     //read in waypoint 8
 	way_lat[7] = params.way_8_latitude;
 	way_lon[7] = params.way_8_longitude;
     way_priority[7] = params.way_8_priority;
+	way_limit[7] = params.way_7_limit;
     
     //read in waypoint 9
 	way_lat[8] = params.way_9_latitude;
 	way_lon[8] = params.way_9_longitude;
     way_priority[8] = params.way_9_priority;
+	way_limit[8] = params.way_8_limit;
     
     //read in waypoint 10
 	way_lat[9] = params.way_10_latitude;
 	way_lon[9] = params.way_10_longitude;
     way_priority[9] = params.way_10_priority;
+	way_limit[9] = params.way_10_limit;
     
     
 }
@@ -453,11 +474,11 @@ int find_target()
 
 	double lowest_dist = -1;
 	int closest_target = -1;
-	while (closest_target == -1 && current_priority <= 10 )
+	while (closest_target == -1 && ((current_priority <= 10 && !params.reverse_order) || (current_priority >= 1 && !params.reverse_order)) )
 	{
 		for(int i = 0 ; i < 10 ; i++)
 		{
-			if(!waypoint_complete[i] && way_priority[i] !=0 && way_priority[i] <= current_priority)
+			if(!waypoint_complete[i] && way_priority[i] !=0 && (((way_priority[i] <= current_priority) && !params.reverse_order) || ((way_priority[i] >= current_priority) && params.reverse_order)))
 			{
 				double lat = way_lat[i]/180 * pi ;
 				double lon = way_lon[i]/180 * pi;
@@ -474,11 +495,16 @@ int find_target()
 		}
 		if(closest_target == -1)
 		{
-			current_priority ++;
-		}	
+		    if(params.reverse_order)
+		    {   
+		        current_priority--;
+		    }
+		    else
+		    {
+			    current_priority ++;
+		}	}
 	}
 	
-		
 
 	return closest_target;	
 	
@@ -543,7 +569,7 @@ nav_msgs::Odometry odom_msg()
                      0, 0, 0, 0, 9999999, 0,
                      0, 0, 0, 0, 0, 9999999};
     for(int i=0; i<36; ++i)
-        odom.twist.covariance[i] = temp2[i]];
+        odom.twist.covariance[i] = temp2[i];
     
     return odom;
 }
@@ -555,6 +581,21 @@ void odom_set_origin()
     inital_head = current_head;
     
     return;
+}
+
+geometry_msgs::PoseStamped relative_waypoint(int target)
+{
+    geometry_msgs::PoseStamped waypoint;
+    waypoint.header.stamp = current_time;
+    waypoint.header.frame_id = "goal";
+    
+    double dist = find_dist(current_lat, current_lon, way_lat[target], way_lon[target]);
+    double theta = find_heading(current_lat, current_lon, way_lat[target], way_lon[target]);
+    waypoint.pose.position.x = cos(theta) * dist;
+    waypoint.pose.position.y = sin(theta) * dist;
+    waypoint.pose.position.z = 0;
+    
+    return waypoint;
 }
 
 /***********************************************************
@@ -587,6 +628,8 @@ int main(int argc, char **argv)
     target_pub = n.advertise<MST_Position::Target_Heading>( "target" , 5 );
         
     odom_pub = n.advertise<nav_msgs::Odometry>( "vo", 5 );
+    
+    goal_pub = n.advertise<geometry_msgs::PoseStamped>( "move_base_simple/goal", 5 );
    
     reset_waypoints();
     
@@ -599,7 +642,8 @@ int main(int argc, char **argv)
 		//check calbacks
 		ros::spinOnce();
 		
-		if(gps_fix)
+		//want heding to update with last so were going to greenwich
+		if(gps_fix || true)
 		{
 			//send the target to navigation
 			if (inital_gps)
@@ -641,6 +685,8 @@ int main(int argc, char **argv)
 			target_pub.publish(target_heading);
             
             odom_pub.publish(odom_msg());
+            
+            goal_pub.publish(relative_waypoint(target_waypoint));
 			
 		}
 		

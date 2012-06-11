@@ -79,9 +79,14 @@ CMakeFiles/ROSBUILD_gencfg_cpp: ../src/mst_homography/cfg/homography_ParamsConfi
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/ros_comm/utilities/message_filters/manifest.xml
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/image_common/image_transport/manifest.xml
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/vision_opencv/image_geometry/manifest.xml
+../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/bullet/manifest.xml
+../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/geometry/angles/manifest.xml
+../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/ros_comm/tools/rosnode/manifest.xml
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/ros_comm/tools/rosmsg/manifest.xml
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/ros_comm/tools/rostopic/manifest.xml
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/ros_comm/tools/rosservice/manifest.xml
+../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/ros_comm/utilities/roswtf/manifest.xml
+../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/geometry/tf/manifest.xml
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/manifest.xml
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/manifest.xml
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/diagnostics/diagnostic_updater/manifest.xml
@@ -95,6 +100,8 @@ CMakeFiles/ROSBUILD_gencfg_cpp: ../src/mst_homography/cfg/homography_ParamsConfi
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/common_msgs/sensor_msgs/msg_gen/generated
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/common_msgs/sensor_msgs/srv_gen/generated
+../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/geometry/tf/msg_gen/generated
+../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/geometry/tf/srv_gen/generated
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/msg_gen/generated
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/driver_common/dynamic_reconfigure/srv_gen/generated
 ../cfg/cpp/mst_homography/homography_ParamsConfig.h: /opt/ros/electric/stacks/common_msgs/diagnostic_msgs/msg_gen/generated

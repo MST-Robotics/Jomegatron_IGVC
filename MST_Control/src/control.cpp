@@ -32,6 +32,13 @@ void pos_callback( const MST_Position::Target_Heading::ConstPtr& msg)
         {
             done_togg = false;
         }
+        
+        if(msg->waypoint != last_msg_waypoint)
+        {
+            say("moving to next waypoint");
+            play(params.waypoint_sound);
+            last_msg_waypoint = msg->waypoint;
+        }
         //waypoint 
 
 }
@@ -657,7 +664,7 @@ int main(int argc, char **argv)
         
         if(robot_init)
         {
-            ros::Duration(7).sleep();
+            ros::Duration(20).sleep();
             
             say("Hello World. My name is Joe-Mega-Tron. Please press the one and two buttons on the wiimote to connect");
             

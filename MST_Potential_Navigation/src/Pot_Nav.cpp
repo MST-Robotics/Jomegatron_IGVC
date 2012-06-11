@@ -288,10 +288,18 @@ geometry_msgs::Twist find_twist()
     twist.angular.z = 0;
     
     //add  in target
-    twist.linear.x =  twist.linear.x + (params.target_weight_y/100.0) * sin(target.target_heading)/ (target.distance * params.target_dist_scale/1000) ;
-    twist.angular.z = twist.angular.z + (params.target_weight_z/100.0) * cos(target.target_heading)/ (target.distance * params.target_dist_scale/1000);
+    //ignoring y for now
+    /*twist.linear.x += (params.target_weight_y/100.0) * sin(target.target_heading)/ (target.distance * params.target_dist_scale/1000) ;*/
     
-	ROS_INFO("y: %f x: %f" , sin(target.target_heading) , cos(target.target_heading));
+    int sign = 1;
+    if (cos(target.target_heading) < 0)
+    {
+        sign = -1;
+    } 
+    
+    twist.angular.z += (params.target_weight_z/100.0) * ((twist.linear.x * params.target_y_scale) +1) * pow(fabs(cos(target.target_heading)), params.target_x_exp) * sign / ((target.distance * params.target_dist_scale/1000) + 1) ;
+    
+	ROS_INFO("y: %f x: %f twist: %f ", sin(target.target_heading) , cos(target.target_heading), twist.angular.z );
     
     //compute twist
     for(int deg = 0 ;  deg <= params.search_res ; deg++ )

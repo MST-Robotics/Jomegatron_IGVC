@@ -49,14 +49,17 @@ namespace enc = sensor_msgs::image_encodings;
 
 
 //Subscriptions
-image_transport::CameraSubscriber     image_sub_cam;
+image_transport::Subscriber     image_sub_color;
+image_transport::Subscriber     image_sub_masked;
 
 //Publications
-image_transport::Publisher      image_pub_homography;
+image_transport::Publisher      image_pub_color;
+image_transport::Publisher      image_pub_masked;
 
 ros::Publisher                  laser_pub;
 
-
+//transformation matrix
+cv::Mat                         _transform; 
 
 
 mst_homography::homography_ParamsConfig params;

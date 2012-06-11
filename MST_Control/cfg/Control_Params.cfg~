@@ -1,0 +1,27 @@
+#! /usr/bin/env python
+# Forearm camera configuration
+
+PACKAGE='MST_Control'
+import roslib; roslib.load_manifest(PACKAGE)
+
+from math import pi
+
+from driver_base.msg import SensorLevels
+from dynamic_reconfigure.parameter_generator import *
+
+gen = ParameterGenerator()
+#       Name                    Type      Reconfiguration level             Description                                        Default    Min   Max
+gen.add("base_linear_speed",    double_t, SensorLevels.RECONFIGURE_STOP,    "max robot speed in lineardirection",              1,         0,    10)
+gen.add("base_rot_speed",       double_t, SensorLevels.RECONFIGURE_STOP,    "max robot speed in angular direction",            1,         0,     4)
+gen.add("turbo_x",              double_t, SensorLevels.RECONFIGURE_STOP,    "multiplyer of turbo button x",                    1.5,       0,     5)
+gen.add("turbo_y",              double_t, SensorLevels.RECONFIGURE_STOP,    "multiplyer of turbo button y",                    2,         0,     5)
+gen.add("d_pad_percent",        double_t, SensorLevels.RECONFIGURE_STOP,    "the percent that the dpad is scaled down",        50,        0,    100)
+gen.add("plus_mesage",          str_t, SensorLevels.RECONFIGURE_STOP,       "phrase to say when plus button is pressed",       "Pardon me. coming through.")
+gen.add("minus_sound",          str_t, SensorLevels.RECONFIGURE_STOP,       "sound to play when minus button is pressed",      "/home/robot/Documents/Joemegatron_IGVC_2011/sounds/Ahooga_Car_Horn.wav")
+gen.add("autonomous_waypoints", str_t, SensorLevels.RECONFIGURE_STOP,       ".yaml file with autonomous waypoints",            "/home/robot/Documents/Joemegatron_IGVC_2011/yaml/Autonomous_Waypoints.yaml")
+gen.add("navigation_waypoints", str_t, SensorLevels.RECONFIGURE_STOP,       ".yaml file with autonomous waypoints",            "/home/robot/Documents/Joemegatron_IGVC_2011/yaml/Navigation_Waypoints.yaml")
+gen.add("waypoint_sound",          str_t, SensorLevels.RECONFIGURE_STOP,       "sound to play when minus button is pressed",      "/home/robot/Documents/Joemegatron_IGVC_2011/sounds/Ahooga_Car_Horn.wav")
+gen.add("done_sound",          str_t, SensorLevels.RECONFIGURE_STOP,       "sound to play when minus button is pressed",      "/home/robot/Documents/Joemegatron_IGVC_2011/sounds/Ahooga_Car_Horn.wav")
+
+exit(gen.generate(PACKAGE, "dynamic_reconfigure_node", "Control_Params"))
+

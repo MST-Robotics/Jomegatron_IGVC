@@ -39,9 +39,9 @@ void Stat::update()
   }
   
   //generate new stats
-  for(int j = yMin; j <= yMax; j++)
+  for(int j = yMin; j < yMax; j++)
   {
-    for(int i = xMin; i <= xMax; i++)
+    for(int i = xMin; i < xMax; i++)
     {
       int r = in->rgb[j][i][0];
       int g = in->rgb[j][i][1];
@@ -113,17 +113,25 @@ void Stat::setBounds(int xmin,int xmax,int ymin,int ymax)
   yMin = ymin;
   yMax = ymax;
   if(xMin < 0) xMin = 0;
+  if(xMax < 0) xMax = 0;
+  if(xMin >= IMAGE_WIDTH) xMin = IMAGE_WIDTH - 1;
   if(xMax >= IMAGE_WIDTH) xMax = IMAGE_WIDTH - 1;
   if(yMin < 0) yMin = 0;
+  if(yMax < 0) yMax = 0;
   if(yMax >= IMAGE_HEIGHT) yMax = IMAGE_HEIGHT - 1;
+  if(yMin >= IMAGE_HEIGHT) yMin = IMAGE_HEIGHT - 1;
   
   return;
 }
 void Stat::saveFilter(const char *filename)
 {
   int fd = open(filename,O_RDWR | O_TRUNC | O_CREAT, 0664);
-  if(fd==-1) return;
-  write(fd,this,sizeof(stat));
+  if(fd==-1) 
+  {
+    ROS_ERROR("Failed to open file for save.");
+    return;
+  }
+  write(fd,this,sizeof(Stat));
   close(fd);
   return;
 }
@@ -131,8 +139,12 @@ void Stat::loadFilter(const char *filename)
 {
   image* inTemp = in;
   int fd = open(filename,O_RDWR);
-  if(fd==-1) return;
-  read(fd,this,sizeof(stat));
+  if(fd==-1) 
+  {
+    ROS_ERROR("Failed to open file for load.");
+    return;
+  }
+  read(fd,this,sizeof(Stat));
   close(fd);
   in = inTemp;
   return;

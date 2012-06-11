@@ -81,8 +81,8 @@ int Open_MIDG_Connection()
     int fd;
     struct termios newtio;
 
-    fd = open("/dev/ttyUSB0", O_RDWR | O_NOCTTY | O_NONBLOCK );
-    if (fd <0) {perror("/dev/ttyUSB0"); exit(-1); }
+    fd = open("/dev/ttyUSB1", O_RDWR | O_NOCTTY | O_NONBLOCK );
+    if (fd <0) {perror("/dev/ttyUSB1"); exit(-1); }
 
     memset( &newtio, 0x00, sizeof(newtio) );
 
@@ -116,12 +116,12 @@ void Process_MIDG_Packets( int fd )
 
     const unsigned int sample_size = 10;
 
-    ROS_INFO("getonepacket");
+    //ROS_INFO("getonepacket");
     midgPacket msg_temp = getonepacket( fd );
     switch( msg_temp.messageID )
     {
         case MIDG_MESSAGE_NAVPVDATA:
-            ROS_INFO("midg_message_navpvdata");
+            //ROS_INFO("midg_message_navpvdata");
             msg_navpv = msg_temp.handle_msg_NAVPV();
 
             if( !msg_navpv.positionvalid )
@@ -132,7 +132,7 @@ void Process_MIDG_Packets( int fd )
             }
             else
             {
-                ROS_INFO("AAAAAAA");
+                //ROS_INFO("AAAAAAA");
 				if( GPSPV_LONG_DATA.size() >= sample_size )
                 {
                     GPSPV_LONG_DATA.pop_front();
@@ -164,7 +164,7 @@ void Process_MIDG_Packets( int fd )
             break;
 
         case MIDG_MESSAGE_GPSPVDATA:
-            ROS_INFO("midg_message_gpspvdata");
+            //ROS_INFO("midg_message_gpspvdata");
             msg_gpspv = msg_temp.handle_msg_GPSPV();
 
             if( !msg_gpspv.gpsfixvalid )
@@ -220,7 +220,7 @@ void Process_MIDG_Packets( int fd )
             break;
 
         case MIDG_MESSAGE_NAVSENSEDATA:
-            ROS_INFO("midg_message_navsensedata");
+            //ROS_INFO("midg_message_navsensedata");
             msg_navsense = msg_temp.handle_msg_NAVSENSE();
 
             //~ //------------------------------------------------------
@@ -261,7 +261,7 @@ void Process_MIDG_Packets( int fd )
             break;
 
         case MIDG_MESSAGE_NAVHDGDATA:
-            ROS_INFO("midg_message_navhdgdata");
+            //ROS_INFO("midg_message_navhdgdata");
             msg_navhdg = msg_temp.handle_msg_NAVHDG();
             
             //~ msg_navhdg.magHeading *= (M_PI/180);
@@ -320,7 +320,7 @@ void Process_MIDG_Packets( int fd )
 		
 		break;
     default:
-            ROS_INFO("default message");
+            //ROS_INFO("default message");
         break;
     } /* switch( msg_temp.messageID ) */
 }  /* Process_MIDG_Packets() */

@@ -1,28 +1,31 @@
 \subsubsection usage Usage
 \verbatim
 <node name="dynamic_reconfigure_node" pkg="mst_homography" type="dynamic_reconfigure_node">
+  <param name="frame_id" type="str" value="/base_footprint" />
+  <param name="use_trans" type="bool" value="False" />
+  <param name="theta_x" type="double" value="0.0" />
+  <param name="theta_y" type="double" value="0.0" />
+  <param name="theta_z" type="double" value="0.0" />
+  <param name="center_x" type="double" value="0.0" />
+  <param name="center_y" type="double" value="0.0" />
+  <param name="scale" type="int" value="0" />
+  <param name="laser_frame" type="str" value="bob" />
+  <param name="laser_angle" type="double" value="3.14159265359" />
+  <param name="laser_scans" type="int" value="180" />
+  <param name="laser_range_min" type="double" value="0.5" />
+  <param name="laser_range_max" type="double" value="10.0" />
+  <param name="laser_res" type="int" value="180" />
+  <param name="laser_time_increment" type="double" value="0.0" />
+  <param name="laser_scan_time" type="double" value="0.0" />
+  <param name="window_size" type="int" value="8" />
+  <param name="laser_threshold" type="double" value="200.0" />
+  <param name="pixels_per_meter" type="double" value="20.0" />
+  <param name="calibration_height" type="double" value="1.0" />
+  <param name="calibration_width" type="double" value="1.0" />
+  <param name="calibration_x" type="double" value="1.0" />
+  <param name="calibration_y" type="double" value="1.0" />
   <param name="robot_x" type="int" value="200" />
   <param name="robot_y" type="int" value="100" />
-  <param name="robot_filled" type="bool" value="False" />
-  <param name="search_radius" type="int" value="100" />
-  <param name="search_res" type="int" value="180" />
-  <param name="display_rays" type="bool" value="False" />
-  <param name="compas_length" type="double" value="200.0" />
-  <param name="carrot_on_a_stick" type="double" value="1.0" />
-  <param name="target_weight_y" type="double" value="1.0" />
-  <param name="target_weight_z" type="double" value="1.0" />
-  <param name="target_dist_scale" type="double" value="200.0" />
-  <param name="dist_scale_x" type="double" value="200.0" />
-  <param name="dist_scale_y" type="double" value="200.0" />
-  <param name="twist_scalar_y" type="double" value="1.0" />
-  <param name="twist_scalar_z" type="double" value="1.0" />
-  <param name="edges_per" type="double" value="100.0" />
-  <param name="stat_per" type="double" value="40.0" />
-  <param name="previous_per" type="double" value="40.0" />
-  <param name="lines_per" type="double" value="40.0" />
-  <param name="flags_per" type="double" value="40.0" />
-  <param name="obst_per" type="double" value="40.0" />
-  <param name="grass_per" type="double" value="40.0" />
 </node>
 \endverbatim
 

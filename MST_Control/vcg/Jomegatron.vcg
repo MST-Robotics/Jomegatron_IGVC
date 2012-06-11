@@ -1,14 +1,11 @@
 Background\ ColorR=0.0941176
 Background\ ColorG=0
 Background\ ColorB=0.466667
-Fixed\ Frame=/odom_combined
+Fixed\ Frame=/base_footprint
 Target\ Frame=/base_footprint
-Camera.Enabled=1
-Camera.Image\ Rendering=background & overlay
-Camera.Image\ Topic=/ptgrey/image_rect_color
-Camera.Overlay\ Alpha=0.5
-Camera.Transport\ Hint=raw
-Camera.Zoom\ Factor=1
+ColorStat.Enabled=1
+ColorStat.Image\ Topic=/image_stat
+ColorStat.Transport\ Hint=raw
 Grid.Alpha=0.5
 Grid.Cell\ Size=0.5
 Grid.ColorR=0.898039
@@ -24,15 +21,18 @@ Grid.OffsetZ=0
 Grid.Plane=0
 Grid.Plane\ Cell\ Count=10
 Grid.Reference\ Frame=<Fixed Frame>
-Image.Enabled=1
-Image.Image\ Topic=/image_stat
-Image.Transport\ Hint=raw
-Image2.Enabled=1
-Image2.Image\ Topic=/map
-Image2.Transport\ Hint=compressed
-Image3.Enabled=1
-Image3.Image\ Topic=/homography_image
-Image3.Transport\ Hint=raw
+Homography_Color.Enabled=1
+Homography_Color.Image\ Topic=/homography_color
+Homography_Color.Transport\ Hint=compressed
+Homography_Masked.Enabled=1
+Homography_Masked.Image\ Topic=/homography_masked
+Homography_Masked.Transport\ Hint=raw
+PotNav.Enabled=1
+PotNav.Image\ Topic=/map
+PotNav.Transport\ Hint=compressed
+PtGrey.Enabled=1
+PtGrey.Image\ Topic=/ptgrey/image_rect_color
+PtGrey.Transport\ Hint=raw
 Robot\ Model.Alpha=1
 Robot\ Model.Collision\ Enabled=0
 Robot\ Model.Enabled=1
@@ -79,33 +79,37 @@ TF.Update\ Interval=0.05
 Tool\ 2D\ Nav\ GoalTopic=goal
 Tool\ 2D\ Pose\ EstimateTopic=initialpose
 Camera\ Type=rviz::OrbitViewController
-Camera\ Config=1.05779 4.35398 13.304 -0.286354 0.325426 0.235626
-Property\ Grid\ State=selection=Target Frame;expanded=.Global Options,Grid.Enabled,Robot Model.Enabled,TF.Enabled.TF.StatusTopStatus,TF.Enabled.TF.Tree,Camera.Enabled,Image3.Enabled;scrollpos=0,0;splitterpos=133,266;ispageselected=1
+Camera\ Config=1.09779 2.92398 5.26728 0.19236 0.588121 0.214326
+Property\ Grid\ State=selection=TF.Enabled;expanded=.Global Options,TF.Enabled.TF.StatusTopStatus,TF.Enabled.TF.Tree;scrollpos=0,0;splitterpos=248,496;ispageselected=1
 [Display0]
-Name=Grid
+Name=PtGrey
 Package=rviz
-ClassName=rviz::GridDisplay
+ClassName=rviz::ImageDisplay
 [Display1]
-Name=Robot Model
+Name=ColorStat
 Package=rviz
-ClassName=rviz::RobotModelDisplay
+ClassName=rviz::ImageDisplay
 [Display2]
-Name=TF
+Name=PotNav
 Package=rviz
-ClassName=rviz::TFDisplay
+ClassName=rviz::ImageDisplay
 [Display3]
-Name=Camera
+Name=Homography_Color
 Package=rviz
-ClassName=rviz::CameraDisplay
+ClassName=rviz::ImageDisplay
 [Display4]
-Name=Image
+Name=Homography_Masked
 Package=rviz
 ClassName=rviz::ImageDisplay
 [Display5]
-Name=Image2
+Name=Grid
 Package=rviz
-ClassName=rviz::ImageDisplay
+ClassName=rviz::GridDisplay
 [Display6]
-Name=Image3
+Name=Robot Model
 Package=rviz
-ClassName=rviz::ImageDisplay
+ClassName=rviz::RobotModelDisplay
+[Display7]
+Name=TF
+Package=rviz
+ClassName=rviz::TFDisplay

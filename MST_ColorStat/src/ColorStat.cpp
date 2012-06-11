@@ -140,23 +140,14 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
 void setparamsCallback(MST_ColorStat::ColorStat_ParamsConfig &config, uint32_t level)
 {
   
-  if (config.xMin >= config.xMax)
-  {
-  	config.xMax = config.xMax +1;
-  }
-  
-  if (config.yMin >= config.yMax)
-  {
-  	config.yMax = config.yMax +1;
-  }
   
   stat1.setBounds(config.xMin,config.xMax,config.yMin,config.yMax);
   stat1.enabled = config.enabled;
-  stat1.reset = config.reset;
   
-  if (config.reset = true)
+  if (config.reset == true)
   {
-  	config.reset =false;
+    stat1.reset = true;
+    config.reset = false;
   }
   
   if(config.save)
@@ -168,6 +159,12 @@ void setparamsCallback(MST_ColorStat::ColorStat_ParamsConfig &config, uint32_t l
   if(config.load)
   {
     stat1.loadFilter(config.filename.c_str());
+    config.xMin = stat1.xMin;
+    config.yMin = stat1.yMin;
+    config.xMax = stat1.xMax;
+    config.yMax = stat1.yMax;
+    config.reset = stat1.reset;
+    config.enabled = stat1.enabled;
     config.load = false;
   }
   

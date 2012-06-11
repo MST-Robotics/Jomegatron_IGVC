@@ -1,0 +1,6 @@
+{calibration_height: 0.635, calibration_width: 0.4, calibration_x: -0.1, calibration_y: 1.3,
+  center_x: 320.0, center_y: 480.0, frame_id: /base_footprint, laser_angle: 1.5079644737232,
+  laser_frame: /odom_combined, laser_range_max: 3.9, laser_range_min: 0.5, laser_res: 126,
+  laser_scan_time: 0.0, laser_threshold: 0.0, laser_time_increment: 0.0, pixels_per_meter: 117.00006100000002,
+  robot_x: 85, robot_y: 79, scale: 0, theta_x: -0.00132, theta_y: 0.0, theta_z: 0.0,
+  use_trans: false, window_size: 14}
