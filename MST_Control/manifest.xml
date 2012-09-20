@@ -19,7 +19,7 @@
 
   <depend package = "sound_play" />
   <depend package = "wiimote" />
-  <depend package = "MST_JAUS" />
+  <!--<depend package = "MST_JAUS" />-->
   <depend package = "MST_Estop" />
   <depend package = "MST_Position" />
   
