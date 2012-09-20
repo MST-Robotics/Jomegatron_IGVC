@@ -8,5 +8,8 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/Joemegatron_IGVC</url>
   <depend stack="ros" />
+  <depend stack="roscpp" />
+  <depend stack="vision_opencv" />
+  <depend stack="joystick_drivers" />
 
 </stack>
