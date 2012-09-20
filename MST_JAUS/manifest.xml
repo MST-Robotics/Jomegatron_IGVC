@@ -8,7 +8,7 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/MST_JAUS</url>
-  <rosdep name = "jaus++" />
+  <!--<rosdep name = "jaus++" />-->
   <depend package="roscpp" />
 
 </package>
