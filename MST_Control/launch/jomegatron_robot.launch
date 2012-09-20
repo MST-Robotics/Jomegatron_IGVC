@@ -67,6 +67,9 @@
         
     </node>
     
+    
+    <node pkg="MST_JAUS" type="jaus_node" name="JAUS" />
+    
 
     <!--  launch usb camera driver and color proc  -->
     <group if="$(arg usb)">

@@ -658,28 +658,44 @@ int main(int argc, char **argv)
 				target_heading = compute_msg(target_waypoint);
 			}
 
-			if(target_heading.distance <= params.waypoint_radius || skip_waypoint)
+			if(target_heading.distance <= params.waypoint_radius || skip_waypoint || (way_limit[target_waypoint] == 0 && target_heading.distance <= params.dummy_point_radius))
 			{
 				waypoint_complete[target_waypoint] = true;	
 				target_waypoint = find_target();
 				if(target_waypoint == -1)
 				{
 					//robot is done
-					target_heading.done = params.continue_when_done;
+					target_heading.done = true;
 					if(params.continue_when_done)
 					{
 						target_heading.target_heading = pi/2;
 						target_heading.distance = 2200000;
+						
 					}
-					target_heading.stop_robot = true;
+					target_heading.stop_robot = false;
 				}
 				else
 				{
 					//go to next
 					
 					target_heading = compute_msg(target_waypoint);
+					
+
 				}
 				skip_waypoint = false;
+			}
+			
+			//just go straight
+			if(!params.go_to_waypoints)
+			{
+	    		target_heading.target_heading = pi/2;
+				target_heading.distance = 2200000;
+				
+			}
+			
+			if(way_limit[target_waypoint] == 0)
+			{
+			    target_heading.target_heading = pi/2;
 			}
 
 			target_pub.publish(target_heading);

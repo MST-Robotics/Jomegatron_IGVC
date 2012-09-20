@@ -1,0 +1,6 @@
+{carrot_on_a_stick: 1.0, compas_length: 200.0, display_rays: true, dist_scale_x: 20.0,
+  dist_scale_y: 580.0, edges_per: 0.0, flags_per: 40.0, grass_per: 40.0, lines_per: 40.0,
+  obst_per: 40.0, previous_per: 11.0, robot_filled: false, robot_x: 180, robot_y: 76,
+  search_radius: 487, search_res: 78, stat_per: 71.0, target_dist_scale: 0.0, target_weight_y: 0.0,
+  target_weight_z: 10.0, target_x_exp: 1.9, target_y_scale: 16.0, twist_scalar_y: 65.0,
+  twist_scalar_z: 15.0}
