@@ -20,14 +20,14 @@
 #include <image_transport/image_transport.h>
 #include <sensor_msgs/image_encodings.h>
 #include <wiimote/State.h>
-#include <wiimote/LEDControl.h>
-#include <wiimote/RumbleControl.h>
+//#include <wiimote/LEDControl.h>
+//#include <wiimote/RumbleControl.h>
 #include <sound_play/SoundRequest.h>
 #include <wiimote/TimedSwitch.h>
 #include <MST_Estop/Estop_State.h>
 #include <MST_Position/Target_Heading.h>
-#include "MST_JAUS/JAUS_in.h"
-#include "MST_JAUS/JAUS_out.h"
+//#include "MST_JAUS/JAUS_in.h"
+//#include "MST_JAUS/JAUS_out.h"
 #include "mst_midg/IMU.h"
 
 /***********************************************************
@@ -160,7 +160,7 @@ MST_Estop::Estop_State          estop;
 
 geometry_msgs::Twist            wii_twist;
 geometry_msgs::Twist            nav_twist;
-MST_JAUS::JAUS_in               jaus_msg;
+//MST_JAUS::JAUS_in               jaus_msg;
 
 
 bool                            wii_dis;

@@ -58,7 +58,7 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
     {
         ROS_INFO("Control: Wiimote Conected");
         
-        wiimote::RumbleControl rumble;
+        /*wiimote::RumbleControl rumble;
         //makes wiimote rumble 3 times
         rumble.rumble.switch_mode = rumble.rumble.REPEAT;
         rumble.rumble.num_cycles = 3;
@@ -67,7 +67,7 @@ void wiimote_callback(const wiimote::State::ConstPtr& state)
         rumble.rumble.pulse_pattern[1] = .5;
         
         ros::Duration(3).sleep();
-        wiimote_rum_pub.publish(rumble);
+        wiimote_rum_pub.publish(rumble);*/
         
         say("wiimote connected. Joe-Mega-Tron standing by");
         
@@ -374,7 +374,7 @@ void navigation_callback(const geometry_msgs::Twist twist)
 *       and passes on waypoints and speed
 * @param takes in a message from MST_JAUS 
 ***********************************************************/
-void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
+/*void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
 {
     if(msg->request_control)
     {
@@ -507,7 +507,7 @@ void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
         }
         jaus_msg.active_waypoint_id = jaus_waypoints[current]->ID;
     }
-}
+}*/
 
 /***********************************************************
 * @fn midg_callback(const mst_midg::IMU::ConstPtr& msg)
@@ -516,7 +516,7 @@ void jaus_callback(const MST_JAUS::JAUS_out::ConstPtr& msg)
 * @post sets the appropriate jaus_msg fields
 * @param takes in an IMU message from mst_midg
 ***********************************************************/
-void midg_callback(const mst_midg::IMU::ConstPtr& imu)
+/*void midg_callback(const mst_midg::IMU::ConstPtr& imu)
 {
     jaus_msg.position_valid = imu->position_valid;
     jaus_msg.gps_time = imu->gps_time;
@@ -533,7 +533,7 @@ void midg_callback(const mst_midg::IMU::ConstPtr& imu)
     
     jaus_msg.angular_rate_valid = imu->angular_rate_valid;
     jaus_msg.angular_rate = imu->angular_rate;
-}
+}*/
 
 /***********************************************************
 * @fn navigation_callback(const geometry_msgs::Twist::ConstPtr& twist)
@@ -635,13 +635,13 @@ int main(int argc, char **argv)
 
     wiimote_state_sub = n.subscribe("wiimote/state" ,100,wiimote_callback);
     
-    jaus_sub = n.subscribe("/jaus_out" ,100, jaus_callback);
+    //jaus_sub = n.subscribe("/jaus_out" ,100, jaus_callback);
 
     estop_sub = n.subscribe("/EStop" ,100 , estop_callback);
     
-    wiimote_led_pub = n.advertise<wiimote::LEDControl>("wiimote/leds" ,100);
+    //wiimote_led_pub = n.advertise<wiimote::LEDControl>("wiimote/leds" ,100);
     
-    wiimote_rum_pub = n.advertise<wiimote::RumbleControl>("wiimote/rumble" ,100);
+    //wiimote_rum_pub = n.advertise<wiimote::RumbleControl>("wiimote/rumble" ,100);
 
     
     //create publications
@@ -649,7 +649,7 @@ int main(int argc, char **argv)
     
     sound_pub = n.advertise<sound_play::SoundRequest>("robotsound" ,100);
     
-    jaus_pub = n.advertise<MST_JAUS::JAUS_in>("/jaus_in" ,100);
+    //jaus_pub = n.advertise<MST_JAUS::JAUS_in>("/jaus_in" ,100);
 
     
     //set rate to 30 hz
@@ -695,7 +695,7 @@ int main(int argc, char **argv)
         {
             if(jaus_mode == jaus_resume)
             {
-                if(jaus_execute)
+                /*if(jaus_execute)
                     motor_pub.publish(nav_twist);
                 jaus_pub.publish(jaus_msg);
                 stopped = false;
@@ -705,7 +705,7 @@ int main(int argc, char **argv)
                 jaus_msg.heading_valid = false;
                 jaus_msg.speed_valid = false;
                 jaus_msg.angular_rate_valid = false;
-                jaus_msg.waypoint_list_valid = false;
+                jaus_msg.waypoint_list_valid = false;*/
             }
             else
             {
@@ -748,7 +748,7 @@ bool check_togg(bool button_state, int button_position)
 void change_mode(Mode new_mode)
 {
     
-    wiimote::LEDControl led;
+    //wiimote::LEDControl led;
     sound_play::SoundRequest sound;
     
     mode_ = new_mode;
@@ -765,12 +765,12 @@ void change_mode(Mode new_mode)
         
         int lights[] ={0,1,1,0};
 
-        led.set_timed_switch_array_size(4);
+        /*led.set_timed_switch_array_size(4);
         for(int i=0; i < 4 ;i++)
         {
             led.timed_switch_array[i].switch_mode = lights[i];
             
-        }
+        }*/
         
         /*
         //setup nightrider
@@ -796,7 +796,7 @@ void change_mode(Mode new_mode)
         
     }
     
-    if (mode_ == wiimote_mode)
+    /*if (mode_ == wiimote_mode)
     {
         ROS_INFO("Control: Wiimote Mode");
         
@@ -813,7 +813,7 @@ void change_mode(Mode new_mode)
             
         }
         
-    }
+    }*/
 
     if (mode_ == autonomous)
     {
@@ -824,11 +824,11 @@ void change_mode(Mode new_mode)
         //turn on light 2
         int lights[] ={0,1,0,0};
 
-        led.set_timed_switch_array_size(4);
+        /*led.set_timed_switch_array_size(4);
         for(int i=0; i < 4 ;i++)
         {
             led.timed_switch_array[i].switch_mode = lights[i];
-        }
+        }*/
         
     }
     
@@ -841,15 +841,15 @@ void change_mode(Mode new_mode)
         //turn on light 3
         int lights[] ={0,0,1,0};
 
-        led.set_timed_switch_array_size(4);
+        /*led.set_timed_switch_array_size(4);
         for(int i=0; i < 4 ;i++)
         {
             led.timed_switch_array[i].switch_mode = lights[i];
-        }
+        }*/
         
     }
     
-    wiimote_led_pub.publish(led);
+    //wiimote_led_pub.publish(led);
     
 }
 
