@@ -6,6 +6,8 @@
 * @brief Constants related to A* navigation and mapping.
 ******************************************************************************/
 
+#define PI 3.14159265359
+
 const float MAP_RESOLUTION = 1.0;
 const uint32_t MAP_WIDTH = 10;
 const uint32_t MAP_HEIGHT = 10;
