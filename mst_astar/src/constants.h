@@ -19,3 +19,6 @@ const double MAP_ORIGIN_ORIENTATION_Y = 0.0;
 const double MAP_ORIGIN_ORIENTATION_Z = 0.0;
 const double MAP_ORIGIN_ORIENTATION_W = 0.0;
 
+const int LASER_SCAN_NUM_RAYS = 20;
+const double LASER_SCAN_FOV = 60.0;
+const int LASER_SCAN_HEALTH = 5;

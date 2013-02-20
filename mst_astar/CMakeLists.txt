@@ -30,3 +30,5 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #target_link_libraries(example ${PROJECT_NAME})
 
 rosbuild_add_executable(mapping src/gridMapping.cpp)
+rosbuild_add_executable(astar src/astar.cpp)
+rosbuild_add_executable(imageToLaserScan src/imageToLaserScan.cpp)
