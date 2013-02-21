@@ -23,8 +23,11 @@ struct Ray
 {
   int health;
   double angle;
+  double distanceTravelled;
   double x;
   double y;
+  double diffX;
+  double diffY;
 };
 Ray rays[LASER_SCAN_NUM_RAYS];
 
@@ -51,21 +54,66 @@ int main(int argc, char **argv)
 
 void imageCallback(const sensor_msgs::Image::ConstPtr& msg)
 {
+    if(msg->encoding != "rbg8")
+    {
+        ROS_ERROR("Need rbg8 image encoding, not publishing laser scan.");
+        return;
+    }
+    
     //TODO transform image
     
-    //Generate laser scan
-    double angleIncrement = LASER_SCAN_FOV / LASER_SCAN_NUM_RAYS;
-    double startAngle = 0 - LASER_SCAN_FOV / 2.0;
+    //Init rays
+    double angleIncrement = (LASER_SCAN_FOV*PI/180) / LASER_SCAN_NUM_RAYS;
+    double startAngle = 0 - (LASER_SCAN_FOV*PI/180) / 2.0;
     for(int i=0; i<LASER_SCAN_NUM_RAYS; i++)
     {
       rays[i].health = LASER_SCAN_HEALTH;
       rays[i].angle = startAngle + i * angleIncrement;
       rays[i].x = msg->width / 2; //image center
       rays[i].y = msg->height; //image bottom
+      rays[i].diffX = LASER_SCAN_RAY_STEP * sin(startAngle + angleIncrement*i);
+      rays[i].diffY = LASER_SCAN_RAY_STEP * cos(startAngle + angleIncrement*i);
     }
-    //TODO while(rays not dead) move rays if alive
+    
+    //Raycast
+    int raysAlive = LASER_SCAN_NUM_RAYS;
+    while(raysAlive > 0)
+    {
+        for(int i=0; i<LASER_SCAN_NUM_RAYS; i++)
+        {
+            //Move rays if still alive
+            if(rays[i].health > 0)
+            {
+                rays[i].distanceTravelled += LASER_SCAN_RAY_STEP;
+                rays[i].x += rays[i].diffX;
+                rays[i].y += rays[i].diffY;
+                
+                int currentPixelIndex = (int)rays[i].y * msg->width * 3 + (int)rays[i].x * 3;
+                unsigned char pixelData = msg->data[currentPixelIndex + 1]; //green channel
+                if(pixelData > LASER_SCAN_PIXEL_THRESHOLD)
+                {
+                    rays[i].health -= 1;
+                    if(rays[i].health <= 0)
+                        raysAlive--;
+                }
+            }
+        }
+    }
     
     //Publish laser scan
+    laserScan.header = msg->header;
+    laserScan.angle_min = startAngle;
+    laserScan.angle_max = startAngle + angleIncrement*(LASER_SCAN_NUM_RAYS-1);
+    laserScan.angle_increment = angleIncrement;
+    //laserScan.time_increment
+    //laserScan.scan_time
+    //laserScan.range_min
+    //laserScan.range_max
+    for(int i=0; i<LASER_SCAN_NUM_RAYS; i++)
+    {
+        laserScan.ranges.push_back(rays[i].distanceTravelled);
+        laserScan.intensities.push_back(rays[i].health > 0 ? 1.0 : 0.0);
+    }
     p_laserScan.publish(laserScan);
 }
 

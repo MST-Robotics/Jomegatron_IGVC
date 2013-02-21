@@ -20,5 +20,8 @@ const double MAP_ORIGIN_ORIENTATION_Z = 0.0;
 const double MAP_ORIGIN_ORIENTATION_W = 0.0;
 
 const int LASER_SCAN_NUM_RAYS = 20;
-const double LASER_SCAN_FOV = 60.0;
+const double LASER_SCAN_FOV = 60.0; //units are degrees
 const int LASER_SCAN_HEALTH = 5;
+const unsigned char LASER_SCAN_PIXEL_THRESHOLD = 127;
+const double LASER_SCAN_RAY_STEP = 1.5; //units are pixels
+const double LASER_SCAN_RAY_CONVERSION = 15.0; //units are pixels/meter, TODO get a real value
