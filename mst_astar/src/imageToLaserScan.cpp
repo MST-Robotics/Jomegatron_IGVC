@@ -16,6 +16,7 @@
 void imageCallback(const sensor_msgs::Image::ConstPtr& msg);
 
 ros::Publisher p_laserScan;
+ros::Publisher p_laserScanImage;
 
 sensor_msgs::LaserScan laserScan;
 
@@ -39,10 +40,11 @@ int main(int argc, char **argv)
     ros::Rate loop_rate(2);   
     
     //Subscribe to the message we need
-    ros::Subscriber s_image = n.subscribe("???", 1, &imageCallback);
+    ros::Subscriber s_image = n.subscribe("image_stat", 1, &imageCallback);
 
     //Advertise our message
     p_laserScan = n.advertise<sensor_msgs::LaserScan>("/laser_scan", 5);
+    p_laserScanImage = n.advertise<sensor_msgs::Image>("/laser_scan_image", 5);
     
     ros::spin();
     
@@ -74,6 +76,11 @@ void imageCallback(const sensor_msgs::Image::ConstPtr& msg)
       rays[i].diffX = LASER_SCAN_RAY_STEP * sin(startAngle + angleIncrement*i);
       rays[i].diffY = LASER_SCAN_RAY_STEP * cos(startAngle + angleIncrement*i);
     }
+
+    //Init debug image
+    sensor_msgs::Image raycastImage;
+    for(int i=0; i<msg->data.size(); i++)
+        raycastImage.data.push_back(msg->data[i]);
     
     //Raycast
     int raysAlive = LASER_SCAN_NUM_RAYS;
@@ -96,6 +103,10 @@ void imageCallback(const sensor_msgs::Image::ConstPtr& msg)
                     if(rays[i].health <= 0)
                         raysAlive--;
                 }
+                
+                //Debug image
+                raycastImage.data[currentPixelIndex] = 255;
+                raycastImage.data[currentPixelIndex + 2] = 0;
             }
         }
     }
@@ -115,5 +126,13 @@ void imageCallback(const sensor_msgs::Image::ConstPtr& msg)
         laserScan.intensities.push_back(rays[i].health > 0 ? 1.0 : 0.0);
     }
     p_laserScan.publish(laserScan);
+    
+    //Publish debug image
+    raycastImage.height = msg->height;
+    raycastImage.width = msg->width;
+    raycastImage.encoding = msg->encoding;
+    raycastImage.is_bigendian = msg->is_bigendian;
+    raycastImage.step = msg->step;
+    p_laserScanImage.publish(raycastImage);
 }
 
