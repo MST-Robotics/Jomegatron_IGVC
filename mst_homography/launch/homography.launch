@@ -1,0 +1,18 @@
+<launch>
+  <include file="$(find MST_Control)/launch/ptgrey.launch"  />
+  <include file="$(find MST_Control)/launch/uvc.launch"  />
+
+  <node pkg="MST_ColorStat" type="ColorStat" name="color_stat" args="image:=ptgrey/image_raw" />
+
+  <node pkg="mst_homography" type="homography" name="homography" args="image_color:=ptgrey/image_raw image_masked:=image_stat" />
+
+  <node pkg="image_view" type="image_view" name="ptgrey_display" args="image:=ptgrey/image_raw" />
+
+  <node pkg="image_view" type="image_view" name="stat_display" args="image:=image_stat" />
+
+  <node pkg="image_view" type="image_view" name="homography_color_display" args="image:=homography_color" />
+
+  <node pkg="image_view" type="image_view" name="homography_masked_display" args="image:=homography_masked" />
+
+  <node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui" />
+</launch>
