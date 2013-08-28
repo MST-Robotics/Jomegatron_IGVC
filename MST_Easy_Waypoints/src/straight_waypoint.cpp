@@ -73,7 +73,7 @@ bool active_waypoints()
 * @fn double find_dist(double lat1, double lon1 , double lat2 ,double lon2)
 * @brief computes distace between two gps points
 * @pre takes in lat and lon for two points
-* @post returns a double with the distace in meeters between points
+* @post returns a double with the distace in meters between points
 ***********************************************************/
 double compute_dist(double lat1, double lon1 , double lat2 ,double lon2)
 {

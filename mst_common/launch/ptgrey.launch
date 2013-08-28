@@ -1,7 +1,7 @@
 <launch>
 	<group ns="ptgrey">
 		<node pkg="camera1394" type="camera1394_node" name="camera1394_node">
-			<param name="guid" value="00b09d01009ec9dd" />
+			<param name="guid" value="00b09d0100bee3c5" />
 			<param name="bayer_pattern" value="rggb" />
 			<param name="bayer_method" value="Simple" />
 			<param name="frame_id" value="ptgrey_frame" />

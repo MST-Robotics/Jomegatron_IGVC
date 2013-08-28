@@ -27,7 +27,7 @@ void homographyColorCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
     
     
     
-    //crete pointer to source image
+    //create pointer to source image
     try
     {
       cv_ptr_src = cv_bridge::toCvCopy(image_sub_msg, "rgb8");
@@ -262,7 +262,7 @@ void homographyMaskedCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
                     //ROS_INFO("threshold: %f ", win_avg/params.window_size);
                     
                     //mark the obsticle
-                    dst.image.at<int>( ray.pos().y , ray.pos().x , 0) = 200;
+                    dst.image.at<float>( ray.pos().y , ray.pos().x , 0) = 200;
                     
                     //give the distance in meters
                     ranges[i] =  sqrt(pow((ray.pos().x - robot_center.x),2) + pow((ray.pos().y - robot_center.y),2) )  / params.pixels_per_meter;

@@ -11,10 +11,9 @@
   <param name="scale" type="int" value="0" />
   <param name="laser_frame" type="str" value="bob" />
   <param name="laser_angle" type="double" value="3.14159265359" />
-  <param name="laser_scans" type="int" value="180" />
+  <param name="laser_res" type="int" value="180" />
   <param name="laser_range_min" type="double" value="0.5" />
   <param name="laser_range_max" type="double" value="10.0" />
-  <param name="laser_res" type="int" value="180" />
   <param name="laser_time_increment" type="double" value="0.0" />
   <param name="laser_scan_time" type="double" value="0.0" />
   <param name="window_size" type="int" value="8" />

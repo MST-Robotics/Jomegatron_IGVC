@@ -54,12 +54,13 @@ static struct
     float   watchdog_timeout;
 } params;
 
-#define GEARRATIO 7
+
+#define GEARRATIO 21.92
 #define CLICKS2METERS (.2459 / 2000 )
 #define WHEELBASE 0.5588
 #define WHEEL_DIAMETER  WHEEL_RADIUS*2
-#define WHEEL_RADIUS    0.2032
-#define ROBOT_RADIUS    0.2794
+#define WHEEL_RADIUS    0.2021
+#define ROBOT_RADIUS    0.5461
 #define ROBOT_DIAMETER  ( ROBOT_RADIUS * 2 )
 #define ENCODER_RESOLUTION  12000
 #define TWO_WHEEL_DRIVE
@@ -99,8 +100,8 @@ int main(int argc, char **argv)
     
     ros::Publisher odom_pub = n.advertise<nav_msgs::Odometry>("/odom", 1000);
     
-    strcpy( params.left_motor_file, (char*) "/dev/ttyUSB2" );
-    strcpy( params.right_motor_file,(char*) "/dev/ttyUSB3" );
+    strcpy( params.left_motor_file, (char*) "/dev/ttyACM1" );
+    strcpy( params.right_motor_file,(char*) "/dev/ttyACM0" );
     params.topspeed = 4.4704;
     params.watchdog_timeout = 1.0;
 
@@ -185,8 +186,8 @@ bool setVelocity( motorController* m, double linear, double angular )
     success &= m[LEFT_MOTOR_CHANNEL].setVelocityTick( left_velocity );
     success &= m[RIGHT_MOTOR_CHANNEL].setVelocityTick( right_velocity );
     
-    success &= m[LEFT_MOTOR_CHANNEL].startMotion();
-    success &= m[RIGHT_MOTOR_CHANNEL].startMotion();
+    //success &= m[LEFT_MOTOR_CHANNEL].startMotion();
+    //success &= m[RIGHT_MOTOR_CHANNEL].startMotion();
 
     if( success == false )
     {

@@ -10,6 +10,7 @@
     <!-- Define arguments and defaults  -->
     <arg name="rviz" default="1" />
     <arg name="wiimote" default="1" />
+    <!--arg name="joy_node" default="1"-->
     <arg name="sound" default="1" />
     <arg name="config" default="1" />
     <arg name="usb" default="0" />
@@ -22,6 +23,7 @@
     <include file="$(find MST_Control)/launch/jomegatron_robot.launch">
         <arg name="rviz" value="$(arg rviz)" />
         <arg name="wiimote" value="$(arg wiimote)" />
+        <!--arg name="joy_node" value="$(arg joy_node)"/-->
         <arg name="sound" value="$(arg sound)" />
         <arg name="config" value="$(arg config)" />
         <arg name="usb" value="$(arg usb)" />

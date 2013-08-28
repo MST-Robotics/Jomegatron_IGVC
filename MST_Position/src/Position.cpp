@@ -136,8 +136,8 @@ void midgCallback(const  mst_midg::IMU::ConstPtr& imu)
 		{
 		 	gps_fix = true;
             current_time = ros::Time(imu->gps_time);
-		 	current_lat = imu->latitude / 180 * pi;
-		 	current_lon = imu->longitude / 180 * pi;
+		 	//current_lat = imu->latitude; // 180 * pi;
+		 	//current_lon = imu->longitude; // 180 * pi;
 		}
         else
         {
@@ -159,12 +159,15 @@ void midgCallback(const  mst_midg::IMU::ConstPtr& imu)
 * @post image added to the map
 * @param takes in a ros message of a raw or cv image 
 ***********************************************************/
-void gpsCallback( const sensor_msgs::NavSatFix::ConstPtr& imu)
+void gpsCallback( const sensor_msgs::NavSatFix::ConstPtr& fix)
 {
-	ROS_INFO("Position: gps message receved");
+	ROS_INFO("Position: gps message received");
 	if(params.use_gpsd && !params.use_dummy)
 	{
-
+     current_lon = fix->longitude;
+     current_lat = fix->latitude;
+  std::cout << "Current Latitude: " << current_lon << std::endl;
+  std::cout << "Current Longitude: " << current_lat << std::endl;
 		
 	}
 
@@ -191,8 +194,8 @@ void setparamsCallback(MST_Position::Position_ParamsConfig &config, uint32_t lev
 
 	 	gps_fix = true;
         current_time = ros::Time::now();
-	 	current_lat = config.dummy_latitude / 180 * pi;
-	 	current_lon = config.dummy_longitude / 180 * pi;
+	 	//current_lat = config.dummy_latitude; // 180 * pi;
+	 	//current_lon = config.dummy_longitude; // 180 * pi;
 	 	current_head = config.dummy_heading;	
 	
 	}
@@ -633,6 +636,7 @@ int main(int argc, char **argv)
    
     reset_waypoints();
     
+    
     //set rate to 30 hz
     ros::Rate loop_rate(30);
     
@@ -684,6 +688,7 @@ int main(int argc, char **argv)
 				}
 				skip_waypoint = false;
 			}
+			
 			
 			//just go straight
 			if(!params.go_to_waypoints)

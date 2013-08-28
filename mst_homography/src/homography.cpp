@@ -27,7 +27,7 @@ void homographyColorCallback( const sensor_msgs::ImageConstPtr& image_sub_msg)
     
     
     
-    //crete pointer to source image
+    //create pointer to source image
     try
     {
       cv_ptr_src = cv_bridge::toCvCopy(image_sub_msg, "rgb8");

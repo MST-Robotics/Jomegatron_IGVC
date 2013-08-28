@@ -123,7 +123,7 @@ void imageCallback(const sensor_msgs::Image::ConstPtr& msg)
     for(int i=0; i<LASER_SCAN_NUM_RAYS; i++)
     {
         laserScan.ranges.push_back(rays[i].distanceTravelled);
-        laserScan.intensities.push_back(rays[i].health > 0 ? 1.0 : 0.0);
+        laserScan.intensities.push_back(rays[i].health > 0 ? 1.0 : 0.0);//TODO function for intesities
     }
     p_laserScan.publish(laserScan);
     

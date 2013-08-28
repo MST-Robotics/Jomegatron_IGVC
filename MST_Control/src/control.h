@@ -1,35 +1,29 @@
 /*******************************************************************************
- * @file control.cpp
- * @author James Anderson <jra798>
+ * @file control.h
+ * @author Michael Lester
  * @version 1.1
- * @date 1/21/12
+ * @date 4/3/13
  * @brief controlls which output goes to motors 
+ * @Re-made for xbox_Mode
  ******************************************************************************/
-
-
-/***********************************************************
+ 
+ /***********************************************************
 * ROS specific includes
 ***********************************************************/
 #include "ros/ros.h"
-
 /***********************************************************
 * Message includes
 ***********************************************************/
 #include <sensor_msgs/Image.h>
+#include <sensor_msgs/Joy.h>
 #include <geometry_msgs/Twist.h>
 #include <image_transport/image_transport.h>
 #include <sensor_msgs/image_encodings.h>
-#include <wiimote/State.h>
-//#include <wiimote/LEDControl.h>
-//#include <wiimote/RumbleControl.h>
 #include <sound_play/SoundRequest.h>
-#include <wiimote/TimedSwitch.h>
 #include <MST_Estop/Estop_State.h>
 #include <MST_Position/Target_Heading.h>
-//#include "MST_JAUS/JAUS_in.h"
-//#include "MST_JAUS/JAUS_out.h"
 #include "mst_midg/IMU.h"
-
+#include "sensor_msgs/Joy.h"
 /***********************************************************
 * Other includes
 ***********************************************************/
@@ -42,51 +36,12 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <dynamic_reconfigure/server.h>
 #include <MST_Control/Control_ParamsConfig.h>
-
-/***********************************************************
-* Defines
-***********************************************************/
-#define MSG_BTN_1      0
-#define MSG_BTN_2      1
-#define MSG_BTN_A      4
-#define MSG_BTN_B      5
-#define MSG_BTN_PLUS   2
-#define MSG_BTN_MINUS  3
-#define MSG_BTN_LEFT   6
-#define MSG_BTN_RIGHT  7
-#define MSG_BTN_UP     8
-#define MSG_BTN_DOWN   9
-#define MSG_BTN_HOME   10
-
-//start at +11 in togg
-#define MSG_BTN_Z      0
-#define MSG_BTN_C      1
-
-//start at +13 in togg
-#define MSG_CLASSIC_BTN_X        0
-#define MSG_CLASSIC_BTN_Y        1
-#define MSG_CLASSIC_BTN_A        2
-#define MSG_CLASSIC_BTN_B        3
-#define MSG_CLASSIC_BTN_PLUS     4
-#define MSG_CLASSIC_BTN_MINUS    5
-#define MSG_CLASSIC_BTN_LEFT     6
-#define MSG_CLASSIC_BTN_RIGHT    7
-#define MSG_CLASSIC_BTN_UP       8
-#define MSG_CLASSIC_BTN_DOWN     9
-#define MSG_CLASSIC_BTN_HOME     10
-#define MSG_CLASSIC_BTN_L        11
-#define MSG_CLASSIC_BTN_R        12
-#define MSG_CLASSIC_BTN_ZL       13
-#define MSG_CLASSIC_BTN_ZR       14
-
-
 /***********************************************************
 * Subscribers
 ***********************************************************/
-
+ros::Subscriber                 xbox_state_sub;
+ros::Subscriber                 s_msg;
 ros::Subscriber                 nav_sub;
-ros::Subscriber                 wiimote_state_sub;
-ros::Subscriber                 jaus_sub;
 ros::Subscriber                 estop_sub;
 ros::Subscriber                 pos_sub;
 
@@ -95,12 +50,12 @@ ros::Subscriber                 pos_sub;
 * Publishers
 ***********************************************************/
 
-ros::Publisher                  wiimote_led_pub;
-ros::Publisher                  wiimote_rum_pub;
+
+//ros::Publisher                  wiimote_rum_pub; Switch out for xbox rumble
 ros::Publisher                  motor_pub;
+ros::Publisher                  p_cmd_vel;
 ros::Publisher                  sound_pub;
 ros::Publisher                  estop_pub;
-ros::Publisher                  jaus_pub;
 
 
 
@@ -108,88 +63,72 @@ ros::Publisher                  jaus_pub;
 * Global variables
 ***********************************************************/
 
-//enumorator for robot mode
-enum 
+/*-----------------------------------
+	Velocity and sensor data variables
+	-----------------------------------*/
+    double m_linear; //These are for simulation
+    double m_angular;
+    //xbox movement x=linear y=angular
+    float  joy_rightstick_x;
+    float  joy_rightstick_y;
+    float  joy_leftstick_x; 
+    float  joy_leftstick_y;
+    float  joy_r_trigger;
+    float  joy_l_trigger;
+    //xbox buttons to assign cmds
+    #define  joy_button_A   0
+    #define  joy_button_B   1
+    #define  joy_button_X   2
+    #define  joy_button_Y   3
+    #define  joy_r_button   5
+    #define  joy_l_button   4
+    #define  joy_start_b    7
+    #define  joy_back_b     6
+    #define  joy_dpad_up    13
+    #define  joy_dpad_dwn   14
+    #define  joy_dpad_l     11
+    #define  joy_dpad_r     12
+    #define  joy_light      8
+    #define  joy_l_stick    9
+    #define  joy_r_stick    10static bool check_togg(bool, int);static bool check_togg(bool, int);
+    
+//Enumorator for each mode 
+enum
 Mode
 {
     standby,
-    wiimote_mode,
-    autonomous,
-    jaus
-};
+    xbox_mode,
+    autonomous
+} 
+mode_;
 
-Mode mode_;
-
-//enumerator for the autonomous mode
+//Enumerator for autonomous mode
 enum
-Autonmous_Mode
+Autonomous_Mode
 {
     navigation,
-    autonomous_waypoints,
-    carrot
+    autonomous_waypoints
 };
-
-Autonmous_Mode autonmous_mode;
-
-//enumerator for JAUS mode
-enum
-JAUS_Mode
-{
-    jaus_resume,
-    jaus_standby,
-    jaus_shutdown
-};
-
-JAUS_Mode jaus_mode;
-
-//storage for wiimote toggle bools 
-//last one is for the disconect and starts empty
-bool wii_togg[30] ;
-
-
-
-bool                            wiimote_init;
-bool                            robot_init;
-
-                
-
-
-ros::Time                       home_press_begin;
-
-MST_Estop::Estop_State          estop;
-
-geometry_msgs::Twist            wii_twist;
-geometry_msgs::Twist            nav_twist;
-//MST_JAUS::JAUS_in               jaus_msg;
-
-
-bool                            wii_dis;
-bool                            estop_togg = 0;
-bool                            done_togg = 0;
-bool                            jaus_execute = false;
-
-
-double                          non_jaus_speed = 2.4;
-
-int last_msg_waypoint = 0;
-
+Autonomous_Mode autonomous_mode;
 
 MST_Control::Control_ParamsConfig params;
-MST_Position::Target_Heading  target;
 
+geometry_msgs::Twist nav_twist;           //Autonomous Navigation
 
-struct jaus_waypoint
-{
-    int priority;
-    uint16_t ID;
-    uint16_t nextID;
-    uint16_t previousID;
-    double_t x;
-    double_t y;
-    double_t yaw;
-};
-std::vector<jaus_waypoint*> jaus_waypoints;
+/***************************************************************** 
+*This is where we changed it from wii_twist to geometry_twist.
+*If using a different remote in the future, assign geometry_twist
+*so we have a universal twist for any controller
+*
+*See xbox_callback
+******************************************************************/
 
+geometry_msgs::Twist geometry_twist;      
+bool xtogg[30];
+bool robot_init;
+bool done_togg = 0;
+bool estop_togg = 0;
+int last_msg_waypoint = 0;
 
 /***********************************************************
 * Namespace Changes
@@ -200,10 +139,10 @@ using namespace std;
 /***********************************************************
 * Function prototypes
 ***********************************************************/
-static void change_mode(Mode new_mode);
-static void say(std::string );
-static void play(std::string );
-static void stop_robot();
-static bool check_togg(bool, int);
-
+void change_mode(Mode new_mode);
+void say(std::string );
+void play(std::string );
+void stop_robot();
+bool check_togg(bool, int);
+    
 

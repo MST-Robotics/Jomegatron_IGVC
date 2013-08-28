@@ -9,6 +9,7 @@
     <!-- Define arguments and defaults  -->
     <arg name="robot_addr" default="localhost" />
     <arg name="rviz" default="1" />
+    <!--arg name="joy_node" defualt="1"/-->
     <arg name="wiimote" default="0" />
     <arg name="sound" default="1" />
     <arg name="config" default="1" />
@@ -19,7 +20,9 @@
     
     <!-- launch rviz if requested -->
     <node name="rviz_desktop" pkg="rviz" type="rviz" args="-d $(find MST_Control)/vcg/Jomegatron.vcg" if="$(arg rviz)"/>
-    
+    <!-->
+    <node pkg="joy" type="joy_node.py" name="joy_desktop" respawn="true" if="$(arg joy_node)"/>
+    -->
     <!-- launch wiimote node if requested -->
     <node pkg="wiimote" type="wiimote_node.py" name="wiimote_desktop" respawn="true" if="$(arg wiimote)"/>
     
@@ -28,6 +31,8 @@
     
     <!-- launch the dynamic reconfigure gui  -->
     <node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui_desktop" if="$(arg config)" />
+
+    <!--node pkg="/fix" -->
     
     <!-- launch image veiws if display is requested  -->
     <group if="$(arg display)">

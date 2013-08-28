@@ -8,7 +8,8 @@
 
     <!-- Define arguments and defaults  -->
     <arg name="rviz" default="1" />
-    <arg name="wiimote" default="1" />
+    <arg name="wiimote" default="0" />
+    <arg name="joy" defualt="1"/>
     <arg name="sound" default="1" />
     <arg name="config" default="1" />
     <arg name="usb" default="0" />
@@ -20,6 +21,8 @@
     
     <!-- launch rviz if requested -->
     <node name="rviz_robot" pkg="rviz" type="rviz" args="-d $(find MST_Control)/vcg/Jomegatron.vcg" if="$(arg rviz)"/>
+    
+        <!--node pkg="joy" type="joy_node" name="joy_node_robot" respawn="true" if="$(arg joy)"/-->
     
     <!-- launch wiimote node if requesed -->
     <node pkg="wiimote" type="wiimote_node.py" name="wiimote_robot" respawn="true" if="$(arg wiimote)"/>

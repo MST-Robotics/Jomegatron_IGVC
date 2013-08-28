@@ -32,6 +32,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <dynamic_reconfigure/server.h>
 #include <MST_Potential_Navigation/Pot_Nav_ParamsConfig.h>
+#include <cv.h>
 
 /***********************************************************
 * Namespace Changes
@@ -173,15 +174,15 @@ void statCallback( const sensor_msgs::ImageConstPtr& msg)
     if(first_callback)
     {
 		//initalize map
-		map.image = cv::Mat::zeros(cv_ptr_src->image.size(),CV_32FC1);
-		map.encoding = "32FC1";
+		map.image = cv::Mat::zeros(cv_ptr_src->image.size(),CV_8UC3);
+		map.encoding = "rgb8";
 		
 		first_callback = 0;
 	}
 
     cv::split(cv_ptr_src->image , Chanels);
     
-    Chanels[1].convertTo(Chanels[1],CV_32FC1);
+    Chanels[1].convertTo(Chanels[1],CV_8UC3);
     
     
     
@@ -292,7 +293,7 @@ geometry_msgs::Twist find_twist()
     /*twist.linear.x += (params.target_weight_y/100.0) * sin(target.target_heading)/ (target.distance * params.target_dist_scale/1000) ;*/
     
     int sign = 1;
-    if (sign < 0)
+    if (cos(target.target_heading) < 0)
     {
         sign = -1;
     } 
@@ -351,7 +352,7 @@ geometry_msgs::Twist find_twist()
 			    //magnitued divided by the distance squared
 
 				 
-			    double dist = (params.dist_scale_x/1000 * pow(abs(ray.pos().x - robot_center.x ),2) 									+  params.dist_scale_y/1000 * pow(abs(ray.pos().y -robot_center.y ),2)) ;
+			    double dist = (params.dist_scale_x/1000 * pow(abs(ray.pos().x - robot_center.x ),2) +  params.dist_scale_y/1000 * pow(abs(ray.pos().y -robot_center.y ),2)) ;
 
 
 			    float mag = map.image.at<float>( ray.pos().y , ray.pos().x );

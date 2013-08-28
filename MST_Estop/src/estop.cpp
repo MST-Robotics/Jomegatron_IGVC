@@ -37,7 +37,7 @@ ros::Subscriber                 control_sub;
 ros::Publisher                  estop_pub;
 
 
-MST_Estop::Estop_State    estop_state;
+MST_Estop::Estop_State           estop_state;
 
 /***********************************************************
 * Function prototypes

@@ -60,11 +60,15 @@ int main(int argc, char **argv)
                 double angle = laserScan.angle_min + i * laserScan.angle_increment;
                 double x = odom.pose.pose.position.x + laserScan.ranges[i] * cos(angle + robotAngle);
                 double y = odom.pose.pose.position.x + laserScan.ranges[i] * cos(angle + robotAngle);
-                int gridX = x / MAP_RESOLUTION; //TODO should be * resolution instead? idk
+                int gridX = x / MAP_RESOLUTION; //TODO should be * resolution instead? wont the resolution always be 1? so is this even nessecary?
                 int gridY = y / MAP_RESOLUTION;
-                grid.data[gridX+gridY*MAP_WIDTH] += (grid.data[gridX+gridY*MAP_WIDTH] < 200 ? 1 : 0); //TODO actually figure out good way to set
+                grid.data[gridX+gridY*MAP_WIDTH] += (grid.data[gridX+gridY*MAP_WIDTH] < 255 ? 1 : 0); //TODO actually figure out good way to set
             }
-            //TODO may want to update map with nothing there to reduce error?
+            //TODO may want to update map with nothing there to reduce error?: like that?
+            else
+            {
+                grid.data[gridX+gridY*MAP_WIDTH] = 0;
+            }
         }
         
         //Publish map

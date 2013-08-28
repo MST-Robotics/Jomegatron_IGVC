@@ -9,6 +9,7 @@
     <!-- Define arguments and defaults  -->
     <arg name="rviz" default="1" />
     <arg name="wiimote" default="1" />
+    <arg name="joy" defualt="0"/>
     <arg name="sound" default="1" />
     <arg name="config" default="1" />
     <arg name="usb" default="0" />
@@ -20,6 +21,8 @@
     
     <!-- launch rviz if requested -->
     <node name="rviz_robot" pkg="rviz" type="rviz" args="-d $(find MST_Control)/vcg/Jomegatron.vcg" if="$(arg rviz)"/>
+    
+        <!--node pkg="joy" type="joy_node" name="joy_node_robot" respawn="true" if="$(arg joy)"/-->
     
     <!-- launch wiimote node if requesed -->
     <node pkg="wiimote" type="wiimote_node.py" name="wiimote_robot" respawn="true" if="$(arg wiimote)"/>
@@ -66,6 +69,9 @@
         <rosparam file="$(find MST_Control)/yaml/Carrot.yaml" command="load" />
         
     </node>
+    
+    
+    <node pkg="MST_JAUS" type="jaus_node" name="JAUS" />
     
 
     <!--  launch usb camera driver and color proc  -->

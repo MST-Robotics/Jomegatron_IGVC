@@ -8,7 +8,7 @@
 
 #define PI 3.14159265359
 
-const float MAP_RESOLUTION = 1.0;
+const float MAP_RESOLUTION = 1.0;//like a 'meter' thing
 const uint32_t MAP_WIDTH = 10;
 const uint32_t MAP_HEIGHT = 10;
 const double MAP_ORIGIN_POSITION_X = 0.0;

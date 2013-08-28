@@ -1,7 +1,7 @@
 <package>
   <description brief="MST_Control">
 
-     MST_Control contains the controll node wich decides what comands to sent form the motors
+     MST_Control contains the control node wich decides what comands to sent form the motors
      and deals with the various user iputs and displays. 
 
   </description>
@@ -16,10 +16,10 @@
   <rosdep name = "uvc_camera" />
   <rosdep name = "camera1394" />
   <rosdep name=  "opencv2.3"/>
-
+  <depend package = "joy" />
   <depend package = "sound_play" />
   <depend package = "wiimote" />
-  <!--<depend package = "MST_JAUS" />-->
+  <depend package = "MST_JAUS" />
   <depend package = "MST_Estop" />
   <depend package = "MST_Position" />
   

@@ -1,6 +1,6 @@
 {autonomous_waypoints: /home/robot/Code/Jomegatron_IGVC/MST_Control/yaml/Qualify.yaml,
   base_linear_speed: 2.4000000000000004, base_rot_speed: 1.0, d_pad_percent: 50.0,
-  done_sound: /home/robot/Documents/Joemegatron_IGVC_2011/sounds/smb_world_clear.wav,
+  done_sound: /home/robot/Code/Jomegatron_IGVC/MST_Control/sounds/smb_world_clear.wav,
   minus_sound: /home/robot/Code/Jomegatron_IGVC/MST_Control/sounds/Ahooga_Car_Horn.wav,
   navigation_waypoints: /home/robot/Code/Jomegatron_IGVC/MST_Control/yaml/AutoNav_2012.yaml,
-  plus_mesage: Pardon me. Robot coming through, turbo_x: 0.1, turbo_y: 2.0, waypoint_sound: /home/robot/Documents/Joemegatron_IGVC_2011/sounds/smb_1-up.wav}
+  plus_mesage: Pardon me. Robot coming through, turbo_x: 0.1, turbo_y: 2.0, waypoint_sound: /home/robot/Code/Jomegatron_IGVC/MST_Control/sounds/smb_1-up.wav}

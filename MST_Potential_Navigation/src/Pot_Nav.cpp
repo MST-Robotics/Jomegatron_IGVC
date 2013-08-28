@@ -32,6 +32,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <dynamic_reconfigure/server.h>
 #include <MST_Potential_Navigation/Pot_Nav_ParamsConfig.h>
+#include <cv.h>
 
 /***********************************************************
 * Namespace Changes
@@ -351,7 +352,7 @@ geometry_msgs::Twist find_twist()
 			    //magnitued divided by the distance squared
 
 				 
-			    double dist = (params.dist_scale_x/1000 * pow(abs(ray.pos().x - robot_center.x ),2) 									+  params.dist_scale_y/1000 * pow(abs(ray.pos().y -robot_center.y ),2)) ;
+			    double dist = (params.dist_scale_x/1000 * pow(abs(ray.pos().x - robot_center.x ),2) +  params.dist_scale_y/1000 * pow(abs(ray.pos().y -robot_center.y ),2)) ;
 
 
 			    float mag = map.image.at<float>( ray.pos().y , ray.pos().x );

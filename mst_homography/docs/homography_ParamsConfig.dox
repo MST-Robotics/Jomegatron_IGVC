@@ -4,7 +4,7 @@ Reads and maintains the following parameters on the ROS server
 
 - \b "~frame_id" : \b [str] The base footprint of the robot min: , default: /base_footprint, max: 
 - \b "~use_trans" : \b [bool] option to use tf to find angle min: False, default: False, max: True
-- \b "~theta_x" : \b [double] camera rotation aplied to perspective. min: -0.01, default: 0.0, max: 0.01
+- \b "~theta_x" : \b [double] camera rotation aplied to perspective. min: -0.003, default: 0.0, max: 0.003
 - \b "~theta_y" : \b [double] camera rotation aplied to perspective. min: -0.01, default: 0.0, max: 0.01
 - \b "~theta_z" : \b [double] camera rotation aplied to perspective. min: -3.14159265359, default: 0.0, max: 3.14159265359
 - \b "~center_x" : \b [double] center rotation is aplied on. min: 0.0, default: 0.0, max: 360.0
@@ -12,19 +12,18 @@ Reads and maintains the following parameters on the ROS server
 - \b "~scale" : \b [int] scale applied to the transform min: 0, default: 0, max: 10
 - \b "~laser_frame" : \b [str] name of the laser frame min: , default: bob, max: 
 - \b "~laser_angle" : \b [double] angle through wich the scan searches in rad min: 0.0, default: 3.14159265359, max: 3.14159265359
-- \b "~laser_scans" : \b [int] number of scans to preform min: 0, default: 180, max: 360
+- \b "~laser_res" : \b [int] The search  degrees of laser min: 1, default: 180, max: 360
 - \b "~laser_range_min" : \b [double] The search radius of the laser in m. min: 0.0, default: 0.5, max: 30.0
 - \b "~laser_range_max" : \b [double] The search radius of the laser in m. min: 0.0, default: 10.0, max: 30.0
-- \b "~laser_res" : \b [int] The search  degrees of laser min: 1, default: 180, max: 360
 - \b "~laser_time_increment" : \b [double] the increment time increment of the laser in sec min: 0.0, default: 0.0, max: 30.0
 - \b "~laser_scan_time" : \b [double] the scan time increment of the laser in sec min: 0.0, default: 0.0, max: 30.0
 - \b "~window_size" : \b [int] The number of pixels to average for the threshold min: 1, default: 8, max: 50
-- \b "~laser_threshold" : \b [double] the threshold to qulify as obsticale min: 0.0, default: 200.0, max: 500.0
+- \b "~laser_threshold" : \b [double] the threshold to qulify as obsticale min: 0.0, default: 200.0, max: 1000.0
 - \b "~pixels_per_meter" : \b [double] number of pixels per meter min: 0.0001, default: 20.0, max: 300.0
 - \b "~calibration_height" : \b [double] height of the calibration square in meters min: 0.0001, default: 1.0, max: 300.0
 - \b "~calibration_width" : \b [double] width of the calibration square in meters min: 0.0001, default: 1.0, max: 300.0
-- \b "~calibration_x" : \b [double] distance to botom center  in meters min: 0.0001, default: 1.0, max: 300.0
-- \b "~calibration_y" : \b [double] distance to bottom center in meters min: 0.0001, default: 1.0, max: 300.0
+- \b "~calibration_x" : \b [double] distance to botom center  in meters min: -5.0, default: 1.0, max: 5.0
+- \b "~calibration_y" : \b [double] distance to bottom center in meters min: 0.0, default: 1.0, max: 5.0
 - \b "~robot_x" : \b [int] The height of the robot mask. min: 0, default: 200, max: 400
 - \b "~robot_y" : \b [int] The width of the robot mask. min: 0, default: 100, max: 400
 
